@@ -52,18 +52,24 @@ Scenario: Track a denunciation with an invalid identifier
 	 When the denunciation is retrieved
 	 Then the error "Invalid identifier" should be raised
 
-Scenario: Identification and restriction of a calumniator
-	Given a person has been identified as a calumniator
-	When they attempt to submit a new denunciation
-	Then they are prevented from doing so
-	And the error "You are no longer allowed to create denunciations" should be raised
+Scenario: Admin responds to a denunciation with confirmation
+	Given an unprocessed denunciation
+	And an admin user
+	When the admin submits a confirmation response with a retribution amount
+	Then the response is added to the denunciation
+	And the informant is eligible for the retribution
 
-Scenario: Add an Informant to the Calumniators list after 3 rejected denunciations
-    Given an Informant has created Denunciations
-    And at least 3 Denunciations have received a Rejection Response
-    Then the Informant is automatically added to the Calumniators list
+Scenario: Attempt to respond to a denunciation that already has a response
+	Given a denunciation with an existing response
+	And an admin user
+	When the admin attempts to respond to the denunciation
+	Then the response submission fails
+	And the error "the denunciation aleady has a response" should be raised
 
-Scenario: Add an Informant to the Calumniators list after reporting a VIP member
-    Given an Informant has created a denunciation
-    And the suspect is a VIP
-    Then the Informant is automatically added to the Calumniators list
+Scenario: Admin views unprocessed denunciations
+	Given an admin user
+	When the admin requests the list of unprocessed denunciations
+	Then the list is displayed in chronological order
+	And includes timestamp, informant, suspect, offense, and if applicable, evasion country
+	And does not include denunciations with VIP suspects
+
