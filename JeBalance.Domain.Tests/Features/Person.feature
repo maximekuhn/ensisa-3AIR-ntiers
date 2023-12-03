@@ -3,11 +3,12 @@
     Scenario: Create a person
         Given the firstname is "Batuhan"
         And the lastname is "GOKER"
-        And an address
+        And an address "7 rue du KFC blessant, 68200 Colonel Street"
         When the person is created
+        Then the person is added to the person list
         And the person firstname is "Batuhan"
         And the person lastname is "GOKER"
-        Then the person is added to the person list
+        And the address is "7 rue du KFC blessant, 68200 Colonel Street"
 
     Scenario: Add a person to informent list
         Given a person
