@@ -23,4 +23,8 @@
     </ItemGroup>
 
 
+    <ItemGroup>
+      <ProjectReference Include="..\JeBalance.Domain\JeBalance.Domain.csproj" />
+    </ItemGroup>
+
 </Project>
