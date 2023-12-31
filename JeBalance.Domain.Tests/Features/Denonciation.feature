@@ -1,4 +1,4 @@
-Feature: Denunciation
+Feature: Denonciation
 
     Scenario: Create a tax evasion denunciation
         Given a suspect

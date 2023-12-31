@@ -1,24 +1,28 @@
-Feature: Offense
+Feature: Delit
 #
-#    Scenario: Cannot create a tax evasion offense without a country
-#        Given the type is "TAXEVASION"
-#        And the country is "FRANCE"
-#        When the offense is created
-#        Then the error "Tax evasion must have a country" should be raised
+#    Scenario: Impossible de creer un delit de type EvasionFiscale sans pays
+#        Given un type "EvasionFiscale"
+#        When la demande de creation de delit est envoyee
+#        Then le message d erreur "L'evasion fiscale doit avoir un pays" doit etre generee
 #
-#    Scenario: Create a tax evasion offense
-#        Given the type is "TAXEVASION"
-#        And the country is "Switzerland"
-#        When the offense is created
-#        Then the offense is valid
+#    Scenario: Creation d un delit de type EvasionFiscale
+#        Given un type "EvasionFiscale"
+#        And un pays "Suisse"
+#        When la demande de creation de delit est envoyee
+#        Then le delit doit etre cree
+#		 And le type du delit est "EvasionFiscale"
+#		 And le pays du delit est "Suisse"
 #
-#    Scenario: Create an income concealer offense
-#        Given the type is "INCOMECONCEALER"
-#        When the offense is created
-#        Then the offense is valid
+#    Scenario: Creation d un delit de type DissimulationDeRevenus
+#        Given un type "DissimulationDeRevenus"
+#        When la demande de creation de delit est envoyee
+#        Then le delit doit etre cree
+#		 And le type du delit est "DissimulationDeRevenus"
 #
-#    Scenario: Create an income concealer offense with a country
-#        Given the type is "INCOMECONEALER"
-#        And the country is "Andorra"
-#        When the offense is created
-#        Then the offense is valid
+#    Scenario: Creation d un delit de type DissimulationDeRevenus avec un pays
+#        Given un type "DissimulationDeRevenus"
+#        And le pays "Andorre"
+#        When la demande de creation de delit est envoyee
+#        Then le delit doit etre cree
+#		 And le type du delit est "DissimulationDeRevenus"
+#		 And le pays du delit est "Andorre"
