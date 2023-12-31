@@ -7,7 +7,7 @@ Feature: Denonciation
         And un pays d'evasion "France"
         When la denonciation est creee
         Then la denonciation a un identifiant
-        And le statut de la denonciation est "Denonciation non traitee"
+        And le statut de la denonciation est "EnAttenteDeReponse"
 
     Scenario: La denonciation pour evasion fiscale doit avoir les bons parametres
         Given un suspect
