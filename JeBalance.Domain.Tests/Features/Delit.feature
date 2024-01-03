@@ -10,19 +10,19 @@ Feature: Delit
 #        And un pays "Suisse"
 #        When la demande de creation de delit est envoyee
 #        Then le delit doit etre cree
-#		 And le type du delit est "EvasionFiscale"
-#		 And le pays du delit est "Suisse"
+#        And le type du delit est "EvasionFiscale"
+#        And le pays du delit est "Suisse"
 #
 #    Scenario: Creation d'un delit de type DissimulationDeRevenus
 #        Given un type "DissimulationDeRevenus"
 #        When la demande de creation de delit est envoyee
 #        Then le delit doit etre cree
-#		 And le type du delit est "DissimulationDeRevenus"
+#        And le type du delit est "DissimulationDeRevenus"
 #
 #    Scenario: Creation d'un delit de type DissimulationDeRevenus avec un pays
 #        Given un type "DissimulationDeRevenus"
 #        And le pays "Andorre"
 #        When la demande de creation de delit est envoyee
 #        Then le delit doit etre cree
-#		 And le type du delit est "DissimulationDeRevenus"
-#		 And le pays du delit est "Andorre"
+#        And le type du delit est "DissimulationDeRevenus"
+#        And le pays du delit est "Andorre"
