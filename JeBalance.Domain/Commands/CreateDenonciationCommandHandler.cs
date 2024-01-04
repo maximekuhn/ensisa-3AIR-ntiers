@@ -3,9 +3,9 @@ using MediatR;
 
 namespace JeBalance.Domain.Commands;
 
-public class GestionnaireCreerDenonciationCommande: IRequestHandler<CreerDenonciationCommande, int>
+public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciationCommand, int>
 {
-    public Task<int> Handle(CreerDenonciationCommande request, CancellationToken cancellationToken)
+    public Task<int> Handle(CreateDenonciationCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
