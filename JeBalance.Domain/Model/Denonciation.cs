@@ -7,6 +7,8 @@ public class Denonciation : Entity
     public Denonciation(int id) : base(id)
     {
     }
+    
+    public Denonciation(): base(0) {}
 
     public Denonciation(TypeDelit typeDelit, string? paysEvasion, Informateur informateur, Suspect suspect) : base(0)
     {

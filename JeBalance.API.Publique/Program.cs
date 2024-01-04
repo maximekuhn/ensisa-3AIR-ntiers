@@ -1,4 +1,5 @@
 using JeBalance.API.Publique;
+using JeBalance.Architecture;
 using JeBalance.Architecture.SQLite;
 using JeBalance.Domain;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ services.AddDbContext<DatabaseContext>(
 
 services.AddApplication();
 services.AddDomain();
+services.AddInfrastructure();
 services.AddControllers();
 
 // Swagger
