@@ -1,4 +1,3 @@
-using System.Collections;
 using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
 
@@ -6,7 +5,7 @@ namespace JeBalance.Domain.Repositories;
 
 // TODO: move to infra
 
-public class DummyDenonciationRepository: DenonciationRepository
+public class DummyDenonciationRepository : DenonciationRepository
 {
     private readonly List<Denonciation> _denonciations = new();
 
@@ -22,7 +21,7 @@ public class DummyDenonciationRepository: DenonciationRepository
 
     public Task<int> Create(Denonciation T)
     {
-        this._denonciations.Add(T);
+        _denonciations.Add(T);
         return Task.FromResult(12);
     }
 

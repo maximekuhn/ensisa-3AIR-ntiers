@@ -4,11 +4,6 @@ namespace JeBalance.Domain.Model;
 
 public class Denonciation : Entity
 {
-    public TypeDelit TypeDelit { get; }
-    public string? PaysEvasion { get; }
-    public StatutDenonciation Statut { get; }
-    public Informateur Informateur { get; }
-    public Suspect Suspect { get; }
     public Denonciation(int id) : base(id)
     {
     }
@@ -24,4 +19,9 @@ public class Denonciation : Entity
         Suspect = suspect;
     }
 
+    public TypeDelit TypeDelit { get; }
+    public string? PaysEvasion { get; }
+    public StatutDenonciation Statut { get; }
+    public Informateur Informateur { get; }
+    public Suspect Suspect { get; }
 }

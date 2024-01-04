@@ -16,7 +16,6 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
     {
         try
         {
-
             var denonciationId = await _denonciationRepository.Create(request.Denonciation);
             return denonciationId;
         }
@@ -24,6 +23,5 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
         {
             throw e;
         }
-        
     }
 }

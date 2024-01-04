@@ -1,5 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
-
 namespace JeBalance.API.Publique;
 
 public static class DependencyInjection
@@ -9,6 +7,5 @@ public static class DependencyInjection
         services.AddMediatR(cf => cf.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
 
         return services;
-
     }
 }

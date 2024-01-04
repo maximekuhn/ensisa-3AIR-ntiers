@@ -2,10 +2,10 @@ using JeBalance.Domain.Contracts;
 
 namespace JeBalance.Domain.ValueObjects;
 
-public class NumeroVoie: SimpleValueObject<int>
+public class NumeroVoie : SimpleValueObject<int>
 {
     private const int MIN_NUMBER = 1;
-    
+
     public NumeroVoie(int value) : base(value)
     {
     }

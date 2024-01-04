@@ -2,7 +2,7 @@ using JeBalance.Domain.Contracts;
 
 namespace JeBalance.Domain.ValueObjects;
 
-public class NomCommune: SimpleValueObject<string>
+public class NomCommune : SimpleValueObject<string>
 {
     public NomCommune(string value) : base(value)
     {

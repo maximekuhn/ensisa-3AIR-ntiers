@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JeBalance.Architecture.SQLite.Configurations;
 
-public class DenonciationConfiguration: IEntityTypeConfiguration<DenonciationSQLite>
+public class DenonciationConfiguration : IEntityTypeConfiguration<DenonciationSQLite>
 {
     public void Configure(EntityTypeBuilder<DenonciationSQLite> builder)
     {

@@ -6,8 +6,4 @@ public class DenonciationAPI
 {
     public string? PaysEvasion { get; set; }
     public TypeDelit TypeDelit { get; set; }
-
-    public DenonciationAPI()
-    {
-    }
 }
