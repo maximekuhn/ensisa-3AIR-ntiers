@@ -26,4 +26,6 @@ public class Denonciation : Entity
     public StatutDenonciation Statut { get; }
     public Informateur Informateur { get; }
     public Suspect Suspect { get; }
+ 
+    // TODO: add Reponse + Horodatage
 }
