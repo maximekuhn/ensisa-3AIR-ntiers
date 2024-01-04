@@ -4,7 +4,8 @@ namespace JeBalance.API.Publique.Resources;
 
 public class DenonciationAPI
 {
-    public string paysEvasion { get; set; }
+    public string? PaysEvasion { get; set; }
+    public TypeDelit TypeDelit { get; set; }
 
     public DenonciationAPI()
     {
