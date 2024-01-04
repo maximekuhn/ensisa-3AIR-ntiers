@@ -23,7 +23,7 @@ Feature: Denonciation
         And un informateur
         And un delit de type "EvasionFiscale"
         When la denonciation est creee
-        Then le message d'erreur "Une infraction d'evasion fiscale doit avoir un pays d'evasion" doit etre generee
+        Then le message d erreur "Une infraction d'evasion fiscale doit avoir un pays d'evasion" doit etre generee
     #
     #    Scenario: Creation d'une denonciation
     #        Given un suspect
