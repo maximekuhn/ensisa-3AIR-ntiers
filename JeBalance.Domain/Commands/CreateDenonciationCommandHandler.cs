@@ -1,4 +1,3 @@
-using JeBalance.Domain.Model;
 using MediatR;
 
 namespace JeBalance.Domain.Commands;

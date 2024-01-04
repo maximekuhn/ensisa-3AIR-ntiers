@@ -7,12 +7,12 @@ namespace JeBalance.Domain.Tests.Steps;
 [Binding]
 public class DenonciationStepDefinition
 {
+    private Denonciation _denonciation;
+    private Exception _exception;
 
     private string _paysEvasion;
     private TypeDelit _typeDelit;
-    private Denonciation _denonciation;
-    private Exception _exception;
-    
+
     [Given(@"un suspect")]
     public void GivenUnSuspect()
     {
@@ -44,7 +44,7 @@ public class DenonciationStepDefinition
         {
             _denonciation = new Denonciation(_typeDelit, _paysEvasion);
         }
-        catch(Exception exception)
+        catch (Exception exception)
         {
             _exception = exception;
         }
