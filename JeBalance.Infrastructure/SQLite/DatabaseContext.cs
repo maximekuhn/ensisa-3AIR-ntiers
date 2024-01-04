@@ -28,8 +28,7 @@ public class DatabaseContext: DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            // TODO
-            Console.WriteLine("TODO: implement OnConfiguring");
+            optionsBuilder.UseSqlite("Data Source=LocalDatabase.db");
         }
     }
 }
