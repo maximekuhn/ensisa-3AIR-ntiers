@@ -42,7 +42,8 @@ public class DenonciationStepDefinition
     {
         try
         {
-            _denonciation = new Denonciation(_typeDelit, _paysEvasion);
+            // TODO: remove null values
+            _denonciation = new Denonciation(_typeDelit, _paysEvasion, null, null);
         }
         catch (Exception exception)
         {
