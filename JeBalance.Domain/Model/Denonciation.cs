@@ -7,8 +7,10 @@ public class Denonciation : Entity
     public Denonciation(int id) : base(id)
     {
     }
-    
-    public Denonciation(): base(0) {}
+
+    public Denonciation() : base(0)
+    {
+    }
 
     public Denonciation(TypeDelit typeDelit, string? paysEvasion, Informateur informateur, Suspect suspect) : base(0)
     {
@@ -24,8 +26,9 @@ public class Denonciation : Entity
     public TypeDelit TypeDelit { get; }
     public string? PaysEvasion { get; }
     public StatutDenonciation Statut { get; }
+
     public Informateur Informateur { get; }
     public Suspect Suspect { get; }
- 
-    // TODO: add Reponse + Horodatage
+    public DateTime Horodatage { get; }
+    public Reponse? Reponse { get; }
 }

@@ -8,11 +8,15 @@ public class DenonciationConfiguration : IEntityTypeConfiguration<DenonciationSQ
 {
     public void Configure(EntityTypeBuilder<DenonciationSQLite> builder)
     {
-        // TODO: complete
         builder.ToTable("DENONCIATIONS", DatabaseContext.DEFAULT_SCHEMA)
             .HasKey(denonciation => denonciation.Id);
 
-        // TODO: get max length from JeBalance.Domain
-        builder.Property(denonciation => denonciation.NomInformateur).IsRequired().HasMaxLength(150);
+        // store enum as int
+        builder.Property(denonciation => denonciation.TypeDelit).HasColumnType("int").IsRequired();
+        builder.Property(denonciation => denonciation.Statut).HasColumnType("int").IsRequired();
+
+        // builder.HasOne(denonciation => denonciation.Informateur);
+        
+        // TODO: use object values constraints
     }
 }

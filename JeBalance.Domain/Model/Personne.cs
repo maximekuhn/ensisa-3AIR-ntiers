@@ -8,8 +8,9 @@ public class Personne : Entity
     public Personne(int id) : base(id)
     {
     }
+    
 
     public Nom Prenom { get; set; }
     public Nom Nom { get; set; }
-    public Adresse Adresse { get; set; }
+    // public Adresse Adresse { get; set; }
 }

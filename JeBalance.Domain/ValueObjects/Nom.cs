@@ -10,7 +10,7 @@ public class Nom : SimpleValueObject<string>
     public Nom(string value) : base(value)
     {
     }
-
+    
     public override string Validate(string value)
     {
         var trimmedValue = value.Trim();

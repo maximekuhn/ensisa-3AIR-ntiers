@@ -1,4 +1,3 @@
-using JeBalance.Domain.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace JeBalance.Domain;

@@ -5,4 +5,9 @@ public class Informateur : Personne
     public Informateur(int id) : base(id)
     {
     }
+
+    public Informateur() : base(0)
+    {
+    }
+    
 }

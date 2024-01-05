@@ -5,4 +5,8 @@ public class Suspect : Personne
     public Suspect(int id) : base(id)
     {
     }
+
+    public Suspect() : base(0)
+    {
+    }
 }

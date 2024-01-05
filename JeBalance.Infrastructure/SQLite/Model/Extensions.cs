@@ -9,8 +9,25 @@ public static class Extensions
         return new DenonciationSQLite
         {
             Id = denonciation.Id,
+            TypeDelit = TypeDelit.DissimulationDeRevenus
             // TODO
-            NomInformateur = "Albi",
+        };
+    }
+
+    public static InformateurSQLite ToSQLite(this Informateur informateur)
+    {
+        return new InformateurSQLite
+        {
+            Id = informateur.Id,
+            // TODO
+        };
+    }
+
+    public static SuspectSQLite ToSQLite(this Suspect suspect)
+    {
+        return new SuspectSQLite
+        {
+            Id = suspect.Id,
         };
     }
 }

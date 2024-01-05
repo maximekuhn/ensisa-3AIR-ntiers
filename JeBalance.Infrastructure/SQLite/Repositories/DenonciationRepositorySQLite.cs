@@ -5,7 +5,7 @@ using JeBalance.Domain.Repositories;
 
 namespace JeBalance.Architecture.SQLite.Repositories;
 
-public class DenonciationRepositorySQLite: DenonciationRepository
+public class DenonciationRepositorySQLite : DenonciationRepository
 {
     private readonly DatabaseContext _context;
 
