@@ -1,5 +1,5 @@
+using JeBalance.API.Publique.Resources;
 using JeBalance.Domain.Commands;
-using JeBalance.Domain.Model;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,11 +17,11 @@ public class DenonciationController : ControllerBase
     }
 
     [HttpPost("create")]
-    public async Task<IActionResult> CreateDenonciation()
+    public async Task<IActionResult> CreateDenonciation([FromBody] DenonciationAPI resource)
     {
-        var command =
-            new CreateDenonciationCommand(TypeDelit.EvasionFiscale, "France", 0, 0);
-        var id = await _mediator.Send(command);
-        return Ok(id);
+        var createDenonciationCommand = new CreateDenonciationCommand(resource.TypeDelit, resource.PaysEvasion,
+            resource.NomInformateur, resource.PrenomInformateur, resource.NomSuspect, resource.PrenomSuspect);
+        var denonciationId = await _mediator.Send(createDenonciationCommand);
+        return Ok(denonciationId);
     }
 }

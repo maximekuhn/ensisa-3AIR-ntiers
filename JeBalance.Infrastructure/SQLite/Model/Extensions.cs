@@ -18,7 +18,7 @@ public static class Extensions
     {
         return new InformateurSQLite
         {
-            Id = informateur.Id,
+            Id = informateur.Id
             // TODO
         };
     }
@@ -27,7 +27,7 @@ public static class Extensions
     {
         return new SuspectSQLite
         {
-            Id = suspect.Id,
+            Id = suspect.Id
         };
     }
 }

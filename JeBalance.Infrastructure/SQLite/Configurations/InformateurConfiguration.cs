@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JeBalance.Architecture.SQLite.Configurations;
 
-public class InformateurConfiguration: IEntityTypeConfiguration<InformateurSQLite>
+public class InformateurConfiguration : IEntityTypeConfiguration<InformateurSQLite>
 {
     public void Configure(EntityTypeBuilder<InformateurSQLite> builder)
     {

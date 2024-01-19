@@ -16,7 +16,7 @@ public class DenonciationConfiguration : IEntityTypeConfiguration<DenonciationSQ
         builder.Property(denonciation => denonciation.Statut).HasColumnType("int").IsRequired();
 
         // builder.HasOne(denonciation => denonciation.Informateur);
-        
+
         // TODO: use object values constraints
     }
 }
