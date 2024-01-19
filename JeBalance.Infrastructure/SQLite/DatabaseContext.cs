@@ -18,13 +18,13 @@ public class DatabaseContext : DbContext
 
     public DbSet<DenonciationSQLite> Denonciations { get; set; }
     public DbSet<InformateurSQLite> Informateurs { get; set; }
-    // public DbSet<SuspectSQLite> Suspects { get; set; }
+    public DbSet<SuspectSQLite> Suspects { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new DenonciationConfiguration());
         modelBuilder.ApplyConfiguration(new InformateurConfiguration());
-        // modelBuilder.ApplyConfiguration(new SuspectConfiguration());
+        modelBuilder.ApplyConfiguration(new SuspectConfiguration());
         base.OnModelCreating(modelBuilder);
     }
 

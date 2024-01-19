@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JeBalance.Architecture.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240105170003_initial")]
+    [Migration("20240119171703_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -79,6 +79,28 @@ namespace JeBalance.Architecture.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("INFORMATEURS", "app");
+                });
+
+            modelBuilder.Entity("JeBalance.Architecture.SQLite.Model.SuspectSQLite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("nom");
+
+                    b.Property<string>("Prenom")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("prenom");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SUSPECTS", "app");
                 });
 #pragma warning restore 612, 618
         }

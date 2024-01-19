@@ -46,6 +46,21 @@ namespace JeBalance.Architecture.Migrations
                 {
                     table.PrimaryKey("PK_INFORMATEURS", x => x.id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "SUSPECTS",
+                schema: "app",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    nom = table.Column<string>(type: "TEXT", nullable: false),
+                    prenom = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SUSPECTS", x => x.id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -56,6 +71,10 @@ namespace JeBalance.Architecture.Migrations
 
             migrationBuilder.DropTable(
                 name: "INFORMATEURS",
+                schema: "app");
+
+            migrationBuilder.DropTable(
+                name: "SUSPECTS",
                 schema: "app");
         }
     }
