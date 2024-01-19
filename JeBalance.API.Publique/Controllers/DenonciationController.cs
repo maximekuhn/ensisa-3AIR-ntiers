@@ -20,7 +20,7 @@ public class DenonciationController : ControllerBase
     public async Task<IActionResult> CreateDenonciation()
     {
         var command =
-            new CreateDenonciationCommand(TypeDelit.EvasionFiscale, "France", new Informateur(0), new Suspect(0));
+            new CreateDenonciationCommand(TypeDelit.EvasionFiscale, "France", 0, 0);
         var id = await _mediator.Send(command);
         return Ok(id);
     }

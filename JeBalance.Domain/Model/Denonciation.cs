@@ -12,23 +12,23 @@ public class Denonciation : Entity
     {
     }
 
-    public Denonciation(TypeDelit typeDelit, string? paysEvasion, Informateur informateur, Suspect suspect) : base(0)
+    public Denonciation(TypeDelit typeDelit, string? paysEvasion, int informateurId, int suspectId) : base(0)
     {
         if (typeDelit == TypeDelit.EvasionFiscale && paysEvasion == null)
             throw new ApplicationException("Une infraction d'evasion fiscale doit avoir un pays d'evasion");
         TypeDelit = typeDelit;
         PaysEvasion = paysEvasion;
         Statut = StatutDenonciation.EnAttenteDeReponse;
-        Informateur = informateur;
-        Suspect = suspect;
+        InformateurId = informateurId;
+        SuspectId = suspectId;
     }
 
     public TypeDelit TypeDelit { get; }
     public string? PaysEvasion { get; }
+    public DateTime Horodatage { get; }
     public StatutDenonciation Statut { get; }
 
-    public Informateur Informateur { get; }
-    public Suspect Suspect { get; }
-    public DateTime Horodatage { get; }
-    public Reponse? Reponse { get; }
+    public int InformateurId { get; }
+    public int SuspectId { get; }
+    public int ReponseId { get; }
 }

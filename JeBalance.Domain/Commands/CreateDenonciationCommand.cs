@@ -5,9 +5,9 @@ namespace JeBalance.Domain.Commands;
 
 public class CreateDenonciationCommand : IRequest<int>
 {
-    public CreateDenonciationCommand(TypeDelit typeDelit, string paysEvasion, Informateur informateur, Suspect suspect)
+    public CreateDenonciationCommand(TypeDelit typeDelit, string paysEvasion, int informateurId, int suspectId)
     {
-        Denonciation = new Denonciation(typeDelit, paysEvasion, informateur, suspect);
+        Denonciation = new Denonciation(typeDelit, paysEvasion, informateurId, suspectId);
     }
 
     public Denonciation Denonciation { get; }
