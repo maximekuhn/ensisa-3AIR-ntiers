@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using JeBalance.Domain.Contracts;
 
-namespace JeBalance.Architecture.SQLite.Repositories;
+namespace JeBalance.Infrastructure.SQLite.Repositories;
 
 public static class SpecificationExtensions
 {

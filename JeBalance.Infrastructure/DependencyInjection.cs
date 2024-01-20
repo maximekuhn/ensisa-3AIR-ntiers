@@ -1,8 +1,8 @@
-using JeBalance.Architecture.SQLite.Repositories;
+using JeBalance.Infrastructure.SQLite.Repositories;
 using JeBalance.Domain.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JeBalance.Architecture;
+namespace JeBalance.Infrastructure;
 
 public static class DependencyInjection
 {

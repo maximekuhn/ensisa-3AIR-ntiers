@@ -1,6 +1,6 @@
 using JeBalance.API.Publique;
-using JeBalance.Architecture;
-using JeBalance.Architecture.SQLite;
+using JeBalance.Infrastructure;
+using JeBalance.Infrastructure.SQLite;
 using JeBalance.Domain;
 using Microsoft.EntityFrameworkCore;
 

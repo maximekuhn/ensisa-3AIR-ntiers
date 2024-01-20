@@ -1,8 +1,8 @@
-using JeBalance.Architecture.SQLite.Configurations;
-using JeBalance.Architecture.SQLite.Model;
+using JeBalance.Infrastructure.SQLite.Configurations;
+using JeBalance.Infrastructure.SQLite.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace JeBalance.Architecture.SQLite;
+namespace JeBalance.Infrastructure.SQLite;
 
 public class DatabaseContext : DbContext
 {
