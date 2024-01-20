@@ -16,8 +16,4 @@ public class DenonciationAPI
     // Informations à propos de l'informateur
     public string NomInformateur { get; set; }
     public string PrenomInformateur { get; set; }
-
-    public DenonciationAPI()
-    {
-    }
 }

@@ -3,7 +3,6 @@ using JeBalance.Domain.Model;
 
 namespace JeBalance.Domain.Repositories;
 
-public interface InformateurRepository: Repository<Informateur>
+public interface InformateurRepository : Repository<Informateur>
 {
-    
 }
