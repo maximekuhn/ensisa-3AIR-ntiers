@@ -4,17 +4,17 @@ using JeBalance.Domain.Repositories;
 
 namespace JeBalance.Domain.Tests.Drivers;
 
-public class InformateurRepositoryDriver: InformateurRepository
+public class InformateurRepositoryDriver : InformateurRepository
 {
-    public List<Informateur> Informateurs { get; set; }
+    private int _lastId;
 
     public InformateurRepositoryDriver()
     {
         Informateurs = new List<Informateur>();
     }
 
-    private int _lastId = 0;
-    
+    public List<Informateur> Informateurs { get; set; }
+
     public Task<IEnumerable<Informateur>> Find(int limit, int offset, Specification<Informateur> specification)
     {
         throw new NotImplementedException();
@@ -23,9 +23,8 @@ public class InformateurRepositoryDriver: InformateurRepository
     public Task<Informateur> GetOne(int id)
     {
         foreach (var informateur in Informateurs)
-        {
-            if (informateur.Id == id) return Task.FromResult(informateur);
-        }
+            if (informateur.Id == id)
+                return Task.FromResult(informateur);
         return null;
     }
 

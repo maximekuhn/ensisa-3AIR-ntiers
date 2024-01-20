@@ -1,42 +1,38 @@
 using FluentAssertions;
 using JeBalance.Domain.Commands;
 using JeBalance.Domain.Model;
-using JeBalance.Domain.Repositories;
-using JeBalance.Domain.Services;
 using JeBalance.Domain.Tests.Drivers;
 using JeBalance.Domain.ValueObjects;
-using Xunit;
 
 namespace JeBalance.Domain.Tests.Steps;
 
 [Binding]
 public class DenonciationStepDefinition
 {
+    private readonly DateTime _defaultDateTime = new(2024, 05, 17, 14, 32, 00);
+    private readonly Guid _defaultIdOpaque = Guid.Parse("64433caf-d963-43cc-9611-c8d09ef83402");
     private readonly DenonciationRepositoryDriver _denonciationRepository;
-    private readonly InformateurRepositoryDriver _informateurRepository;
-    private readonly SuspectRepositoryDriver _suspectRepository;
     private readonly HorodatageProviderDriver _horodatageProvider;
     private readonly IdOpaqueProviderDriver _idOpaqueProviderDriver;
-    
-    private readonly DateTime _defaultDateTime = new DateTime(2024, 05, 17, 14, 32, 00);
-    private readonly Guid _defaultIdOpaque = Guid.Parse("64433caf-d963-43cc-9611-c8d09ef83402");
-    
-    private TypeDelit _typeDelit;
-    private string _paysEvasion;
-    private Informateur _informateur;
-    private Suspect _suspect;
-    private Guid _denonciationId;
+    private readonly InformateurRepositoryDriver _informateurRepository;
+    private readonly SuspectRepositoryDriver _suspectRepository;
     private Denonciation _denonciation;
+    private Guid _denonciationId;
+    private Informateur _informateur;
+    private string _paysEvasion;
+    private Suspect _suspect;
+
+    private TypeDelit _typeDelit;
 
     public DenonciationStepDefinition()
     {
         _denonciationRepository = new DenonciationRepositoryDriver();
         _informateurRepository = new InformateurRepositoryDriver();
         _suspectRepository = new SuspectRepositoryDriver();
-        
+
         _horodatageProvider = new HorodatageProviderDriver();
         _horodatageProvider.DateTime = _defaultDateTime;
-        
+
         _idOpaqueProviderDriver = new IdOpaqueProviderDriver();
         _idOpaqueProviderDriver.IdOpaque = _defaultIdOpaque;
     }
@@ -57,7 +53,7 @@ public class DenonciationStepDefinition
     [Given(@"un informateur")]
     public void GivenUnInformateur()
     {
-        _informateur = new Informateur("Nom info", "Prenom info", createAdresse("info ville" ,"nom voie", 68000, 2));
+        _informateur = new Informateur("Nom info", "Prenom info", createAdresse("info ville", "nom voie", 68000, 2));
     }
 
     [Given(@"un suspect")]
@@ -103,6 +99,6 @@ public class DenonciationStepDefinition
             new NomVoie(nomVoie),
             new CodePostal(codePostal),
             new NomCommune(nomCommune)
-            );
+        );
     }
 }

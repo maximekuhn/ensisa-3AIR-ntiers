@@ -5,11 +5,10 @@ namespace JeBalance.Domain.Queries;
 
 public class GetInformateurByIdQuery : IRequest<Informateur>
 {
-    public int InformateurId { get; }
-
     public GetInformateurByIdQuery(int informateurId)
     {
         InformateurId = informateurId;
     }
-    
+
+    public int InformateurId { get; }
 }

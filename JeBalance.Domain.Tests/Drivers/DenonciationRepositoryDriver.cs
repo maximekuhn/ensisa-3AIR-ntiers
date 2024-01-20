@@ -4,14 +4,14 @@ using JeBalance.Domain.Repositories;
 
 namespace JeBalance.Domain.Tests.Drivers;
 
-public class DenonciationRepositoryDriver: DenonciationRepository
+public class DenonciationRepositoryDriver : DenonciationRepository
 {
-    public List<Denonciation> Denonciations { get; }
-
     public DenonciationRepositoryDriver()
     {
         Denonciations = new List<Denonciation>();
     }
+
+    public List<Denonciation> Denonciations { get; }
 
     public Task<IEnumerable<Denonciation>> Find(int limit, int offset, Specification<Denonciation> specification)
     {

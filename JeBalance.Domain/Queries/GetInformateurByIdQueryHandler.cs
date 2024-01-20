@@ -12,7 +12,7 @@ public class GetInformateurByIdQueryHandler : IRequestHandler<GetInformateurById
     {
         _informateurRepository = informateurRepository;
     }
-    
+
     public async Task<Informateur> Handle(GetInformateurByIdQuery request, CancellationToken cancellationToken)
     {
         var id = request.InformateurId;

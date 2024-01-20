@@ -9,23 +9,23 @@ Feature: Denonciation
         Then la denonciation est datée (horodatage)
         And l'identifiant du suspect est le bon
         And l'identifiant de l'informateur est le bon
-        
-        
-#    Scenario: La denonciation pour evasion fiscale doit avoir les bons parametres
-#        Given un suspect
-#        And un informateur
-#        And un delit de type "EvasionFiscale"
-#        And un pays d'evasion "France"
-#        When la denonciation est creee
-#        Then le type de delit de la denonciation est "EvasionFiscale"
-#        And le pays d'evasion est "France"
 
-#    Scenario: Impossible de creer une denonciation pour evasion fiscale sans pays
-#        Given un suspect
-#        And un informateur
-#        And un delit de type "EvasionFiscale"
-#        When la denonciation est creee
-#        Then le message d erreur "Une infraction d'evasion fiscale doit avoir un pays d'evasion" doit etre generee
+
+    #    Scenario: La denonciation pour evasion fiscale doit avoir les bons parametres
+    #        Given un suspect
+    #        And un informateur
+    #        And un delit de type "EvasionFiscale"
+    #        And un pays d'evasion "France"
+    #        When la denonciation est creee
+    #        Then le type de delit de la denonciation est "EvasionFiscale"
+    #        And le pays d'evasion est "France"
+
+    #    Scenario: Impossible de creer une denonciation pour evasion fiscale sans pays
+    #        Given un suspect
+    #        And un informateur
+    #        And un delit de type "EvasionFiscale"
+    #        When la denonciation est creee
+    #        Then le message d erreur "Une infraction d'evasion fiscale doit avoir un pays d'evasion" doit etre generee
     #
     #    Scenario: Creation d'une denonciation
     #        Given un suspect

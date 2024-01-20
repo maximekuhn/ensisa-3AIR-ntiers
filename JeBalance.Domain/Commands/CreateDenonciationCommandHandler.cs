@@ -10,9 +10,9 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
 {
     private readonly DenonciationRepository _denonciationRepository;
     private readonly IHorodatageProvider _horodatageProvider;
+    private readonly IdOpaqueProvider _idOpaqueProvider;
     private readonly InformateurRepository _informateurRepository;
     private readonly SuspectRepository _suspectRepository;
-    private readonly IdOpaqueProvider _idOpaqueProvider;
 
     public CreateDenonciationCommandHandler(DenonciationRepository denonciationRepository,
         InformateurRepository informateurRepository, SuspectRepository suspectRepository,
@@ -44,7 +44,7 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
         denonciation.InformateurId = informateur.Id;
 
         if (informateur.EstCalomniateur) throw new ApplicationException("Vous ne pouvez plus créer de dénonciations");
-        
+
         var denonciationId = await _denonciationRepository.Create(denonciation);
         return denonciationId;
     }
@@ -62,7 +62,7 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
             suspectId = maybeSuspect.Id;
         return suspectId;
     }
-    
+
     private async Task<Informateur> GetOrInsertInformateur(Informateur informateur)
     {
         var findInformateurSpecification =
@@ -76,5 +76,4 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
             informateurId = maybeInformateur.Id;
         return await _informateurRepository.GetOne(informateurId);
     }
-    
 }

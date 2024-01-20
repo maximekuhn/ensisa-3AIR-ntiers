@@ -7,7 +7,7 @@ namespace JeBalance.API.Publique.Controllers;
 
 [ApiController]
 [Route("/api/[controller]")]
-public class SuspectController: ControllerBase
+public class SuspectController : ControllerBase
 {
     private readonly IMediator _mediator;
 

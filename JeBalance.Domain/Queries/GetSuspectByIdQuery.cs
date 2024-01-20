@@ -3,12 +3,12 @@ using MediatR;
 
 namespace JeBalance.Domain.Queries;
 
-public class GetSuspectByIdQuery: IRequest<Suspect>
+public class GetSuspectByIdQuery : IRequest<Suspect>
 {
-    public int SuspectId { get; }
-
     public GetSuspectByIdQuery(int suspectId)
     {
         SuspectId = suspectId;
     }
+
+    public int SuspectId { get; }
 }

@@ -4,11 +4,10 @@ using JeBalance.Domain.Repositories;
 
 namespace JeBalance.Domain.Tests.Drivers;
 
-public class SuspectRepositoryDriver: SuspectRepository
+public class SuspectRepositoryDriver : SuspectRepository
 {
+    private int _lastId;
     public List<Suspect> Suspects;
-    
-    private int _lastId = 0;
 
     public SuspectRepositoryDriver()
     {
@@ -23,9 +22,8 @@ public class SuspectRepositoryDriver: SuspectRepository
     public Task<Suspect> GetOne(int id)
     {
         foreach (var suspect in Suspects)
-        {
-            if (suspect.Id == id) return Task.FromResult(suspect);
-        }
+            if (suspect.Id == id)
+                return Task.FromResult(suspect);
         return null;
     }
 
@@ -33,7 +31,7 @@ public class SuspectRepositoryDriver: SuspectRepository
     {
         suspect.Id = ++_lastId;
         Suspects.Add(suspect);
-        return Task.FromResult<int>(_lastId);
+        return Task.FromResult(_lastId);
     }
 
     public Task<int> Update(int id, Suspect T)

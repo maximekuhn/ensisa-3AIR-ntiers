@@ -4,7 +4,7 @@ using MediatR;
 
 namespace JeBalance.Domain.Queries;
 
-public class GetSuspectByIdQueryHandler: IRequestHandler<GetSuspectByIdQuery, Suspect>
+public class GetSuspectByIdQueryHandler : IRequestHandler<GetSuspectByIdQuery, Suspect>
 {
     private readonly SuspectRepository _suspectRepository;
 

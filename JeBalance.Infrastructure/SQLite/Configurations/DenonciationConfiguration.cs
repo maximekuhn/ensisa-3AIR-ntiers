@@ -13,7 +13,7 @@ public class DenonciationConfiguration : IEntityTypeConfiguration<DenonciationSQ
 
         // Dot not generate a Guid as the `IdOpaqueProvider` already does it
         builder.Property(denonciation => denonciation.Id).ValueGeneratedNever();
-        
+
 
         // store enum as int
         builder.Property(denonciation => denonciation.TypeDelit).HasColumnType("int").IsRequired();
