@@ -18,6 +18,13 @@ public class Suspect : Personne
         Prenom = new Nom(prenom);
     }
 
+    public Suspect(Nom nom, Nom prenom, Adresse adresse) : base(0)
+    {
+        Nom = nom;
+        Prenom = prenom;
+        Adresse = adresse;
+    }
+
     public Suspect(Nom nom, Nom prenom, Adresse adresse, int id) : base(id)
     {
         Nom = nom;

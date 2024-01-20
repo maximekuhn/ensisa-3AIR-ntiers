@@ -12,20 +12,25 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
     private readonly IHorodatageProvider _horodatageProvider;
     private readonly InformateurRepository _informateurRepository;
     private readonly SuspectRepository _suspectRepository;
+    private readonly IdOpaqueProvider _idOpaqueProvider;
 
     public CreateDenonciationCommandHandler(DenonciationRepository denonciationRepository,
         InformateurRepository informateurRepository, SuspectRepository suspectRepository,
-        IHorodatageProvider horodatageProvider)
+        IHorodatageProvider horodatageProvider, IdOpaqueProvider idOpaqueProvider)
     {
         _denonciationRepository = denonciationRepository;
         _informateurRepository = informateurRepository;
         _suspectRepository = suspectRepository;
         _horodatageProvider = horodatageProvider;
+        _idOpaqueProvider = idOpaqueProvider;
     }
 
     public async Task<Guid> Handle(CreateDenonciationCommand request, CancellationToken cancellationToken)
     {
         var denonciation = request.Denonciation;
+
+        var idOpaque = _idOpaqueProvider.GetOpaqueId();
+        denonciation.Id = idOpaque;
 
         var now = _horodatageProvider.GetNow();
         denonciation.Horodatage = now;
