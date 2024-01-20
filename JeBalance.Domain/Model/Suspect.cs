@@ -15,7 +15,7 @@ public class Suspect : Personne
     public Suspect(string prenom, string nom) : base(0)
     {
         Nom = new Nom(nom);
-        Prenom = new Nom(nom);
+        Prenom = new Nom(prenom);
     }
 
     public Suspect(Nom nom, Nom prenom, Adresse adresse, int id) : base(id)

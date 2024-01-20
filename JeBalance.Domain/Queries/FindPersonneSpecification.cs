@@ -18,6 +18,6 @@ public class FindPersonneSpecification<T>: Specification<T> where T: Personne
 
     public override Expression<Func<T, bool>> ToExpression()
     {
-        return personne => personne.Nom == _nom && personne.Prenom == _prenom;
+        return personne => (personne.Nom == _nom) && (personne.Prenom == _prenom);
     }
 }
