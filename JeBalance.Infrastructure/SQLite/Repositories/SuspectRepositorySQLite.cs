@@ -20,9 +20,10 @@ public class SuspectRepositorySQLite : SuspectRepository
         throw new NotImplementedException();
     }
 
-    public Task<Suspect> GetOne(int id)
+    public async Task<Suspect> GetOne(int id)
     {
-        throw new NotImplementedException();
+        var suspect = await _context.Suspects.FirstAsync(suspect => id.Equals(suspect.Id));
+        return suspect.ToDomain();
     }
 
     public async Task<int> Create(Suspect suspect)
