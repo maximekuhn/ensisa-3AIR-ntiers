@@ -18,7 +18,7 @@ namespace JeBalance.Architecture.Migrations
                     nom = table.Column<string>(type: "TEXT", nullable: false),
                     prenom = table.Column<string>(type: "TEXT", nullable: false),
                     calomniateur = table.Column<bool>(type: "INTEGER", nullable: false),
-                    addresse = table.Column<string>(type: "TEXT", nullable: false)
+                    adresse = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

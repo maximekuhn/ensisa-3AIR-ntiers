@@ -83,7 +83,7 @@ namespace JeBalance.Architecture.Migrations
                     b.Property<string>("Adresse")
                         .IsRequired()
                         .HasColumnType("TEXT")
-                        .HasColumnName("addresse");
+                        .HasColumnName("adresse");
 
                     b.Property<bool>("EstCalomniateur")
                         .HasColumnType("INTEGER")

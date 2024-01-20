@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JeBalance.Architecture.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240120111143_initial")]
+    [Migration("20240120112036_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,7 +85,7 @@ namespace JeBalance.Architecture.Migrations
                     b.Property<string>("Adresse")
                         .IsRequired()
                         .HasColumnType("TEXT")
-                        .HasColumnName("addresse");
+                        .HasColumnName("adresse");
 
                     b.Property<bool>("EstCalomniateur")
                         .HasColumnType("INTEGER")
