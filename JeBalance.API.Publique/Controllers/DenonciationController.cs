@@ -1,6 +1,7 @@
 using JeBalance.API.Publique.Resources;
 using JeBalance.Domain.Commands;
 using JeBalance.Domain.Model;
+using JeBalance.Domain.Queries;
 using JeBalance.Domain.ValueObjects;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -31,5 +32,13 @@ public class DenonciationController : ControllerBase
         );
         var denonciationId = await _mediator.Send(createDenonciationCommand);
         return Ok(denonciationId);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetDenonciationById([FromQuery] Guid denonciationId)
+    {
+        var getDenonciationByIdQuery = new GetDenonciationByIdQuery(denonciationId);
+        var denonciation = await _mediator.Send(getDenonciationByIdQuery);
+        return Ok(denonciation);
     }
 }

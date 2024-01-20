@@ -17,6 +17,20 @@ public static class Extensions
         };
     }
 
+    public static Denonciation ToDomain(this DenonciationSQLite denonciation)
+    {
+        return new Denonciation
+        {
+            Id = denonciation.Id,
+            InformateurId = denonciation.IdInformateur,
+            SuspectId = denonciation.IdSuspect,
+            Horodatage = denonciation.Horodatage,
+            PaysEvasion = denonciation.PaysEvasion,
+            ReponseId = denonciation.ReponseId,
+            TypeDelit = denonciation.TypeDelit
+        };
+    }
+
     public static InformateurSQLite ToSQLite(this Informateur informateur)
     {
         return new InformateurSQLite

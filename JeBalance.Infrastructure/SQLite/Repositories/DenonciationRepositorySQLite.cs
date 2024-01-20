@@ -2,6 +2,7 @@ using JeBalance.Architecture.SQLite.Model;
 using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
 using JeBalance.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace JeBalance.Architecture.SQLite.Repositories;
 
@@ -19,9 +20,10 @@ public class DenonciationRepositorySQLite : DenonciationRepository
         throw new NotImplementedException();
     }
 
-    public Task<Denonciation> GetOne(int id)
+    public async Task<Denonciation> GetOne(Guid id)
     {
-        throw new NotImplementedException();
+        var denonciation = await _context.Denonciations.FirstAsync(denonciation => id.Equals(denonciation.Id));
+        return denonciation.ToDomain();
     }
 
     public async Task<Guid> Create(Denonciation denonciation)
@@ -32,12 +34,12 @@ public class DenonciationRepositorySQLite : DenonciationRepository
         return denonciationToSave.Id;
     }
 
-    public Task<Guid> Update(int id, Denonciation denonciation)
+    public Task<Guid> Update(Guid id, Denonciation denonciation)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> Delete(int id)
+    public Task<bool> Delete(Guid id)
     {
         throw new NotImplementedException();
     }

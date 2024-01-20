@@ -23,8 +23,8 @@ public class Denonciation : Entity<Guid>
         SuspectId = suspectId;
     }
 
-    public TypeDelit TypeDelit { get; }
-    public string? PaysEvasion { get; }
+    public TypeDelit TypeDelit { get; set; }
+    public string? PaysEvasion { get; set; }
     public DateTime Horodatage { get; set; }
     public StatutDenonciation Statut { get; }
 

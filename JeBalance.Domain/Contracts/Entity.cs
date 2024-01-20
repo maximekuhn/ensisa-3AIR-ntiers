@@ -7,5 +7,5 @@ public abstract class Entity<T>
         Id = id;
     }
 
-    public T Id { get; }
+    public T Id { get; set; }
 }
