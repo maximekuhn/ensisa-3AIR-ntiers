@@ -9,10 +9,11 @@ public class InformateurRepositoryTests : RepositoryTest
     private const int _informateurId = 1;
     private const string _nom = "toto";
     private const string _prenom = "tata";
-    private readonly InformateurRepositorySQLite _repository;
 
     private readonly Adresse _adresse = new(new NumeroVoie(10), new NomVoie("Rue des freres"),
         new CodePostal(68200), new NomCommune("Mulhouse"));
+
+    private readonly InformateurRepositorySQLite _repository;
 
     public InformateurRepositoryTests()
     {

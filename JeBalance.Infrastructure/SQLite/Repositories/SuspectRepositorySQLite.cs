@@ -15,7 +15,8 @@ public class SuspectRepositorySQLite : SuspectRepository
         _context = context;
     }
 
-    public Task<IEnumerable<Suspect>> Find(int limit, int offset, Specification<Suspect> specification)
+    public Task<(IEnumerable<Suspect> Results, int Total)> Find(int limit, int offset,
+        Specification<Suspect> specification)
     {
         throw new NotImplementedException();
     }

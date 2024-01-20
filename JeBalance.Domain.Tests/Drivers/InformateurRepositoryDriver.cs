@@ -6,8 +6,6 @@ namespace JeBalance.Domain.Tests.Drivers;
 
 public class InformateurRepositoryDriver : InformateurRepository
 {
-    private int _lastId;
-
     public InformateurRepositoryDriver()
     {
         Informateurs = new List<Informateur>();
@@ -15,38 +13,45 @@ public class InformateurRepositoryDriver : InformateurRepository
 
     public List<Informateur> Informateurs { get; set; }
 
-    public Task<IEnumerable<Informateur>> Find(int limit, int offset, Specification<Informateur> specification)
+    public async Task<(IEnumerable<Informateur> Results, int Total)> Find(int limit, int offset,
+        Specification<Informateur> specification)
     {
-        throw new NotImplementedException();
+        var informateurs = Informateurs.Where(specification.IsSatisfiedBy).Skip(offset).Take(limit);
+        return (informateurs, Informateurs.Count);
     }
 
     public Task<Informateur> GetOne(int id)
     {
-        foreach (var informateur in Informateurs)
-            if (informateur.Id == id)
-                return Task.FromResult(informateur);
-        return null;
+        return Task.FromResult(Informateurs.First(informateur => id == informateur.Id));
     }
 
     public Task<int> Create(Informateur informateur)
     {
-        informateur.Id = ++_lastId;
+        if (Informateurs.Count > 0)
+            informateur.Id = Informateurs.Last().Id + 1;
+        else
+            informateur.Id = 1;
         Informateurs.Add(informateur);
-        return Task.FromResult(_lastId);
+        return Task.FromResult(Informateurs.Last().Id);
     }
 
-    public Task<int> Update(int id, Informateur T)
+    public async Task<int> Update(int id, Informateur updatedInformateur)
     {
-        throw new NotImplementedException();
+        var informateur = await GetOne(updatedInformateur.Id);
+        var index = Informateurs.IndexOf(informateur);
+        Informateurs[index] = new Informateur(informateur.Id, updatedInformateur.Nom, updatedInformateur.Prenom,
+            updatedInformateur.Adresse, updatedInformateur.EstCalomniateur);
+        return id;
     }
 
     public Task<bool> Delete(int id)
     {
-        throw new NotImplementedException();
+        Informateurs.RemoveAll(informateur => id == informateur.Id);
+        return Task.FromResult(true);
     }
 
     public Task<Informateur?> FindOne(Specification<Informateur> specification)
     {
-        return Task.FromResult<Informateur?>(null);
+        return Task.FromResult(Informateurs.FirstOrDefault(specification.IsSatisfiedBy));
     }
 }

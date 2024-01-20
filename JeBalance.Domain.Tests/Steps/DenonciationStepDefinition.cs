@@ -3,6 +3,7 @@ using JeBalance.Domain.Commands;
 using JeBalance.Domain.Model;
 using JeBalance.Domain.Tests.Drivers;
 using JeBalance.Domain.ValueObjects;
+using Xunit;
 
 namespace JeBalance.Domain.Tests.Steps;
 
@@ -18,6 +19,7 @@ public class DenonciationStepDefinition
     private readonly SuspectRepositoryDriver _suspectRepository;
     private Denonciation _denonciation;
     private Guid _denonciationId;
+    private ApplicationException _exception;
     private Informateur _informateur;
     private string _paysEvasion;
     private Suspect _suspect;
@@ -62,16 +64,33 @@ public class DenonciationStepDefinition
         _suspect = new Suspect("Nom sus", "Prenom sus", createAdresse("sus ville", "sus voie", 69000, 2));
     }
 
+    [Given(@"un informateur calomniateur déjà enrengistré")]
+    public void GivenUnInformateurCalomniateur()
+    {
+        _informateur = new Informateur(0, "Nom info", "Prenom info", createAdresse("info ville", "nom voie", 68000, 2),
+            true);
+        _informateurRepository.Create(_informateur);
+    }
+
     [When(@"la denonciation est creee")]
     public async Task WhenLaDenonciationEstCreee()
     {
-        var createDenonciationCommand = new CreateDenonciationCommand(_typeDelit, _paysEvasion, _informateur, _suspect);
-        var handler = new CreateDenonciationCommandHandler(_denonciationRepository, _informateurRepository,
-            _suspectRepository, _horodatageProvider, _idOpaqueProviderDriver);
-        _denonciationId = await handler.Handle(createDenonciationCommand, CancellationToken.None);
-        _denonciation = _denonciationRepository.Denonciations.First();
-        _informateur = _informateurRepository.Informateurs.First();
-        _suspect = _suspectRepository.Suspects.First();
+        try
+        {
+            var createDenonciationCommand =
+                new CreateDenonciationCommand(_typeDelit, _paysEvasion, _informateur, _suspect);
+            var handler = new CreateDenonciationCommandHandler(_denonciationRepository, _informateurRepository,
+                _suspectRepository, _horodatageProvider, _idOpaqueProviderDriver);
+
+            _denonciationId = await handler.Handle(createDenonciationCommand, CancellationToken.None);
+            _denonciation = _denonciationRepository.Denonciations.First();
+            _informateur = _informateurRepository.Informateurs.First();
+            _suspect = _suspectRepository.Suspects.First();
+        }
+        catch (ApplicationException e)
+        {
+            _exception = e;
+        }
     }
 
     [Then(@"la denonciation est datée \(horodatage\)")]
@@ -100,5 +119,30 @@ public class DenonciationStepDefinition
             new CodePostal(codePostal),
             new NomCommune(nomCommune)
         );
+    }
+
+    [Then(@"apparait le message d'erreur '(.*)'")]
+    public void ThenApparaitLeMessageDetesPlusAutoriseACreerUneDenonciation(string message)
+    {
+        Assert.NotNull(_exception);
+        _exception.Message.Should().Be(message);
+    }
+
+    [Then(@"la denonciation a un identifiant opaque")]
+    public void ThenLaDenonciationAUnIdentifiantOpaque()
+    {
+        _denonciation.Id.Should().Be(_defaultIdOpaque);
+    }
+
+    [Then(@"l'informateur est ajouté à la base")]
+    public void ThenLinformateurEstAjouteALaBase()
+    {
+        _informateurRepository.Informateurs.Contains(_informateur).Should().BeTrue();
+    }
+
+    [Then(@"le suspect est ajouté à la base")]
+    public void ThenLeSuspectEstAjouteALaBase()
+    {
+        _suspectRepository.Suspects.Contains(_suspect).Should().BeTrue();
     }
 }
