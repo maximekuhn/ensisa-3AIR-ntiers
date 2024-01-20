@@ -1,3 +1,4 @@
+using JeBalance.Architecture.SQLite.Model;
 using JeBalance.Architecture.SQLite.Repositories;
 using JeBalance.Domain.Repositories;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,7 @@ public static class DependencyInjection
         services.AddScoped<DenonciationRepository, DenonciationRepositorySQLite>();
         services.AddScoped<SuspectRepository, SuspectRepositorySQLite>();
         services.AddScoped<InformateurRepository, InformateurRepositorySQLite>();
+        services.AddScoped<ReponseRepository, ReponseRepositorySQLite>();
         return services;
     }
 }
