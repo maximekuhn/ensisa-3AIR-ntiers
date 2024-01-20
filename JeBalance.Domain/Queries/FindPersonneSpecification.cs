@@ -5,21 +5,19 @@ using JeBalance.Domain.ValueObjects;
 
 namespace JeBalance.Domain.Queries;
 
-public class FindPersonneSpecification : Specification<Personne>
+public class FindPersonneSpecification<T>: Specification<T> where T: Personne
 {
-    private readonly Adresse _adresse;
-    private readonly Nom _nom;
-    private readonly Nom _prenom;
+    private readonly string _nom;
+    private readonly string _prenom;
 
-    public FindPersonneSpecification(Nom nom, Nom prenom, Adresse adresse)
+    public FindPersonneSpecification(Nom nom, Nom prenom)
     {
         _nom = nom;
         _prenom = prenom;
-        _adresse = adresse;
     }
 
-    public override Expression<Func<Personne, bool>> ToExpression()
+    public override Expression<Func<T, bool>> ToExpression()
     {
-        return personne => personne.Nom == _nom && personne.Prenom == _prenom && personne.Adresse == _adresse;
+        return personne => personne.Nom == _nom && personne.Prenom == _prenom;
     }
 }

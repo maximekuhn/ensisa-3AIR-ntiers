@@ -19,5 +19,12 @@ public class Informateur : Personne
         EstCalomniateur = false;
     }
 
+    public Informateur(Nom nom, Nom prenom, Adresse adresse, int id) : base(id)
+    {
+        Nom = nom;
+        Prenom = Prenom;
+        Adresse = adresse;
+    }
+
     public bool EstCalomniateur { get; set; }
 }

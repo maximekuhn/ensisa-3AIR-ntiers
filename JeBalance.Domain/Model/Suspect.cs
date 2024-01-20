@@ -17,4 +17,11 @@ public class Suspect : Personne
         Nom = new Nom(nom);
         Prenom = new Nom(nom);
     }
+
+    public Suspect(Nom nom, Nom prenom, Adresse adresse, int id) : base(id)
+    {
+        Nom = nom;
+        Prenom = prenom;
+        Adresse = adresse;
+    }
 }

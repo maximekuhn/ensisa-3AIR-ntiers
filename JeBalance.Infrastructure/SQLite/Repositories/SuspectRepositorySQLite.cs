@@ -1,8 +1,8 @@
 using JeBalance.Architecture.SQLite.Model;
 using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
-using JeBalance.Domain.Queries;
 using JeBalance.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace JeBalance.Architecture.SQLite.Repositories;
 
@@ -43,8 +43,10 @@ public class SuspectRepositorySQLite : SuspectRepository
         throw new NotImplementedException();
     }
 
-    public async Task<Suspect?> FindOne(FindPersonneSpecification specification)
+    public async Task<Suspect?> FindOne(Specification<Suspect> specification)
     {
-        return null;
+        var suspect = await _context.Suspects.Apply(specification.ToSQLiteExpression<Suspect, SuspectSQLite>())
+            .FirstOrDefaultAsync();
+        return suspect?.ToDomain();
     }
 }

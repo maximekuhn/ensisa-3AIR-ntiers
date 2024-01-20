@@ -6,5 +6,5 @@ namespace JeBalance.Domain.Repositories;
 
 public interface InformateurRepository : Repository<Informateur, int>
 {
-    public Task<Informateur?> FindOne(FindPersonneSpecification specification);
+    public Task<Informateur?> FindOne(Specification<Informateur> specification);
 }

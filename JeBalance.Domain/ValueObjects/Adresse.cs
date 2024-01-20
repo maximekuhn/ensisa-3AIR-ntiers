@@ -16,4 +16,5 @@ public class Adresse
     public NomCommune NomCommune { get; set; }
 
     // TODO: comparator
+
 }

@@ -3,6 +3,7 @@ using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
 using JeBalance.Domain.Queries;
 using JeBalance.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace JeBalance.Architecture.SQLite.Repositories;
 
@@ -43,8 +44,10 @@ public class InformateurRepositorySQLite : InformateurRepository
         throw new NotImplementedException();
     }
 
-    public async Task<Informateur?> FindOne(FindPersonneSpecification specification)
+    public async Task<Informateur?> FindOne(Specification<Informateur> specification)
     {
-        return null;
+        var informateur = await _context.Informateurs
+            .Apply(specification.ToSQLiteExpression<Informateur, InformateurSQLite>()).FirstOrDefaultAsync();
+        return informateur?.ToDomain();
     }
 }

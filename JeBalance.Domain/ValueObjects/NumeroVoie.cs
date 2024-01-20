@@ -4,7 +4,8 @@ namespace JeBalance.Domain.ValueObjects;
 
 public class NumeroVoie : SimpleValueObject<int>
 {
-    private const int MIN_NUMBER = 1;
+    // TODO: change back to 1
+    private const int MIN_NUMBER = 0;
 
     public NumeroVoie(int value) : base(value)
     {
@@ -12,7 +13,7 @@ public class NumeroVoie : SimpleValueObject<int>
 
     public override int Validate(int value)
     {
-        if (value < 1) throw new ApplicationException($"Le numero de voie ne peut pas être inférieur à {MIN_NUMBER}");
+        if (value < MIN_NUMBER) throw new ApplicationException($"Le numero de voie ne peut pas être inférieur à {MIN_NUMBER}");
         return value;
     }
 }

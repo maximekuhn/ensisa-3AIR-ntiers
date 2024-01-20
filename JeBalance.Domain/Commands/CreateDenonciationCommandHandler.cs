@@ -1,3 +1,4 @@
+using JeBalance.Domain.Model;
 using JeBalance.Domain.Queries;
 using JeBalance.Domain.Repositories;
 using JeBalance.Domain.Services;
@@ -30,7 +31,7 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
         denonciation.Horodatage = now;
 
         var findSuspectSpecification =
-            new FindPersonneSpecification(request.Suspect.Nom, request.Suspect.Prenom, request.Suspect.Adresse);
+            new FindPersonneSpecification<Suspect>(request.Suspect.Nom, request.Suspect.Prenom);
         var suspect = await _suspectRepository.FindOne(findSuspectSpecification);
         int suspectId;
         if (suspect == null)
@@ -39,15 +40,16 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
             suspectId = suspect.Id;
         denonciation.SuspectId = suspectId;
 
-        var findInformateurSuspect = new FindPersonneSpecification(request.Informateur.Nom, request.Informateur.Prenom,
-            request.Informateur.Adresse);
-        var informateur = await _informateurRepository.FindOne(findInformateurSuspect);
+        var findInformateurSpecification = new FindPersonneSpecification<Informateur>(request.Informateur.Nom, request.Informateur.Prenom);
+        var informateur = await _informateurRepository.FindOne(findInformateurSpecification);
         int informateurId;
         if (informateur == null)
             informateurId = await _informateurRepository.Create(request.Informateur);
         else
             informateurId = informateur.Id;
         denonciation.InformateurId = informateurId;
+
+        Console.WriteLine($"Informateur Id = {informateurId}, Suspect Id = {suspectId}");
 
         var denonciationId = await _denonciationRepository.Create(denonciation);
         return denonciationId;

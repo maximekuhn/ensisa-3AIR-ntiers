@@ -43,18 +43,18 @@ public static class Extensions
 
     public static Suspect ToDomain(this SuspectSQLite suspect)
     {
-        return new Suspect();
+        return new Suspect(new Nom(suspect.Nom), new Nom(suspect.Prenom), suspect.Adresse.ToDomain(), suspect.Id);
     }
 
     public static Informateur ToDomain(this InformateurSQLite informateur)
     {
-        return new Informateur();
+        return new Informateur(new Nom(informateur.Nom), new Nom(informateur.Prenom), informateur.Adresse.ToDomain(), informateur.Id);
     }
 
     private static string ToSQLite(this Adresse adresse)
     {
         return
-            $"{adresse.NumeroVoieDeVoie.Value}{AdresseSep}{adresse.NomVoie.Value}{AdresseSep}{adresse.NomCommune.Value}{adresse.CodePostal.Value}";
+            $"{adresse.NumeroVoieDeVoie.Value}{AdresseSep}{adresse.NomVoie.Value}{AdresseSep}{adresse.NomCommune.Value}{AdresseSep}{adresse.CodePostal.Value}";
     }
 
     private static Adresse ToDomain(this string adresseStr)

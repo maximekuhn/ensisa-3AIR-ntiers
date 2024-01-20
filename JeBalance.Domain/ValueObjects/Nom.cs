@@ -35,4 +35,7 @@ public class Nom : SimpleValueObject<string>
     {
         return HashCode.Combine(Value);
     }
+
+    public static implicit operator string(Nom nom) => nom.Value;
+    public static implicit operator Nom(string value) => new Nom(value);
 }
