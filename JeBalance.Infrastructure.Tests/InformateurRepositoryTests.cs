@@ -33,11 +33,11 @@ public class InformateurRepositoryTests : RepositoryTest
     {
         var informateur = new Informateur(_nom, _prenom, _adresse, _informateurId);
         var result = await _repository.Create(informateur);
-
         var lastInformateur = Context.Informateurs.Last();
         Assert.Equal(lastInformateur.Id, result);
         Assert.Equal(lastInformateur.Nom, _nom);
         Assert.Equal(lastInformateur.Prenom, _prenom);
+        Assert.Equal(lastInformateur.Adresse, _adresse);
     }
 
     [Fact]
