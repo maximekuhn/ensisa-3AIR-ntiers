@@ -1,7 +1,7 @@
 using JeBalance.API.Publique;
+using JeBalance.Domain;
 using JeBalance.Infrastructure;
 using JeBalance.Infrastructure.SQLite;
-using JeBalance.Domain;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

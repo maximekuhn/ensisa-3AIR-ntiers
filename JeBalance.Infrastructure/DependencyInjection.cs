@@ -1,5 +1,5 @@
-using JeBalance.Infrastructure.SQLite.Repositories;
 using JeBalance.Domain.Repositories;
+using JeBalance.Infrastructure.SQLite.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace JeBalance.Infrastructure;
