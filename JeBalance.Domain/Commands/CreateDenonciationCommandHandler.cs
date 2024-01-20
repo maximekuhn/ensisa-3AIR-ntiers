@@ -30,30 +30,42 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
         var now = _horodatageProvider.GetNow();
         denonciation.Horodatage = now;
 
-        var findSuspectSpecification =
-            new FindPersonneSpecification<Suspect>(request.Suspect.Nom, request.Suspect.Prenom,
-                request.Suspect.Adresse);
-        var suspect = await _suspectRepository.FindOne(findSuspectSpecification);
-        int suspectId;
-        if (suspect == null)
-            suspectId = await _suspectRepository.Create(request.Suspect);
-        else
-            suspectId = suspect.Id;
+        var suspectId = await GetOrInsertSuspect(request.Suspect);
+        var informateurId = await GetOrInsertInformateur(request.Informateur);
+
         denonciation.SuspectId = suspectId;
-
-        var findInformateurSpecification = new FindPersonneSpecification<Informateur>(request.Informateur.Nom,
-            request.Informateur.Prenom, request.Suspect.Adresse);
-        var informateur = await _informateurRepository.FindOne(findInformateurSpecification);
-        int informateurId;
-        if (informateur == null)
-            informateurId = await _informateurRepository.Create(request.Informateur);
-        else
-            informateurId = informateur.Id;
         denonciation.InformateurId = informateurId;
-
-        Console.WriteLine($"Informateur Id = {informateurId}, Suspect Id = {suspectId}");
-
+        
         var denonciationId = await _denonciationRepository.Create(denonciation);
         return denonciationId;
     }
+
+    private async Task<int> GetOrInsertSuspect(Suspect suspect)
+    {
+        var findSuspectSpecification =
+            new FindPersonneSpecification<Suspect>(suspect.Nom, suspect.Prenom,
+                suspect.Adresse);
+        var maybeSuspect = await _suspectRepository.FindOne(findSuspectSpecification);
+        int suspectId;
+        if (maybeSuspect == null)
+            suspectId = await _suspectRepository.Create(suspect);
+        else
+            suspectId = maybeSuspect.Id;
+        return suspectId;
+    }
+    
+    private async Task<int> GetOrInsertInformateur(Informateur informateur)
+    {
+        var findInformateurSpecification =
+            new FindPersonneSpecification<Informateur>(informateur.Nom, informateur.Prenom,
+                informateur.Adresse);
+        var maybeSuspect = await _informateurRepository.FindOne(findInformateurSpecification);
+        int suspectId;
+        if (maybeSuspect == null)
+            suspectId = await _informateurRepository.Create(informateur);
+        else
+            suspectId = maybeSuspect.Id;
+        return suspectId;
+    }
+    
 }
