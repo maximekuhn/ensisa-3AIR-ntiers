@@ -27,14 +27,14 @@ public class DenonciationController : ControllerBase
             resource.NomSuspect,
             resource.PrenomSuspect,
             resource.NumeroVoieSuspect,
-            resource.NomVoieSuspect, 
+            resource.NomVoieSuspect,
             resource.CodePostalSuspect,
             resource.NomCommuneSuspect,
             resource.NumeroVoieInformateur,
             resource.NomVoieInformateur,
             resource.CodePostalInformateur,
             resource.NomCommuneInformateur
-            );
+        );
         var denonciationId = await _mediator.Send(createDenonciationCommand);
         return Ok(denonciationId);
     }

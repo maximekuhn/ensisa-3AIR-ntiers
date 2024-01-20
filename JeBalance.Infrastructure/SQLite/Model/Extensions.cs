@@ -5,8 +5,6 @@ namespace JeBalance.Architecture.SQLite.Model;
 
 public static class Extensions
 {
-    private static readonly char AdresseSep = '$';
-
     public static DenonciationSQLite ToSQLite(this Denonciation denonciation)
     {
         return new DenonciationSQLite
@@ -26,7 +24,7 @@ public static class Extensions
             Id = informateur.Id,
             Nom = informateur.Nom.Value,
             Prenom = informateur.Prenom.Value,
-            Adresse = informateur.Adresse.ToSQLite()
+            Adresse = informateur.Adresse
         };
     }
 
@@ -37,33 +35,18 @@ public static class Extensions
             Id = suspect.Id,
             Nom = suspect.Nom.Value,
             Prenom = suspect.Prenom.Value,
-            Adresse = suspect.Adresse.ToSQLite()
+            Adresse = suspect.Adresse
         };
     }
 
     public static Suspect ToDomain(this SuspectSQLite suspect)
     {
-        return new Suspect(new Nom(suspect.Nom), new Nom(suspect.Prenom), suspect.Adresse.ToDomain(), suspect.Id);
+        return new Suspect(new Nom(suspect.Nom), new Nom(suspect.Prenom), suspect.Adresse, suspect.Id);
     }
 
     public static Informateur ToDomain(this InformateurSQLite informateur)
     {
-        return new Informateur(new Nom(informateur.Nom), new Nom(informateur.Prenom), informateur.Adresse.ToDomain(), informateur.Id);
-    }
-
-    private static string ToSQLite(this Adresse adresse)
-    {
-        return
-            $"{adresse.NumeroVoieDeVoie.Value}{AdresseSep}{adresse.NomVoie.Value}{AdresseSep}{adresse.NomCommune.Value}{AdresseSep}{adresse.CodePostal.Value}";
-    }
-
-    private static Adresse ToDomain(this string adresseStr)
-    {
-        var fragments = adresseStr.Split(AdresseSep);
-        if (fragments.Length != 4) throw new ApplicationException("Could not retrieve address");
-        var numeroDeVoie = int.Parse(fragments[0]);
-        var codePostal = int.Parse(fragments[3]);
-        return new Adresse(new NumeroVoie(numeroDeVoie), new NomVoie(fragments[1]), new CodePostal(codePostal),
-            new NomCommune(fragments[2]));
+        return new Informateur(new Nom(informateur.Nom), new Nom(informateur.Prenom), informateur.Adresse,
+            informateur.Id);
     }
 }

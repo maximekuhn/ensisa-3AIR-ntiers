@@ -1,7 +1,6 @@
 using JeBalance.Architecture.SQLite.Model;
 using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
-using JeBalance.Domain.Queries;
 using JeBalance.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 

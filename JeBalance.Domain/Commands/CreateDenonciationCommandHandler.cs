@@ -31,7 +31,8 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
         denonciation.Horodatage = now;
 
         var findSuspectSpecification =
-            new FindPersonneSpecification<Suspect>(request.Suspect.Nom, request.Suspect.Prenom);
+            new FindPersonneSpecification<Suspect>(request.Suspect.Nom, request.Suspect.Prenom,
+                request.Suspect.Adresse);
         var suspect = await _suspectRepository.FindOne(findSuspectSpecification);
         int suspectId;
         if (suspect == null)
@@ -40,7 +41,8 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
             suspectId = suspect.Id;
         denonciation.SuspectId = suspectId;
 
-        var findInformateurSpecification = new FindPersonneSpecification<Informateur>(request.Informateur.Nom, request.Informateur.Prenom);
+        var findInformateurSpecification = new FindPersonneSpecification<Informateur>(request.Informateur.Nom,
+            request.Informateur.Prenom, request.Suspect.Adresse);
         var informateur = await _informateurRepository.FindOne(findInformateurSpecification);
         int informateurId;
         if (informateur == null)

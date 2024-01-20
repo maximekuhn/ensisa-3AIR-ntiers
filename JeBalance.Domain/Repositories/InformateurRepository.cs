@@ -1,6 +1,5 @@
 using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
-using JeBalance.Domain.Queries;
 
 namespace JeBalance.Domain.Repositories;
 
