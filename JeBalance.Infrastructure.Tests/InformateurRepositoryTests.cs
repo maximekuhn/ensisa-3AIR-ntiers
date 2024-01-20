@@ -24,9 +24,9 @@ public class InformateurRepositoryTests : RepositoryTest
         var informateur = new Informateur(_nom, _prenom, _adresse, _informateurId);
         var result = await _repository.Create(informateur);
         
-        var informateur = Context.Informateurs.Last();
-        Assert.Equal(informateur.Id, _informateurId);
-        Assert.Equal(informateur.Nom, _nom);
-        Assert.Equal(informateur.Prenom, _prenom);
+        var lastInformateur = Context.Informateurs.Last();
+        Assert.Equal(lastInformateur.Id, _informateurId);
+        Assert.Equal(lastInformateur.Nom, _nom);
+        Assert.Equal(lastInformateur.Prenom, _prenom);
     }
 }
