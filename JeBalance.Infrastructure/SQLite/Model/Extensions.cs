@@ -12,7 +12,7 @@ public static class Extensions
             TypeDelit = TypeDelit.DissimulationDeRevenus,
             Horodatage = denonciation.Horodatage,
             IdInformateur = denonciation.InformateurId,
-            IdSuspect = denonciation.SuspectId,
+            IdSuspect = denonciation.SuspectId
         };
     }
 
@@ -23,7 +23,7 @@ public static class Extensions
             Id = informateur.Id,
             Nom = informateur.Nom.Value,
             Prenom = informateur.Prenom.Value,
-            Adresse = "todo",
+            Adresse = "todo"
         };
     }
 
@@ -34,23 +34,17 @@ public static class Extensions
             Id = suspect.Id,
             Nom = suspect.Nom.Value,
             Prenom = suspect.Prenom.Value,
-            Adresse = "todo",
+            Adresse = "todo"
         };
     }
 
     public static Suspect ToDomain(this SuspectSQLite suspect)
     {
-        return new Suspect
-        {
-
-        };
+        return new Suspect();
     }
 
     public static Informateur ToDomain(this InformateurSQLite informateur)
     {
-        return new Informateur
-        {
-
-        };
+        return new Informateur();
     }
 }

@@ -21,7 +21,9 @@ public class DenonciationController : ControllerBase
     {
         var createDenonciationCommand = new CreateDenonciationCommand(resource.TypeDelit, resource.PaysEvasion,
             resource.NomInformateur, resource.PrenomInformateur, resource.NomSuspect, resource.PrenomSuspect,
-            resource.NumeroVoieSuspect, resource.NomVoieSuspect, resource.CodePostalSuspect, resource.NomCommuneSuspect, resource.NumeroVoieInformateur, resource.NomVoieInformateur, resource.CodePostalInformateur, resource.NomCommuneInformateur);
+            resource.NumeroVoieSuspect, resource.NomVoieSuspect, resource.CodePostalSuspect, resource.NomCommuneSuspect,
+            resource.NumeroVoieInformateur, resource.NomVoieInformateur, resource.CodePostalInformateur,
+            resource.NomCommuneInformateur);
         var denonciationId = await _mediator.Send(createDenonciationCommand);
         return Ok(denonciationId);
     }

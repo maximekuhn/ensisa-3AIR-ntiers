@@ -3,11 +3,10 @@ using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
 using JeBalance.Domain.Queries;
 using JeBalance.Domain.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace JeBalance.Architecture.SQLite.Repositories;
 
-public class InformateurRepositorySQLite: InformateurRepository
+public class InformateurRepositorySQLite : InformateurRepository
 {
     private readonly DatabaseContext _context;
 

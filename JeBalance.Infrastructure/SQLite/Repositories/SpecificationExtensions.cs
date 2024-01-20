@@ -15,7 +15,7 @@ public static class SpecificationExtensions
             expression.Body.Replace(expression.Parameters[0], param),
             param);
     }
-    
+
     private static Expression Replace(
         this Expression expression,
         Expression searchEx,
@@ -23,24 +23,25 @@ public static class SpecificationExtensions
     {
         return new ReplaceVisitor(searchEx, replaceEx).Visit(expression);
     }
-    
+
     public static IQueryable<T> Apply<T>(
         this IQueryable<T> query,
         Expression<Func<T, bool>> predicate)
     {
         return query.Where(predicate);
     }
-    
 }
 
 internal class ReplaceVisitor : ExpressionVisitor
 {
     private readonly Expression _from, _to;
+
     public ReplaceVisitor(Expression from, Expression to)
     {
         _from = from;
         _to = to;
     }
+
     public override Expression Visit(Expression node)
     {
         return node == _from ? _to : base.Visit(node);
