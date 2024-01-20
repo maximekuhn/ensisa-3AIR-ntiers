@@ -1,22 +1,20 @@
 using System.Text.Json.Serialization;
 using JeBalance.Domain.Model;
-using JeBalance.Domain.ValueObjects;
 
 namespace JeBalance.API.Publique.Resources;
 
 public class SuspectAPI
 {
-    [JsonPropertyName("nom")]
-    public string Nom { get; set; }
-    
-    [JsonPropertyName("prenom")]
-    public string Prenom { get; set; }
-    [JsonPropertyName("adresse")]
-    public AdresseAPI Adresse { get; set; }
     public SuspectAPI(Suspect source)
     {
         Nom = source.Nom;
         Prenom = source.Prenom;
         Adresse = new AdresseAPI(source.Adresse);
     }
+
+    [JsonPropertyName("nom")] public string Nom { get; set; }
+
+    [JsonPropertyName("prenom")] public string Prenom { get; set; }
+
+    [JsonPropertyName("adresse")] public AdresseAPI Adresse { get; set; }
 }

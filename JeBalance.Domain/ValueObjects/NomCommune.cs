@@ -13,5 +13,4 @@ public class NomCommune : SimpleValueObject<string>
         // TODO: real validation
         return value;
     }
-
 }

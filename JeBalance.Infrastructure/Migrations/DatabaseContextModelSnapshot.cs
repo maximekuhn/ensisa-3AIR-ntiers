@@ -20,7 +20,6 @@ namespace JeBalance.Architecture.Migrations
             modelBuilder.Entity("JeBalance.Architecture.SQLite.Model.DenonciationSQLite", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
                         .HasColumnName("id");
 

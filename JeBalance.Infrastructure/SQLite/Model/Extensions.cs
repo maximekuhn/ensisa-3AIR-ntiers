@@ -60,7 +60,8 @@ public static class Extensions
 
     public static Informateur ToDomain(this InformateurSQLite informateur)
     {
-        return new Informateur(informateur.Id, new Nom(informateur.Nom), new Nom(informateur.Prenom), informateur.Adresse,
+        return new Informateur(informateur.Id, new Nom(informateur.Nom), new Nom(informateur.Prenom),
+            informateur.Adresse,
             informateur.EstCalomniateur);
     }
 }

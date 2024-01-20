@@ -10,22 +10,29 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
 {
     private readonly DenonciationRepository _denonciationRepository;
     private readonly IHorodatageProvider _horodatageProvider;
+    private readonly IdOpaqueProvider _idOpaqueProvider;
     private readonly InformateurRepository _informateurRepository;
     private readonly SuspectRepository _suspectRepository;
 
     public CreateDenonciationCommandHandler(DenonciationRepository denonciationRepository,
         InformateurRepository informateurRepository, SuspectRepository suspectRepository,
-        IHorodatageProvider horodatageProvider)
+        IHorodatageProvider horodatageProvider, IdOpaqueProvider idOpaqueProvider)
     {
         _denonciationRepository = denonciationRepository;
         _informateurRepository = informateurRepository;
         _suspectRepository = suspectRepository;
         _horodatageProvider = horodatageProvider;
+        _idOpaqueProvider = idOpaqueProvider;
     }
 
     public async Task<Guid> Handle(CreateDenonciationCommand request, CancellationToken cancellationToken)
     {
         var denonciation = request.Denonciation;
+
+        var idOpaque = _idOpaqueProvider.GetOpaqueId();
+        denonciation.Id = idOpaque;
+
+        Console.WriteLine($"Id de la dénonciation {denonciation.Id}");
 
         var now = _horodatageProvider.GetNow();
         denonciation.Horodatage = now;
@@ -37,7 +44,7 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
         denonciation.InformateurId = informateur.Id;
 
         if (informateur.EstCalomniateur) throw new ApplicationException("Vous ne pouvez plus créer de dénonciations");
-        
+
         var denonciationId = await _denonciationRepository.Create(denonciation);
         return denonciationId;
     }
@@ -55,7 +62,7 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
             suspectId = maybeSuspect.Id;
         return suspectId;
     }
-    
+
     private async Task<Informateur> GetOrInsertInformateur(Informateur informateur)
     {
         var findInformateurSpecification =
@@ -69,5 +76,4 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
             informateurId = maybeInformateur.Id;
         return await _informateurRepository.GetOne(informateurId);
     }
-    
 }

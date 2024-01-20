@@ -1,5 +1,4 @@
 using JeBalance.Domain.Model;
-using JeBalance.Domain.ValueObjects;
 using MediatR;
 
 namespace JeBalance.Domain.Commands;
