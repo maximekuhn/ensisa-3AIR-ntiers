@@ -15,7 +15,8 @@ public class DenonciationRepositorySQLite : DenonciationRepository
         _context = context;
     }
 
-    public Task<IEnumerable<Denonciation>> Find(int limit, int offset, Specification<Denonciation> specification)
+    public Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset,
+        Specification<Denonciation> specification)
     {
         throw new NotImplementedException();
     }
