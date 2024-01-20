@@ -9,8 +9,10 @@ public static class Extensions
         return new DenonciationSQLite
         {
             Id = denonciation.Id,
-            TypeDelit = TypeDelit.DissimulationDeRevenus
-            // TODO
+            TypeDelit = TypeDelit.DissimulationDeRevenus,
+            Horodatage = denonciation.Horodatage,
+            IdInformateur = denonciation.InformateurId,
+            IdSuspect = denonciation.SuspectId,
         };
     }
 
@@ -18,8 +20,10 @@ public static class Extensions
     {
         return new InformateurSQLite
         {
-            Id = informateur.Id
-            // TODO
+            Id = informateur.Id,
+            Nom = informateur.Nom.Value,
+            Prenom = informateur.Prenom.Value,
+            Adresse = "todo",
         };
     }
 
@@ -27,7 +31,10 @@ public static class Extensions
     {
         return new SuspectSQLite
         {
-            Id = suspect.Id
+            Id = suspect.Id,
+            Nom = suspect.Nom.Value,
+            Prenom = suspect.Prenom.Value,
+            Adresse = "todo",
         };
     }
 

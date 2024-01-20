@@ -46,7 +46,6 @@ public class SuspectRepositorySQLite: SuspectRepository
 
     public async Task<Suspect?> FindOne(FindPersonneSpecification specification)
     {
-        var suspect = await _context.Suspects.FirstAsync(suspect => specification.IsSatisfiedBy(suspect));
-        return suspect.ToDomain();
+        return null;
     }
 }

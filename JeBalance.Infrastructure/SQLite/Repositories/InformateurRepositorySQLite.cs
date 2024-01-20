@@ -46,8 +46,6 @@ public class InformateurRepositorySQLite: InformateurRepository
 
     public async Task<Informateur?> FindOne(FindPersonneSpecification specification)
     {
-        var informateur =
-            await _context.Informateurs.FirstAsync(informateur => specification.IsSatisfiedBy(informateur));
-        return informateur.ToDomain();
+        return null;
     }
 }
