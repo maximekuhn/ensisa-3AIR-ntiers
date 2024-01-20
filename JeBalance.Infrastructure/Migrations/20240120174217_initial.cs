@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace JeBalance.Architecture.Migrations
+namespace JeBalance.Infrastructure.Migrations
 {
     public partial class initial : Migration
     {

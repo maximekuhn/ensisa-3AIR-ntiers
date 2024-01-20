@@ -1,7 +1,7 @@
 using JeBalance.Domain.Model;
 using JeBalance.Domain.ValueObjects;
 
-namespace JeBalance.Architecture.SQLite.Model;
+namespace JeBalance.Infrastructure.SQLite.Model;
 
 public static class Extensions
 {
