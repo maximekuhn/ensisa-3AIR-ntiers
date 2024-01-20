@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JeBalance.Architecture.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240120092139_initial")]
+    [Migration("20240120111143_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,9 +21,9 @@ namespace JeBalance.Architecture.Migrations
 
             modelBuilder.Entity("JeBalance.Architecture.SQLite.Model.DenonciationSQLite", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("TEXT")
                         .HasColumnName("id");
 
                     b.Property<DateTime>("Horodatage")
@@ -82,6 +82,15 @@ namespace JeBalance.Architecture.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
+                    b.Property<string>("Adresse")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("addresse");
+
+                    b.Property<bool>("EstCalomniateur")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("calomniateur");
+
                     b.Property<string>("Nom")
                         .IsRequired()
                         .HasColumnType("TEXT")
@@ -115,6 +124,11 @@ namespace JeBalance.Architecture.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER")
                         .HasColumnName("id");
+
+                    b.Property<string>("Adresse")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("adresse");
 
                     b.Property<string>("Nom")
                         .IsRequired()

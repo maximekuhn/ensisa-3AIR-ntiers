@@ -9,6 +9,7 @@ public static class DependencyInjection
     {
         services.AddMediatR(cf => cf.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
         services.AddSingleton<IHorodatageProvider, HorodatageProvider>();
+        services.AddSingleton<IdOpaqueProvider, OpaqueProvider>();
         return services;
     }
 }

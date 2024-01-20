@@ -16,7 +16,9 @@ namespace JeBalance.Architecture.Migrations
                     id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     nom = table.Column<string>(type: "TEXT", nullable: false),
-                    prenom = table.Column<string>(type: "TEXT", nullable: false)
+                    prenom = table.Column<string>(type: "TEXT", nullable: false),
+                    calomniateur = table.Column<bool>(type: "INTEGER", nullable: false),
+                    addresse = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,7 +44,8 @@ namespace JeBalance.Architecture.Migrations
                     id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     nom = table.Column<string>(type: "TEXT", nullable: false),
-                    prenom = table.Column<string>(type: "TEXT", nullable: false)
+                    prenom = table.Column<string>(type: "TEXT", nullable: false),
+                    adresse = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,8 +56,7 @@ namespace JeBalance.Architecture.Migrations
                 name: "DENONCIATIONS",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
                     type_delit = table.Column<int>(type: "int", nullable: false),
                     pays_evasion = table.Column<string>(type: "TEXT", nullable: true),
                     statut = table.Column<int>(type: "int", nullable: false),

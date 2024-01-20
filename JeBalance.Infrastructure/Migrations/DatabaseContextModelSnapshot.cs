@@ -19,9 +19,9 @@ namespace JeBalance.Architecture.Migrations
 
             modelBuilder.Entity("JeBalance.Architecture.SQLite.Model.DenonciationSQLite", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("TEXT")
                         .HasColumnName("id");
 
                     b.Property<DateTime>("Horodatage")
