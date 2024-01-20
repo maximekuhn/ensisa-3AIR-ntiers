@@ -22,7 +22,7 @@ public class Informateur : Personne
     public Informateur(Nom nom, Nom prenom, Adresse adresse, int id) : base(id)
     {
         Nom = nom;
-        Prenom = Prenom;
+        Prenom = prenom;
         Adresse = adresse;
     }
 
