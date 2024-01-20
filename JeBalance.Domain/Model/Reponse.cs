@@ -14,13 +14,13 @@ public class Reponse : Entity<int>
     {
     }
 
-    public Reponse(TypeReponse typeReponse, Double? retribution) : base(0)
+    public Reponse(TypeReponse typeReponse, double? retribution) : base(0)
     {
         TypeReponse = typeReponse;
         Retribution = retribution;
     }
-    
+
     public TypeReponse TypeReponse { get; set; }
-    public Double? Retribution { get; set; }
+    public double? Retribution { get; set; }
     public DateTime Horodatage { get; set; }
 }

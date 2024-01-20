@@ -1,5 +1,4 @@
 using JeBalance.Architecture.SQLite.Model;
-using JeBalance.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,9 +10,8 @@ public class ReponseConfiguration : IEntityTypeConfiguration<ReponseSQLite>
     {
         builder.ToTable("REPONSES")
             .HasKey(reponse => reponse.Id);
-        
+
         // store enum as int
         builder.Property(reponse => reponse.TypeReponse).HasColumnType("int").IsRequired();
-        
     }
 }

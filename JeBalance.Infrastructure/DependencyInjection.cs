@@ -1,4 +1,3 @@
-using JeBalance.Architecture.SQLite.Model;
 using JeBalance.Architecture.SQLite.Repositories;
 using JeBalance.Domain.Repositories;
 using Microsoft.Extensions.DependencyInjection;

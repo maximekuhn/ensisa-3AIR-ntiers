@@ -21,7 +21,7 @@ public class ReponseRepositorySQLite : ReponseRepository
         await _context.SaveChangesAsync();
         return reponseToSave.Id;
     }
-    
+
     public Task<IEnumerable<Reponse>> Find(int limit, int offset, Specification<Reponse> specification)
     {
         throw new NotImplementedException();
@@ -31,15 +31,14 @@ public class ReponseRepositorySQLite : ReponseRepository
     {
         throw new NotImplementedException();
     }
-    
+
     public Task<int> Update(int id, Reponse reponse)
     {
         throw new NotImplementedException();
     }
-    
+
     public Task<bool> Delete(int id)
     {
         throw new NotImplementedException();
     }
-    
 }
