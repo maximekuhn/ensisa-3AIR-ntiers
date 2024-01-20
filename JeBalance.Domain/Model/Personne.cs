@@ -3,7 +3,7 @@ using JeBalance.Domain.ValueObjects;
 
 namespace JeBalance.Domain.Model;
 
-public class Personne : Entity
+public class Personne : Entity<int>
 {
     public Personne(int id) : base(id)
     {

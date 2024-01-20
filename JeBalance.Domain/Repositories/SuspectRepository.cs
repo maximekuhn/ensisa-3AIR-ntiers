@@ -4,7 +4,7 @@ using JeBalance.Domain.Queries;
 
 namespace JeBalance.Domain.Repositories;
 
-public interface SuspectRepository : Repository<Suspect>
+public interface SuspectRepository : Repository<Suspect, int>
 {
     public Task<Suspect?> FindOne(FindPersonneSpecification specification);
 }

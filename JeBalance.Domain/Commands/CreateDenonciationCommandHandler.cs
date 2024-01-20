@@ -5,7 +5,7 @@ using MediatR;
 
 namespace JeBalance.Domain.Commands;
 
-public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciationCommand, int>
+public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciationCommand, Guid>
 {
     private readonly DenonciationRepository _denonciationRepository;
     private readonly IHorodatageProvider _horodatageProvider;
@@ -22,7 +22,7 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
         _horodatageProvider = horodatageProvider;
     }
 
-    public async Task<int> Handle(CreateDenonciationCommand request, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(CreateDenonciationCommand request, CancellationToken cancellationToken)
     {
         var denonciation = request.Denonciation;
 

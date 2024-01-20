@@ -2,17 +2,17 @@ using JeBalance.Domain.Contracts;
 
 namespace JeBalance.Domain.Model;
 
-public class Denonciation : Entity
+public class Denonciation : Entity<Guid>
 {
-    public Denonciation(int id) : base(id)
+    public Denonciation(Guid id) : base(id)
     {
     }
 
-    public Denonciation() : base(0)
+    public Denonciation() : base(Guid.Empty)
     {
     }
 
-    public Denonciation(TypeDelit typeDelit, string? paysEvasion, int informateurId, int suspectId) : base(0)
+    public Denonciation(TypeDelit typeDelit, string? paysEvasion, int informateurId, int suspectId) : base(Guid.Empty)
     {
         if (typeDelit == TypeDelit.EvasionFiscale && paysEvasion == null)
             throw new ApplicationException("Une infraction d'evasion fiscale doit avoir un pays d'evasion");

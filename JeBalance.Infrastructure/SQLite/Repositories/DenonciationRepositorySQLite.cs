@@ -24,7 +24,7 @@ public class DenonciationRepositorySQLite : DenonciationRepository
         throw new NotImplementedException();
     }
 
-    public async Task<int> Create(Denonciation denonciation)
+    public async Task<Guid> Create(Denonciation denonciation)
     {
         var denonciationToSave = denonciation.ToSQLite();
         await _context.AddAsync(denonciationToSave);
@@ -32,7 +32,7 @@ public class DenonciationRepositorySQLite : DenonciationRepository
         return denonciationToSave.Id;
     }
 
-    public Task<int> Update(int id, Denonciation denonciation)
+    public Task<Guid> Update(int id, Denonciation denonciation)
     {
         throw new NotImplementedException();
     }

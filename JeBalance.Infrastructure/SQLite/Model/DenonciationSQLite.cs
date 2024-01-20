@@ -5,7 +5,7 @@ namespace JeBalance.Architecture.SQLite.Model;
 
 public class DenonciationSQLite : Denonciation
 {
-    [Column("id")] public int Id { get; set; }
+    [Column("id")] public Guid Id { get; set; }
 
     [Column("type_delit")] public TypeDelit TypeDelit { get; set; }
 

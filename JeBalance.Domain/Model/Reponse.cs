@@ -4,7 +4,7 @@ namespace JeBalance.Domain.Model;
 
 // TODO
 
-public class Reponse : Entity
+public class Reponse : Entity<int>
 {
     public Reponse(int id) : base(id)
     {

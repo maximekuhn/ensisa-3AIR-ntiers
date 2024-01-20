@@ -4,7 +4,7 @@ using MediatR;
 
 namespace JeBalance.Domain.Commands;
 
-public class CreateDenonciationCommand : IRequest<int>
+public class CreateDenonciationCommand : IRequest<Guid>
 {
     public CreateDenonciationCommand(TypeDelit typeDelit, string? paysEvasion, string nomInformateur,
         string prenomInformateur, string nomSuspect, string prenomSuspect, int numeroVoieSuspect, string nomVoieSuspect, int codePostalSuspect, string nomCommuneSuspect, int numeroVoieInformateur, string nomVoieInformateur, int codePostalInformateur, string nomCommuneInformateur)
