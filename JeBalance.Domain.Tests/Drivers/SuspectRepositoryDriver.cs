@@ -6,7 +6,6 @@ namespace JeBalance.Domain.Tests.Drivers;
 
 public class SuspectRepositoryDriver : SuspectRepository
 {
-    private int _lastId;
     public List<Suspect> Suspects;
 
     public SuspectRepositoryDriver()
@@ -14,39 +13,45 @@ public class SuspectRepositoryDriver : SuspectRepository
         Suspects = new List<Suspect>();
     }
 
-    public Task<(IEnumerable<Suspect> Results, int Total)> Find(int limit, int offset,
+    public async Task<(IEnumerable<Suspect> Results, int Total)> Find(int limit, int offset,
         Specification<Suspect> specification)
     {
-        throw new NotImplementedException();
+        var suspects = Suspects.Where(specification.IsSatisfiedBy).Skip(offset).Take(limit);
+        return (suspects, Suspects.Count);
     }
 
     public Task<Suspect> GetOne(int id)
     {
-        foreach (var suspect in Suspects)
-            if (suspect.Id == id)
-                return Task.FromResult(suspect);
-        return null;
+        return Task.FromResult(Suspects.First(suspect => id == suspect.Id));
     }
 
     public Task<int> Create(Suspect suspect)
     {
-        suspect.Id = ++_lastId;
+        if (Suspects.Count > 0)
+            suspect.Id = Suspects.Last().Id + 1;
+        else
+            suspect.Id = 1;
         Suspects.Add(suspect);
-        return Task.FromResult(_lastId);
+        return Task.FromResult(Suspects.Last().Id);
     }
 
-    public Task<int> Update(int id, Suspect T)
+    public async Task<int> Update(int id, Suspect updatedSuspect)
     {
-        throw new NotImplementedException();
+        var suspect = await GetOne(updatedSuspect.Id);
+        var index = Suspects.IndexOf(suspect);
+        Suspects[index] = new Suspect(updatedSuspect.Nom, updatedSuspect.Prenom, updatedSuspect.Adresse,
+            updatedSuspect.Id);
+        return id;
     }
 
     public Task<bool> Delete(int id)
     {
-        throw new NotImplementedException();
+        Suspects.RemoveAll(suspect => id == suspect.Id);
+        return Task.FromResult(true);
     }
 
     public Task<Suspect?> FindOne(Specification<Suspect> specification)
     {
-        return Task.FromResult<Suspect?>(null);
+        return Task.FromResult(Suspects.FirstOrDefault(specification.IsSatisfiedBy));
     }
 }

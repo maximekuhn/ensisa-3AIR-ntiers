@@ -52,6 +52,6 @@ public class InformateurRepositoryDriver : InformateurRepository
 
     public Task<Informateur?> FindOne(Specification<Informateur> specification)
     {
-        return Task.FromResult<Informateur?>(Informateurs.FirstOrDefault(informateur => specification.IsSatisfiedBy(informateur)));
+        return Task.FromResult(Informateurs.FirstOrDefault(specification.IsSatisfiedBy));
     }
 }
