@@ -5,8 +5,6 @@ namespace JeBalance.Infrastructure.Tests;
 
 public class RepositoryTest
 {
-    public DatabaseContext Context { get; private set; }
-
     public RepositoryTest()
     {
         var options = new DbContextOptionsBuilder<DbContext>()
@@ -14,4 +12,6 @@ public class RepositoryTest
             .Options;
         Context = new DatabaseContext(options);
     }
+
+    public DatabaseContext Context { get; private set; }
 }
