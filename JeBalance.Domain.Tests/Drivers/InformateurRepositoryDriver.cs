@@ -15,7 +15,8 @@ public class InformateurRepositoryDriver : InformateurRepository
 
     public List<Informateur> Informateurs { get; set; }
 
-    public Task<IEnumerable<Informateur>> Find(int limit, int offset, Specification<Informateur> specification)
+    public Task<(IEnumerable<Informateur> Results, int Total)> Find(int limit, int offset,
+        Specification<Informateur> specification)
     {
         throw new NotImplementedException();
     }

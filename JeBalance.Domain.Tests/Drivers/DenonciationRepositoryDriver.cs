@@ -13,14 +13,16 @@ public class DenonciationRepositoryDriver : DenonciationRepository
 
     public List<Denonciation> Denonciations { get; }
 
-    public Task<IEnumerable<Denonciation>> Find(int limit, int offset, Specification<Denonciation> specification)
+    public async Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset,
+        Specification<Denonciation> specification)
     {
-        throw new NotImplementedException();
+        var denonciations = Denonciations.Where(specification.IsSatisfiedBy).Skip(offset).Take(limit);
+        return (denonciations,  Denonciations.Count);
     }
 
     public Task<Denonciation> GetOne(Guid id)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(Denonciations.First(denonciation => id.Equals(denonciation.Id)));
     }
 
     public Task<Guid> Create(Denonciation denonciation)
@@ -29,13 +31,24 @@ public class DenonciationRepositoryDriver : DenonciationRepository
         return Task.FromResult(Denonciations.Last().Id);
     }
 
-    public Task<Guid> Update(Guid id, Denonciation T)
+    public Task<Guid> Update(Guid id, Denonciation updatedDenonciation)
     {
-        throw new NotImplementedException();
+        var denonciation = Denonciations.Single(denonciation => id == denonciation.Id);
+        var index = Denonciations.IndexOf(denonciation);
+        Denonciations[index] = new Denonciation(
+            id,
+            updatedDenonciation.TypeDelit,
+            updatedDenonciation.PaysEvasion,
+            updatedDenonciation.InformateurId,
+            updatedDenonciation.SuspectId,
+            updatedDenonciation.ReponseId
+            );
+        return Task.FromResult<Guid>(id);
     }
 
     public Task<bool> Delete(Guid id)
     {
-        throw new NotImplementedException();
+        Denonciations.RemoveAll(denonciation => id == denonciation.Id);
+        return Task.FromResult<bool>(true);
     }
 }
