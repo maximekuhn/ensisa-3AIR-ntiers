@@ -19,10 +19,10 @@ public class DenonciationStepDefinition
     private readonly SuspectRepositoryDriver _suspectRepository;
     private Denonciation _denonciation;
     private Guid _denonciationId;
+    private ApplicationException _exception;
     private Informateur _informateur;
     private string _paysEvasion;
     private Suspect _suspect;
-    private ApplicationException _exception;
 
     private TypeDelit _typeDelit;
 
@@ -63,7 +63,7 @@ public class DenonciationStepDefinition
     {
         _suspect = new Suspect("Nom sus", "Prenom sus", createAdresse("sus ville", "sus voie", 69000, 2));
     }
-    
+
     [Given(@"un informateur calomniateur déjà enrengistré")]
     public void GivenUnInformateurCalomniateur()
     {
@@ -77,10 +77,11 @@ public class DenonciationStepDefinition
     {
         try
         {
-        var createDenonciationCommand = new CreateDenonciationCommand(_typeDelit, _paysEvasion, _informateur, _suspect);
-        var handler = new CreateDenonciationCommandHandler(_denonciationRepository, _informateurRepository,
-            _suspectRepository, _horodatageProvider, _idOpaqueProviderDriver);
-        
+            var createDenonciationCommand =
+                new CreateDenonciationCommand(_typeDelit, _paysEvasion, _informateur, _suspect);
+            var handler = new CreateDenonciationCommandHandler(_denonciationRepository, _informateurRepository,
+                _suspectRepository, _horodatageProvider, _idOpaqueProviderDriver);
+
             _denonciationId = await handler.Handle(createDenonciationCommand, CancellationToken.None);
             _denonciation = _denonciationRepository.Denonciations.First();
             _informateur = _informateurRepository.Informateurs.First();
@@ -121,7 +122,7 @@ public class DenonciationStepDefinition
     }
 
     [Then(@"apparait le message d'erreur '(.*)'")]
-    public void ThenApparaitLeMessageDetesPlusAutoriseACreerUneDenonciation(String message)
+    public void ThenApparaitLeMessageDetesPlusAutoriseACreerUneDenonciation(string message)
     {
         Assert.NotNull(_exception);
         _exception.Message.Should().Be(message);
