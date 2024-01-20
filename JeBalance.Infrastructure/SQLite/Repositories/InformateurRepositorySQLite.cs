@@ -1,7 +1,9 @@
+using JeBalance.Architecture.SQLite.Model;
 using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
 using JeBalance.Domain.Queries;
 using JeBalance.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace JeBalance.Architecture.SQLite.Repositories;
 
@@ -24,9 +26,12 @@ public class InformateurRepositorySQLite: InformateurRepository
         throw new NotImplementedException();
     }
 
-    public Task<int> Create(Informateur T)
+    public async Task<int> Create(Informateur informateur)
     {
-        throw new NotImplementedException();
+        var informateurToSave = informateur.ToSQLite();
+        await _context.AddAsync(informateurToSave);
+        await _context.SaveChangesAsync();
+        return informateurToSave.Id;
     }
 
     public Task<int> Update(int id, Informateur T)
@@ -39,8 +44,10 @@ public class InformateurRepositorySQLite: InformateurRepository
         throw new NotImplementedException();
     }
 
-    public Task<Informateur?> FindOne(FindPersonneSpecification specification)
+    public async Task<Informateur?> FindOne(FindPersonneSpecification specification)
     {
-        throw new NotImplementedException();
+        var informateur =
+            await _context.Informateurs.FirstAsync(informateur => specification.IsSatisfiedBy(informateur));
+        return informateur.ToDomain();
     }
 }

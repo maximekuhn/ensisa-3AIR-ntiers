@@ -30,4 +30,20 @@ public static class Extensions
             Id = suspect.Id
         };
     }
+
+    public static Suspect ToDomain(this SuspectSQLite suspect)
+    {
+        return new Suspect
+        {
+
+        };
+    }
+
+    public static Informateur ToDomain(this InformateurSQLite informateur)
+    {
+        return new Informateur
+        {
+
+        };
+    }
 }
