@@ -31,10 +31,12 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
         denonciation.Horodatage = now;
 
         var suspectId = await GetOrInsertSuspect(request.Suspect);
-        var informateurId = await GetOrInsertInformateur(request.Informateur);
+        var informateur = await GetOrInsertInformateur(request.Informateur);
 
         denonciation.SuspectId = suspectId;
-        denonciation.InformateurId = informateurId;
+        denonciation.InformateurId = informateur.Id;
+
+        if (informateur.EstCalomniateur) throw new ApplicationException("Vous ne pouvez plus créer de dénonciations");
         
         var denonciationId = await _denonciationRepository.Create(denonciation);
         return denonciationId;
@@ -54,18 +56,18 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
         return suspectId;
     }
     
-    private async Task<int> GetOrInsertInformateur(Informateur informateur)
+    private async Task<Informateur> GetOrInsertInformateur(Informateur informateur)
     {
         var findInformateurSpecification =
             new FindPersonneSpecification<Informateur>(informateur.Nom, informateur.Prenom,
                 informateur.Adresse);
-        var maybeSuspect = await _informateurRepository.FindOne(findInformateurSpecification);
-        int suspectId;
-        if (maybeSuspect == null)
-            suspectId = await _informateurRepository.Create(informateur);
+        var maybeInformateur = await _informateurRepository.FindOne(findInformateurSpecification);
+        int informateurId;
+        if (maybeInformateur == null)
+            informateurId = await _informateurRepository.Create(informateur);
         else
-            suspectId = maybeSuspect.Id;
-        return suspectId;
+            informateurId = maybeInformateur.Id;
+        return await _informateurRepository.GetOne(informateurId);
     }
     
 }

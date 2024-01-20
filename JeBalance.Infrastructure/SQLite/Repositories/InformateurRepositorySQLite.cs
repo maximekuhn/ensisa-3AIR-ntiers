@@ -20,9 +20,10 @@ public class InformateurRepositorySQLite : InformateurRepository
         throw new NotImplementedException();
     }
 
-    public Task<Informateur> GetOne(int id)
+    public async Task<Informateur> GetOne(int id)
     {
-        throw new NotImplementedException();
+        var informateur = await _context.Informateurs.FirstAsync(informateur => id.Equals(informateur.Id));
+        return informateur.ToDomain();
     }
 
     public async Task<int> Create(Informateur informateur)
