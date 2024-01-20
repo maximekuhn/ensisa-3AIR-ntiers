@@ -7,6 +7,7 @@ Feature: Denonciation
         And un suspect
         When la denonciation est creee
         Then la denonciation est datée (horodatage)
+        And la denonciation a un identifiant opaque
         And l'identifiant du suspect est le bon
         And l'identifiant de l'informateur est le bon
         

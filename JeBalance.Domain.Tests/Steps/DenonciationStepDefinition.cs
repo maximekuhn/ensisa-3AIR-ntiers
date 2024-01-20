@@ -126,4 +126,10 @@ public class DenonciationStepDefinition
         Assert.NotNull(_exception);
         _exception.Message.Should().Be(message);
     }
+
+    [Then(@"la denonciation a un identifiant opaque")]
+    public void ThenLaDenonciationAUnIdentifiantOpaque()
+    {
+        _denonciation.Id.Should().Be(_defaultIdOpaque);
+    }
 }
