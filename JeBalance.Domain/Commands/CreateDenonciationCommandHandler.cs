@@ -32,6 +32,8 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
         var idOpaque = _idOpaqueProvider.GetOpaqueId();
         denonciation.Id = idOpaque;
 
+        Console.WriteLine($"Id de la dénonciation {denonciation.Id}");
+
         var now = _horodatageProvider.GetNow();
         denonciation.Horodatage = now;
 
