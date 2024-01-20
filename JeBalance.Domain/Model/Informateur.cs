@@ -4,6 +4,9 @@ namespace JeBalance.Domain.Model;
 
 public class Informateur : Personne
 {
+    
+    public bool EstCalomniateur { get; set; }
+    
     public Informateur(int id) : base(id)
     {
     }
@@ -16,5 +19,6 @@ public class Informateur : Personne
     {
         Nom = new Nom(nom);
         Prenom = new Nom(prenom);
+        EstCalomniateur = false;
     }
 }

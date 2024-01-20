@@ -13,5 +13,5 @@ public class Personne : Entity
     public Nom Prenom { get; set; }
 
     public Nom Nom { get; set; }
-    // public Adresse Adresse { get; set; }
+    public Adresse Adresse { get; set; }
 }

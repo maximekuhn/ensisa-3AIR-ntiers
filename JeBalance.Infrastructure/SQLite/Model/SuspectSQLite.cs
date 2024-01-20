@@ -7,7 +7,6 @@ public class SuspectSQLite : Suspect
 {
     [Column("id")] public int Id { get; set; }
     [Column("nom")] public string Nom { get; set; }
-
     [Column("prenom")] public string Prenom { get; set; }
-    // [Column("adresse")] public string Adresse { get; set; }
+    [Column("adresse")] public string Adresse { get; set; }
 }
