@@ -17,7 +17,7 @@ public class DenonciationRepositoryDriver : DenonciationRepository
         Specification<Denonciation> specification)
     {
         var denonciations = Denonciations.Where(specification.IsSatisfiedBy).Skip(offset).Take(limit);
-        return (denonciations,  Denonciations.Count);
+        return (denonciations, Denonciations.Count);
     }
 
     public Task<Denonciation> GetOne(Guid id)
@@ -42,13 +42,13 @@ public class DenonciationRepositoryDriver : DenonciationRepository
             updatedDenonciation.InformateurId,
             updatedDenonciation.SuspectId,
             updatedDenonciation.ReponseId
-            );
-        return Task.FromResult<Guid>(id);
+        );
+        return Task.FromResult(id);
     }
 
     public Task<bool> Delete(Guid id)
     {
         Denonciations.RemoveAll(denonciation => id == denonciation.Id);
-        return Task.FromResult<bool>(true);
+        return Task.FromResult(true);
     }
 }

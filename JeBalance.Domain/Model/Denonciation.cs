@@ -23,7 +23,8 @@ public class Denonciation : Entity<Guid>
         SuspectId = suspectId;
     }
 
-    public Denonciation(Guid id, TypeDelit typeDelit, string? paysEvasion, int informateurId, int suspectId, int reponseId) : base(id)
+    public Denonciation(Guid id, TypeDelit typeDelit, string? paysEvasion, int informateurId, int suspectId,
+        int reponseId) : base(id)
     {
         TypeDelit = typeDelit;
         PaysEvasion = paysEvasion;
