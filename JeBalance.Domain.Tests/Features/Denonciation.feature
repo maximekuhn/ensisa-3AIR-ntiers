@@ -25,7 +25,7 @@ Feature: Denonciation
         And un suspect
         When la denonciation est creee
         Then apparait le message d'erreur 'Une infraction d'evasion fiscale doit avoir un pays d'evasion'
-        
+
     Scenario: La création d'une dénonciation doit créer le suspect dans la base s'il n'existe pas déjà
         Given un type de delit "EvasionFiscale"
         And un pays d'evasion "Suisse"
@@ -33,7 +33,7 @@ Feature: Denonciation
         And un suspect
         When la denonciation est creee
         Then le suspect est ajouté à la base
-        
+
     Scenario: La création d'une dénonciation doit créer l'informateur dans la base s'il n'existe pas déjà
         Given un type de delit "EvasionFiscale"
         And un pays d'evasion "Suisse"
@@ -41,5 +41,3 @@ Feature: Denonciation
         And un suspect
         When la denonciation est creee
         Then l'informateur est ajouté à la base
-        
-     

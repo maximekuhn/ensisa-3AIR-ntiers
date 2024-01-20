@@ -144,6 +144,5 @@ public class DenonciationStepDefinition
     public void ThenLeSuspectEstAjouteALaBase()
     {
         _suspectRepository.Suspects.Contains(_suspect).Should().BeTrue();
-
     }
 }
