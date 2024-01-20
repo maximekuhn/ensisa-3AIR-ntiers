@@ -30,7 +30,8 @@ public class Informateur : Personne
     {
         Nom = nom;
         Prenom = prenom;
-        Adresse = adresse; }
+        Adresse = adresse;
+    }
 
     public Informateur(int id, Nom nom, Nom prenom, Adresse adresse, bool estCalomniateur) : base(id)
     {
