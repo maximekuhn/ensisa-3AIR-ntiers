@@ -8,7 +8,7 @@ public class SuspectConfiguration : IEntityTypeConfiguration<SuspectSQLite>
 {
     public void Configure(EntityTypeBuilder<SuspectSQLite> builder)
     {
-        builder.ToTable("SUSPECTS", DatabaseContext.DEFAULT_SCHEMA)
+        builder.ToTable("SUSPECTS")
             .HasKey(suspect => suspect.Id);
 
         // TODO

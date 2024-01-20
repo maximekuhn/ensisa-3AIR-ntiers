@@ -30,23 +30,32 @@ namespace JeBalance.Architecture.Migrations
 
                     b.Property<int>("IdInformateur")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("id_informateur");
+                        .HasColumnName("fk_informateur");
 
                     b.Property<int?>("IdReponse")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("id_reponse");
+                        .HasColumnName("fk_reponse");
 
                     b.Property<int>("IdSuspect")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("id_suspect");
+                        .HasColumnName("fk_suspect");
+
+                    b.Property<int>("InformateurId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("PaysEvasion")
                         .HasColumnType("TEXT")
                         .HasColumnName("pays_evasion");
 
+                    b.Property<int>("ReponseId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Statut")
                         .HasColumnType("int")
                         .HasColumnName("statut");
+
+                    b.Property<int>("SuspectId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("TypeDelit")
                         .HasColumnType("int")
@@ -54,7 +63,14 @@ namespace JeBalance.Architecture.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DENONCIATIONS", "app");
+                    b.HasIndex("IdInformateur");
+
+                    b.HasIndex("IdReponse")
+                        .IsUnique();
+
+                    b.HasIndex("IdSuspect");
+
+                    b.ToTable("DENONCIATIONS", (string)null);
                 });
 
             modelBuilder.Entity("JeBalance.Architecture.SQLite.Model.InformateurSQLite", b =>
@@ -76,7 +92,19 @@ namespace JeBalance.Architecture.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("INFORMATEURS", "app");
+                    b.ToTable("INFORMATEURS", (string)null);
+                });
+
+            modelBuilder.Entity("JeBalance.Architecture.SQLite.Model.ReponseSQLite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("id");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ReponseSQLite");
                 });
 
             modelBuilder.Entity("JeBalance.Architecture.SQLite.Model.SuspectSQLite", b =>
@@ -98,7 +126,33 @@ namespace JeBalance.Architecture.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SUSPECTS", "app");
+                    b.ToTable("SUSPECTS", (string)null);
+                });
+
+            modelBuilder.Entity("JeBalance.Architecture.SQLite.Model.DenonciationSQLite", b =>
+                {
+                    b.HasOne("JeBalance.Architecture.SQLite.Model.InformateurSQLite", "Informateur")
+                        .WithMany()
+                        .HasForeignKey("IdInformateur")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("JeBalance.Architecture.SQLite.Model.ReponseSQLite", "Reponse")
+                        .WithOne()
+                        .HasForeignKey("JeBalance.Architecture.SQLite.Model.DenonciationSQLite", "IdReponse")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("JeBalance.Architecture.SQLite.Model.SuspectSQLite", "Suspect")
+                        .WithMany()
+                        .HasForeignKey("IdSuspect")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Informateur");
+
+                    b.Navigation("Reponse");
+
+                    b.Navigation("Suspect");
                 });
 #pragma warning restore 612, 618
         }

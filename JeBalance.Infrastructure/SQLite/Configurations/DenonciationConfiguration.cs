@@ -8,15 +8,16 @@ public class DenonciationConfiguration : IEntityTypeConfiguration<DenonciationSQ
 {
     public void Configure(EntityTypeBuilder<DenonciationSQLite> builder)
     {
-        builder.ToTable("DENONCIATIONS", DatabaseContext.DEFAULT_SCHEMA)
+        builder.ToTable("DENONCIATIONS")
             .HasKey(denonciation => denonciation.Id);
 
         // store enum as int
         builder.Property(denonciation => denonciation.TypeDelit).HasColumnType("int").IsRequired();
         builder.Property(denonciation => denonciation.Statut).HasColumnType("int").IsRequired();
 
-        // builder.HasOne(denonciation => denonciation.Informateur);
-
-        // TODO: use object values constraints
+        // Relations
+        builder.HasOne(denonciation => denonciation.Informateur).WithMany().OnDelete(DeleteBehavior.NoAction);
+        builder.HasOne(denonciation => denonciation.Suspect).WithMany().OnDelete(DeleteBehavior.NoAction);
+        builder.HasOne(denonciation => denonciation.Reponse).WithOne().OnDelete(DeleteBehavior.NoAction);
     }
 }

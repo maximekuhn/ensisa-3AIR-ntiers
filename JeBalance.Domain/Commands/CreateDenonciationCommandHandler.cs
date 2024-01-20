@@ -7,7 +7,6 @@ namespace JeBalance.Domain.Commands;
 public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciationCommand, int>
 {
     private readonly DenonciationRepository _denonciationRepository;
-
     private readonly IHorodatageProvider _horodatageProvider;
     private readonly InformateurRepository _informateurRepository;
     private readonly SuspectRepository _suspectRepository;
@@ -19,7 +18,6 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
         _denonciationRepository = denonciationRepository;
         _informateurRepository = informateurRepository;
         _suspectRepository = suspectRepository;
-
         _horodatageProvider = horodatageProvider;
     }
 

@@ -13,14 +13,17 @@ public class DenonciationSQLite : Denonciation
 
     [Column("statut")] public StatutDenonciation Statut { get; set; }
 
-    [Column("id_informateur")] public int IdInformateur { get; set; }
-
-    [Column("id_suspect")] public int IdSuspect { get; set; }
-
     [Column("horodatage")] public DateTime Horodatage { get; set; }
 
-    [Column("id_reponse")] public int? IdReponse { get; set; }
+    [Column("fk_informateur")] public int IdInformateur { get; set; }
 
-    // [ForeignKey(nameof(IdInformateur))]
-    // public virtual InformateurSQLite Informateur { get; set; }
+    [Column("fk_suspect")] public int IdSuspect { get; set; }
+
+    [Column("fk_reponse")] public int? IdReponse { get; set; }
+
+    [ForeignKey(nameof(IdInformateur))] public virtual InformateurSQLite? Informateur { get; set; }
+
+    [ForeignKey(nameof(IdSuspect))] public virtual SuspectSQLite? Suspect { get; set; }
+
+    [ForeignKey(nameof(IdReponse))] public virtual ReponseSQLite? Reponse { get; set; }
 }

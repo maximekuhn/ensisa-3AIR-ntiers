@@ -9,4 +9,8 @@ public class Reponse : Entity
     public Reponse(int id) : base(id)
     {
     }
+
+    public Reponse() : base(0)
+    {
+    }
 }

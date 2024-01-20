@@ -8,7 +8,7 @@ public class InformateurConfiguration : IEntityTypeConfiguration<InformateurSQLi
 {
     public void Configure(EntityTypeBuilder<InformateurSQLite> builder)
     {
-        builder.ToTable("INFORMATEURS", DatabaseContext.DEFAULT_SCHEMA).HasKey(informateur => informateur.Id);
+        builder.ToTable("INFORMATEURS").HasKey(informateur => informateur.Id);
         // TODO
     }
 }
