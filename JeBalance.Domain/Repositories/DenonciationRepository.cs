@@ -3,7 +3,6 @@ using JeBalance.Domain.Model;
 
 namespace JeBalance.Domain.Repositories;
 
-public interface DenonciationRepository : Repository<Denonciation>
+public interface DenonciationRepository : Repository<Denonciation, Guid>
 {
-    Task SetStatus(int id, StatutDenonciation nvStatus);
 }

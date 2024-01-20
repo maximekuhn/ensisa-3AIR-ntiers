@@ -3,12 +3,16 @@ using MediatR;
 
 namespace JeBalance.Domain.Commands;
 
-public class CreateDenonciationCommand : IRequest<int>
+public class CreateDenonciationCommand : IRequest<Guid>
 {
-    public Denonciation Denonciation { get; }
-
-    public CreateDenonciationCommand(TypeDelit typeDelit, string paysEvasion)
+    public CreateDenonciationCommand(TypeDelit typeDelit, string? paysEvasion, Informateur informateur, Suspect suspect)
     {
-        Denonciation = new Denonciation(typeDelit, paysEvasion);
+        Denonciation = new Denonciation(typeDelit, paysEvasion, 0, 0);
+        Informateur = informateur;
+        Suspect = suspect;
     }
+
+    public Denonciation Denonciation { get; }
+    public Informateur Informateur { get; }
+    public Suspect Suspect { get; }
 }
