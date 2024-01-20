@@ -64,4 +64,15 @@ public static class Extensions
             informateur.Adresse,
             informateur.EstCalomniateur);
     }
+
+    public static ReponseSQLite ToSQLite(this Reponse reponse)
+    {
+        return new ReponseSQLite
+        {
+            Id = reponse.Id,
+            TypeReponse = reponse.TypeReponse,
+            Horodatage = reponse.Horodatage,
+            Retribution = reponse.Retribution
+        };
+    }
 }
