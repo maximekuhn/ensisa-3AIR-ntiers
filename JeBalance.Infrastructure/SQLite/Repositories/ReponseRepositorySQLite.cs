@@ -22,7 +22,8 @@ public class ReponseRepositorySQLite : ReponseRepository
         return reponseToSave.Id;
     }
 
-    public Task<IEnumerable<Reponse>> Find(int limit, int offset, Specification<Reponse> specification)
+    public Task<(IEnumerable<Reponse> Results, int Total)> Find(int limit, int offset,
+        Specification<Reponse> specification)
     {
         throw new NotImplementedException();
     }
