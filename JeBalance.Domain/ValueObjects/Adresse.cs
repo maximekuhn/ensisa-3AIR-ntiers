@@ -14,4 +14,6 @@ public class Adresse
     public NomVoie NomVoie { get; set; }
     public CodePostal CodePostal { get; set; }
     public NomCommune NomCommune { get; set; }
+
+    // TODO: comparator
 }

@@ -1,5 +1,4 @@
 using JeBalance.Domain.Model;
-using JeBalance.Domain.ValueObjects;
 
 namespace JeBalance.Architecture.SQLite.Model;
 
@@ -31,5 +30,4 @@ public static class Extensions
             Id = suspect.Id
         };
     }
-    
 }

@@ -1,3 +1,4 @@
+using JeBalance.Domain.Queries;
 using JeBalance.Domain.Repositories;
 using JeBalance.Domain.Services;
 using MediatR;
@@ -28,13 +29,25 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
         var now = _horodatageProvider.GetNow();
         denonciation.Horodatage = now;
 
-        // TODO (get by prenom+nom+adresse, check calomniateur)
+        var findSuspectSpecification =
+            new FindPersonneSpecification(request.Suspect.Nom, request.Suspect.Prenom, request.Suspect.Adresse);
+        var suspect = await _suspectRepository.FindOne(findSuspectSpecification);
+        int suspectId;
+        if (suspect == null)
+            suspectId = await _suspectRepository.Create(request.Suspect);
+        else
+            suspectId = suspect.Id;
+        denonciation.SuspectId = suspectId;
 
-        var suspect = _suspectRepository.GetOne(0);
-        denonciation.SuspectId = suspect.Id;
-
-        var informateur = _informateurRepository.GetOne(0);
-        denonciation.InformateurId = informateur.Id;
+        var findInformateurSuspect = new FindPersonneSpecification(request.Informateur.Nom, request.Informateur.Prenom,
+            request.Informateur.Adresse);
+        var informateur = await _informateurRepository.FindOne(findInformateurSuspect);
+        int informateurId;
+        if (informateur == null)
+            informateurId = await _informateurRepository.Create(request.Informateur);
+        else
+            informateurId = informateur.Id;
+        denonciation.InformateurId = informateurId;
 
         var denonciationId = await _denonciationRepository.Create(denonciation);
         return denonciationId;
