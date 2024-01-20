@@ -25,10 +25,10 @@ public class Denonciation : Entity
 
     public TypeDelit TypeDelit { get; }
     public string? PaysEvasion { get; }
-    public DateTime Horodatage { get; }
+    public DateTime Horodatage { get; set; }
     public StatutDenonciation Statut { get; }
 
-    public int InformateurId { get; }
-    public int SuspectId { get; }
-    public int ReponseId { get; }
+    public int InformateurId { get; set; }
+    public int SuspectId { get; set; }
+    public int ReponseId { get; set; }
 }

@@ -1,4 +1,5 @@
 using JeBalance.Domain.Repositories;
+using JeBalance.Domain.Services;
 using MediatR;
 
 namespace JeBalance.Domain.Commands;
@@ -6,37 +7,40 @@ namespace JeBalance.Domain.Commands;
 public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciationCommand, int>
 {
     private readonly DenonciationRepository _denonciationRepository;
+    private readonly InformateurRepository _informateurRepository;
+    private readonly SuspectRepository _suspectRepository;
+    
+    private readonly IHorodatageProvider _horodatageProvider;
 
-    public CreateDenonciationCommandHandler(DenonciationRepository denonciationRepository)
+    public CreateDenonciationCommandHandler(DenonciationRepository denonciationRepository, IHorodatageProvider horodatageProvider)
     {
         _denonciationRepository = denonciationRepository;
+        _horodatageProvider = horodatageProvider;
     }
 
     public async Task<int> Handle(CreateDenonciationCommand request, CancellationToken cancellationToken)
     {
+        var denonciation = request.Denonciation;
+        
+        var now = _horodatageProvider.GetNow();
+        denonciation.Horodatage = now;
+        
         try
         {
-            // Récupérer l'id du suspect avec _suspectRepository
-            // var informateur = request.Informateur;
-            // var idInformateur = _informateurRepository.insertOrFind(informateur);
-
-            // Récupérer l'id de l'informateur avec _informateurRepository
-
-            // Faire les checks de calamar ou de VIP
-
-            // Créer la dénonciation dans la base
-            //
-            // var denonciation = request.Denonciation;
-            // denonciation.InformateurId = idInformateur;
-
-            Console.WriteLine("toto");
-
-            var denonciationId = await _denonciationRepository.Create(request.Denonciation);
+            // TODO (get by prenom+nom+adresse, check calomniateur)
+            
+            var suspect = _suspectRepository.GetOne(0);
+            denonciation.SuspectId = suspect.Id;
+            
+            var informateur = _informateurRepository.GetOne(0);
+            denonciation.InformateurId = informateur.Id;
+            
+            var denonciationId = await _denonciationRepository.Create(denonciation);
             return denonciationId;
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
     }
 }
