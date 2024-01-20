@@ -75,12 +75,12 @@ public class DenonciationStepDefinition
     [When(@"la denonciation est creee")]
     public async Task WhenLaDenonciationEstCreee()
     {
+        try
+        {
         var createDenonciationCommand = new CreateDenonciationCommand(_typeDelit, _paysEvasion, _informateur, _suspect);
         var handler = new CreateDenonciationCommandHandler(_denonciationRepository, _informateurRepository,
             _suspectRepository, _horodatageProvider, _idOpaqueProviderDriver);
-
-        try
-        {
+        
             _denonciationId = await handler.Handle(createDenonciationCommand, CancellationToken.None);
             _denonciation = _denonciationRepository.Denonciations.First();
             _informateur = _informateurRepository.Informateurs.First();
