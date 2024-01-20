@@ -10,6 +10,8 @@ public static class DependencyInjection
     {
         services.AddMediatR(cf => cf.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
         services.AddScoped<DenonciationRepository, DenonciationRepositorySQLite>();
+        services.AddScoped<SuspectRepository, SuspectRepositorySQLite>();
+        services.AddScoped<InformateurRepository, InformateurRepositorySQLite>();
         return services;
     }
 }
