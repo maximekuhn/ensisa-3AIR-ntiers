@@ -133,4 +133,17 @@ public class DenonciationStepDefinition
     {
         _denonciation.Id.Should().Be(_defaultIdOpaque);
     }
+
+    [Then(@"l'informateur est ajouté à la base")]
+    public void ThenLinformateurEstAjouteALaBase()
+    {
+        _informateurRepository.Informateurs.Contains(_informateur).Should().BeTrue();
+    }
+
+    [Then(@"le suspect est ajouté à la base")]
+    public void ThenLeSuspectEstAjouteALaBase()
+    {
+        _suspectRepository.Suspects.Contains(_suspect).Should().BeTrue();
+
+    }
 }
