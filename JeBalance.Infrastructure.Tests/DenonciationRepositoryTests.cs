@@ -20,8 +20,8 @@ public class DenonciationRepositoryTests : RepositoryTest
     [Fact]
     public async Task ShouldGetOneAsync()
     {
-        var guid = await AddDenonciation();
-        var result = await _repository.GetOne(guid);
+        var denonciationId = await AddDenonciation();
+        var result = await _repository.GetOne(denonciationId);
         Assert.NotNull(result);
     }
 
@@ -35,13 +35,13 @@ public class DenonciationRepositoryTests : RepositoryTest
         Assert.Equal(_typeDelit, lastDenonciation.TypeDelit);
         Assert.Equal(_paysEvasion, lastDenonciation.PaysEvasion);
         Assert.Equal(_informateurId, lastDenonciation.IdInformateur);
-        Assert.Equal(_informateurId, lastDenonciation.IdSuspect);
+        Assert.Equal(_suspectId, lastDenonciation.IdSuspect);
     }
 
     private Task<Guid> AddDenonciation(TypeDelit typeDelit = _typeDelit, string paysEvasion = _paysEvasion,
-        int inforamateurId = _informateurId, int suspectId = _suspectId)
+        int informateurId = _informateurId, int suspectId = _suspectId)
     {
-        var denonciation = new Denonciation(typeDelit, paysEvasion, inforamateurId, suspectId);
+        var denonciation = new Denonciation(typeDelit, paysEvasion, informateurId, suspectId);
         return _repository.Create(denonciation);
     }
 }

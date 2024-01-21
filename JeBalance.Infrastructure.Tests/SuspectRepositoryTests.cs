@@ -24,8 +24,8 @@ public class SuspectRepositoryTests : RepositoryTest
     [Fact]
     public async Task ShouldGetOneAsync()
     {
-        var id = await AddSuspect();
-        var result = await _repository.GetOne(id);
+        var suspectId = await AddSuspect();
+        var result = await _repository.GetOne(suspectId);
         Assert.NotNull(result);
     }
 
@@ -33,9 +33,9 @@ public class SuspectRepositoryTests : RepositoryTest
     public async Task ShouldCreateAsync()
     {
         var suspect = new Suspect(_nom, _prenom, _adresse, _suspectId);
-        var result = await _repository.Create(suspect);
+        var suspectId = await _repository.Create(suspect);
         var lastSuspect = Context.Suspects.Last();
-        Assert.Equal(result, lastSuspect.Id);
+        Assert.Equal(suspectId, lastSuspect.Id);
         Assert.Equal(_nom, lastSuspect.Nom);
         Assert.Equal(_prenom, lastSuspect.Prenom);
         Assert.Equal(_adresse, lastSuspect.Adresse);
@@ -44,10 +44,10 @@ public class SuspectRepositoryTests : RepositoryTest
     [Fact]
     public async Task ShouldFindOneAsync()
     {
-        var goodId = await AddSuspect();
+        var suspectId = await AddSuspect();
         var specification = new FindPersonneSpecification<Suspect>(_nom, _prenom, _adresse);
-        var result = await _repository.FindOne(specification);
-        Assert.Equal(goodId, result.Id);
+        var suspect = await _repository.FindOne(specification);
+        Assert.Equal(suspectId, suspect.Id);
     }
 
     private Task<int> AddSuspect(int suspectId = _suspectId, string nom = _nom, string prenom = _prenom)
