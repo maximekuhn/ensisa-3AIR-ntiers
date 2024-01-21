@@ -25,7 +25,7 @@ services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<A
     .AddDefaultTokenProviders();
 
 // Add authentication + JWT Bearer
-services.AddAuthentication(options => 
+services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
