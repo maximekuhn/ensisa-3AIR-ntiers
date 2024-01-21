@@ -8,18 +8,25 @@ Feature: Reponse
         And la réponse contient une retribution de '1000' euros
         And la réponse est datée (horodatage)
         
-    #  Scenario: Repondre a une denonciation par un rejet
-    #    Given une denonciation existante sans reponse
-    #    When une reponse de type "Rejet" est ajoutee a la denonciation
-    #    Then la denonciation a une reponse de type "Rejet"
-    #    And l'horodatage de la reponse est daté (horodatage)
-    #    And le montant de retribution est null
-    #
-    #  Scenario: Impossible de repondre a une denonciation qui a deja une reponse
-    #    Given une denonciation existante avec une reponse associée
-    #    When une reponse est ajoutee a la denonciation
-    #    Then apparait le message d'erreur 'Cette denonciation a deja une reponse'
-    #
+    Scenario: Repondre a une denonciation par un rejet
+      Given une dénonciation existante sans réponse
+      When une réponse de type 'Rejet' est ajoutée à la dénonciation
+      Then la réponse est de type 'Rejet'
+      And la réponse est datée (horodatage)
+      And la réponse contient une retribution nulle
+      
+    Scenario: Le montant de la retribution pour une réponse de type Rejet n'est pas pris en compte
+        Given une dénonciation existante sans réponse
+        When une réponse de type 'Rejet'  avec une retribution de '599' euros est ajoutée à la dénonciaton
+        Then la réponse est de type 'Rejet'
+        And la réponse est datée (horodatage)
+        And la réponse contient une retribution nulle
+     
+#    Scenario: Impossible de répondre a une dénonciation qui a déjà une réponse
+#        Given une dénonciation existante avec une réponse
+#        When une réponse de type 'Rejet' est ajoutée à la dénonciation
+#        Then apparait le message d erreur 'Impossible de répondre à une dénonciation qui a déjà une réponse'  
+
     Scenario: Repondre a une denonciation avec un montant de retribution negatif
       Given une dénonciation existante sans réponse
       When une réponse de type 'Confirmation'  avec une retribution de '-50' euros est ajoutée à la dénonciaton

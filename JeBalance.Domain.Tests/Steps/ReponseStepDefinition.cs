@@ -100,4 +100,36 @@ public class ReponseStepDefinition
         Assert.NotNull(_exception);
         _exception.Message.Should().Be(message);
     }
+
+    [When(@"une réponse de type '(.*)' est ajoutée à la dénonciation")]
+    public async Task WhenUneReponseDeTypeEstAjouteeALaDenonciation(TypeReponse typeReponse)
+    {
+        try
+        {
+            var createReponseCommand = new CreateReponseCommand(typeReponse, null, _denonciationId); 
+            var createReponseCommandHandler = 
+                new CreateReponseCommandHandler(_reponseRepository, _denonciationRepository, _horodatageProvider);
+
+            _reponseId = await createReponseCommandHandler.Handle(createReponseCommand, CancellationToken.None);
+            _denonciation = _denonciationRepository.Denonciations.Last();
+            _reponse = _reponseRepository.Reponses.Last();
+        }
+        catch (ApplicationException e)
+        {
+            _exception = e;
+        }
+    }
+
+    [Then(@"la réponse contient une retribution nulle")]
+    public void ThenLaReponseContientUneRetributionNulle()
+    {
+        Assert.Null(_reponse.Retribution);
+    }
+
+    [Given(@"une dénonciation existante avec une réponse")]
+    public async Task GivenUneDenonciationExistanteAvecUneReponse()
+    {
+        await GivenUneDenonciationExistanteSansReponse();
+        await WhenUneReponseDeTypeAvecUneRetributionDeEurosEstAjouteeALaDenonciaton(TypeReponse.Confirmation, 149.0);
+    }
 }

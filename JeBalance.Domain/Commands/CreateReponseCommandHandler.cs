@@ -1,3 +1,4 @@
+using JeBalance.Domain.Model;
 using JeBalance.Domain.Repositories;
 using JeBalance.Domain.Services;
 using MediatR;
@@ -21,16 +22,19 @@ public class CreateReponseCommandHandler : IRequestHandler<CreateReponseCommand,
     public async Task<int> Handle(CreateReponseCommand request, CancellationToken cancellationToken)
     {
         var reponse = request.Reponse;
-
-        if (reponse.Retribution < 0)
+        
+        
+        if (reponse is { TypeReponse: TypeReponse.Confirmation, Retribution: < 0 })
             throw new ApplicationException("Le montant de retribution ne peut pas etre negatif");
+
+        if (reponse.TypeReponse == TypeReponse.Rejet) reponse.Retribution = null;
 
         var now = _horodatageProvider.GetNow();
         reponse.Horodatage = now;
 
         var denonciationId = request.DenonciationId;
         var denonciation = await _denonciationRepository.GetOne(denonciationId);
-
+        
         var reponseId = await _reponseRepository.Create(reponse);
 
         denonciation.ReponseId = reponseId;
