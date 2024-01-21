@@ -56,7 +56,7 @@ public class VIPRepositorySQLite : VIPRepository
             var vipToDelete = await _context.VIPs.FirstOrDefaultAsync(vip => vip.Id == id);
 
             if (vipToDelete == null)
-                throw new KeyNotFoundException("Le VIP n'a pas été trouvé");
+                return false;
 
             _context.Remove(vipToDelete);
             await _context.SaveChangesAsync();

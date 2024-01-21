@@ -56,7 +56,7 @@ public class DenonciationRepositorySQLite : DenonciationRepository
                 await _context.Denonciations.FirstOrDefaultAsync(denonciation => denonciation.Id == id);
 
             if (denonciationToDelete == null)
-                throw new KeyNotFoundException("La denonciation n'a pas été trouvé");
+                return false;
 
             _context.Remove(denonciationToDelete);
             await _context.SaveChangesAsync();

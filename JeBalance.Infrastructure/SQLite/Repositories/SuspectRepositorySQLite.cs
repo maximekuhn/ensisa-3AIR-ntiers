@@ -55,7 +55,7 @@ public class SuspectRepositorySQLite : SuspectRepository
             var suspectToDelete = await _context.Suspects.FirstOrDefaultAsync(suspect => suspect.Id == id);
 
             if (suspectToDelete == null)
-                throw new KeyNotFoundException("Le suspect n'a pas été trouvé");
+                return false;
 
             _context.Remove(suspectToDelete);
             await _context.SaveChangesAsync();

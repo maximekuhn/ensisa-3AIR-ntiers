@@ -57,7 +57,7 @@ public class InformateurRepositorySQLite : InformateurRepository
                 await _context.Informateurs.FirstOrDefaultAsync(informateur => informateur.Id == id);
 
             if (informateurToDelete == null)
-                throw new KeyNotFoundException("L'informateur n'a pas été trouvé");
+                return false;
 
             _context.Remove(informateurToDelete);
             await _context.SaveChangesAsync();

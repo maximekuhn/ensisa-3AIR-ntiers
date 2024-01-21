@@ -54,6 +54,16 @@ public class DenonciationRepositoryDriver : DenonciationRepository
 
     public Task<bool> SetReponseId(Guid denonciationId, int reponseId)
     {
-        throw new NotImplementedException();
+        var denonciation = Denonciations.Single(denonciation => denonciationId == denonciation.Id);
+        var index = Denonciations.IndexOf(denonciation);
+        Denonciations[index] = new Denonciation(
+            denonciationId,
+            denonciation.TypeDelit,
+            denonciation.PaysEvasion,
+            denonciation.InformateurId,
+            denonciation.SuspectId,
+            reponseId
+        );
+        return Task.FromResult(true);
     }
 }
