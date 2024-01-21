@@ -1,6 +1,6 @@
 Feature: Reponse
 
-    Scenario: Répondre à une dénonciation par une confiration et une retribution
+    Scenario: Répondre à une dénonciation par une confirmation et une retribution
         Given une dénonciation existante sans réponse
         When une réponse de type 'Confirmation'  avec une retribution de '1000' euros est ajoutée à la dénonciaton
         Then la dénonciation contient l'identifiant de la réponse
