@@ -14,7 +14,8 @@ public static class Extensions
             PaysEvasion = denonciation.PaysEvasion,
             Horodatage = denonciation.Horodatage,
             IdInformateur = denonciation.InformateurId,
-            IdSuspect = denonciation.SuspectId
+            IdSuspect = denonciation.SuspectId,
+            IdReponse = denonciation.ReponseId
         };
     }
 
