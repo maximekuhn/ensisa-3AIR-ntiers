@@ -76,4 +76,20 @@ public static class Extensions
             Retribution = reponse.Retribution
         };
     }
+
+    public static VIPSQLite ToSQLite(this VIP vip)
+    {
+        return new VIPSQLite()
+        {
+            Id = vip.Id,
+            Nom = vip.Nom.Value,
+            Prenom = vip.Prenom.Value,
+            Adresse = vip.Adresse
+        };
+    }
+
+    public static VIP ToDomain(this VIPSQLite vip)
+    {
+        return new VIP(new Nom(vip.Nom), new Nom(vip.Prenom), vip.Adresse);
+    }
 }
