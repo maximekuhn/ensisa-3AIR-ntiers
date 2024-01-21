@@ -1,4 +1,5 @@
 using JeBalance.Domain.Model;
+using JeBalance.Domain.Queries;
 using JeBalance.Infrastructure.SQLite.Repositories;
 
 namespace JeBalance.Infrastructure.Tests;
@@ -15,6 +16,12 @@ public class DenonciationRepositoryTests : RepositoryTest
     public DenonciationRepositoryTests()
     {
         _repository = new DenonciationRepositorySQLite(Context);
+    }
+
+    [Fact]
+    public async Task ShouldFindAsync()
+    {
+        // TODO
     }
 
     [Fact]
@@ -36,6 +43,22 @@ public class DenonciationRepositoryTests : RepositoryTest
         Assert.Equal(_paysEvasion, lastDenonciation.PaysEvasion);
         Assert.Equal(_informateurId, lastDenonciation.IdInformateur);
         Assert.Equal(_suspectId, lastDenonciation.IdSuspect);
+    }
+
+    [Fact]
+    public async Task ShouldSetReponseIdAsync()
+    {
+        var id = await AddDenonciation();
+        var result = await _repository.SetReponseId(id, 1);
+        Assert.True(result);
+    }
+
+    [Fact]
+    public async Task ShouldDeleteAsync()
+    {
+        var id = await AddDenonciation();
+        var result = await _repository.Delete(id);
+        Assert.True(result);
     }
 
     private Task<Guid> AddDenonciation(TypeDelit typeDelit = _typeDelit, string paysEvasion = _paysEvasion,
