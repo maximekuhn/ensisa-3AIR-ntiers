@@ -1,4 +1,5 @@
 using JeBalance.Domain.Model;
+using JeBalance.Domain.Queries;
 using JeBalance.Domain.ValueObjects;
 using JeBalance.Infrastructure.SQLite.Repositories;
 
@@ -21,14 +22,37 @@ public class InformateurRepositoryTests : RepositoryTest
     }
 
     [Fact]
+    public async Task ShouldGetOneAsync()
+    {
+        var informateurId = await AddInformateur();
+        var result = await _repository.GetOne(informateurId);
+        Assert.NotNull(result);
+    }
+
+    [Fact]
     public async Task ShouldCreateAsync()
     {
         var informateur = new Informateur(_nom, _prenom, _adresse, _informateurId);
-        var result = await _repository.Create(informateur);
-
+        var informateurId = await _repository.Create(informateur);
         var lastInformateur = Context.Informateurs.Last();
-        Assert.Equal(lastInformateur.Id, result);
-        Assert.Equal(lastInformateur.Nom, _nom);
-        Assert.Equal(lastInformateur.Prenom, _prenom);
+        Assert.Equal(informateurId, lastInformateur.Id);
+        Assert.Equal(_nom, lastInformateur.Nom);
+        Assert.Equal(_prenom, lastInformateur.Prenom);
+        Assert.Equal(_adresse, lastInformateur.Adresse);
+    }
+
+    [Fact]
+    public async Task ShouldFindOneAsync()
+    {
+        var informateurId = await AddInformateur();
+        var specification = new FindPersonneSpecification<Informateur>(_nom, _prenom, _adresse);
+        var informateur = await _repository.FindOne(specification);
+        Assert.Equal(informateurId, informateur.Id);
+    }
+
+    private Task<int> AddInformateur(int informateurId = _informateurId, string nom = _nom, string prenom = _prenom)
+    {
+        var informateur = new Informateur(nom, prenom, _adresse, informateurId);
+        return _repository.Create(informateur);
     }
 }

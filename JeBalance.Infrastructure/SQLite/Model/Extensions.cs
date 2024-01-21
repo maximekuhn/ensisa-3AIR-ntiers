@@ -11,6 +11,7 @@ public static class Extensions
         {
             Id = denonciation.Id,
             TypeDelit = denonciation.TypeDelit,
+            PaysEvasion = denonciation.PaysEvasion,
             Horodatage = denonciation.Horodatage,
             IdInformateur = denonciation.InformateurId,
             IdSuspect = denonciation.SuspectId
