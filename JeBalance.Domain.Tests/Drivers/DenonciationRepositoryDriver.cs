@@ -51,4 +51,9 @@ public class DenonciationRepositoryDriver : DenonciationRepository
         Denonciations.RemoveAll(denonciation => id == denonciation.Id);
         return Task.FromResult(true);
     }
+
+    public Task<bool> SetReponseId(Guid denonciationId, int reponseId)
+    {
+        throw new NotImplementedException();
+    }
 }
