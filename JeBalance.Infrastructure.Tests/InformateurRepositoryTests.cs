@@ -51,7 +51,7 @@ public class InformateurRepositoryTests : RepositoryTest
         var newEstCalomniateur = true;
         var updatedInforamteur = new Informateur(newNom, newPrenom, newAdresse, newEstCalomniateur);
         await _repository.Update(id, updatedInforamteur);
-        var informateur = Context.Informateurs.Single(inforamteuer => inforamteuer.Id == id);
+        var informateur = Context.Informateurs.Single(informateur => informateur.Id == id);
         Assert.Equal(newNom, informateur.Nom);
         Assert.Equal(newPrenom, informateur.Prenom);
         Assert.Equal(newAdresse, informateur.Adresse);
