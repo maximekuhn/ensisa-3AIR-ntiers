@@ -55,6 +55,7 @@ public class InformateurRepositoryTests : RepositoryTest
         Assert.Equal(newNom, informateur.Nom);
         Assert.Equal(newPrenom, informateur.Prenom);
         Assert.Equal(newAdresse, informateur.Adresse);
+        Assert.Equal(newEstCalomniateur, informateur.EstCalomniateur);
     }
 
     [Fact]
