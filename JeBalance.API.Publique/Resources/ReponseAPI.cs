@@ -16,7 +16,7 @@ public class ReponseAPI
     }
 
     //Informations de la réponse
-    [JsonPropertyName("type_reponse")] public TypeReponse TypeReponse { get; set; }
+    [JsonPropertyName("typeReponse")] public TypeReponse TypeReponse { get; set; }
     [JsonPropertyName("retribution")] public double? Retribution { get; set; }
-    [JsonPropertyName("denonciation_id")] public Guid DenonciationId { get; set; }
+    [JsonPropertyName("denonciationId")] public Guid DenonciationId { get; set; }
 }
