@@ -36,7 +36,7 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
 
         var now = _horodatageProvider.GetNow();
         denonciation.Horodatage = now;
-        
+
         var informateur = await GetOrInsertInformateur(request.Informateur);
 
         if (await VIPsContainsSuspect(request.Suspect))
@@ -47,7 +47,7 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
         }
 
         var suspectId = await GetOrInsertSuspect(request.Suspect);
-        
+
         denonciation.SuspectId = suspectId;
         denonciation.InformateurId = informateur.Id;
 
