@@ -23,7 +23,7 @@ public class VIPRepositorySQLite : VIPRepository
 
     public async Task<VIP> GetOne(int id)
     {
-        var vip = await _context.Vips.FirstAsync(vip => id.Equals(vip.Id));
+        var vip = await _context.VIPs.FirstAsync(vip => id.Equals(vip.Id));
         return vip.ToDomain();
     }
 
@@ -45,8 +45,10 @@ public class VIPRepositorySQLite : VIPRepository
         throw new NotImplementedException();
     }
 
-    public Task<VIP?> FindOne(Specification<VIP> specification)
+    public async Task<VIP?> FindOne(Specification<VIP> specification)
     {
-        throw new NotImplementedException();
+        var vip = await _context.VIPs.Apply(specification.ToSQLiteExpression<VIP, VIPsQLite>())
+            .FirstOrDefaultAsync();
+        return vip?.ToDomain();
     }
 }

@@ -3,7 +3,7 @@ using JeBalance.Domain.Model;
 
 namespace JeBalance.Infrastructure.SQLite.Model;
 
-public class VIPSQLite : VIP
+public class VIPsQLite : VIP
 {
     [Column("id")] public int Id { get; set; }
     [Column("nom")] public string Nom { get; set; }

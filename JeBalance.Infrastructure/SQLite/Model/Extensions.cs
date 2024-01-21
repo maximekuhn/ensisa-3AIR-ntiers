@@ -77,9 +77,9 @@ public static class Extensions
         };
     }
 
-    public static VIPSQLite ToSQLite(this VIP vip)
+    public static VIPsQLite ToSQLite(this VIP vip)
     {
-        return new VIPSQLite()
+        return new VIPsQLite()
         {
             Id = vip.Id,
             Nom = vip.Nom.Value,
@@ -88,8 +88,8 @@ public static class Extensions
         };
     }
 
-    public static VIP ToDomain(this VIPSQLite vip)
+    public static VIP ToDomain(this VIPsQLite vip)
     {
-        return new VIP(new Nom(vip.Nom), new Nom(vip.Prenom), vip.Adresse);
+        return new VIP(new Nom(vip.Nom), new Nom(vip.Prenom), vip.Adresse, vip.Id);
     }
 }

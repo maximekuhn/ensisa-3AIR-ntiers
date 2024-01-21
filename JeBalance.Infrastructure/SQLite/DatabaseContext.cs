@@ -19,7 +19,7 @@ public class DatabaseContext : DbContext
     public DbSet<DenonciationSQLite> Denonciations { get; set; }
     public DbSet<InformateurSQLite> Informateurs { get; set; }
     public DbSet<SuspectSQLite> Suspects { get; set; }
-    public DbSet<VIPSQLite> Vips { get; set; }
+    public DbSet<VIPsQLite> VIPs { get; set; }
     public DbSet<ReponseSQLite> Reponses { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

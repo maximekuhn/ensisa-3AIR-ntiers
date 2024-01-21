@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JeBalance.Infrastructure.SQLite.Configurations;
 
-public class VIPConfiguration : IEntityTypeConfiguration<VIPSQLite>
+public class VIPConfiguration : IEntityTypeConfiguration<VIPsQLite>
 {
-    public void Configure(EntityTypeBuilder<VIPSQLite> builder)
+    public void Configure(EntityTypeBuilder<VIPsQLite> builder)
     {
-        builder.ToTable("VIP")
+        builder.ToTable("VIPs")
             .HasKey(vip => vip.Id)
             ;
         
