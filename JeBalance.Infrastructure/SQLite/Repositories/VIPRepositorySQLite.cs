@@ -44,4 +44,9 @@ public class VIPRepositorySQLite : VIPRepository
     {
         throw new NotImplementedException();
     }
+
+    public Task<VIP?> FindOne(Specification<VIP> specification)
+    {
+        throw new NotImplementedException();
+    }
 }
