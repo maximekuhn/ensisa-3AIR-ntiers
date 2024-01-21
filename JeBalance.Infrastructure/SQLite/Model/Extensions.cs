@@ -77,6 +77,17 @@ public static class Extensions
         };
     }
 
+    public static Reponse ToDomain(this ReponseSQLite reponse)
+    {
+        return new Reponse
+        {
+            Horodatage = reponse.Horodatage,
+            Id = reponse.Id,
+            Retribution = reponse.Retribution,
+            TypeReponse = reponse.TypeReponse
+        };
+    }
+
     public static VIPsQLite ToSQLite(this VIP vip)
     {
         return new VIPsQLite

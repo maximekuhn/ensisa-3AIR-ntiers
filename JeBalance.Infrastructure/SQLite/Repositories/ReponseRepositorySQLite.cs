@@ -25,7 +25,10 @@ public class ReponseRepositorySQLite : ReponseRepository
     public Task<(IEnumerable<Reponse> Results, int Total)> Find(int limit, int offset,
         Specification<Reponse> specification)
     {
-        throw new NotImplementedException();
+        var results = _context.Reponses.Apply(specification.ToSQLiteExpression<Reponse, ReponseSQLite>()).Skip(offset)
+            .Take(limit).AsEnumerable().Select(reponse => reponse.ToDomain());
+
+        return Task.FromResult((results, _context.Reponses.Count()));
     }
 
     public async Task<Reponse> GetOne(int id)
