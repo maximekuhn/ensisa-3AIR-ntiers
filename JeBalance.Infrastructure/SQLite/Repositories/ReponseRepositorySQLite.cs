@@ -17,7 +17,7 @@ public class ReponseRepositorySQLite : ReponseRepository
     public async Task<int> Create(Reponse reponse)
     {
         var reponseToSave = reponse.ToSQLite();
-        await _context.AddAsync(reponse);
+        await _context.AddAsync(reponseToSave);
         await _context.SaveChangesAsync();
         return reponseToSave.Id;
     }
@@ -25,12 +25,18 @@ public class ReponseRepositorySQLite : ReponseRepository
     public Task<(IEnumerable<Reponse> Results, int Total)> Find(int limit, int offset,
         Specification<Reponse> specification)
     {
-        throw new NotImplementedException();
+        var results = _context.Reponses.Apply(specification.ToSQLiteExpression<Reponse, ReponseSQLite>()).Skip(offset)
+            .Take(limit).AsEnumerable().Select(reponse => reponse.ToDomain());
+
+        return Task.FromResult((results, _context.Reponses.Count()));
     }
 
     public async Task<Reponse> GetOne(int id)
     {
-        throw new NotImplementedException();
+        var reponse = await _context.Reponses.FindAsync(id);
+        if (reponse == null) throw new KeyNotFoundException("Cette réponse n'existe pas");
+
+        return reponse;
     }
 
     public Task<int> Update(int id, Reponse reponse)
