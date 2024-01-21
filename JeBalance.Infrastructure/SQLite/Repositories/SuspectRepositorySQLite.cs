@@ -1,10 +1,10 @@
-using JeBalance.Architecture.SQLite.Model;
 using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
 using JeBalance.Domain.Repositories;
+using JeBalance.Infrastructure.SQLite.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace JeBalance.Architecture.SQLite.Repositories;
+namespace JeBalance.Infrastructure.SQLite.Repositories;
 
 public class SuspectRepositorySQLite : SuspectRepository
 {

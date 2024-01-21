@@ -1,6 +1,6 @@
-using JeBalance.Architecture.SQLite.Repositories;
 using JeBalance.Domain.Model;
 using JeBalance.Domain.ValueObjects;
+using JeBalance.Infrastructure.SQLite.Repositories;
 
 namespace JeBalance.Infrastructure.Tests;
 
