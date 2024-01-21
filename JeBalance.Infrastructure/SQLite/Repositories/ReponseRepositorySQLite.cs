@@ -17,7 +17,7 @@ public class ReponseRepositorySQLite : ReponseRepository
     public async Task<int> Create(Reponse reponse)
     {
         var reponseToSave = reponse.ToSQLite();
-        await _context.AddAsync(reponse);
+        await _context.AddAsync(reponseToSave);
         await _context.SaveChangesAsync();
         return reponseToSave.Id;
     }

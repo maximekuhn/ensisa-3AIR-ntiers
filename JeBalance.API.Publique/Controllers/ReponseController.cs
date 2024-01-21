@@ -20,7 +20,8 @@ public class ReponseController : ControllerBase
     {
         var createReponseCommand = new CreateReponseCommand(
             resource.TypeReponse,
-            resource.Retribution
+            resource.Retribution,
+            resource.DenonciationId
         );
         var reponseId = await _mediator.Send(createReponseCommand);
         return Ok(reponseId);
