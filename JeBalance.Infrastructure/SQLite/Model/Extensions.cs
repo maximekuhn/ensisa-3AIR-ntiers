@@ -21,7 +21,7 @@ public static class Extensions
     public static Denonciation ToDomain(this DenonciationSQLite denonciation)
     {
         var reponseId = denonciation.ReponseId == 0 ? null : denonciation.ReponseId;
-        
+
         return new Denonciation
         {
             Id = denonciation.Id,

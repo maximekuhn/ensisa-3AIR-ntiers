@@ -5,27 +5,6 @@ namespace JeBalance.API.Interne.Securisee.Resources;
 
 public class DenonciationAPI
 {
-    [JsonPropertyName("id")]
-    public Guid Id { get; set; }
-    
-    [JsonPropertyName("typeDelit")]
-    public TypeDelit TypeDelit { get; set; }
-    
-    [JsonPropertyName("paysEvasion")]
-    public string? PaysEvasion { get; set; }
-    
-    [JsonPropertyName("horodatage")]
-    public DateTime Horodatage { get; set; }
-    
-    [JsonPropertyName("informateurId")]
-    public int InformateurId { get; set; }
-    
-    [JsonPropertyName("suspectId")]
-    public int SuspectId { get; set; }
-    
-    [JsonPropertyName("reponseId")]
-    public int? ReponseId { get; set; }
-    
     public DenonciationAPI(Denonciation denonciation)
     {
         Id = denonciation.Id;
@@ -36,4 +15,18 @@ public class DenonciationAPI
         SuspectId = denonciation.SuspectId;
         ReponseId = denonciation.ReponseId;
     }
+
+    [JsonPropertyName("id")] public Guid Id { get; set; }
+
+    [JsonPropertyName("typeDelit")] public TypeDelit TypeDelit { get; set; }
+
+    [JsonPropertyName("paysEvasion")] public string? PaysEvasion { get; set; }
+
+    [JsonPropertyName("horodatage")] public DateTime Horodatage { get; set; }
+
+    [JsonPropertyName("informateurId")] public int InformateurId { get; set; }
+
+    [JsonPropertyName("suspectId")] public int SuspectId { get; set; }
+
+    [JsonPropertyName("reponseId")] public int? ReponseId { get; set; }
 }
