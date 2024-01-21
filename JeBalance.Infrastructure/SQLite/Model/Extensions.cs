@@ -14,7 +14,8 @@ public static class Extensions
             PaysEvasion = denonciation.PaysEvasion,
             Horodatage = denonciation.Horodatage,
             IdInformateur = denonciation.InformateurId,
-            IdSuspect = denonciation.SuspectId
+            IdSuspect = denonciation.SuspectId,
+            IdReponse = denonciation.ReponseId
         };
     }
 
@@ -74,6 +75,17 @@ public static class Extensions
             TypeReponse = reponse.TypeReponse,
             Horodatage = reponse.Horodatage,
             Retribution = reponse.Retribution
+        };
+    }
+
+    public static Reponse ToDomain(this ReponseSQLite reponse)
+    {
+        return new Reponse
+        {
+            Horodatage = reponse.Horodatage,
+            Id = reponse.Id,
+            Retribution = reponse.Retribution,
+            TypeReponse = reponse.TypeReponse
         };
     }
 
