@@ -35,26 +35,38 @@ public class InformateurRepositorySQLite : InformateurRepository
         return informateurToSave.Id;
     }
 
-    public async Task<int> Update(int id, Informateur informateur)
+    public async Task<int> Update(int id, Informateur newInformateur)
     {
-        var informateurToUpdate = await _context.Informateurs.FindAsync(id);
-        if (informateurToUpdate == null) throw new KeyNotFoundException("L'informateur n'existe pas");
+        var informateurToUpdate = _context.Informateurs.First(inforamteur => inforamteur.Id == id);
+        if (informateurToUpdate == null) throw new KeyNotFoundException("L'informateur n'a pas été trouvé");
 
-        _context.Informateurs.Update(informateurToUpdate);
+        informateurToUpdate.Nom = newInformateur.Nom;
+        informateurToUpdate.Prenom = newInformateur.Prenom;
+        informateurToUpdate.Adresse = newInformateur.Adresse;
+        informateurToUpdate.EstCalomniateur = newInformateur.EstCalomniateur;
+
         await _context.SaveChangesAsync();
-
-        return informateurToUpdate.Id;
+        return id;
     }
 
     public async Task<bool> Delete(int id)
     {
-        var informateur = await _context.Informateurs.FindAsync(id);
-        if (informateur == null) return false;
+        try
+        {
+            var informateurToDelete =
+                await _context.Informateurs.FirstOrDefaultAsync(informateur => informateur.Id == id);
 
-        _context.Informateurs.Remove(informateur);
-        await _context.SaveChangesAsync();
+            if (informateurToDelete == null)
+                throw new KeyNotFoundException("L'informateur n'a pas été trouvé");
 
-        return true;
+            _context.Remove(informateurToDelete);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     public async Task<Informateur?> FindOne(Specification<Informateur> specification)

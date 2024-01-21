@@ -41,6 +41,31 @@ public class InformateurRepositoryTests : RepositoryTest
     }
 
     [Fact]
+    public async Task ShouldUpdateAsync()
+    {
+        var id = await AddInformateur();
+        var newNom = "Updated Nom";
+        var newPrenom = "Updated Prenom";
+        var newAdresse = new Adresse(new NumeroVoie(20), new NomVoie("Updated nom de voie"),
+            new CodePostal(68700), new NomCommune("Updated commune"));
+        var newEstCalomniateur = true;
+        var updatedInforamteur = new Informateur(newNom, newPrenom, newAdresse, newEstCalomniateur);
+        await _repository.Update(id, updatedInforamteur);
+        var informateur = Context.Informateurs.Single(inforamteuer => inforamteuer.Id == id);
+        Assert.Equal(newNom, informateur.Nom);
+        Assert.Equal(newPrenom, informateur.Prenom);
+        Assert.Equal(newAdresse, informateur.Adresse);
+    }
+
+    [Fact]
+    public async Task ShouldDeleteAsync()
+    {
+        var id = await AddInformateur();
+        var result = await _repository.Delete(id);
+        Assert.True(result);
+    }
+
+    [Fact]
     public async Task ShouldFindOneAsync()
     {
         var informateurId = await AddInformateur();
