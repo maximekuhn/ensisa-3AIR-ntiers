@@ -1,8 +1,21 @@
+using JeBalance.API.Interne.Securisee;
+using JeBalance.Domain;
+using JeBalance.Infrastructure;
+using JeBalance.Infrastructure.SQLite;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
 
-// Add services to the container.
+// For entity framework
+services.AddDbContext<DatabaseContext>(
+    options => options.UseSqlite(builder.Configuration.GetConnectionString("localdb")), ServiceLifetime.Scoped, ServiceLifetime.Transient);
 
-builder.Services.AddControllers();
+services.AddApplication();
+services.AddDomain();
+services.AddInfrastructure();
+services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
