@@ -33,7 +33,7 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
 
         var idOpaque = _idOpaqueProvider.GetOpaqueId();
         denonciation.Id = idOpaque;
-        
+
         var now = _horodatageProvider.GetNow();
         denonciation.Horodatage = now;
 
@@ -44,8 +44,9 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
         denonciation.InformateurId = informateur.Id;
 
         if (informateur.EstCalomniateur) throw new ApplicationException("Vous ne pouvez plus créer de dénonciations");
-        if (await VIPsContainsSuspect(request.Suspect)) throw new ApplicationException("La dénonciation ne peut pas être créée");
-        
+        if (await VIPsContainsSuspect(request.Suspect))
+            throw new ApplicationException("La dénonciation ne peut pas être créée");
+
         var denonciationId = await _denonciationRepository.Create(denonciation);
         return denonciationId;
     }
@@ -85,5 +86,4 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
         var maybeSuspectInVIPs = await _vipRepository.FindOne(findVIPSpecification);
         return maybeSuspectInVIPs != null;
     }
-    
 }

@@ -9,12 +9,12 @@ namespace JeBalance.Infrastructure.SQLite.Repositories;
 public class VIPRepositorySQLite : VIPRepository
 {
     private readonly DatabaseContext _context;
-    
+
     public VIPRepositorySQLite(DatabaseContext context)
     {
         _context = context;
     }
-    
+
     public Task<(IEnumerable<VIP> Results, int Total)> Find(int limit, int offset,
         Specification<VIP> specification)
     {

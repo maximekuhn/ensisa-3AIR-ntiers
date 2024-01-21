@@ -79,7 +79,7 @@ public static class Extensions
 
     public static VIPsQLite ToSQLite(this VIP vip)
     {
-        return new VIPsQLite()
+        return new VIPsQLite
         {
             Id = vip.Id,
             Nom = vip.Nom.Value,

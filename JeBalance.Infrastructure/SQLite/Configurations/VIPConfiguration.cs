@@ -11,7 +11,7 @@ public class VIPConfiguration : IEntityTypeConfiguration<VIPsQLite>
         builder.ToTable("VIPs")
             .HasKey(vip => vip.Id)
             ;
-        
+
         //TODO
     }
 }

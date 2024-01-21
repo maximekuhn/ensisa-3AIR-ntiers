@@ -22,11 +22,11 @@ public class DenonciationStepDefinition
     private Guid _denonciationId;
     private ApplicationException _exception;
     private Informateur _informateur;
-    private VIP _vip;
     private string _paysEvasion;
     private Suspect _suspect;
 
     private TypeDelit _typeDelit;
+    private VIP _vip;
 
     public DenonciationStepDefinition()
     {

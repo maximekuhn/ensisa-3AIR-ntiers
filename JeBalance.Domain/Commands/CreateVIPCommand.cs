@@ -10,6 +10,6 @@ public class CreateVIPCommand : IRequest<int>
     {
         Vip = new VIP(nom, prenom, adresse);
     }
-    
+
     public VIP Vip { get; }
 }

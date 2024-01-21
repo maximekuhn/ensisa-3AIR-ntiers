@@ -48,7 +48,7 @@ public class VIPRepositoryTests : RepositoryTest
         var vip = await _repository.FindOne(specification);
         Assert.Equal(vipId, vip.Id);
     }
-    
+
     private Task<int> AddVIP(string nom = _nom, string prenom = _prenom)
     {
         var vip = new VIP(nom, prenom, _adresse);

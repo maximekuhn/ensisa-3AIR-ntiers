@@ -25,5 +25,4 @@ public class VIP : Personne
         Prenom = prenom;
         Adresse = adresse;
     }
-
 }

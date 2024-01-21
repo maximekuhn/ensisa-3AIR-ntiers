@@ -41,7 +41,7 @@ Feature: Denonciation
         And un suspect
         When la denonciation est creee
         Then l'informateur est ajouté à la base
-        
+
     Scenario: Impossible de créer une denonciation si le suspect appartient à la liste des VIP
         Given un type de delit "EvasionFiscale"
         And un pays d'evasion "Suisse"

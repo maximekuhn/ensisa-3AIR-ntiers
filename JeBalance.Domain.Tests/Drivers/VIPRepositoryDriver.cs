@@ -1,4 +1,3 @@
-using System.Net.Sockets;
 using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
 using JeBalance.Domain.Repositories;
@@ -11,10 +10,11 @@ public class VIPRepositoryDriver : VIPRepository
     {
         VIPs = new List<VIP>();
     }
-    
+
     public List<VIP> VIPs { get; set; }
-    
-    public async Task<(IEnumerable<VIP> Results, int Total)> Find(int limit, int offset, Specification<VIP> specification)
+
+    public async Task<(IEnumerable<VIP> Results, int Total)> Find(int limit, int offset,
+        Specification<VIP> specification)
     {
         var vips = VIPs.Where(specification.IsSatisfiedBy).Skip(offset).Take(limit);
         return (vips, VIPs.Count);
