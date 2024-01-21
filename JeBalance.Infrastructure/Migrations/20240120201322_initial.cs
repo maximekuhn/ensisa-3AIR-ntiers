@@ -26,15 +26,18 @@ namespace JeBalance.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ReponseSQLite",
+                name: "REPONSES",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    type_reponse = table.Column<int>(type: "int", nullable: false),
+                    retribution = table.Column<double>(type: "REAL", nullable: true),
+                    horodatage = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ReponseSQLite", x => x.id);
+                    table.PrimaryKey("PK_REPONSES", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,9 +80,9 @@ namespace JeBalance.Infrastructure.Migrations
                         principalTable: "INFORMATEURS",
                         principalColumn: "id");
                     table.ForeignKey(
-                        name: "FK_DENONCIATIONS_ReponseSQLite_fk_reponse",
+                        name: "FK_DENONCIATIONS_REPONSES_fk_reponse",
                         column: x => x.fk_reponse,
-                        principalTable: "ReponseSQLite",
+                        principalTable: "REPONSES",
                         principalColumn: "id");
                     table.ForeignKey(
                         name: "FK_DENONCIATIONS_SUSPECTS_fk_suspect",
@@ -114,7 +117,7 @@ namespace JeBalance.Infrastructure.Migrations
                 name: "INFORMATEURS");
 
             migrationBuilder.DropTable(
-                name: "ReponseSQLite");
+                name: "REPONSES");
 
             migrationBuilder.DropTable(
                 name: "SUSPECTS");

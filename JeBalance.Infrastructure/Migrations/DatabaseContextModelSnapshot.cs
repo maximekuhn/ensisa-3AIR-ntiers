@@ -110,9 +110,21 @@ namespace JeBalance.Infrastructure.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
+                    b.Property<DateTime>("Horodatage")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("horodatage");
+
+                    b.Property<double?>("Retribution")
+                        .HasColumnType("REAL")
+                        .HasColumnName("retribution");
+
+                    b.Property<int>("TypeReponse")
+                        .HasColumnType("int")
+                        .HasColumnName("type_reponse");
+
                     b.HasKey("Id");
 
-                    b.ToTable("ReponseSQLite");
+                    b.ToTable("REPONSES", (string)null);
                 });
 
             modelBuilder.Entity("JeBalance.Infrastructure.SQLite.Model.SuspectSQLite", b =>

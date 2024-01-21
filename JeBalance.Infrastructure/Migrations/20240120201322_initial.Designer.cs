@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JeBalance.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240120174217_initial")]
+    [Migration("20240120201322_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,9 +112,21 @@ namespace JeBalance.Infrastructure.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
+                    b.Property<DateTime>("Horodatage")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("horodatage");
+
+                    b.Property<double?>("Retribution")
+                        .HasColumnType("REAL")
+                        .HasColumnName("retribution");
+
+                    b.Property<int>("TypeReponse")
+                        .HasColumnType("int")
+                        .HasColumnName("type_reponse");
+
                     b.HasKey("Id");
 
-                    b.ToTable("ReponseSQLite");
+                    b.ToTable("REPONSES", (string)null);
                 });
 
             modelBuilder.Entity("JeBalance.Infrastructure.SQLite.Model.SuspectSQLite", b =>
