@@ -35,6 +35,9 @@ public class CreateReponseCommandHandler : IRequestHandler<CreateReponseCommand,
         var denonciationId = request.DenonciationId;
         var denonciation = await _denonciationRepository.GetOne(denonciationId);
 
+        if (denonciation.ReponseId != null)
+            throw new ApplicationException("Impossible de répondre à une dénonciation qui a déjà une réponse");
+
         var reponseId = await _reponseRepository.Create(reponse);
 
         denonciation.ReponseId = reponseId;
