@@ -1,6 +1,5 @@
 using JeBalance.API.Secrete.Securisee.Resources;
 using JeBalance.Domain.Commands;
-using JeBalance.Domain.Model;
 using JeBalance.Domain.ValueObjects;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,9 +20,10 @@ public class VIPController : ControllerBase
     [HttpPost("create")]
     public async Task<IActionResult> CreateVIP([FromBody] VIPAPI resource)
     {
-        var createVIPCommand = new CreateVIPCommand(resource.Nom, resource.Prenom, new Adresse(new NumeroVoie(resource.Adresse.NumeroVoie), new NomVoie(resource.Adresse.NomVoie), new CodePostal(resource.Adresse.CodePostal), new NomCommune(resource.Adresse.NomCommune)));
+        var createVIPCommand = new CreateVIPCommand(resource.Nom, resource.Prenom,
+            new Adresse(new NumeroVoie(resource.Adresse.NumeroVoie), new NomVoie(resource.Adresse.NomVoie),
+                new CodePostal(resource.Adresse.CodePostal), new NomCommune(resource.Adresse.NomCommune)));
         var vipId = await _mediator.Send(createVIPCommand);
         return Ok(vipId);
     }
-    
 }
