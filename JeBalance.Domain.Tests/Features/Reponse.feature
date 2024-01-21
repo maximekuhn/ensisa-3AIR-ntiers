@@ -20,8 +20,7 @@ Feature: Reponse
     #    When une reponse est ajoutee a la denonciation
     #    Then apparait le message d'erreur 'Cette denonciation a deja une reponse'
     #
-    #  Scenario: Repondre a une denonciation avec un montant de retribution negatif
-    #    Given une denonciation existante sans reponse
-    #    When une reponse de type "Confirmation" est ajoutee a la denonciation avec un montant de retribution negatif
-    #    Then apparait le message d'erreur 'Le montant de retribution ne peut pas etre negatif'
-    #    And la denonciation n'a pas de nouvelle reponse
+    Scenario: Repondre a une denonciation avec un montant de retribution negatif
+      Given une dénonciation existante sans réponse
+      When une réponse de type 'Confirmation'  avec une retribution de '-50' euros est ajoutée à la dénonciaton
+      Then apparait le message d erreur 'Le montant de retribution ne peut pas etre negatif'

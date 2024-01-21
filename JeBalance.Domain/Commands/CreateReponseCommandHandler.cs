@@ -22,6 +22,9 @@ public class CreateReponseCommandHandler : IRequestHandler<CreateReponseCommand,
     {
         var reponse = request.Reponse;
 
+        if (reponse.Retribution < 0)
+            throw new ApplicationException("Le montant de retribution ne peut pas etre negatif");
+
         var now = _horodatageProvider.GetNow();
         reponse.Horodatage = now;
 

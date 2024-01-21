@@ -3,6 +3,7 @@ using JeBalance.Domain.Commands;
 using JeBalance.Domain.Model;
 using JeBalance.Domain.Tests.Drivers;
 using JeBalance.Domain.ValueObjects;
+using Xunit;
 
 namespace JeBalance.Domain.Tests.Steps;
 
@@ -29,6 +30,7 @@ public class ReponseStepDefinition
     private Denonciation _denonciation;
     private Reponse _reponse;
     private int _reponseId;
+    private ApplicationException _exception;
 
 
     [Given(@"une dénonciation existante sans réponse")]
@@ -52,6 +54,8 @@ public class ReponseStepDefinition
     [When(@"une réponse de type '(.*)'  avec une retribution de '(.*)' euros est ajoutée à la dénonciaton")]
     public async Task WhenUneReponseDeTypeAvecUneRetributionDeEurosEstAjouteeALaDenonciaton(TypeReponse typeReponse, double retribution)
     {
+        try
+        {
         var createReponseCommand = new CreateReponseCommand(typeReponse, retribution, _denonciationId); 
         var createReponseCommandHandler = 
             new CreateReponseCommandHandler(_reponseRepository, _denonciationRepository, _horodatageProvider);
@@ -59,6 +63,11 @@ public class ReponseStepDefinition
         _reponseId = await createReponseCommandHandler.Handle(createReponseCommand, CancellationToken.None);
         _denonciation = _denonciationRepository.Denonciations.Last();
         _reponse = _reponseRepository.Reponses.Last();
+        }
+        catch (ApplicationException e)
+        {
+            _exception = e;
+        }
     }
 
     [Then(@"la dénonciation contient l'identifiant de la réponse")]
@@ -83,5 +92,12 @@ public class ReponseStepDefinition
     public void ThenLaReponseEstDateeHorodatage()
     {
         _reponse.Horodatage.Should().Be(_defaultDateTime);
+    }
+
+    [Then(@"apparait le message d erreur '(.*)'")]
+    public void ThenApparaitLeMessageDErreur(string message)
+    {
+        Assert.NotNull(_exception);
+        _exception.Message.Should().Be(message);
     }
 }
