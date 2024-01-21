@@ -17,7 +17,7 @@ public class ReponseRepositorySQLite : ReponseRepository
     public async Task<int> Create(Reponse reponse)
     {
         var reponseToSave = reponse.ToSQLite();
-        await _context.AddAsync(reponse);
+        await _context.AddAsync(reponseToSave);
         await _context.SaveChangesAsync();
         return reponseToSave.Id;
     }
@@ -30,7 +30,10 @@ public class ReponseRepositorySQLite : ReponseRepository
 
     public async Task<Reponse> GetOne(int id)
     {
-        throw new NotImplementedException();
+        var reponse = await _context.Reponses.FindAsync(id);
+        if (reponse == null) throw new KeyNotFoundException("Cette réponse n'existe pas");
+
+        return reponse;
     }
 
     public Task<int> Update(int id, Reponse reponse)
