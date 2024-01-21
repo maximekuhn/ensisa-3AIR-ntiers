@@ -22,8 +22,8 @@ public class CreateReponseCommandHandler : IRequestHandler<CreateReponseCommand,
     public async Task<int> Handle(CreateReponseCommand request, CancellationToken cancellationToken)
     {
         var reponse = request.Reponse;
-        
-        
+
+
         if (reponse is { TypeReponse: TypeReponse.Confirmation, Retribution: < 0 })
             throw new ApplicationException("Le montant de retribution ne peut pas etre negatif");
 
@@ -34,7 +34,7 @@ public class CreateReponseCommandHandler : IRequestHandler<CreateReponseCommand,
 
         var denonciationId = request.DenonciationId;
         var denonciation = await _denonciationRepository.GetOne(denonciationId);
-        
+
         var reponseId = await _reponseRepository.Create(reponse);
 
         denonciation.ReponseId = reponseId;

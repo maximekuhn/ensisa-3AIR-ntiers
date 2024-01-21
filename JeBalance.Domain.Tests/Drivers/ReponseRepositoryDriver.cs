@@ -4,18 +4,19 @@ using JeBalance.Domain.Repositories;
 
 namespace JeBalance.Domain.Tests.Drivers;
 
-public class ReponseRepositoryDriver: ReponseRepository
+public class ReponseRepositoryDriver : ReponseRepository
 {
-    public List<Reponse> Reponses { get; set; } = new List<Reponse>();
-    
-    public Task<(IEnumerable<Reponse> Results, int Total)> Find(int limit, int offset, Specification<Reponse> specification)
+    public List<Reponse> Reponses { get; set; } = new();
+
+    public Task<(IEnumerable<Reponse> Results, int Total)> Find(int limit, int offset,
+        Specification<Reponse> specification)
     {
         throw new NotImplementedException();
     }
 
     public Task<Reponse> GetOne(int id)
     {
-        return Task.FromResult<Reponse>(Reponses.First(reponse => id == reponse.Id));
+        return Task.FromResult(Reponses.First(reponse => id == reponse.Id));
     }
 
     public Task<int> Create(Reponse reponse)
@@ -25,7 +26,7 @@ public class ReponseRepositoryDriver: ReponseRepository
         else
             reponse.Id = 1;
         Reponses.Add(reponse);
-        return Task.FromResult<int>(Reponses.Last().Id);
+        return Task.FromResult(Reponses.Last().Id);
     }
 
     public Task<int> Update(int id, Reponse T)

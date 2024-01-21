@@ -10,27 +10,27 @@ namespace JeBalance.Domain.Tests.Steps;
 [Binding]
 public class ReponseStepDefinition
 {
+    private readonly DateTime _defaultDateTime = new(2024, 05, 17, 14, 32, 00);
 
     private readonly DenonciationRepositoryDriver _denonciationRepository = new();
-    private readonly InformateurRepositoryDriver _informateurRepository = new();
-    private readonly SuspectRepositoryDriver _suspectRepository = new();
-    private readonly ReponseRepositoryDriver _reponseRepository = new();
-    private readonly VIPRepositoryDriver _vipRepository = new();
     private readonly HorodatageProviderDriver _horodatageProvider = new();
     private readonly IdOpaqueProviderDriver _idOpaqueProvider = new();
-    private readonly DateTime _defaultDateTime = new(2024, 05, 17, 14, 32, 00);
+    private readonly InformateurRepositoryDriver _informateurRepository = new();
+    private readonly ReponseRepositoryDriver _reponseRepository = new();
+    private readonly SuspectRepositoryDriver _suspectRepository = new();
+    private readonly VIPRepositoryDriver _vipRepository = new();
+    private Denonciation _denonciation;
+
+
+    private Guid _denonciationId;
+    private ApplicationException _exception;
+    private Reponse _reponse;
+    private int _reponseId;
 
     public ReponseStepDefinition()
     {
         _horodatageProvider.DateTime = _defaultDateTime;
     }
-
-
-    private Guid _denonciationId;
-    private Denonciation _denonciation;
-    private Reponse _reponse;
-    private int _reponseId;
-    private ApplicationException _exception;
 
 
     [Given(@"une dénonciation existante sans réponse")]
@@ -48,21 +48,22 @@ public class ReponseStepDefinition
         var createDenonciationCommandHandler = new CreateDenonciationCommandHandler(_denonciationRepository,
             _informateurRepository, _suspectRepository, _vipRepository, _horodatageProvider, _idOpaqueProvider);
 
-         await createDenonciationCommandHandler.Handle(createDenonciationCommand, CancellationToken.None);
+        await createDenonciationCommandHandler.Handle(createDenonciationCommand, CancellationToken.None);
     }
 
     [When(@"une réponse de type '(.*)'  avec une retribution de '(.*)' euros est ajoutée à la dénonciaton")]
-    public async Task WhenUneReponseDeTypeAvecUneRetributionDeEurosEstAjouteeALaDenonciaton(TypeReponse typeReponse, double retribution)
+    public async Task WhenUneReponseDeTypeAvecUneRetributionDeEurosEstAjouteeALaDenonciaton(TypeReponse typeReponse,
+        double retribution)
     {
         try
         {
-        var createReponseCommand = new CreateReponseCommand(typeReponse, retribution, _denonciationId); 
-        var createReponseCommandHandler = 
-            new CreateReponseCommandHandler(_reponseRepository, _denonciationRepository, _horodatageProvider);
+            var createReponseCommand = new CreateReponseCommand(typeReponse, retribution, _denonciationId);
+            var createReponseCommandHandler =
+                new CreateReponseCommandHandler(_reponseRepository, _denonciationRepository, _horodatageProvider);
 
-        _reponseId = await createReponseCommandHandler.Handle(createReponseCommand, CancellationToken.None);
-        _denonciation = _denonciationRepository.Denonciations.Last();
-        _reponse = _reponseRepository.Reponses.Last();
+            _reponseId = await createReponseCommandHandler.Handle(createReponseCommand, CancellationToken.None);
+            _denonciation = _denonciationRepository.Denonciations.Last();
+            _reponse = _reponseRepository.Reponses.Last();
         }
         catch (ApplicationException e)
         {
@@ -106,8 +107,8 @@ public class ReponseStepDefinition
     {
         try
         {
-            var createReponseCommand = new CreateReponseCommand(typeReponse, null, _denonciationId); 
-            var createReponseCommandHandler = 
+            var createReponseCommand = new CreateReponseCommand(typeReponse, null, _denonciationId);
+            var createReponseCommandHandler =
                 new CreateReponseCommandHandler(_reponseRepository, _denonciationRepository, _horodatageProvider);
 
             _reponseId = await createReponseCommandHandler.Handle(createReponseCommand, CancellationToken.None);
