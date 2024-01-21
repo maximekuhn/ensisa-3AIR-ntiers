@@ -24,7 +24,7 @@ public class Denonciation : Entity<Guid>
     }
 
     public Denonciation(Guid id, TypeDelit typeDelit, string? paysEvasion, int informateurId, int suspectId,
-        int reponseId) : base(id)
+        int? reponseId) : base(id)
     {
         TypeDelit = typeDelit;
         PaysEvasion = paysEvasion;
@@ -40,5 +40,5 @@ public class Denonciation : Entity<Guid>
 
     public int InformateurId { get; set; }
     public int SuspectId { get; set; }
-    public int ReponseId { get; set; }
+    public int? ReponseId { get; set; }
 }

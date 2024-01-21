@@ -56,6 +56,21 @@ namespace JeBalance.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "VIPs",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    nom = table.Column<string>(type: "TEXT", nullable: false),
+                    prenom = table.Column<string>(type: "TEXT", nullable: false),
+                    adresse = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VIPs", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DENONCIATIONS",
                 columns: table => new
                 {
@@ -69,7 +84,7 @@ namespace JeBalance.Infrastructure.Migrations
                     fk_reponse = table.Column<int>(type: "INTEGER", nullable: true),
                     InformateurId = table.Column<int>(type: "INTEGER", nullable: false),
                     SuspectId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ReponseId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ReponseId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -112,6 +127,9 @@ namespace JeBalance.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "DENONCIATIONS");
+
+            migrationBuilder.DropTable(
+                name: "VIPs");
 
             migrationBuilder.DropTable(
                 name: "INFORMATEURS");

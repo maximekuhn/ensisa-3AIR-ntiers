@@ -46,7 +46,7 @@ namespace JeBalance.Infrastructure.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("pays_evasion");
 
-                    b.Property<int>("ReponseId")
+                    b.Property<int?>("ReponseId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Statut")
@@ -152,6 +152,33 @@ namespace JeBalance.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SUSPECTS", (string)null);
+                });
+
+            modelBuilder.Entity("JeBalance.Infrastructure.SQLite.Model.VIPsQLite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Adresse")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("adresse");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("nom");
+
+                    b.Property<string>("Prenom")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("prenom");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VIPs", (string)null);
                 });
 
             modelBuilder.Entity("JeBalance.Infrastructure.SQLite.Model.DenonciationSQLite", b =>

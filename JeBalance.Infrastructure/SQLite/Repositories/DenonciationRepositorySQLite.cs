@@ -15,10 +15,17 @@ public class DenonciationRepositorySQLite : DenonciationRepository
         _context = context;
     }
 
-    public async Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset,
+    public Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset,
         Specification<Denonciation> specification)
     {
-        throw new NotImplementedException();
+        var results = _context.Denonciations
+            .Apply(specification.ToSQLiteExpression<Denonciation, DenonciationSQLite>())
+            .Skip(offset)
+            .Take(limit)
+            .AsEnumerable()
+            .Select(denonciation => denonciation.ToDomain());
+
+        return Task.FromResult((results, _context.Denonciations.Count()));
     }
 
     public async Task<Denonciation> GetOne(Guid id)
