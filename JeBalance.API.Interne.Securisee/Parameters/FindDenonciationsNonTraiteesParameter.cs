@@ -4,8 +4,4 @@ public class FindDenonciationsNonTraiteesParameter
 {
     public int Limit { get; }
     public int Offset { get; }
-
-    public FindDenonciationsNonTraiteesParameter()
-    {
-    }
 }

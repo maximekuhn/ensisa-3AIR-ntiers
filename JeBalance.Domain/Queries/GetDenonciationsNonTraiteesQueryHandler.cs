@@ -4,7 +4,8 @@ using MediatR;
 
 namespace JeBalance.Domain.Queries;
 
-public class GetDenonciationsNonTraiteesQueryHandler: IRequestHandler<GetDenonciationsNonTraiteesQuery, (IEnumerable<Denonciation> Results, int Total)>
+public class GetDenonciationsNonTraiteesQueryHandler : IRequestHandler<GetDenonciationsNonTraiteesQuery, (
+    IEnumerable<Denonciation> Results, int Total)>
 {
     private readonly DenonciationRepository _denonciationRepository;
 
@@ -13,7 +14,8 @@ public class GetDenonciationsNonTraiteesQueryHandler: IRequestHandler<GetDenonci
         _denonciationRepository = denonciationRepository;
     }
 
-    public async Task<(IEnumerable<Denonciation> Results, int Total)> Handle(GetDenonciationsNonTraiteesQuery request, CancellationToken cancellationToken)
+    public async Task<(IEnumerable<Denonciation> Results, int Total)> Handle(GetDenonciationsNonTraiteesQuery request,
+        CancellationToken cancellationToken)
     {
         var pagination = request.Pagination;
         var findDenonciationsNonTraiteesSpecification = new FindDenonciationsNonTraiteesSpecification();
