@@ -36,16 +36,22 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
 
         var now = _horodatageProvider.GetNow();
         denonciation.Horodatage = now;
-
-        var suspectId = await GetOrInsertSuspect(request.Suspect);
+        
         var informateur = await GetOrInsertInformateur(request.Informateur);
 
+        if (await VIPsContainsSuspect(request.Suspect))
+        {
+            informateur.EstCalomniateur = true;
+            await _informateurRepository.Update(informateur.Id, informateur);
+            throw new ApplicationException("Vous ne pouvez plus créer de dénonciations");
+        }
+
+        var suspectId = await GetOrInsertSuspect(request.Suspect);
+        
         denonciation.SuspectId = suspectId;
         denonciation.InformateurId = informateur.Id;
 
         if (informateur.EstCalomniateur) throw new ApplicationException("Vous ne pouvez plus créer de dénonciations");
-        if (await VIPsContainsSuspect(request.Suspect))
-            throw new ApplicationException("Vous ne pouvez plus créer de dénonciations");
 
         var denonciationId = await _denonciationRepository.Create(denonciation);
         return denonciationId;

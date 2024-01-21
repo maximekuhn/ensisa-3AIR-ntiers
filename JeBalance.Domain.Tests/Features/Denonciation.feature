@@ -49,3 +49,10 @@ Feature: Denonciation
         And un suspect appartenant aux VIP
         When la denonciation est creee
         Then apparait le message d'erreur 'Vous ne pouvez plus créer de dénonciations'
+        
+    Scenario: Créer une dénonciation contre un suspect VIP marque l'informateur comme calomniateur
+        Given un type de delit "DissimulationDeRevenus"
+        And un informateur
+        And un suspect appartenant aux VIP
+        When la denonciation est creee
+        Then l'informateur est marqué comme calomniateur

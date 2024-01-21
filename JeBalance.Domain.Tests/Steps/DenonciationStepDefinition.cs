@@ -86,9 +86,9 @@ public class DenonciationStepDefinition
                 _suspectRepository, _vipRepository, _horodatageProvider, _idOpaqueProviderDriver);
 
             _denonciationId = await handler.Handle(createDenonciationCommand, CancellationToken.None);
-            _denonciation = _denonciationRepository.Denonciations.First();
-            _informateur = _informateurRepository.Informateurs.First();
-            _suspect = _suspectRepository.Suspects.First();
+            _denonciation = _denonciationRepository.Denonciations.Last();
+            _informateur = _informateurRepository.Informateurs.Last();
+            _suspect = _suspectRepository.Suspects.Last();
         }
         catch (ApplicationException e)
         {
@@ -155,5 +155,11 @@ public class DenonciationStepDefinition
         _suspect = new Suspect("Nom vip", "Prenom vip", createAdresse("vip ville", "vip voie", 6900, 2));
         _vip = new VIP("Nom vip", "Prenom vip", createAdresse("vip ville", "vip voie", 6900, 2));
         _vipRepository.Create(_vip);
+    }
+
+    [Then(@"l'informateur est marqué comme calomniateur")]
+    public void ThenLinformateurEstMarqueCommeCalomniateur()
+    {
+        _informateur.EstCalomniateur.Should().BeTrue();
     }
 }
