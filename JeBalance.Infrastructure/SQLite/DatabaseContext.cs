@@ -19,6 +19,7 @@ public class DatabaseContext : DbContext
     public DbSet<DenonciationSQLite> Denonciations { get; set; }
     public DbSet<InformateurSQLite> Informateurs { get; set; }
     public DbSet<SuspectSQLite> Suspects { get; set; }
+    public DbSet<VIPsQLite> VIPs { get; set; }
     public DbSet<ReponseSQLite> Reponses { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,6 +27,7 @@ public class DatabaseContext : DbContext
         modelBuilder.ApplyConfiguration(new DenonciationConfiguration());
         modelBuilder.ApplyConfiguration(new InformateurConfiguration());
         modelBuilder.ApplyConfiguration(new SuspectConfiguration());
+        modelBuilder.ApplyConfiguration(new VIPConfiguration());
         modelBuilder.ApplyConfiguration(new ReponseConfiguration());
         base.OnModelCreating(modelBuilder);
     }
