@@ -20,6 +20,8 @@ public static class Extensions
 
     public static Denonciation ToDomain(this DenonciationSQLite denonciation)
     {
+        var reponseId = denonciation.ReponseId == 0 ? null : denonciation.ReponseId;
+        
         return new Denonciation
         {
             Id = denonciation.Id,
@@ -27,7 +29,7 @@ public static class Extensions
             SuspectId = denonciation.IdSuspect,
             Horodatage = denonciation.Horodatage,
             PaysEvasion = denonciation.PaysEvasion,
-            ReponseId = denonciation.ReponseId,
+            ReponseId = reponseId,
             TypeDelit = denonciation.TypeDelit
         };
     }

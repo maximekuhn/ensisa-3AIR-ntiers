@@ -1,4 +1,5 @@
 using JeBalance.API.Interne.Securisee.Parameters;
+using JeBalance.API.Interne.Securisee.Resources;
 using JeBalance.Domain.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,6 @@ public class DenonciationController : ControllerBase
         var getDenonciationsNonTraiteesQuery =
             new GetDenonciationsNonTraiteesQuery((parameter.Limit, parameter.Offset));
         var (denonciations, total) = await _mediator.Send(getDenonciationsNonTraiteesQuery);
-        return Ok((denonciations, total));
+        return Ok(denonciations.Select(denonciation => new DenonciationAPI(denonciation)));
     }
 }

@@ -8,6 +8,6 @@ public class FindDenonciationsNonTraiteesSpecification : Specification<Denonciat
 {
     public override Expression<Func<Denonciation, bool>> ToExpression()
     {
-        return denonciation => denonciation.ReponseId == null;
+        return denonciation => denonciation.ReponseId == null || denonciation.ReponseId == 0;
     }
 }
