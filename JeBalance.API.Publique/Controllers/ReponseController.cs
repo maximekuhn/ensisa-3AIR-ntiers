@@ -32,7 +32,6 @@ public class ReponseController : ControllerBase
     {
         var getReponseByIdQuery = new GetReponseByIdQuery(reponseId);
         var reponse = await _mediator.Send(getReponseByIdQuery);
-        Console.WriteLine();
         return Ok(new ReponseAPI(reponse));
     }
 }

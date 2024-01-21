@@ -18,14 +18,6 @@ public class DenonciationRepositorySQLite : DenonciationRepository
     public async Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset,
         Specification<Denonciation> specification)
     {
-        /*  var query = _context.Denonciations
-             .Where(specification.ToExpression())
-             .Skip(offset)
-             .Take(limit);
-
-         var results = await query.ToListAsync();
-         var total = await _context.Denonciations.CountAsync(specification.ToExpression());
-         */
         throw new NotImplementedException();
     }
 

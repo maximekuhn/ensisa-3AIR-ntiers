@@ -35,7 +35,7 @@ public class InformateurRepositorySQLite : InformateurRepository
         return informateurToSave.Id;
     }
 
-    public async Task<int> Update(int id, Informateur T)
+    public async Task<int> Update(int id, Informateur informateur)
     {
         var informateurToUpdate = await _context.Informateurs.FindAsync(id);
         if (informateurToUpdate == null) throw new KeyNotFoundException("L'informateur n'existe pas");

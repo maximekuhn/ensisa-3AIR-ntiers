@@ -36,12 +36,12 @@ public class ReponseRepositorySQLite : ReponseRepository
         return reponse;
     }
 
-    public async Task<int> Update(int id, Reponse reponse)
+    public Task<int> Update(int id, Reponse reponse)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<bool> Delete(int id)
+    public Task<bool> Delete(int id)
     {
         throw new NotImplementedException();
     }
