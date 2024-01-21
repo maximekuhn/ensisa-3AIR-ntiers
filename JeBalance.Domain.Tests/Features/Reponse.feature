@@ -1,12 +1,13 @@
 Feature: Reponse
 
-    Scenario: Repondre a une denonciation par une confirmation
-        Given une denonciation existante sans reponse
-        When une reponse de type "Confirmation" est ajoutee a la denonciation
-        Then la denonciation a une reponse de type "Confirmation"
-        And l'horodatage de la reponse est daté (horodatage)
-        And la reponse contient le montant de la retribution
-
+    Scenario: Répondre à une dénonciation par une confiration et une retribution
+        Given une dénonciation existante sans réponse
+        When une réponse de type 'Confirmation'  avec une retribution de '1000' euros est ajoutée à la dénonciaton
+        Then la dénonciation contient l'identifiant de la réponse
+        And la réponse est de type 'Confirmation'
+        And la réponse contient une retribution de '1000' euros
+        And la réponse est datée (horodatage)
+        
     #  Scenario: Repondre a une denonciation par un rejet
     #    Given une denonciation existante sans reponse
     #    When une reponse de type "Rejet" est ajoutee a la denonciation
