@@ -40,9 +40,15 @@ public class SuspectRepositorySQLite : SuspectRepository
         throw new NotImplementedException();
     }
 
-    public Task<bool> Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        throw new NotImplementedException();
+        var suspect = await _context.Suspects.FindAsync(id);
+        if (suspect == null) return false;
+
+        _context.Suspects.Remove(suspect);
+        await _context.SaveChangesAsync();
+
+        return true;
     }
 
     public async Task<Suspect?> FindOne(Specification<Suspect> specification)

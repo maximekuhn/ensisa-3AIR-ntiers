@@ -15,9 +15,17 @@ public class DenonciationRepositorySQLite : DenonciationRepository
         _context = context;
     }
 
-    public Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset,
+    public async Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset,
         Specification<Denonciation> specification)
     {
+        /*  var query = _context.Denonciations
+             .Where(specification.ToExpression())
+             .Skip(offset)
+             .Take(limit);
+
+         var results = await query.ToListAsync();
+         var total = await _context.Denonciations.CountAsync(specification.ToExpression());
+         */
         throw new NotImplementedException();
     }
 
@@ -35,13 +43,26 @@ public class DenonciationRepositorySQLite : DenonciationRepository
         return denonciationToSave.Id;
     }
 
-    public Task<Guid> Update(Guid id, Denonciation denonciation)
+    public async Task<Guid> Update(Guid id, Denonciation denonciation)
     {
-        throw new NotImplementedException();
+        var denonciationToUpdate = await _context.Denonciations.FindAsync(id);
+        if (denonciationToUpdate == null) throw new KeyNotFoundException("Denonciation not found");
+
+        denonciationToUpdate = denonciation.ToSQLite();
+        _context.Denonciations.Update(denonciationToUpdate);
+        await _context.SaveChangesAsync();
+
+        return denonciationToUpdate.Id;
     }
 
-    public Task<bool> Delete(Guid id)
+    public async Task<bool> Delete(Guid id)
     {
-        throw new NotImplementedException();
+        var denonciation = await _context.Denonciations.FindAsync(id);
+        if (denonciation == null) return false;
+
+        _context.Denonciations.Remove(denonciation);
+        await _context.SaveChangesAsync();
+
+        return true;
     }
 }

@@ -35,14 +35,26 @@ public class InformateurRepositorySQLite : InformateurRepository
         return informateurToSave.Id;
     }
 
-    public Task<int> Update(int id, Informateur T)
+    public async Task<int> Update(int id, Informateur T)
     {
-        throw new NotImplementedException();
+        var informateurToUpdate = await _context.Informateurs.FindAsync(id);
+        if (informateurToUpdate == null) throw new KeyNotFoundException("Informateur not found");
+
+        _context.Informateurs.Update(informateurToUpdate);
+        await _context.SaveChangesAsync();
+
+        return informateurToUpdate.Id;
     }
 
-    public Task<bool> Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        throw new NotImplementedException();
+        var informateur = await _context.Informateurs.FindAsync(id);
+        if (informateur == null) return false;
+
+        _context.Informateurs.Remove(informateur);
+        await _context.SaveChangesAsync();
+
+        return true;
     }
 
     public async Task<Informateur?> FindOne(Specification<Informateur> specification)
