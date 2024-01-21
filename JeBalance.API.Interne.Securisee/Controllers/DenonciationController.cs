@@ -1,11 +1,14 @@
+using JeBalance.API.Interne.Securisee.Authentication;
 using JeBalance.API.Interne.Securisee.Parameters;
 using JeBalance.API.Interne.Securisee.Resources;
 using JeBalance.Domain.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JeBalance.API.Interne.Securisee.Controllers;
 
+[Authorize(Roles = UserRoles.AdministrationFiscale)]
 [Route("/api/[controller]")]
 [ApiController]
 public class DenonciationController : ControllerBase
