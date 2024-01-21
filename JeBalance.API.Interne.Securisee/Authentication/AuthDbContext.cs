@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JeBalance.API.Interne.Securisee.Authentication;
 
-public class AuthDbContext: IdentityDbContext<ApplicationUser>
+public class AuthDbContext : IdentityDbContext<ApplicationUser>
 {
     public AuthDbContext()
     {
@@ -21,9 +21,6 @@ public class AuthDbContext: IdentityDbContext<ApplicationUser>
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseSqlite("Data Source=LocalDatabase.db");
-        }
+        if (!optionsBuilder.IsConfigured) optionsBuilder.UseSqlite("Data Source=LocalDatabase.db");
     }
 }
