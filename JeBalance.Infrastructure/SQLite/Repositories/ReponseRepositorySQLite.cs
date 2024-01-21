@@ -1,9 +1,9 @@
-using JeBalance.Architecture.SQLite.Model;
 using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
 using JeBalance.Domain.Repositories;
+using JeBalance.Infrastructure.SQLite.Model;
 
-namespace JeBalance.Architecture.SQLite.Repositories;
+namespace JeBalance.Infrastructure.SQLite.Repositories;
 
 public class ReponseRepositorySQLite : ReponseRepository
 {
