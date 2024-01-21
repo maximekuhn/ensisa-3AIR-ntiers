@@ -7,7 +7,6 @@ namespace JeBalance.Infrastructure.Tests;
 
 public class InformateurRepositoryTests : RepositoryTest
 {
-    private const int _informateurId = 1;
     private const string _nom = "toto";
     private const string _prenom = "tata";
 
@@ -32,7 +31,7 @@ public class InformateurRepositoryTests : RepositoryTest
     [Fact]
     public async Task ShouldCreateAsync()
     {
-        var informateur = new Informateur(_nom, _prenom, _adresse, _informateurId);
+        var informateur = new Informateur(_nom, _prenom, _adresse);
         var informateurId = await _repository.Create(informateur);
         var lastInformateur = Context.Informateurs.Last();
         Assert.Equal(informateurId, lastInformateur.Id);
@@ -50,9 +49,9 @@ public class InformateurRepositoryTests : RepositoryTest
         Assert.Equal(informateurId, informateur.Id);
     }
 
-    private Task<int> AddInformateur(int informateurId = _informateurId, string nom = _nom, string prenom = _prenom)
+    private Task<int> AddInformateur(string nom = _nom, string prenom = _prenom)
     {
-        var informateur = new Informateur(nom, prenom, _adresse, informateurId);
+        var informateur = new Informateur(nom, prenom, _adresse);
         return _repository.Create(informateur);
     }
 }
