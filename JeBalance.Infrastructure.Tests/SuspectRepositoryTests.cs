@@ -1,13 +1,12 @@
-using JeBalance.Infrastructure.SQLite.Repositories;
 using JeBalance.Domain.Model;
 using JeBalance.Domain.Queries;
 using JeBalance.Domain.ValueObjects;
+using JeBalance.Infrastructure.SQLite.Repositories;
 
 namespace JeBalance.Infrastructure.Tests;
 
 public class SuspectRepositoryTests : RepositoryTest
 {
-    private const int _suspectId = 1;
     private const string _nom = "toto";
     private const string _prenom = "tata";
 
@@ -32,7 +31,7 @@ public class SuspectRepositoryTests : RepositoryTest
     [Fact]
     public async Task ShouldCreateAsync()
     {
-        var suspect = new Suspect(_nom, _prenom, _adresse, _suspectId);
+        var suspect = new Suspect(_nom, _prenom, _adresse);
         var suspectId = await _repository.Create(suspect);
         var lastSuspect = Context.Suspects.Last();
         Assert.Equal(suspectId, lastSuspect.Id);
@@ -50,9 +49,9 @@ public class SuspectRepositoryTests : RepositoryTest
         Assert.Equal(suspectId, suspect.Id);
     }
 
-    private Task<int> AddSuspect(int suspectId = _suspectId, string nom = _nom, string prenom = _prenom)
+    private Task<int> AddSuspect(string nom = _nom, string prenom = _prenom)
     {
-        var suspect = new Suspect(nom, prenom, _adresse, suspectId);
+        var suspect = new Suspect(nom, prenom, _adresse);
         return _repository.Create(suspect);
     }
 }

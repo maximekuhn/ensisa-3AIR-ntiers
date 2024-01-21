@@ -17,6 +17,7 @@ public class DenonciationStepDefinition
     private readonly IdOpaqueProviderDriver _idOpaqueProviderDriver;
     private readonly InformateurRepositoryDriver _informateurRepository;
     private readonly SuspectRepositoryDriver _suspectRepository;
+    private readonly VIPRepositoryDriver _vipRepository;
     private Denonciation _denonciation;
     private Guid _denonciationId;
     private ApplicationException _exception;
@@ -25,12 +26,14 @@ public class DenonciationStepDefinition
     private Suspect _suspect;
 
     private TypeDelit _typeDelit;
+    private VIP _vip;
 
     public DenonciationStepDefinition()
     {
         _denonciationRepository = new DenonciationRepositoryDriver();
         _informateurRepository = new InformateurRepositoryDriver();
         _suspectRepository = new SuspectRepositoryDriver();
+        _vipRepository = new VIPRepositoryDriver();
 
         _horodatageProvider = new HorodatageProviderDriver();
         _horodatageProvider.DateTime = _defaultDateTime;
@@ -80,12 +83,12 @@ public class DenonciationStepDefinition
             var createDenonciationCommand =
                 new CreateDenonciationCommand(_typeDelit, _paysEvasion, _informateur, _suspect);
             var handler = new CreateDenonciationCommandHandler(_denonciationRepository, _informateurRepository,
-                _suspectRepository, _horodatageProvider, _idOpaqueProviderDriver);
+                _suspectRepository, _vipRepository, _horodatageProvider, _idOpaqueProviderDriver);
 
             _denonciationId = await handler.Handle(createDenonciationCommand, CancellationToken.None);
-            _denonciation = _denonciationRepository.Denonciations.First();
-            _informateur = _informateurRepository.Informateurs.First();
-            _suspect = _suspectRepository.Suspects.First();
+            _denonciation = _denonciationRepository.Denonciations.Last();
+            _informateur = _informateurRepository.Informateurs.Last();
+            _suspect = _suspectRepository.Suspects.Last();
         }
         catch (ApplicationException e)
         {
@@ -144,5 +147,19 @@ public class DenonciationStepDefinition
     public void ThenLeSuspectEstAjouteALaBase()
     {
         _suspectRepository.Suspects.Contains(_suspect).Should().BeTrue();
+    }
+
+    [Given(@"un suspect appartenant aux VIP")]
+    public void GivenUnSuspectAppartenantAuxVip()
+    {
+        _suspect = new Suspect("Nom vip", "Prenom vip", createAdresse("vip ville", "vip voie", 6900, 2));
+        _vip = new VIP("Nom vip", "Prenom vip", createAdresse("vip ville", "vip voie", 6900, 2));
+        _vipRepository.Create(_vip);
+    }
+
+    [Then(@"l'informateur est marqué comme calomniateur")]
+    public void ThenLinformateurEstMarqueCommeCalomniateur()
+    {
+        _informateur.EstCalomniateur.Should().BeTrue();
     }
 }
