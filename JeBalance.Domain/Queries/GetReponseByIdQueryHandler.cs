@@ -7,7 +7,7 @@ namespace JeBalance.Domain.Queries;
 public class GetReponseByIdQueryHandler : IRequestHandler<GetReponseByIdQuery, Reponse>
 {
     public readonly ReponseRepository _reponseRepository;
-    
+
     public GetReponseByIdQueryHandler(ReponseRepository reponseRepository)
     {
         _reponseRepository = reponseRepository;

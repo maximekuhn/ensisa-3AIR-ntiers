@@ -9,6 +9,6 @@ public class GetReponseByIdQuery : IRequest<Reponse>
     {
         ReponseId = reponseId;
     }
-    
+
     public int ReponseId { get; }
 }

@@ -14,7 +14,7 @@ public class ReponseController : ControllerBase
     {
         _mediator = mediator;
     }
-    
+
     [HttpPost("create")]
     public async Task<IActionResult> CreateReponse([FromBody] ReponseAPI resource)
     {
@@ -25,7 +25,7 @@ public class ReponseController : ControllerBase
         var reponseId = await _mediator.Send(createReponseCommand);
         return Ok(reponseId);
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> GetReponseById([FromQuery] int reponseId)
     {

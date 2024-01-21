@@ -10,7 +10,8 @@ public class ReponseAPI
         TypeReponse = source.TypeReponse;
         Retribution = source.Retribution;
     }
+
     //Informations de la réponse
     [JsonPropertyName("type_reponse")] public TypeReponse TypeReponse { get; set; }
-    [JsonPropertyName("retribution")] public Double? Retribution { get; set; }
+    [JsonPropertyName("retribution")] public double? Retribution { get; set; }
 }

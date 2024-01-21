@@ -5,12 +5,12 @@ namespace JeBalance.Domain.Commands;
 
 public class CreateReponseCommand : IRequest<int>
 {
-    public CreateReponseCommand(TypeReponse typeReponse, Double? retribution)
+    public CreateReponseCommand(TypeReponse typeReponse, double? retribution)
     {
         TypeReponse = typeReponse;
         Retribution = retribution;
     }
-    
+
     public TypeReponse TypeReponse { get; }
-    public Double? Retribution { get; }
+    public double? Retribution { get; }
 }
