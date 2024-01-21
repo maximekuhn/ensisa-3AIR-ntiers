@@ -8,8 +8,8 @@ public class CreateVIPCommand : IRequest<int>
 {
     public CreateVIPCommand(Nom nom, Nom prenom, Adresse adresse)
     {
-        Vip = new VIP(nom, prenom, adresse);
+        VIP = new VIP(nom, prenom, adresse);
     }
 
-    public VIP Vip { get; }
+    public VIP VIP { get; }
 }
