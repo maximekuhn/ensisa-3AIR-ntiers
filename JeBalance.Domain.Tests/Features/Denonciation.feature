@@ -48,4 +48,4 @@ Feature: Denonciation
         And un informateur
         And un suspect appartenant aux VIP
         When la denonciation est creee
-        Then apparait le message d'erreur 'La dénonciation ne peut pas être créée'
+        Then apparait le message d'erreur 'Vous ne pouvez plus créer de dénonciations'

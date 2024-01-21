@@ -45,7 +45,7 @@ public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciati
 
         if (informateur.EstCalomniateur) throw new ApplicationException("Vous ne pouvez plus créer de dénonciations");
         if (await VIPsContainsSuspect(request.Suspect))
-            throw new ApplicationException("La dénonciation ne peut pas être créée");
+            throw new ApplicationException("Vous ne pouvez plus créer de dénonciations");
 
         var denonciationId = await _denonciationRepository.Create(denonciation);
         return denonciationId;
