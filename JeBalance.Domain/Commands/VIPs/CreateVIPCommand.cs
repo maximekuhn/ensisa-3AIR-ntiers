@@ -2,7 +2,7 @@ using JeBalance.Domain.Model;
 using JeBalance.Domain.ValueObjects;
 using MediatR;
 
-namespace JeBalance.Domain.Commands;
+namespace JeBalance.Domain.Commands.VIPs;
 
 public class CreateVIPCommand : IRequest<int>
 {

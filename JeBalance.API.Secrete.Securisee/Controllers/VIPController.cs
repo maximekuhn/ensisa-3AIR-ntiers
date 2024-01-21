@@ -1,5 +1,5 @@
 using JeBalance.API.Secrete.Securisee.Resources;
-using JeBalance.Domain.Commands;
+using JeBalance.Domain.Commands.VIPs;
 using JeBalance.Domain.ValueObjects;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -25,5 +25,12 @@ public class VIPController : ControllerBase
                 new CodePostal(resource.Adresse.CodePostal), new NomCommune(resource.Adresse.NomCommune)));
         var vipId = await _mediator.Send(createVIPCommand);
         return Ok(vipId);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        // TODO
+        return null;
     }
 }

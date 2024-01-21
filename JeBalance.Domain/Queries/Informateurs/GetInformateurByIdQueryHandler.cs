@@ -2,7 +2,7 @@ using JeBalance.Domain.Model;
 using JeBalance.Domain.Repositories;
 using MediatR;
 
-namespace JeBalance.Domain.Queries;
+namespace JeBalance.Domain.Queries.Informateurs;
 
 public class GetInformateurByIdQueryHandler : IRequestHandler<GetInformateurByIdQuery, Informateur>
 {

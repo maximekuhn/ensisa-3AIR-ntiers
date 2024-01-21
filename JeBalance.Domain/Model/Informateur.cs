@@ -25,7 +25,7 @@ public class Informateur : Personne
         Prenom = prenom;
         Adresse = adresse;
     }
-    
+
     public Informateur(Nom nom, Nom prenom, Adresse adresse, bool estCalomniateur) : base(0)
     {
         Nom = nom;

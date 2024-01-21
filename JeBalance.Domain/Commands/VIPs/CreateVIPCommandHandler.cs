@@ -3,7 +3,7 @@ using JeBalance.Domain.Queries;
 using JeBalance.Domain.Repositories;
 using MediatR;
 
-namespace JeBalance.Domain.Commands;
+namespace JeBalance.Domain.Commands.VIPs;
 
 public class CreateVIPCommandHandler : IRequestHandler<CreateVIPCommand, int>
 {
@@ -19,7 +19,7 @@ public class CreateVIPCommandHandler : IRequestHandler<CreateVIPCommand, int>
         var vip = request.VIP;
 
         if (await VIPExist(vip)) throw new ApplicationException("La personne existe déjà");
-        
+
         var vipId = await _vipRepository.Create(vip);
         return vipId;
     }

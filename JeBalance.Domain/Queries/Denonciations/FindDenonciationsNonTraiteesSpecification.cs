@@ -2,7 +2,7 @@ using System.Linq.Expressions;
 using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
 
-namespace JeBalance.Domain.Queries;
+namespace JeBalance.Domain.Queries.Denonciations;
 
 public class FindDenonciationsNonTraiteesSpecification : Specification<Denonciation>
 {

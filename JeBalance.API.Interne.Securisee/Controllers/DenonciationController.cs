@@ -1,6 +1,6 @@
 using JeBalance.API.Interne.Securisee.Parameters;
 using JeBalance.API.Interne.Securisee.Resources;
-using JeBalance.Domain.Queries;
+using JeBalance.Domain.Queries.Denonciations;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

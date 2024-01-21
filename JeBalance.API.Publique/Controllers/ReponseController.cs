@@ -1,6 +1,6 @@
 using JeBalance.API.Publique.Resources;
-using JeBalance.Domain.Commands;
-using JeBalance.Domain.Queries;
+using JeBalance.Domain.Commands.Reponses;
+using JeBalance.Domain.Queries.Reponses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +18,7 @@ public class ReponseController : ControllerBase
     [HttpPost("create")]
     public async Task<IActionResult> CreateReponse([FromBody] ReponseAPI resource)
     {
+        // TODO : deplacer dans l'autre api
         var createReponseCommand = new CreateReponseCommand(
             resource.TypeReponse,
             resource.Retribution,

@@ -44,6 +44,4 @@ public class ReponseRepositoryTests : RepositoryTest
         var reponse = new Reponse(typeReponse, retribution);
         return _repository.Create(reponse);
     }
-
-
 }

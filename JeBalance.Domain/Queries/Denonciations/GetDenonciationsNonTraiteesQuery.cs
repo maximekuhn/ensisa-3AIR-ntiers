@@ -1,7 +1,7 @@
 using JeBalance.Domain.Model;
 using MediatR;
 
-namespace JeBalance.Domain.Queries;
+namespace JeBalance.Domain.Queries.Denonciations;
 
 public class GetDenonciationsNonTraiteesQuery : IRequest<(IEnumerable<Denonciation> Results, int Total)>
 {

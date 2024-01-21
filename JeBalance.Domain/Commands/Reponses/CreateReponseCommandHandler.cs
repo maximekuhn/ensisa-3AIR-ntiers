@@ -3,7 +3,7 @@ using JeBalance.Domain.Repositories;
 using JeBalance.Domain.Services;
 using MediatR;
 
-namespace JeBalance.Domain.Commands;
+namespace JeBalance.Domain.Commands.Reponses;
 
 public class CreateReponseCommandHandler : IRequestHandler<CreateReponseCommand, int>
 {

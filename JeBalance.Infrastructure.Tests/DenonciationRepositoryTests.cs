@@ -1,5 +1,4 @@
 using JeBalance.Domain.Model;
-using JeBalance.Domain.Queries;
 using JeBalance.Infrastructure.SQLite.Repositories;
 
 namespace JeBalance.Infrastructure.Tests;

@@ -4,7 +4,7 @@ using JeBalance.Domain.Repositories;
 using JeBalance.Domain.Services;
 using MediatR;
 
-namespace JeBalance.Domain.Commands;
+namespace JeBalance.Domain.Commands.Denonciation;
 
 public class CreateDenonciationCommandHandler : IRequestHandler<CreateDenonciationCommand, Guid>
 {

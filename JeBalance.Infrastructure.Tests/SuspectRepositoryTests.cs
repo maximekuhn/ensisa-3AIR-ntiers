@@ -10,7 +10,7 @@ public class SuspectRepositoryTests : RepositoryTest
     private const string _nom = "toto";
     private const string _prenom = "tata";
 
-    private readonly Adresse _adresse = new Adresse(new NumeroVoie(10), new NomVoie("Rue des freres"),
+    private readonly Adresse _adresse = new(new NumeroVoie(10), new NomVoie("Rue des freres"),
         new CodePostal(68200), new NomCommune("Mulhouse"));
 
     private readonly SuspectRepositorySQLite _repository;
