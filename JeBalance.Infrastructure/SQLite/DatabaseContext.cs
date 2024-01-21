@@ -1,8 +1,8 @@
-using JeBalance.Architecture.SQLite.Configurations;
-using JeBalance.Architecture.SQLite.Model;
+using JeBalance.Infrastructure.SQLite.Configurations;
+using JeBalance.Infrastructure.SQLite.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace JeBalance.Architecture.SQLite;
+namespace JeBalance.Infrastructure.SQLite;
 
 public class DatabaseContext : DbContext
 {
@@ -19,12 +19,14 @@ public class DatabaseContext : DbContext
     public DbSet<DenonciationSQLite> Denonciations { get; set; }
     public DbSet<InformateurSQLite> Informateurs { get; set; }
     public DbSet<SuspectSQLite> Suspects { get; set; }
+    public DbSet<ReponseSQLite> Reponses { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new DenonciationConfiguration());
         modelBuilder.ApplyConfiguration(new InformateurConfiguration());
         modelBuilder.ApplyConfiguration(new SuspectConfiguration());
+        modelBuilder.ApplyConfiguration(new ReponseConfiguration());
         base.OnModelCreating(modelBuilder);
     }
 

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using JeBalance.Domain.Model;
 
-namespace JeBalance.Architecture.SQLite.Model;
+namespace JeBalance.Infrastructure.SQLite.Model;
 
 public class SuspectSQLite : Suspect
 {

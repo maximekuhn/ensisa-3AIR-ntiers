@@ -1,7 +1,7 @@
 using JeBalance.Domain.Model;
 using JeBalance.Domain.ValueObjects;
 
-namespace JeBalance.Architecture.SQLite.Model;
+namespace JeBalance.Infrastructure.SQLite.Model;
 
 public static class Extensions
 {
@@ -64,5 +64,16 @@ public static class Extensions
         return new Informateur(informateur.Id, new Nom(informateur.Nom), new Nom(informateur.Prenom),
             informateur.Adresse,
             informateur.EstCalomniateur);
+    }
+
+    public static ReponseSQLite ToSQLite(this Reponse reponse)
+    {
+        return new ReponseSQLite
+        {
+            Id = reponse.Id,
+            TypeReponse = reponse.TypeReponse,
+            Horodatage = reponse.Horodatage,
+            Retribution = reponse.Retribution
+        };
     }
 }

@@ -1,8 +1,8 @@
-using JeBalance.Architecture.SQLite.Model;
+using JeBalance.Infrastructure.SQLite.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace JeBalance.Architecture.SQLite.Configurations;
+namespace JeBalance.Infrastructure.SQLite.Configurations;
 
 public class DenonciationConfiguration : IEntityTypeConfiguration<DenonciationSQLite>
 {

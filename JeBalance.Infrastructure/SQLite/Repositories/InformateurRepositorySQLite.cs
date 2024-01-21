@@ -1,10 +1,10 @@
-using JeBalance.Architecture.SQLite.Model;
 using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
 using JeBalance.Domain.Repositories;
+using JeBalance.Infrastructure.SQLite.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace JeBalance.Architecture.SQLite.Repositories;
+namespace JeBalance.Infrastructure.SQLite.Repositories;
 
 public class InformateurRepositorySQLite : InformateurRepository
 {
@@ -15,7 +15,8 @@ public class InformateurRepositorySQLite : InformateurRepository
         _context = context;
     }
 
-    public Task<IEnumerable<Informateur>> Find(int limit, int offset, Specification<Informateur> specification)
+    public Task<(IEnumerable<Informateur> Results, int Total)> Find(int limit, int offset,
+        Specification<Informateur> specification)
     {
         throw new NotImplementedException();
     }

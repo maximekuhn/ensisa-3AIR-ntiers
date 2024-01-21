@@ -1,4 +1,4 @@
-using JeBalance.Architecture.SQLite;
+using JeBalance.Infrastructure.SQLite;
 using Microsoft.EntityFrameworkCore;
 
 namespace JeBalance.Infrastructure.Tests;
