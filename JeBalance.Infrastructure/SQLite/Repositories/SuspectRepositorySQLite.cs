@@ -35,9 +35,15 @@ public class SuspectRepositorySQLite : SuspectRepository
         return suspectToSave.Id;
     }
 
-    public Task<int> Update(int id, Suspect T)
+    public async Task<int> Update(int id, Suspect T)
     {
-        throw new NotImplementedException();
+        var suspectToUpdate = await _context.Suspects.FindAsync(id);
+        if (suspectToUpdate == null) throw new KeyNotFoundException("Le suspect n'existe pas");
+
+        _context.Suspects.Update(suspectToUpdate);
+        await _context.SaveChangesAsync();
+
+        return suspectToUpdate.Id;
     }
 
     public async Task<bool> Delete(int id)

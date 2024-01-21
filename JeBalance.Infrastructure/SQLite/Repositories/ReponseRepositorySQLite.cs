@@ -28,30 +28,21 @@ public class ReponseRepositorySQLite : ReponseRepository
         throw new NotImplementedException();
     }
 
-    public Task<Reponse> GetOne(int id)
+    public async Task<Reponse> GetOne(int id)
     {
-        throw new NotImplementedException();
+        var reponse = await _context.Reponses.FindAsync(id);
+        if (reponse == null) throw new KeyNotFoundException("Cette réponse n'existe pas");
+
+        return reponse;
     }
 
     public async Task<int> Update(int id, Reponse reponse)
     {
-        var reponseToUpdate = await _context.Reponses.FindAsync(id);
-        if (reponseToUpdate == null) throw new KeyNotFoundException("Reponse not found");
-
-        _context.Reponses.Update(reponseToUpdate);
-        await _context.SaveChangesAsync();
-
-        return reponseToUpdate.Id;
+        throw new NotImplementedException();
     }
 
     public async Task<bool> Delete(int id)
     {
-        var reponse = await _context.Reponses.FindAsync(id);
-        if (reponse == null) return false;
-
-        _context.Reponses.Remove(reponse);
-        await _context.SaveChangesAsync();
-
-        return true;
+        throw new NotImplementedException();
     }
 }

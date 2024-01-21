@@ -38,7 +38,7 @@ public class InformateurRepositorySQLite : InformateurRepository
     public async Task<int> Update(int id, Informateur T)
     {
         var informateurToUpdate = await _context.Informateurs.FindAsync(id);
-        if (informateurToUpdate == null) throw new KeyNotFoundException("Informateur not found");
+        if (informateurToUpdate == null) throw new KeyNotFoundException("L'informateur n'existe pas");
 
         _context.Informateurs.Update(informateurToUpdate);
         await _context.SaveChangesAsync();

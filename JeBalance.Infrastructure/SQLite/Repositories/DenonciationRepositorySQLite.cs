@@ -46,14 +46,14 @@ public class DenonciationRepositorySQLite : DenonciationRepository
     public async Task<Guid> Update(Guid id, Denonciation denonciation)
     {
         var denonciationToUpdate = await _context.Denonciations.FindAsync(id);
-        if (denonciationToUpdate == null) throw new KeyNotFoundException("Denonciation not found");
+        if (denonciationToUpdate == null) throw new KeyNotFoundException("La dénonciation n'existe pas");
 
-        denonciationToUpdate = denonciation.ToSQLite();
-        _context.Denonciations.Update(denonciationToUpdate);
+        denonciationToUpdate.ReponseId = denonciation.ReponseId;
         await _context.SaveChangesAsync();
 
         return denonciationToUpdate.Id;
     }
+
 
     public async Task<bool> Delete(Guid id)
     {
