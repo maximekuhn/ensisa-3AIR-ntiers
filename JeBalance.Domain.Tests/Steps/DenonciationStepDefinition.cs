@@ -197,7 +197,7 @@ public class DenonciationStepDefinition
         }
     }
 
-    [When(@"une requête pour récupérer (.*) dénonciations à partir de la page (.*) sans réponse est faite")]
+    [When(@"nous récupérons (.*) dénonciations sans réponse à partir de la page (.*)")]
     public async Task WhenUneRequetePourRecupererLesDenonciationsSansReponseEstFaite(int limit, int page)
     {
         var pagination = (Limit: limit, Offset: page);
