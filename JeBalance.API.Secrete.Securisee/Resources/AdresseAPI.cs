@@ -16,6 +16,7 @@ public class AdresseAPI
         NumeroVoie = adresse.NumeroVoieDeVoie.Value;
         CodePostal = adresse.CodePostal.Value;
     }
+
     [JsonPropertyName("nomCommune")] public string NomCommune { get; set; }
 
     [JsonPropertyName("nomVoie")] public string NomVoie { get; set; }

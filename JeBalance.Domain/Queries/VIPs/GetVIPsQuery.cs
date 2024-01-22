@@ -9,6 +9,6 @@ public class GetVIPsQuery : IRequest<(IEnumerable<VIP> Results, int Total)>
     {
         Pagination = pagination;
     }
-    
+
     public (int Limit, int Offset) Pagination { get; }
 }

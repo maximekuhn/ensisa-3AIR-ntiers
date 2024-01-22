@@ -20,7 +20,7 @@ public class VIPRepositorySQLite : VIPRepository
     {
         var query = _context.VIPs.AsQueryable();
         if (specification != null)
-                query.Apply(specification.ToSQLiteExpression<VIP, VIPsQLite>());
+            query.Apply(specification.ToSQLiteExpression<VIP, VIPsQLite>());
         var results = query
             .Skip(offset)
             .Take(limit)

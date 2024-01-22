@@ -12,7 +12,9 @@ public class GetVIPsQueryHandler : IRequestHandler<GetVIPsQuery, (IEnumerable<VI
     {
         _vipRepository = vipRepository;
     }
-    public async Task<(IEnumerable<VIP> Results, int Total)> Handle(GetVIPsQuery request, CancellationToken cancellationToken)
+
+    public async Task<(IEnumerable<VIP> Results, int Total)> Handle(GetVIPsQuery request,
+        CancellationToken cancellationToken)
     {
         var pagination = request.Pagination;
         var (vips, total) = await _vipRepository.Find(pagination.Limit, pagination.Offset, null);

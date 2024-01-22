@@ -15,6 +15,7 @@ public class VIPAPI
         Prenom = vip.Prenom;
         Adresse = new AdresseAPI(vip.Adresse);
     }
+
     [JsonPropertyName("nom")] public string Nom { get; set; }
 
     [JsonPropertyName("prenom")] public string Prenom { get; set; }
