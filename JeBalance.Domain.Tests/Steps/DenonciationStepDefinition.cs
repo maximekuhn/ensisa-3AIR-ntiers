@@ -197,10 +197,10 @@ public class DenonciationStepDefinition
         }
     }
 
-    [When(@"une requête pour récupérer les (.*) dénonciations à partir de la page (.*) sans réponse est faite")]
+    [When(@"une requête pour récupérer (.*) dénonciation à partir de la page (.*) sans réponse est faite")]
     public async Task WhenUneRequetePourRecupererLesDenonciationsSansReponseEstFaite(int limit, int offset)
     {
-        var pagination = (Limit: limit, Offset: offset);
+        var pagination = (Limit: limit, Offset: offset - 1);
         var query = new GetDenonciationsNonTraiteesQuery(pagination);
         var queryHandler = new GetDenonciationsNonTraiteesQueryHandler(_denonciationRepository);
         var result = await queryHandler.Handle(query, CancellationToken.None);
@@ -210,6 +210,6 @@ public class DenonciationStepDefinition
     [Then(@"toutes les dénonciations sans réponse de cette page sont retournées")]
     public void ThenToutesLesDenonciationsSansReponseSontRetournes()
     {
-        _denonciationsSansReponse.Should().NotBeNull();
+        _denonciationsSansReponse.Should().HaveCount(1);
     }
 }
