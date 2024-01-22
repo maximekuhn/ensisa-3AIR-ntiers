@@ -26,6 +26,14 @@ public class Informateur : Personne
         Adresse = adresse;
     }
 
+    public Informateur(Nom nom, Nom prenom, Adresse adresse, bool estCalomniateur) : base(0)
+    {
+        Nom = nom;
+        Prenom = prenom;
+        Adresse = adresse;
+        EstCalomniateur = estCalomniateur;
+    }
+
     public Informateur(Nom nom, Nom prenom, Adresse adresse, int id) : base(id)
     {
         Nom = nom;

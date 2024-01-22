@@ -1,5 +1,5 @@
 using JeBalance.API.Publique.Resources;
-using JeBalance.Domain.Queries;
+using JeBalance.Domain.Queries.Suspects;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

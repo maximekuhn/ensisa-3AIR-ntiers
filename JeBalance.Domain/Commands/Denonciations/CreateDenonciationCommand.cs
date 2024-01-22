@@ -1,7 +1,7 @@
 using JeBalance.Domain.Model;
 using MediatR;
 
-namespace JeBalance.Domain.Commands;
+namespace JeBalance.Domain.Commands.Denonciations;
 
 public class CreateDenonciationCommand : IRequest<Guid>
 {

@@ -1,7 +1,7 @@
 using JeBalance.API.Publique.Resources;
-using JeBalance.Domain.Commands;
+using JeBalance.Domain.Commands.Denonciations;
 using JeBalance.Domain.Model;
-using JeBalance.Domain.Queries;
+using JeBalance.Domain.Queries.Denonciations;
 using JeBalance.Domain.ValueObjects;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

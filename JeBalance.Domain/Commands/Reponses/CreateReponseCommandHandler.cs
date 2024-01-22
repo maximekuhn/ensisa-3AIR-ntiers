@@ -3,7 +3,7 @@ using JeBalance.Domain.Repositories;
 using JeBalance.Domain.Services;
 using MediatR;
 
-namespace JeBalance.Domain.Commands;
+namespace JeBalance.Domain.Commands.Reponses;
 
 public class CreateReponseCommandHandler : IRequestHandler<CreateReponseCommand, int>
 {
@@ -40,9 +40,7 @@ public class CreateReponseCommandHandler : IRequestHandler<CreateReponseCommand,
 
         var reponseId = await _reponseRepository.Create(reponse);
 
-        denonciation.ReponseId = reponseId;
-
-        await _denonciationRepository.Update(denonciationId, denonciation);
+        await _denonciationRepository.SetReponseId(denonciationId, reponseId);
         return reponseId;
     }
 }

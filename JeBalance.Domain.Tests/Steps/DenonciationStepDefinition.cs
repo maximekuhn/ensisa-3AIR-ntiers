@@ -1,5 +1,5 @@
 using FluentAssertions;
-using JeBalance.Domain.Commands;
+using JeBalance.Domain.Commands.Denonciations;
 using JeBalance.Domain.Model;
 using JeBalance.Domain.Tests.Drivers;
 using JeBalance.Domain.ValueObjects;

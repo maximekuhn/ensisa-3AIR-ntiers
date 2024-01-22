@@ -35,14 +35,37 @@ public class VIPRepositorySQLite : VIPRepository
         return vipToSave.Id;
     }
 
-    public Task<int> Update(int id, VIP T)
+    public async Task<int> Update(int id, VIP newVIP)
     {
-        throw new NotImplementedException();
+        var vipToUpdate = await _context.VIPs.FirstAsync(vip => vip.Id == id);
+        if (vipToUpdate == null)
+            throw new KeyNotFoundException("Le VIP n'a pas été trouvé");
+
+        vipToUpdate.Nom = newVIP.Nom;
+        vipToUpdate.Prenom = newVIP.Prenom;
+        vipToUpdate.Adresse = newVIP.Adresse;
+
+        await _context.SaveChangesAsync();
+        return id;
     }
 
-    public Task<bool> Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var vipToDelete = await _context.VIPs.FirstOrDefaultAsync(vip => vip.Id == id);
+
+            if (vipToDelete == null)
+                return false;
+
+            _context.Remove(vipToDelete);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     public async Task<VIP?> FindOne(Specification<VIP> specification)

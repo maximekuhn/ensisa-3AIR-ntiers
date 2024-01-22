@@ -51,4 +51,12 @@ public class DenonciationRepositoryDriver : DenonciationRepository
         Denonciations.RemoveAll(denonciation => id == denonciation.Id);
         return Task.FromResult(true);
     }
+
+    public Task<bool> SetReponseId(Guid denonciationId, int reponseId)
+    {
+        var denonciation = Denonciations.Single(denonciation => denonciationId == denonciation.Id);
+        var index = Denonciations.IndexOf(denonciation);
+        Denonciations[index].ReponseId = reponseId;
+        return Task.FromResult(true);
+    }
 }
