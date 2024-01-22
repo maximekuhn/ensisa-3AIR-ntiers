@@ -56,3 +56,9 @@ Feature: Denonciation
         And un suspect appartenant aux VIP
         When la denonciation est creee
         Then l'informateur est marqué comme calomniateur
+
+    Scenario: Récupérer les dénonciations sans réponse avec pagination
+        Given trois dénonciations créées sans réponse
+        And deux d'entre elles ont reçu une réponse
+        When une requête pour récupérer les 10 dénonciations à partir de la page 1 sans réponse est faite
+        Then toutes les dénonciations sans réponse de cette page sont retournées

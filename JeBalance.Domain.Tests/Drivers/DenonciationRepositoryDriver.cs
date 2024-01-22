@@ -54,9 +54,14 @@ public class DenonciationRepositoryDriver : DenonciationRepository
 
     public Task<bool> SetReponseId(Guid denonciationId, int reponseId)
     {
-        var denonciation = Denonciations.Single(denonciation => denonciationId == denonciation.Id);
-        var index = Denonciations.IndexOf(denonciation);
-        Denonciations[index].ReponseId = reponseId;
-        return Task.FromResult(true);
+        var denonciation = Denonciations.FirstOrDefault(d => d.Id == denonciationId);
+
+        if (denonciation != null)
+        {
+            denonciation.ReponseId = reponseId;
+            return Task.FromResult(true);
+        }
+
+        return Task.FromResult(false);
     }
 }

@@ -22,7 +22,7 @@ Feature: Reponse
         And la réponse est datée (horodatage)
         And la réponse contient une retribution nulle
 
-    Scenario: Impossible de répondre a une dénonciation qui a déjà une réponse
+    Scenario: Impossible de répondre a une dénonciation qui a déjà une réponse de type rejet
         Given une dénonciation existante avec une réponse
         When une réponse de type 'Rejet' est ajoutée à la dénonciation
         Then apparait le message d erreur 'Impossible de répondre à une dénonciation qui a déjà une réponse'
