@@ -37,7 +37,7 @@ public class ServiceBase<TSourceType>
     {
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            $"{Endpoint}"
+            $"{Endpoint}/create"
             );
         var httpContent = new StringContent(
             JsonSerializer.Serialize(data),
