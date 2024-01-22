@@ -14,7 +14,7 @@ public class VIPRepositoryDriver : VIPRepository
     public List<VIP> VIPs { get; set; }
 
     public async Task<(IEnumerable<VIP> Results, int Total)> Find(int limit, int offset,
-        Specification<VIP> specification)
+        Specification<VIP>? specification)
     {
         var vips = VIPs.Where(specification.IsSatisfiedBy).Skip(offset).Take(limit);
         return (vips, VIPs.Count);

@@ -16,7 +16,7 @@ public class DenonciationRepositorySQLite : DenonciationRepository
     }
 
     public Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset,
-        Specification<Denonciation> specification)
+        Specification<Denonciation>? specification)
     {
         var results = _context.Denonciations
             .Apply(specification.ToSQLiteExpression<Denonciation, DenonciationSQLite>())

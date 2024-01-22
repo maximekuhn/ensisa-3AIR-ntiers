@@ -16,7 +16,7 @@ public class InformateurRepositorySQLite : InformateurRepository
     }
 
     public Task<(IEnumerable<Informateur> Results, int Total)> Find(int limit, int offset,
-        Specification<Informateur> specification)
+        Specification<Informateur>? specification)
     {
         throw new NotImplementedException();
     }

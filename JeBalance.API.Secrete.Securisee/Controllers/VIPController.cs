@@ -1,5 +1,7 @@
+using JeBalance.API.Secrete.Securisee.Parameters;
 using JeBalance.API.Secrete.Securisee.Resources;
 using JeBalance.Domain.Commands.VIPs;
+using JeBalance.Domain.Queries.VIPs;
 using JeBalance.Domain.ValueObjects;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -27,10 +29,19 @@ public class VIPController : ControllerBase
         return Ok(vipId);
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    [HttpDelete("{vipId}")]
+    public async Task<IActionResult> Delete(int vipId)
     {
-        // TODO
-        return null;
+        var command = new DeleteVIPCommand(vipId);
+        await _mediator.Send(command);
+        return Ok();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetVIPs([FromQuery] FindVIPs parameters)
+    {
+        var getVIPs = new GetVIPsQuery((parameters.Limit, parameters.Offset));
+        var (vips, total) = await _mediator.Send(getVIPs);
+        return Ok(vips.Select(vip => new VIPAPI(vip)));
     }
 }

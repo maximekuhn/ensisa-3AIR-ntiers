@@ -9,7 +9,7 @@ public class ReponseRepositoryDriver : ReponseRepository
     public List<Reponse> Reponses { get; set; } = new();
 
     public Task<(IEnumerable<Reponse> Results, int Total)> Find(int limit, int offset,
-        Specification<Reponse> specification)
+        Specification<Reponse>? specification)
     {
         throw new NotImplementedException();
     }

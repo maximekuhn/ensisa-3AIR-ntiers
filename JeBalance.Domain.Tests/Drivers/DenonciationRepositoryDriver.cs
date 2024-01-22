@@ -14,7 +14,7 @@ public class DenonciationRepositoryDriver : DenonciationRepository
     public List<Denonciation> Denonciations { get; }
 
     public async Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset,
-        Specification<Denonciation> specification)
+        Specification<Denonciation>? specification)
     {
         var denonciations = Denonciations.Where(specification.IsSatisfiedBy).Skip(offset).Take(limit);
         return (denonciations, Denonciations.Count);
