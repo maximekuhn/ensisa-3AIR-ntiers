@@ -58,8 +58,8 @@ Feature: Denonciation
         Then l'informateur est marqué comme calomniateur
 
     Scenario: Récupérer les dénonciations sans réponse avec pagination
-        Given trois dénonciations créées sans réponse
-        And deux d'entre elles ont reçu une réponse
+        Given 3 dénonciations créées sans réponse
+        And 2 d'entre elles ont reçu une réponse
         When une requête pour récupérer 1 dénonciations à partir de la page 0 sans réponse est faite
-        Then toutes les dénonciations sans réponse de cette page sont retournées
-        And toutes les dénonciations ont un ReponseId null
+        Then 1 dénonciations sans réponse sont retournées
+        And 1 dénonciations ont un ReponseId null
