@@ -16,9 +16,18 @@ public class VIPRepositorySQLite : VIPRepository
     }
 
     public Task<(IEnumerable<VIP> Results, int Total)> Find(int limit, int offset,
-        Specification<VIP> specification)
+        Specification<VIP>? specification)
     {
-        throw new NotImplementedException();
+        var query = _context.VIPs.AsQueryable();
+        if (specification != null)
+            query.Apply(specification.ToSQLiteExpression<VIP, VIPsQLite>());
+        var results = query
+            .Skip(offset)
+            .Take(limit)
+            .AsEnumerable()
+            .Select(vip => vip.ToDomain());
+
+        return Task.FromResult((results, _context.VIPs.Count()));
     }
 
     public async Task<VIP> GetOne(int id)

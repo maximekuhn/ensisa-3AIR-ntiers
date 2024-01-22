@@ -14,7 +14,7 @@ public class InformateurRepositoryDriver : InformateurRepository
     public List<Informateur> Informateurs { get; set; }
 
     public async Task<(IEnumerable<Informateur> Results, int Total)> Find(int limit, int offset,
-        Specification<Informateur> specification)
+        Specification<Informateur>? specification)
     {
         var informateurs = Informateurs.Where(specification.IsSatisfiedBy).Skip(offset).Take(limit);
         return (informateurs, Informateurs.Count);
