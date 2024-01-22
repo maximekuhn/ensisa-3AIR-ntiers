@@ -23,7 +23,7 @@ public class ReponseRepositorySQLite : ReponseRepository
     }
 
     public Task<(IEnumerable<Reponse> Results, int Total)> Find(int limit, int offset,
-        Specification<Reponse> specification)
+        Specification<Reponse>? specification)
     {
         var results = _context.Reponses.Apply(specification.ToSQLiteExpression<Reponse, ReponseSQLite>()).Skip(offset)
             .Take(limit).AsEnumerable().Select(reponse => reponse.ToDomain());

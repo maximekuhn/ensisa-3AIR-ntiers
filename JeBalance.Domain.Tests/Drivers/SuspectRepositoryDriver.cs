@@ -14,7 +14,7 @@ public class SuspectRepositoryDriver : SuspectRepository
     }
 
     public async Task<(IEnumerable<Suspect> Results, int Total)> Find(int limit, int offset,
-        Specification<Suspect> specification)
+        Specification<Suspect>? specification)
     {
         var suspects = Suspects.Where(specification.IsSatisfiedBy).Skip(offset).Take(limit);
         return (suspects, Suspects.Count);

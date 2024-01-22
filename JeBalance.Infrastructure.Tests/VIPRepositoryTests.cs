@@ -21,6 +21,12 @@ public class VIPRepositoryTests : RepositoryTest
     }
 
     [Fact]
+    public async Task ShouldFindAsync()
+    {
+        // TODO
+    }
+
+    [Fact]
     public async Task ShouldGetOneAsync()
     {
         var vipId = await AddVIP();
