@@ -60,5 +60,6 @@ Feature: Denonciation
     Scenario: Récupérer les dénonciations sans réponse avec pagination
         Given trois dénonciations créées sans réponse
         And deux d'entre elles ont reçu une réponse
-        When une requête pour récupérer 1 dénonciation à partir de la page 1 sans réponse est faite
+        When une requête pour récupérer 1 dénonciations à partir de la page 0 sans réponse est faite
         Then toutes les dénonciations sans réponse de cette page sont retournées
+        And toutes les dénonciations ont un ReponseId null

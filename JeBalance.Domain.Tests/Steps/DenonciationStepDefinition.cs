@@ -197,10 +197,10 @@ public class DenonciationStepDefinition
         }
     }
 
-    [When(@"une requête pour récupérer (.*) dénonciation à partir de la page (.*) sans réponse est faite")]
-    public async Task WhenUneRequetePourRecupererLesDenonciationsSansReponseEstFaite(int limit, int offset)
+    [When(@"une requête pour récupérer (.*) dénonciations à partir de la page 0 sans réponse est faite")]
+    public async Task WhenUneRequetePourRecupererLesDenonciationsSansReponseEstFaite(int limit)
     {
-        var pagination = (Limit: limit, Offset: offset - 1);
+        var pagination = (Limit: limit, Offset: 0);
         var query = new GetDenonciationsNonTraiteesQuery(pagination);
         var queryHandler = new GetDenonciationsNonTraiteesQueryHandler(_denonciationRepository);
         var result = await queryHandler.Handle(query, CancellationToken.None);
@@ -211,5 +211,12 @@ public class DenonciationStepDefinition
     public void ThenToutesLesDenonciationsSansReponseSontRetournes()
     {
         _denonciationsSansReponse.Should().HaveCount(1);
+    }
+
+    [Then(@"toutes les dénonciations ont un ReponseId null")]
+    public void ThenToutesLesDenonciationsOntUnReponseIdNull()
+    {
+        foreach (var denonciation in _denonciationsSansReponse)
+            denonciation.ReponseId.Should().BeNull();
     }
 }
