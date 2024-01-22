@@ -1,0 +1,95 @@
+@page "/denonciation"
+@inject DenonciationService Service
+
+<h3>Créez votre dénonciation</h3>
+
+<EditForm Model="@denonciation" OnValidSubmit="FormSubmitted">
+    <!-- Type de délit -->
+    <div class="form-group">
+        <label for="typeDelit">Type de Délit</label><br />
+        <InputSelect class="form-control" id="typeDelit" @bind-Value="denonciation.TypeDelit">
+            @foreach (var delit in Enum.GetValues(typeof(TypeDelit)))
+            {
+                <option value="@delit">@delit</option>
+            }
+        </InputSelect>
+    </div>
+    <br />
+
+    <!-- Pays d'évasion -->
+    <div class="form-group">
+        <label for="paysEvasion">Pays d'évasion</label><br />
+        <InputText class="form-control" id="paysEvasion" @bind-Value="denonciation.PaysEvasion" />
+    </div>
+    <br />
+
+    <!-- Informations du suspect -->
+    <div class="form-group">
+        <label for="nomSuspect">Nom du Suspect</label><br />
+        <InputText class="form-control" id="nomSuspect" @bind-Value="denonciation.NomSuspect" />
+    </div>
+    <div class="form-group">
+        <label for="prenomSuspect">Prénom du Suspect</label><br />
+        <InputText class="form-control" id="prenomSuspect" @bind-Value="denonciation.PrenomSuspect" />
+    </div>
+    <div class="form-group">
+        <label for="numVoieSuspect">Numéro de Voie du Suspect</label><br />
+        <InputNumber class="form-control" id="numVoieSuspect" @bind-Value="denonciation.NumeroVoieSuspect" />
+    </div>
+    <div class="form-group">
+        <label for="nomVoieSuspect">Nom de Voie du Suspect</label><br />
+        <InputText class="form-control" id="nomVoieSuspect" @bind-Value="denonciation.NomVoieSuspect" />
+    </div>
+    <div class="form-group">
+        <label for="cpSuspect">Code Postal du Suspect</label><br />
+        <InputNumber class="form-control" id="cpSuspect" @bind-Value="denonciation.CodePostalSuspect" />
+    </div>
+    <div class="form-group">
+        <label for="communeSuspect">Commune du Suspect</label><br />
+        <InputText class="form-control" id="communeSuspect" @bind-Value="denonciation.NomCommuneSuspect" />
+    </div>
+    <br />
+
+    <!-- Informations de l'informateur -->
+    <div class="form-group">
+        <label for="nomInformateur">Nom de l'Informateur</label><br />
+        <InputText class="form-control" id="nomInformateur" @bind-Value="denonciation.NomInformateur" />
+    </div>
+    <div class="form-group">
+        <label for="prenomInformateur">Prénom de l'Informateur</label><br />
+        <InputText class="form-control" id="prenomInformateur" @bind-Value="denonciation.PrenomInformateur" />
+    </div>
+    <div class="form-group">
+        <label for="numVoieInformateur">Numéro de Voie de l'Informateur</label><br />
+        <InputNumber class="form-control" id="numVoieInformateur" @bind-Value="denonciation.NumeroVoieInformateur" />
+    </div>
+    <div class="form-group">
+        <label for="nomVoieInformateur">Nom de Voie de l'Informateur</label><br />
+        <InputText class="form-control" id="nomVoieInformateur" @bind-Value="denonciation.NomVoieInformateur" />
+    </div>
+    <div class="form-group">
+        <label for="cpInformateur">Code Postal de l'Informateur</label><br />
+        <InputNumber class="form-control" id="cpInformateur" @bind-Value="denonciation.CodePostalInformateur" />
+    </div>
+    <div class="form-group">
+        <label for="communeInformateur">Commune de l'Informateur</label><br />
+        <InputText class="form-control" id="communeInformateur" @bind-Value="denonciation.NomCommuneInformateur" />
+    </div>
+    <br />
+
+    <!-- Boutons -->
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+    <button @onclick="@(async () => await BlazoredModal.CancelAsync())" class="btn btn-secondary">Annuler</button>
+</EditForm>
+
+@code {
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+    
+    DenonciationAPI denonciation = new DenonciationAPI();
+
+    private async void FormSubmitted()
+    {
+        await Service.AddDenonciationAsync(denonciation);
+        await BlazoredModal.CloseAsync(ModalResult.Ok<DenonciationAPI>(denonciation));
+    }
+}
