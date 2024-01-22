@@ -21,11 +21,13 @@ public class PersonneStepDefinition
     {
         _personne = new Personne(1)
         {
-            Nom = new Nom("Doe"), Prenom = new Nom("John"),
+            Nom = new Nom("Doe"),
+            Prenom = new Nom("John"),
             Adresse = new Adresse(new NumeroVoie(10), new NomVoie("rue des Exemples"), new CodePostal(75000),
                 new NomCommune("Paris"))
         };
     }
+
 
     [When(@"une personne cree une denonciation")]
     public async Task WhenUnePersonneCreeUneDenonciation()
