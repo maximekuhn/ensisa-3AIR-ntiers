@@ -1,0 +1,10 @@
+@page "/denonciation-result/{Id}"
+
+<h3>Résultat de la Dénonciation</h3>
+
+<p>ID de la dénonciation : @Id</p>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+}

@@ -1,0 +1,36 @@
+@page "/toto"
+@inject DenonciationService Service
+
+<h3>Recherche de Dénonciation par ID</h3>
+
+<EditForm Model="@denonciationId" OnValidSubmit="FetchData">
+    <div class="form-group">
+        <label for="denonciationId">Id de la denonciation : </label>
+        <InputText class="form-control" id="denonciationId" @bind-Value="denonciationId" />
+    </div>
+    <button type="submit" class="btn btn-primary">Recherche</button>
+    <button @onclick="@(async () => await BlazoredModal.CancelAsync())" class="btn btn-secondary">Annuler</button>
+</EditForm>
+
+@if (denonciation != null)
+{
+    <p>Type de Délit : @denonciation.TypeDelit</p>
+}
+
+
+@code {
+    private Denonciation? denonciation;
+    private string denonciationId = string.Empty;
+    
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+
+
+    private async void FetchData()
+    {
+        denonciation = null; // Réinitialiser la dénonciation précédente
+
+
+        denonciation = await Service.GetDenonciationAsync(Guid.Parse(denonciationId));
+        
+    }
+}

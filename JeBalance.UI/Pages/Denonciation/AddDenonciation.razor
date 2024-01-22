@@ -1,5 +1,7 @@
 @page "/denonciation"
 @inject DenonciationService Service
+@inject NavigationManager NavigationManager
+
 
 <h3>Créez votre dénonciation</h3>
 
@@ -89,7 +91,14 @@
 
     private async void FormSubmitted()
     {
-        await Service.AddDenonciationAsync(denonciation);
-        await BlazoredModal.CloseAsync(ModalResult.Ok<DenonciationAPI>(denonciation));
+        var id = await Service.AddDenonciationAsync(denonciation);
+        if (id == null || !id.HasValue)
+        {
+            throw new InvalidOperationException("Échec de l'ajout de la dénonciation ou ID null.");
+        }
+
+        NavigationManager.NavigateTo($"/denonciation-result/{id.Value}");
+        
+        
     }
 }
