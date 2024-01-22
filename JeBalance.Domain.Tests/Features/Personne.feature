@@ -14,18 +14,18 @@
     Scenario: Ajouter une personne dans la liste des informateurs
         Given une personne
         When une personne cree une denonciation
-        Then la personne est ajoutee a la liste des informateurs
+        Then la personne informateur est ajoutee a la liste des informateurs
 
     #    Scenario: Impossible d'ajouter une personne dans la liste des informateurs
     #        Given une personne
     #        When la personne n'a pas fait de denonciation
     #        Then la personne n'est pas ajoutee dans la liste des informateurs
-    #
-    #    Scenario: Ajouter une personne dans la liste des suspects
-    #        Given une personne
-    #        When une personne a ete accusee par une denonciation
-    #        Then la personne est ajoutee dans la liste des suspects
-    #
+
+    Scenario: Ajouter une personne dans la liste des suspects
+        Given une personne
+        When une personne cree une denonciation
+        Then la personne denoncee est ajoutee dans la liste des suspects
+
     #    Scenario: Ajout d'une personne dans la liste des VIP par l'administrateur
     #        Given une personne
     #        And un administrateur
