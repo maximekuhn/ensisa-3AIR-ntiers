@@ -27,10 +27,11 @@ public class VIPController : ControllerBase
         return Ok(vipId);
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    [HttpDelete("{vipId}")]
+    public async Task<IActionResult> Delete(int vipId)
     {
-        // TODO
-        return null;
+        var command = new DeleteVIPCommand(vipId);
+        await _mediator.Send(command);
+        return Ok();
     }
 }
