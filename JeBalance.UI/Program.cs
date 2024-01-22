@@ -1,9 +1,6 @@
 using Blazored.Modal;
-using JeBalance.UI.Data;
 using JeBalance.UI.Data.Services;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
-using Microsoft.AspNetCore.Components.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 

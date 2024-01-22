@@ -6,7 +6,7 @@ namespace JeBalance.UI.Data.Services;
 public class DenonciationService : ServiceBase<DenonciationAPI>
 {
     private const string Controller = "Denonciation";
-    
+
     public DenonciationService(IHttpClientFactory clientFactory) : base(clientFactory, Controller)
     {
     }
@@ -24,6 +24,4 @@ public class DenonciationService : ServiceBase<DenonciationAPI>
         var id = await SendAddRequest(request);
         return id;
     }
-    
-    
 }
