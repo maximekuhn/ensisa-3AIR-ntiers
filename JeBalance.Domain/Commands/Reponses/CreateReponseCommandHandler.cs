@@ -40,9 +40,7 @@ public class CreateReponseCommandHandler : IRequestHandler<CreateReponseCommand,
 
         var reponseId = await _reponseRepository.Create(reponse);
 
-        denonciation.ReponseId = reponseId;
-
-        await _denonciationRepository.Update(denonciationId, denonciation);
+        await _denonciationRepository.SetReponseId(denonciationId, reponseId);
         return reponseId;
     }
 }

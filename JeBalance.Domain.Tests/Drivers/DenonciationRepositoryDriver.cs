@@ -56,14 +56,7 @@ public class DenonciationRepositoryDriver : DenonciationRepository
     {
         var denonciation = Denonciations.Single(denonciation => denonciationId == denonciation.Id);
         var index = Denonciations.IndexOf(denonciation);
-        Denonciations[index] = new Denonciation(
-            denonciationId,
-            denonciation.TypeDelit,
-            denonciation.PaysEvasion,
-            denonciation.InformateurId,
-            denonciation.SuspectId,
-            reponseId
-        );
+        Denonciations[index].ReponseId = reponseId;
         return Task.FromResult(true);
     }
 }

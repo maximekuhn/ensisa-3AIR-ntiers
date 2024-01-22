@@ -37,7 +37,7 @@ public class SuspectRepositorySQLite : SuspectRepository
 
     public async Task<int> Update(int id, Suspect newSuspect)
     {
-        var suspectToUpdate = _context.Suspects.First(suspect => suspect.Id == id);
+        var suspectToUpdate = await _context.Suspects.FirstAsync(suspect => suspect.Id == id);
         if (suspectToUpdate == null) throw new KeyNotFoundException("Le suspect n'a pas été trouvé");
 
         suspectToUpdate.Nom = newSuspect.Nom;

@@ -37,7 +37,7 @@ public class VIPRepositorySQLite : VIPRepository
 
     public async Task<int> Update(int id, VIP newVIP)
     {
-        var vipToUpdate = _context.VIPs.First(vip => vip.Id == id);
+        var vipToUpdate = await _context.VIPs.FirstAsync(vip => vip.Id == id);
         if (vipToUpdate == null)
             throw new KeyNotFoundException("Le VIP n'a pas été trouvé");
 
