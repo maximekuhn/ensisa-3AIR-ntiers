@@ -28,7 +28,7 @@ public class ServiceBase<TSourceType>
             $"{Endpoint}/{id}");
 
         request.Headers.Add("Accept", "application/json");
-        request.Headers.Add("User-Agent", "ParkNGo");
+        request.Headers.Add("User-Agent", "JeBalance");
 
         return request;
     }
@@ -47,7 +47,7 @@ public class ServiceBase<TSourceType>
         request.Content = httpContent;
         
         request.Headers.Add("Accept", "application/json");
-        request.Headers.Add("User-Agent", "ParkNGo");
+        request.Headers.Add("User-Agent", "JeBalance");
         
         return request;
     }
