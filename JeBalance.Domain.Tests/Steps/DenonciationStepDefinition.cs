@@ -1,6 +1,7 @@
 using FluentAssertions;
 using JeBalance.Domain.Commands.Denonciations;
 using JeBalance.Domain.Model;
+using JeBalance.Domain.Queries.Denonciations;
 using JeBalance.Domain.Tests.Drivers;
 using JeBalance.Domain.ValueObjects;
 using Xunit;
@@ -20,6 +21,7 @@ public class DenonciationStepDefinition
     private readonly VIPRepositoryDriver _vipRepository;
     private Denonciation _denonciation;
     private Guid _denonciationId;
+    private IEnumerable<Denonciation> _denonciationsSansReponse;
     private ApplicationException _exception;
     private Informateur _informateur;
     private string _paysEvasion;
@@ -161,5 +163,63 @@ public class DenonciationStepDefinition
     public void ThenLinformateurEstMarqueCommeCalomniateur()
     {
         _informateur.EstCalomniateur.Should().BeTrue();
+    }
+
+    [Given(@"(.*) dénonciations créées sans réponse")]
+    public async Task GivenNombreDenonciationsCreesSansReponse(int nombre)
+    {
+        for (var i = 0; i < nombre; i++)
+        {
+            var informateur = new Informateur("Informateur" + i, "Prénom",
+                createAdresse("Ville" + i, "Rue" + i, 75000 + i, i));
+            var suspect = new Suspect("Suspect" + i, "Prénom", createAdresse("Ville" + i, "Rue" + i, 75000 + i, i));
+            var typeDelit = TypeDelit.DissimulationDeRevenus;
+
+            var createDenonciationCommand = new CreateDenonciationCommand(typeDelit, null, informateur, suspect);
+            var handler = new CreateDenonciationCommandHandler(_denonciationRepository, _informateurRepository,
+                _suspectRepository, _vipRepository, _horodatageProvider, _idOpaqueProviderDriver);
+
+            await handler.Handle(createDenonciationCommand, CancellationToken.None);
+        }
+    }
+
+    [Given(@"(.*) d'entre elles ont reçu une réponse")]
+    public async Task GivenNombreDenonciationsOntRecuUneReponse(int nombre)
+    {
+        var denonciationsAvecReponse = _denonciationRepository.Denonciations.Take(nombre).ToList();
+        var reponseId = 0;
+
+        foreach (var denonciation in denonciationsAvecReponse)
+        {
+            denonciation.ReponseId = reponseId;
+            await _denonciationRepository.SetReponseId(denonciation.Id, reponseId);
+            reponseId++;
+        }
+    }
+
+    [When(@"nous récupérons (.*) dénonciations sans réponse à partir de la page (.*)")]
+    public async Task WhenUneRequetePourRecupererLesDenonciationsSansReponseEstFaite(int limit, int page)
+    {
+        var pagination = (Limit: limit, Offset: page);
+        var getDenonciationsNonTraiteesQuery = new GetDenonciationsNonTraiteesQuery(pagination);
+        var getDenonciationsNonTraiteesQueryHandler =
+            new GetDenonciationsNonTraiteesQueryHandler(_denonciationRepository);
+        var result =
+            await getDenonciationsNonTraiteesQueryHandler.Handle(getDenonciationsNonTraiteesQuery,
+                CancellationToken.None);
+        _denonciationsSansReponse = result.Results;
+    }
+
+    [Then(@"(.*) dénonciations sans réponse sont retournées")]
+    public void ThenNombreDenonciationsSansReponseSontRetournes(int nombre)
+    {
+        _denonciationsSansReponse.Should().HaveCount(nombre);
+    }
+
+
+    [Then(@"(.*) dénonciations ont un ReponseId null")]
+    public void ThenNombreDenonciationsOntUnReponseIdNull(int nombre)
+    {
+        _denonciationsSansReponse.Take(nombre).All(d => d.ReponseId == null).Should().BeTrue();
     }
 }
