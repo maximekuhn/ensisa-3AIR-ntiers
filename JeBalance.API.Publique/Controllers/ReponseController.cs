@@ -16,7 +16,7 @@ public class ReponseController : ControllerBase
     }
 
     [HttpPost("create")]
-    public async Task<IActionResult> CreateReponse([FromBody] ReponseAPI resource)
+    public async Task<IActionResult> CreateReponse([FromBody] ReponseCreateAPI resource)
     {
         // TODO : deplacer dans l'autre api
         var createReponseCommand = new CreateReponseCommand(
