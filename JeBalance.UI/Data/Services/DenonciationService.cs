@@ -3,24 +3,18 @@ using JeBalance.Domain.Model;
 
 namespace JeBalance.UI.Data.Services;
 
-public class DenonciationService : ServiceBase<DenonciationAPI>
+public class DenonciationService : ServiceBase<DenonciationAPI, Guid>
 {
+    private const string BaseUrl = "https://localhost:7274/api/";
     private const string Controller = "Denonciation";
 
-    public DenonciationService(IHttpClientFactory clientFactory) : base(clientFactory, Controller)
+    public DenonciationService(IHttpClientFactory clientFactory) : base(clientFactory)
     {
-    }
-
-    public async Task<Denonciation?> GetDenonciationAsync(Guid id)
-    {
-        var request = await MakeGetOneRequest(id);
-        var denonciation = await SendGetOneRequestDenonciation(request);
-        return denonciation;
     }
 
     public async Task<Guid?> AddDenonciationAsync(DenonciationAPI denonciation)
     {
-        var request = await MakeAddRequest(denonciation, "/create");
+        var request = await MakeAddRequest($"{BaseUrl}{Controller}/create", denonciation);
         var id = await SendAddRequest(request);
         return id;
     }

@@ -10,7 +10,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<ProtectedSessionStorage>();
-builder.Services.AddSingleton<DenonciationService>();
+builder.Services.AddScoped<DenonciationService>();
+builder.Services.AddScoped<DenonciationGetService>();
 
 var app = builder.Build();
 
