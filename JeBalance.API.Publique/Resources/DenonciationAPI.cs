@@ -6,7 +6,11 @@ public class DenonciationAPI
 {
     public DenonciationAPI()
     {
+        Informateur = new InformateurAPI();
+        Suspect = new SuspectAPI();
     }
+    
+    
 
     public DenonciationAPI(Denonciation denonciation, Informateur informateur, Suspect suspect)
     {

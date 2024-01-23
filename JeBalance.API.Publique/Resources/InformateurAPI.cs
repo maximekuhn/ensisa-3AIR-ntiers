@@ -7,6 +7,7 @@ public class InformateurAPI
 {
     public InformateurAPI()
     {
+        Adresse = new AdresseAPI();
     }
 
     public InformateurAPI(Informateur source)

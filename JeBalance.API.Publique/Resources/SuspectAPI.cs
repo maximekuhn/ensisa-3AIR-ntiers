@@ -7,6 +7,7 @@ public class SuspectAPI
 {
     public SuspectAPI()
     {
+        Adresse = new AdresseAPI();
     }
 
     public SuspectAPI(Suspect source)
