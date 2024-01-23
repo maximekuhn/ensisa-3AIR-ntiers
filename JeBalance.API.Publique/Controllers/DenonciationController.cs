@@ -52,7 +52,7 @@ public class DenonciationController : ControllerBase
         Reponse reponse = null;
         if (denonciation.ReponseId != null)
         {
-            var getReponseByIdQuery = new GetReponseByIdQuery((int)denonciation.ReponseId);
+            var getReponseByIdQuery = new GetReponseByIdQuery(denonciation.ReponseId.Value);
             reponse = await _mediator.Send(getReponseByIdQuery);
         }
     
