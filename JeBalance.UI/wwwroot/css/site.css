@@ -1,22 +1,14 @@
+/*========================================================================
+                         Default Font Configuration
+========================================================================*/
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
+/*========================================================================
+                         Body Configuration
+========================================================================*/
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: #f0f0f0;
-}
-
-h1:focus {
-    outline: none;
-}
-
-a, .btn-link {
-    color: #0071c1;
-}
-
-.btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
 }
 
 .content {
@@ -36,6 +28,190 @@ a, .btn-link {
     color: red;
 }
 
+/*========================================================================
+                         Titles
+========================================================================*/
+h2 {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #D428BA;
+}
+
+h3 {
+    color: white;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#titleLogo {
+    font-family: 'Pacifico', cursive;
+    font-size: 25px;
+    color: white;
+    margin-left: auto;
+    margin-right: 10px;
+    margin-top: 0;
+}
+
+#bleu {
+    color: #478CC6;
+}
+
+#gris {
+    color: #AEBAC4;
+}
+
+/*========================================================================
+                         NavBar Styling
+========================================================================*/
+.active-green {
+    background-color: #04AA6D;
+}
+
+.ul-navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 50px;
+    overflow-y: auto;
+    background-color: #333;
+    display: flex;
+}
+
+li {
+    border-right: 1px solid #bbb;
+    float: left;
+}
+
+li:last-child {
+    border-right: none;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    padding: 13px;
+    min-width: 140px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+#home-link, #create-link, #edit-link {
+    min-width: 80px;
+    height: 100%;
+}
+
+#home-link i {
+    font-size: 20px;
+    transition: transform 0.5s;
+}
+
+#home-link:hover i {
+    transform: scale(1.2);
+}
+
+#logo {
+    width: 50px;
+    height: 50px;
+}
+
+/*========================================================================
+                         Form styling
+========================================================================*/
+form {
+    background-color: #4a4a4a;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px auto;
+    width: fit-content;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.section {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.inter {
+    margin-bottom: 60px;
+}
+
+label {
+    color: #ffffff;
+    text-align: left;
+    display: block;
+}
+
+input, select {
+    background-color: #E2E5E7;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 20px;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+}
+
+input::placeholder {
+    color: #888888;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 0 10px;
+}
+
+/*======================================================================
+                          Button styling
+=======================================================================*/
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+}
+
+button[type="button"] {
+    background-color: #f44336;
+    color: white;
+}
+
+.button-container {
+    text-align: center;
+}
+
+button:hover {
+    background-color: #3680c1;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+button:active {
+    background-color: #1a4f8b;
+    color: #ffffff;
+    transform: translateY(2px);
+}
+
+/*========================================================================
+                         ERROR Messages
+========================================================================*/
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;
@@ -65,116 +241,16 @@ a, .btn-link {
     content: "An error has occurred."
 }
 
-form {
-    background-color: #4a4a4a;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px auto;
-    width: auto;
-    max-width: 600px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-
-.section {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    color: #ffffff;
-    text-align: left;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 400px;
-}
-
-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-
-button[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-}
-
-button[type="button"] {
-    background-color: #f44336;
-    color: white;
-}
-
-.navbar {
-    background-color: #333333;
-    color: white;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navbar a {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-}
-
+/*========================================================================
+                         Footer styling
+========================================================================*/
 footer {
-    background-color: #333333;
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
     color: white;
-    text-align: center;
-    padding: 15px 0;
-    margin-top: 2cm;
+    margin-top: 15px;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
-
-input, select {
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
-    padding: 10px;
-    width: 100%;
-    max-width: 400px;
-    margin: auto;
-    display: block;
-}
-
-input::placeholder {
-    color: #888888;
-}
-
-h3 {
-    text-align: center;
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    color: #D428BA;
-}
-
-.art-degrade h3 {
-    background: linear-gradient(to right, #36ecde, #000);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.button-container {
-    text-align: center;
-}
-
-button:hover {
-    background-color: #3680c1;
-    color: #ffffff;
-    cursor: pointer;
-}
-
-button:active {
-    background-color: #1a4f8b;
-    color: #ffffff;
-    transform: translateY(2px);
-}
-
-
-
-
