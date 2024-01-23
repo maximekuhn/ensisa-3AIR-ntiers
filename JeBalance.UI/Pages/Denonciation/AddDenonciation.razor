@@ -3,83 +3,115 @@
 @inject NavigationManager NavigationManager
 
 <div class="navbar">
-    <a href="/">Accueil</a>
+    <ul class="ul-navbar">
+        <li>
+            <a id="home-link" class="active-green" href="index">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+        <li>
+            <a id="create-link" href="create">DENONCER</a>
+        </li>
+        <li>
+            <a id="edit-link" href="consult">CONSULTER</a>
+        </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
+    </ul>
 </div>
 
-<h3>Créez votre dénonciation</h3>
+<h2>Créez votre dénonciation</h2>
 
 <EditForm Model="@denonciation" OnValidSubmit="FormSubmitted">
-    <div class="section">
-        <!-- Type de délit -->
-        <div class="form-group">
-            <label for="typeDelit">Type de Délit</label>
-            <InputSelect class="form-control" id="typeDelit" @bind-Value="denonciation.TypeDelit">
-                @foreach (var delit in Enum.GetValues(typeof(TypeDelit)))
-                {
-                    <option value="@delit">@delit</option>
-                }
-            </InputSelect>
-        </div>
+    <div class="inter">
+        <h3>Renseignements sur le délit</h3>
+        <div class="section">
+            <!-- Type de délit -->
+            <div class="form-group">
+                <label for="typeDelit">Type de Délit</label>
+                <InputSelect class="form-control" id="typeDelit" @bind-Value="denonciation.TypeDelit">
+                    @foreach (var delit in Enum.GetValues(typeof(TypeDelit)))
+                    {
+                        <option value="@delit">@delit</option>
+                    }
+                </InputSelect>
+            </div>
 
-        <!-- Pays d'évasion -->
-        <div class="form-group">
-            <label for="paysEvasion">Pays d'évasion</label>
-            <InputText class="form-control" id="paysEvasion" @bind-Value="denonciation.PaysEvasion" placeholder="Exemple : Mali"/>
+            <!-- Pays d'évasion -->
+            <div class="form-group">
+                <label for="paysEvasion">Pays d'évasion</label>
+                <InputText class="form-control" id="paysEvasion" @bind-Value="denonciation.PaysEvasion" placeholder="Exemple : Mali"/>
+            </div>
         </div>
     </div>
-
-    <div class="section">
-        <!-- Informations du suspect -->
-        <div class="form-group">
-            <label for="nomSuspect">Nom du Suspect</label>
-            <InputText class="form-control" id="nomSuspect" @bind-Value="denonciation.NomSuspect" placeholder="Exemple : Jackson"/>
+    <hr>
+    <div class="inter">
+        <h3>Renseignements sur le suspect</h3>
+        <div class="section">
+            <!-- Informations du suspect -->
+            <div class="form-group">
+                <label for="nomSuspect">Nom du Suspect</label>
+                <InputText class="form-control" id="nomSuspect" @bind-Value="denonciation.NomSuspect" placeholder="Exemple : Jackson"/>
+            </div>
+            <div class="form-group">
+                <label for="prenomSuspect">Prénom du Suspect</label>
+                <InputText class="form-control" id="prenomSuspect" @bind-Value="denonciation.PrenomSuspect" placeholder="Exemple : Michael"/>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="prenomSuspect">Prénom du Suspect</label>
-            <InputText class="form-control" id="prenomSuspect" @bind-Value="denonciation.PrenomSuspect" placeholder="Exemple : Michael"/>
+        <div class="section">
+            <div class="form-group">
+                <label for="numVoieSuspect">Numéro de Voie du Suspect</label>
+                <InputNumber class="form-control" id="numVoieSuspect" @bind-Value="denonciation.NumeroVoieSuspect"/>
+            </div>
+            <div class="form-group">
+                <label for="nomVoieSuspect">Nom de Voie du Suspect</label>
+                <InputText class="form-control" id="nomVoieSuspect" @bind-Value="denonciation.NomVoieSuspect" placeholder="Exemple : Avenue de l'Europe"/>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="numVoieSuspect">Numéro de Voie du Suspect</label>
-            <InputNumber class="form-control" id="numVoieSuspect" @bind-Value="denonciation.NumeroVoieSuspect"/>
-        </div>
-        <div class="form-group">
-            <label for="nomVoieSuspect">Nom de Voie du Suspect</label>
-            <InputText class="form-control" id="nomVoieSuspect" @bind-Value="denonciation.NomVoieSuspect" placeholder="Exemple : Avenue de l'Europe"/>
-        </div>
-        <div class="form-group">
-            <label for="cpSuspect">Code Postal du Suspect</label>
-            <InputNumber class="form-control" id="cpSuspect" @bind-Value="denonciation.CodePostalSuspect" placeholder="Exemple : 67000"/>
-        </div>
-        <div class="form-group">
-            <label for="communeSuspect">Commune du Suspect</label>
-            <InputText class="form-control" id="communeSuspect" @bind-Value="denonciation.NomCommuneSuspect" placeholder="Exemple : Strasbourg"/>
+        <div class="section">
+            <div class="form-group">
+                <label for="cpSuspect">Code Postal du Suspect</label>
+                <InputNumber class="form-control" id="cpSuspect" @bind-Value="denonciation.CodePostalSuspect" placeholder="Exemple : 67000"/>
+            </div>
+            <div class="form-group">
+                <label for="communeSuspect">Commune du Suspect</label>
+                <InputText class="form-control" id="communeSuspect" @bind-Value="denonciation.NomCommuneSuspect" placeholder="Exemple : Strasbourg"/>
+            </div>
         </div>
     </div>
-    <div class="section">
-        <!-- Informations de l'informateur -->
-        <div class="form-group">
-            <label for="nomInformateur">Nom de l'Informateur</label>
-            <InputText class="form-control" id="nomInformateur" @bind-Value="denonciation.NomInformateur" placeholder="Exemple : Deschamps"/>
+    <hr>
+    <div class="inter">
+        <h3>Renseignements sur l'informateur</h3>
+        <div class="section">
+            <!-- Informations de l'informateur -->
+            <div class="form-group">
+                <label for="nomInformateur">Nom de l'Informateur</label>
+                <InputText class="form-control" id="nomInformateur" @bind-Value="denonciation.NomInformateur" placeholder="Exemple : Deschamps"/>
+            </div>
+            <div class="form-group">
+                <label for="prenomInformateur">Prénom de l'Informateur</label>
+                <InputText class="form-control" id="prenomInformateur" @bind-Value="denonciation.PrenomInformateur" placeholder="Exemple : Didier"/>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="prenomInformateur">Prénom de l'Informateur</label>
-            <InputText class="form-control" id="prenomInformateur" @bind-Value="denonciation.PrenomInformateur" placeholder="Exemple : Didier"/>
+        <div class="section">
+            <div class="form-group">
+                <label for="numVoieInformateur">Numéro de Voie de l'Informateur</label>
+                <InputNumber class="form-control" id="numVoieInformateur" @bind-Value="denonciation.NumeroVoieInformateur"/>
+            </div>
+            <div class="form-group">
+                <label for="nomVoieInformateur">Nom de Voie de l'Informateur</label>
+                <InputText class="form-control" id="nomVoieInformateur" @bind-Value="denonciation.NomVoieInformateur" placeholder="Exemple : Rue du Foot"/>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="numVoieInformateur">Numéro de Voie de l'Informateur</label>
-            <InputNumber class="form-control" id="numVoieInformateur" @bind-Value="denonciation.NumeroVoieInformateur"/>
-        </div>
-        <div class="form-group">
-            <label for="nomVoieInformateur">Nom de Voie de l'Informateur</label>
-            <InputText class="form-control" id="nomVoieInformateur" @bind-Value="denonciation.NomVoieInformateur" placeholder="Exemple : Rue du Foot"/>
-        </div>
-        <div class="form-group">
-            <label for="cpInformateur">Code Postal de l'Informateur</label>
-            <InputNumber class="form-control" id="cpInformateur" @bind-Value="denonciation.CodePostalInformateur" placeholder="Exemple : 68000"/>
-        </div>
-        <div class="form-group">
-            <label for="communeInformateur">Commune de l'Informateur</label>
-            <InputText class="form-control" id="communeInformateur" @bind-Value="denonciation.NomCommuneInformateur" placeholder="Exemple : Strasbourg"/>
+        <div class="section">
+            <div class="form-group">
+                <label for="cpInformateur">Code Postal de l'Informateur</label>
+                <InputNumber class="form-control" id="cpInformateur" @bind-Value="denonciation.CodePostalInformateur" placeholder="Exemple : 68000"/>
+            </div>
+            <div class="form-group">
+                <label for="communeInformateur">Commune de l'Informateur</label>
+                <InputText class="form-control" id="communeInformateur" @bind-Value="denonciation.NomCommuneInformateur" placeholder="Exemple : Strasbourg"/>
+            </div>
         </div>
     </div>
 
