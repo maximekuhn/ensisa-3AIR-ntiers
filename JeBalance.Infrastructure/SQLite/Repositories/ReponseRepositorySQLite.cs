@@ -2,6 +2,7 @@ using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
 using JeBalance.Domain.Repositories;
 using JeBalance.Infrastructure.SQLite.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace JeBalance.Infrastructure.SQLite.Repositories;
 
@@ -33,10 +34,10 @@ public class ReponseRepositorySQLite : ReponseRepository
 
     public async Task<Reponse> GetOne(int id)
     {
-        var reponse = await _context.Reponses.FindAsync(id);
+        var reponse = await _context.Reponses.FirstOrDefaultAsync(reponse => id.Equals(reponse.Id));
         if (reponse == null) throw new KeyNotFoundException("Cette réponse n'existe pas");
 
-        return reponse;
+        return reponse.ToDomain();
     }
 
     public Task<int> Update(int id, Reponse reponse)
