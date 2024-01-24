@@ -192,6 +192,18 @@ button {
     margin-right: 10px;
 }
 
+.button-style-red {
+    background-color: #f44336; /* Red */
+    border: none;
+    color: white;
+    padding: 10px 13px;
+    margin-top: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
 button[type="submit"] {
     background-color: #4CAF50;
     color: white;
@@ -216,6 +228,64 @@ button:active {
     background-color: #1a4f8b;
     color: #ffffff;
     transform: translateY(2px);
+}
+
+/*========================================================================
+                         List tab styling
+========================================================================*/
+.tableau-style {
+    border-collapse: collapse;
+    min-width: 400px;
+    width: auto;
+    /* box-shadow: 0, 5px, 50px, rgba(0, 0, 0, 0.15); */
+    cursor: pointer;
+    margin: 100px auto;
+    border: 2px solid #333;
+}
+
+thead tr {
+    background-color: #333;
+    color: white;
+    text-align: left;
+}
+
+th, td {
+    padding: 15px 20px;
+}
+
+tbody tr, td, th {
+    border: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+    background-color: white;
+}
+
+.form-inline {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.netstat {
+    font-weight: bold;
+}
+
+.tables-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.table-container {
+    width: 45%; /* ajustez cette valeur en fonction de vos besoins */
+}
+
+.table-container:first-child {
+    border-right: 2px solid #dadde1;
+    padding-right: 20px; /* ajouter un espace à droite du tableau */
+}
+
+.table-container:last-child {
+    padding-left: 20px; /* ajouter un espace à gauche du tableau */
 }
 
 /*========================================================================

@@ -1,3 +1,48 @@
+@page "/get-all-vip"
+@using JeBalance.UI.Data.Services.SecreteAPI
+@inject VIPServices Service
+
+<h2>Liste de tous les VIP</h2>
+
+@if (vips == null)
+{
+    <p>
+        <em>Chargement...</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Adresse</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var vip in vips)
+        {
+            <tr>
+                <td>@vip.Nom</td>
+                <td>@vip.Prenom</td>
+                <td>@vip.Adresse.NumeroVoie @vip.Adresse.NomVoie , @vip.Adresse.NomCommune @vip.Adresse.CodePostal</td>
+                <td>
+                    <button class="button-style-red">Supprimer</button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
 @code {
+    private VIPAPI[] vips;
+
+    protected override async Task OnInitializedAsync()
+    {
+        vips = await Service.GetVIPsAsync(50, 0); // Récupère les 50 premiers VIP
+    }
 
 }
