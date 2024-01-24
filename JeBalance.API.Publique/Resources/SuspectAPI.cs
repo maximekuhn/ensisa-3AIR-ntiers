@@ -5,6 +5,11 @@ namespace JeBalance.API.Publique.Resources;
 
 public class SuspectAPI
 {
+    public SuspectAPI()
+    {
+        Adresse = new AdresseAPI();
+    }
+
     public SuspectAPI(Suspect source)
     {
         Nom = source.Nom;

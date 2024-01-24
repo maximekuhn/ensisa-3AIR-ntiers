@@ -2,21 +2,20 @@ using JeBalance.Domain.Model;
 
 namespace JeBalance.API.Publique.Resources;
 
-public class DenonciationAPI
+public class DenonciationGetAPI
 {
-    public DenonciationAPI()
+    public DenonciationGetAPI()
     {
-        Informateur = new InformateurAPI();
-        Suspect = new SuspectAPI();
     }
 
-
-    public DenonciationAPI(Denonciation denonciation, Informateur informateur, Suspect suspect)
+    public DenonciationGetAPI(Denonciation denonciation, Informateur informateur, Suspect suspect, Reponse? reponse)
     {
         TypeDelit = denonciation.TypeDelit;
         PaysEvasion = denonciation.PaysEvasion;
         Informateur = new InformateurAPI(informateur);
         Suspect = new SuspectAPI(suspect);
+        if (reponse != null)
+            Reponse = new ReponseAPI(reponse);
     }
 
     // Informations de la dénonciation
@@ -28,4 +27,7 @@ public class DenonciationAPI
 
     // Informations à propos du suspect
     public SuspectAPI Suspect { get; set; }
+
+    // Information à propos de la reponse
+    public ReponseAPI Reponse { get; set; }
 }

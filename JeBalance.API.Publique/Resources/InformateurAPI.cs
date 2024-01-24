@@ -5,6 +5,11 @@ namespace JeBalance.API.Publique.Resources;
 
 public class InformateurAPI
 {
+    public InformateurAPI()
+    {
+        Adresse = new AdresseAPI();
+    }
+
     public InformateurAPI(Informateur source)
     {
         Nom = source.Nom;

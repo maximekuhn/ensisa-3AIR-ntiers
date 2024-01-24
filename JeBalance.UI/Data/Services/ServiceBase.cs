@@ -1,31 +1,20 @@
 using System.Text;
 using System.Text.Json;
-using JeBalance.Domain.Model;
 
 namespace JeBalance.UI.Data.Services;
 
-public class ServiceBase<TSourceType>
+public class ServiceBase<TSourceType, TId>
 {
-    private const string BaseURL = "https://localhost:7274/api/";
     private readonly IHttpClientFactory _clientFactory;
-    private readonly string Controller;
 
-    public ServiceBase(
-        IHttpClientFactory clientFactory,
-        string controller
-    )
+    public ServiceBase(IHttpClientFactory clientFactory)
     {
         _clientFactory = clientFactory;
-        Controller = controller;
     }
 
-    private string Endpoint => $"{BaseURL}{Controller}";
-
-    public async Task<HttpRequestMessage> MakeGetOneRequest(Guid id)
+    public async Task<HttpRequestMessage> MakeGetOneRequest(string url)
     {
-        var request = new HttpRequestMessage(
-            HttpMethod.Get,
-            $"{Endpoint}?denonciationId={id}");
+        var request = new HttpRequestMessage(HttpMethod.Get, url);
 
         request.Headers.Add("Accept", "application/json");
         request.Headers.Add("User-Agent", "JeBalance");
@@ -33,12 +22,9 @@ public class ServiceBase<TSourceType>
         return request;
     }
 
-    public async Task<HttpRequestMessage> MakeAddRequest(TSourceType data, string route)
+    public async Task<HttpRequestMessage> MakeAddRequest(string url, TSourceType data)
     {
-        var request = new HttpRequestMessage(
-            HttpMethod.Post,
-            $"{Endpoint}" + route
-        );
+        var request = new HttpRequestMessage(HttpMethod.Post, url);
         var httpContent = new StringContent(
             JsonSerializer.Serialize(data),
             Encoding.UTF8,
@@ -64,19 +50,7 @@ public class ServiceBase<TSourceType>
         return data;
     }
 
-    public async Task<Guid?> SendAddRequest(HttpRequestMessage request)
-    {
-        var client = _clientFactory.CreateClient();
-
-        var response = await client.SendAsync(request);
-        if (!response.IsSuccessStatusCode) return null;
-
-        using var responseStream = await response.Content.ReadAsStreamAsync();
-        var id = await JsonSerializer.DeserializeAsync<Guid>(responseStream);
-        return id;
-    }
-
-    public async Task<Denonciation> SendGetOneRequestDenonciation(HttpRequestMessage request)
+    public async Task<TId?> SendAddRequest(HttpRequestMessage request)
     {
         var client = _clientFactory.CreateClient();
 
@@ -84,7 +58,7 @@ public class ServiceBase<TSourceType>
         if (!response.IsSuccessStatusCode) return default;
 
         using var responseStream = await response.Content.ReadAsStreamAsync();
-        var data = await JsonSerializer.DeserializeAsync<Denonciation>(responseStream);
-        return data;
+        var id = await JsonSerializer.DeserializeAsync<TId>(responseStream);
+        return id;
     }
 }
