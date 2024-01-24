@@ -7,8 +7,8 @@ namespace JeBalance.UI.Authentification;
 public class CustomAuthenticationStateProvider : AuthenticationStateProvider
 {
     private const string SessionKey = "UserSession";
-    private readonly ProtectedSessionStorage _sessionStorage;
     private readonly ClaimsPrincipal _anonymous = new(new ClaimsIdentity());
+    private readonly ProtectedSessionStorage _sessionStorage;
 
     public CustomAuthenticationStateProvider(ProtectedSessionStorage sessionStorage)
     {

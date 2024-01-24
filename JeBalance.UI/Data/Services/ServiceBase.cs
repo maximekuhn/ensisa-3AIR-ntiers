@@ -8,8 +8,8 @@ namespace JeBalance.UI.Data.Services;
 
 public class ServiceBase<TSourceType, TId>
 {
-    private readonly IHttpClientFactory _clientFactory;
     private readonly CustomAuthenticationStateProvider? _casp;
+    private readonly IHttpClientFactory _clientFactory;
 
     public ServiceBase(IHttpClientFactory clientFactory, CustomAuthenticationStateProvider? casp)
     {
