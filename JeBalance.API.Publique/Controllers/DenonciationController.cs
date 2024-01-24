@@ -1,8 +1,10 @@
 using JeBalance.API.Publique.Resources;
-using JeBalance.Domain.Commands;
+using JeBalance.Domain.Commands.Denonciations;
 using JeBalance.Domain.Model;
-using JeBalance.Domain.Queries;
-using JeBalance.Domain.ValueObjects;
+using JeBalance.Domain.Queries.Denonciations;
+using JeBalance.Domain.Queries.Informateurs;
+using JeBalance.Domain.Queries.Reponses;
+using JeBalance.Domain.Queries.Suspects;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,12 +24,9 @@ public class DenonciationController : ControllerBase
     [HttpPost("create")]
     public async Task<IActionResult> CreateDenonciation([FromBody] DenonciationAPI resource)
     {
-        var suspect = new Suspect(resource.NomSuspect, resource.PrenomSuspect,
-            new Adresse(new NumeroVoie(resource.NumeroVoieSuspect), new NomVoie(resource.NomVoieSuspect),
-                new CodePostal(resource.CodePostalSuspect), new NomCommune(resource.NomCommuneSuspect)), 0);
-        var informateur = new Informateur(resource.NomInformateur, resource.PrenomInformateur,
-            new Adresse(new NumeroVoie(resource.NumeroVoieInformateur), new NomVoie(resource.NomVoieInformateur),
-                new CodePostal(resource.CodePostalInformateur), new NomCommune(resource.NomCommuneInformateur)), 0);
+        var suspect = new Suspect(resource.Suspect.Nom, resource.Suspect.Prenom, resource.Suspect.Adresse.ToAdresse());
+        var informateur = new Informateur(resource.Informateur.Nom, resource.Informateur.Prenom,
+            resource.Informateur.Adresse.ToAdresse());
         var createDenonciationCommand = new CreateDenonciationCommand(
             resource.TypeDelit,
             resource.PaysEvasion,
@@ -43,6 +42,20 @@ public class DenonciationController : ControllerBase
     {
         var getDenonciationByIdQuery = new GetDenonciationByIdQuery(denonciationId);
         var denonciation = await _mediator.Send(getDenonciationByIdQuery);
-        return Ok(denonciation);
+
+        var getInformateurByIdQuery = new GetInformateurByIdQuery(denonciation.InformateurId);
+        var informateur = await _mediator.Send(getInformateurByIdQuery);
+
+        var getSuspectByIdQuery = new GetSuspectByIdQuery(denonciation.SuspectId);
+        var suspect = await _mediator.Send(getSuspectByIdQuery);
+
+        Reponse reponse = null;
+        if (denonciation.ReponseId != null)
+        {
+            var getReponseByIdQuery = new GetReponseByIdQuery(denonciation.ReponseId.Value);
+            reponse = await _mediator.Send(getReponseByIdQuery);
+        }
+
+        return Ok(new DenonciationGetAPI(denonciation, informateur, suspect, reponse));
     }
 }

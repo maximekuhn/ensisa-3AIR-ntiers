@@ -21,6 +21,12 @@ public class VIPRepositoryTests : RepositoryTest
     }
 
     [Fact]
+    public async Task ShouldFindAsync()
+    {
+        // TODO
+    }
+
+    [Fact]
     public async Task ShouldGetOneAsync()
     {
         var vipId = await AddVIP();
@@ -38,6 +44,30 @@ public class VIPRepositoryTests : RepositoryTest
         Assert.Equal(_nom, lastVIP.Nom);
         Assert.Equal(_prenom, lastVIP.Prenom);
         Assert.Equal(_adresse, lastVIP.Adresse);
+    }
+
+    [Fact]
+    public async Task ShouldUpdateAsync()
+    {
+        var id = await AddVIP();
+        var newNom = "Updated Nom";
+        var newPrenom = "Updated Prenom";
+        var newAdresse = new Adresse(new NumeroVoie(20), new NomVoie("Updated nom de voie"),
+            new CodePostal(68700), new NomCommune("Updated commune"));
+        var updatedVIP = new VIP(newNom, newPrenom, newAdresse);
+        await _repository.Update(id, updatedVIP);
+        var vip = Context.VIPs.Single(vip => vip.Id == id);
+        Assert.Equal(newNom, vip.Nom);
+        Assert.Equal(newPrenom, vip.Prenom);
+        Assert.Equal(newAdresse, vip.Adresse);
+    }
+
+    [Fact]
+    public async Task ShouldDeleteAsync()
+    {
+        var id = await AddVIP();
+        var result = await _repository.Delete(id);
+        Assert.True(result);
     }
 
     [Fact]

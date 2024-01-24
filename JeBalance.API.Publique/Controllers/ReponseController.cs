@@ -1,6 +1,6 @@
 using JeBalance.API.Publique.Resources;
-using JeBalance.Domain.Commands;
-using JeBalance.Domain.Queries;
+using JeBalance.Domain.Commands.Reponses;
+using JeBalance.Domain.Queries.Reponses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,8 +16,9 @@ public class ReponseController : ControllerBase
     }
 
     [HttpPost("create")]
-    public async Task<IActionResult> CreateReponse([FromBody] ReponseAPI resource)
+    public async Task<IActionResult> CreateReponse([FromBody] ReponseCreateAPI resource)
     {
+        // TODO : deplacer dans l'autre api
         var createReponseCommand = new CreateReponseCommand(
             resource.TypeReponse,
             resource.Retribution,
@@ -32,6 +33,8 @@ public class ReponseController : ControllerBase
     {
         var getReponseByIdQuery = new GetReponseByIdQuery(reponseId);
         var reponse = await _mediator.Send(getReponseByIdQuery);
+        Console.WriteLine("La reponse est : " + reponse.TypeReponse);
+        Console.WriteLine("La reponse est : " + reponse.Retribution);
         return Ok(new ReponseAPI(reponse));
     }
 }

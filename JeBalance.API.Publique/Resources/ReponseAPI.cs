@@ -13,10 +13,11 @@ public class ReponseAPI
     {
         TypeReponse = source.TypeReponse;
         Retribution = source.Retribution;
+        Horodatage = source.Horodatage;
     }
 
     //Informations de la réponse
     [JsonPropertyName("typeReponse")] public TypeReponse TypeReponse { get; set; }
     [JsonPropertyName("retribution")] public double? Retribution { get; set; }
-    [JsonPropertyName("denonciationId")] public Guid DenonciationId { get; set; }
+    [JsonPropertyName("horodatage")] public DateTime Horodatage { get; set; }
 }

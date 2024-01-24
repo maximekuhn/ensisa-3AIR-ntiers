@@ -1,7 +1,7 @@
 using JeBalance.API.Interne.Securisee.Authentication;
 using JeBalance.API.Interne.Securisee.Parameters;
 using JeBalance.API.Interne.Securisee.Resources;
-using JeBalance.Domain.Queries;
+using JeBalance.Domain.Queries.Denonciations;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

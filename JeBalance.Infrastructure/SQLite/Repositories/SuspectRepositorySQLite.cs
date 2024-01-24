@@ -16,7 +16,7 @@ public class SuspectRepositorySQLite : SuspectRepository
     }
 
     public Task<(IEnumerable<Suspect> Results, int Total)> Find(int limit, int offset,
-        Specification<Suspect> specification)
+        Specification<Suspect>? specification)
     {
         throw new NotImplementedException();
     }
@@ -35,26 +35,36 @@ public class SuspectRepositorySQLite : SuspectRepository
         return suspectToSave.Id;
     }
 
-    public async Task<int> Update(int id, Suspect suspect)
+    public async Task<int> Update(int id, Suspect newSuspect)
     {
-        var suspectToUpdate = await _context.Suspects.FindAsync(id);
-        if (suspectToUpdate == null) throw new KeyNotFoundException("Le suspect n'existe pas");
+        var suspectToUpdate = await _context.Suspects.FirstAsync(suspect => suspect.Id == id);
+        if (suspectToUpdate == null) throw new KeyNotFoundException("Le suspect n'a pas été trouvé");
 
-        _context.Suspects.Update(suspectToUpdate);
+        suspectToUpdate.Nom = newSuspect.Nom;
+        suspectToUpdate.Prenom = newSuspect.Prenom;
+        suspectToUpdate.Adresse = newSuspect.Adresse;
+
         await _context.SaveChangesAsync();
-
-        return suspectToUpdate.Id;
+        return id;
     }
 
     public async Task<bool> Delete(int id)
     {
-        var suspect = await _context.Suspects.FindAsync(id);
-        if (suspect == null) return false;
+        try
+        {
+            var suspectToDelete = await _context.Suspects.FirstOrDefaultAsync(suspect => suspect.Id == id);
 
-        _context.Suspects.Remove(suspect);
-        await _context.SaveChangesAsync();
+            if (suspectToDelete == null)
+                return false;
 
-        return true;
+            _context.Remove(suspectToDelete);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     public async Task<Suspect?> FindOne(Specification<Suspect> specification)

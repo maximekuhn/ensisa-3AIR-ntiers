@@ -14,7 +14,7 @@ public class DenonciationRepositoryDriver : DenonciationRepository
     public List<Denonciation> Denonciations { get; }
 
     public async Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset,
-        Specification<Denonciation> specification)
+        Specification<Denonciation>? specification)
     {
         var denonciations = Denonciations.Where(specification.IsSatisfiedBy).Skip(offset).Take(limit);
         return (denonciations, Denonciations.Count);
@@ -50,5 +50,18 @@ public class DenonciationRepositoryDriver : DenonciationRepository
     {
         Denonciations.RemoveAll(denonciation => id == denonciation.Id);
         return Task.FromResult(true);
+    }
+
+    public Task<bool> SetReponseId(Guid denonciationId, int reponseId)
+    {
+        var denonciation = Denonciations.FirstOrDefault(d => d.Id == denonciationId);
+
+        if (denonciation != null)
+        {
+            denonciation.ReponseId = reponseId;
+            return Task.FromResult(true);
+        }
+
+        return Task.FromResult(false);
     }
 }

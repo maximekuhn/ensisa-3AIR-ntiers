@@ -4,24 +4,28 @@ namespace JeBalance.API.Publique.Resources;
 
 public class DenonciationAPI
 {
+    public DenonciationAPI()
+    {
+        Informateur = new InformateurAPI();
+        Suspect = new SuspectAPI();
+    }
+
+
+    public DenonciationAPI(Denonciation denonciation, Informateur informateur, Suspect suspect)
+    {
+        TypeDelit = denonciation.TypeDelit;
+        PaysEvasion = denonciation.PaysEvasion;
+        Informateur = new InformateurAPI(informateur);
+        Suspect = new SuspectAPI(suspect);
+    }
+
     // Informations de la dénonciation
     public TypeDelit TypeDelit { get; set; }
     public string? PaysEvasion { get; set; }
 
+    // Information à propos de l'informateur 
+    public InformateurAPI Informateur { get; set; }
+
     // Informations à propos du suspect
-    public string NomSuspect { get; set; }
-    public string PrenomSuspect { get; set; }
-    public int NumeroVoieSuspect { get; set; }
-    public string NomVoieSuspect { get; set; }
-    public int CodePostalSuspect { get; set; }
-    public string NomCommuneSuspect { get; set; }
-
-
-    // Informations à propos de l'informateur
-    public string NomInformateur { get; set; }
-    public string PrenomInformateur { get; set; }
-    public int NumeroVoieInformateur { get; set; }
-    public string NomVoieInformateur { get; set; }
-    public int CodePostalInformateur { get; set; }
-    public string NomCommuneInformateur { get; set; }
+    public SuspectAPI Suspect { get; set; }
 }

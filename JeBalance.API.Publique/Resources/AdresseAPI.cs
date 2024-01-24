@@ -5,6 +5,10 @@ namespace JeBalance.API.Publique.Resources;
 
 public class AdresseAPI
 {
+    public AdresseAPI()
+    {
+    }
+
     public AdresseAPI(Adresse source)
     {
         NomCommune = source.NomCommune.Value;
@@ -20,4 +24,10 @@ public class AdresseAPI
     [JsonPropertyName("numeroDeVoie")] public int NumeroVoie { get; set; }
 
     [JsonPropertyName("codePostal")] public int CodePostal { get; set; }
+
+    public Adresse ToAdresse()
+    {
+        return new Adresse(new NumeroVoie(NumeroVoie), new NomVoie(NomVoie),
+            new CodePostal(CodePostal), new NomCommune(NomCommune));
+    }
 }
