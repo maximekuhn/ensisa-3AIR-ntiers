@@ -1,18 +1,17 @@
 using System.Text;
 using System.Text.Json;
-using JeBalance.Domain.Model;
 
 namespace JeBalance.UI.Data.Services;
 
 public class ServiceBase<TSourceType, TId>
 {
     private readonly IHttpClientFactory _clientFactory;
-    
+
     public ServiceBase(IHttpClientFactory clientFactory)
     {
         _clientFactory = clientFactory;
     }
-    
+
     public async Task<HttpRequestMessage> MakeGetOneRequest(string url)
     {
         var request = new HttpRequestMessage(HttpMethod.Get, url);

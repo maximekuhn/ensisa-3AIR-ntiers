@@ -17,5 +17,4 @@ public class DenonciationGetService : ServiceBase<DenonciationGetAPI, Guid>
         var denonciation = await SendGetOneRequest(request);
         return denonciation;
     }
-    
 }
