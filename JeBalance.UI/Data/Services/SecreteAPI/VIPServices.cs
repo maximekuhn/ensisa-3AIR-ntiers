@@ -30,7 +30,7 @@ public class VIPServices : ServiceBase<VIPAPI, int>
     public async Task<VIPAPI[]> GetVIPsAsync(int limit, int offset)
     {
         var request = await MakePaginatedGetAllRequest(
-            $"{_baseUrl}/{Controller}/", 
+            $"{_baseUrl}/{Controller}", 
             limit,
             offset);
         var vips = await SendGetAllPaginatedRequest(request);
