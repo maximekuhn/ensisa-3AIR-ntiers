@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using JeBalance.Domain.Model;
 
 namespace JeBalance.API.Publique.Resources;
@@ -20,12 +21,14 @@ public class DenonciationAPI
     }
 
     // Informations de la dénonciation
-    public TypeDelit TypeDelit { get; set; }
-    public string? PaysEvasion { get; set; }
+    [JsonPropertyName("typeDelit")] public TypeDelit TypeDelit { get; set; }
+
+    [JsonPropertyName("paysEvasion")] public string? PaysEvasion { get; set; }
 
     // Information à propos de l'informateur 
-    public InformateurAPI Informateur { get; set; }
+
+    [JsonPropertyName("informateur")] public InformateurAPI Informateur { get; set; }
 
     // Informations à propos du suspect
-    public SuspectAPI Suspect { get; set; }
+    [JsonPropertyName("suspect")] public SuspectAPI Suspect { get; set; }
 }

@@ -21,25 +21,18 @@ public class DenonciationGetAPI
     }
 
     // Informations de la dénonciation
-    [JsonPropertyName("typeDelit")]
-    public TypeDelit TypeDelit { get; set; }
-    
-    [JsonPropertyName("paysEvasion")]
-    public string? PaysEvasion { get; set; }
-    [JsonPropertyName("horodatage")]
+    [JsonPropertyName("typeDelit")] public TypeDelit TypeDelit { get; set; }
 
-    public DateTime Horodatage { get; set; }
+    [JsonPropertyName("paysEvasion")] public string? PaysEvasion { get; set; }
+
+    [JsonPropertyName("horodatage")] public DateTime Horodatage { get; set; }
 
     // Information à propos de l'informateur 
-    [JsonPropertyName("informateur")]
-    public InformateurAPI Informateur { get; set; }
+    [JsonPropertyName("informateur")] public InformateurAPI Informateur { get; set; }
 
     // Informations à propos du suspect
-    [JsonPropertyName("suspect")]
-
-    public SuspectAPI Suspect { get; set; }
+    [JsonPropertyName("suspect")] public SuspectAPI Suspect { get; set; }
 
     // Information à propos de la reponse
-    [JsonPropertyName("reponse")]
-    public ReponseAPI Reponse { get; set; }
+    [JsonPropertyName("reponse")] public ReponseAPI Reponse { get; set; }
 }
