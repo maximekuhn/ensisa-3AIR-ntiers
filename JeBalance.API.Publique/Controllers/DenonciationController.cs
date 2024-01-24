@@ -55,7 +55,7 @@ public class DenonciationController : ControllerBase
             var getReponseByIdQuery = new GetReponseByIdQuery(denonciation.ReponseId.Value);
             reponse = await _mediator.Send(getReponseByIdQuery);
         }
-    
+
         return Ok(new DenonciationGetAPI(denonciation, informateur, suspect, reponse));
     }
 }

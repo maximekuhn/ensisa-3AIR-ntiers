@@ -1,5 +1,4 @@
 using JeBalance.API.Publique.Resources;
-using JeBalance.Domain.Model;
 
 namespace JeBalance.UI.Data.Services;
 
