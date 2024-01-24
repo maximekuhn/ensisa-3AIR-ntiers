@@ -20,18 +20,13 @@ public class ServiceBase<TSourceType, TId>
     public async Task<HttpRequestMessage> MakePaginatedGetAllRequest(
         string url,
         int limit,
-        int offset,
-        KeyValuePair<string, string>? filter)
+        int offset)
     {
         var param = new Dictionary<string, string>() {
             { "limit", limit.ToString() } ,
             { "offset", offset.ToString() }
         };
-        if (filter.HasValue)
-        {
-            param.Add(filter.Value.Key, filter.Value.Value);
-        }
-
+        
         var request = new HttpRequestMessage(
             HttpMethod.Get,
             new Uri(QueryHelpers.AddQueryString(url, param)));
