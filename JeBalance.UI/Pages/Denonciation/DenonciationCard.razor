@@ -1,14 +1,16 @@
 @page "/recherche"
 @inject DenonciationGetService Service
 
-<h3>Recherche de Dénonciation par ID</h3>
+<h2>Recherche d'une dénonciation par ID</h2>
 
 <EditForm Model="@denonciationId" OnValidSubmit="FetchData">
     <div class="form-group">
-        <label for="denonciationId">Id de la denonciation : </label>
+        <label for="denonciationId">Id de la dénonciation : </label>
         <InputText class="form-control" id="denonciationId" @bind-Value="denonciationId"/>
     </div>
-    <button type="submit" class="btn btn-primary">Recherche</button>
+    <div class="content">
+        <button type="submit" class="btn btn-primary">Rechercher</button>
+    </div>
 </EditForm>
 
 @if (denonciation != null)

@@ -2,24 +2,6 @@
 @inject DenonciationService Service
 @inject NavigationManager NavigationManager
 
-<div class="navbar">
-    <ul class="ul-navbar">
-        <li>
-            <a id="home-link" class="active-green" href="index">
-                <i class="fas fa-home"></i>
-            </a>
-        </li>
-        <li>
-            <a id="create-link" href="create">DENONCER</a>
-        </li>
-        <li>
-            <a id="edit-link" href="consult">CONSULTER</a>
-        </li>
-        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
-        <img id="logo" src="/favicon.ico" alt="Home"/>
-    </ul>
-</div>
-
 <h2>Créez votre dénonciation</h2>
 
 <EditForm Model="@denonciation" OnValidSubmit="FormSubmitted">
@@ -61,7 +43,7 @@
         <div class="section">
             <div class="form-group">
                 <label for="numVoieSuspect">Numéro de Voie du Suspect</label>
-                <InputNumber class="form-control" id="numVoieSuspect" @bind-Value="denonciation.Suspect.Adresse.NumeroVoie"/>
+                <InputNumber class="form-control" id="numVoieSuspect" @bind-Value="denonciation.Suspect.Adresse.NumeroVoie" min="0"/>
             </div>
             <div class="form-group">
                 <label for="nomVoieSuspect">Nom de Voie du Suspect</label>
@@ -71,7 +53,7 @@
         <div class="section">
             <div class="form-group">
                 <label for="cpSuspect">Code Postal du Suspect</label>
-                <InputNumber class="form-control" id="cpSuspect" @bind-Value="denonciation.Suspect.Adresse.CodePostal" placeholder="Exemple : 67000"/>
+                <InputNumber class="form-control" id="cpSuspect" @bind-Value="denonciation.Suspect.Adresse.CodePostal" placeholder="Exemple : 67000" min="0"/>
             </div>
             <div class="form-group">
                 <label for="communeSuspect">Commune du Suspect</label>
@@ -96,7 +78,7 @@
         <div class="section">
             <div class="form-group">
                 <label for="numVoieInformateur">Numéro de Voie de l'Informateur</label>
-                <InputNumber class="form-control" id="numVoieInformateur" @bind-Value="denonciation.Informateur.Adresse.NumeroVoie"/>
+                <InputNumber class="form-control" id="numVoieInformateur" @bind-Value="denonciation.Informateur.Adresse.NumeroVoie" min="0"/>
             </div>
             <div class="form-group">
                 <label for="nomVoieInformateur">Nom de Voie de l'Informateur</label>
@@ -106,7 +88,7 @@
         <div class="section">
             <div class="form-group">
                 <label for="cpInformateur">Code Postal de l'Informateur</label>
-                <InputNumber class="form-control" id="cpInformateur" @bind-Value="denonciation.Informateur.Adresse.CodePostal" placeholder="Exemple : 68000"/>
+                <InputNumber class="form-control" id="cpInformateur" @bind-Value="denonciation.Informateur.Adresse.CodePostal" placeholder="Exemple : 68000" min="0"/>
             </div>
             <div class="form-group">
                 <label for="communeInformateur">Commune de l'Informateur</label>
@@ -120,10 +102,6 @@
         <button type="submit">Ajouter</button>
     </div>
 </EditForm>
-
-<footer>
-    <p>© 2024 Fondement Corporation</p>
-</footer>
 
 @code {
     readonly DenonciationAPI denonciation = new();

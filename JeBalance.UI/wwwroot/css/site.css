@@ -9,10 +9,20 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: #f0f0f0;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .content {
-    margin-top: 500px;
+    margin-top: 30px;
     text-align: center;
 }
 
@@ -76,7 +86,7 @@ h3 {
     margin: 0;
     padding: 0;
     height: 50px;
-    overflow-y: auto;
+    overflow-y: hidden;
     background-color: #333;
     display: flex;
 }
@@ -96,7 +106,6 @@ li a {
     text-align: center;
     font-weight: bold;
     padding: 13px;
-    min-width: 140px;
     text-decoration: none;
 }
 
@@ -129,7 +138,7 @@ li a:hover {
 form {
     background-color: #4a4a4a;
     border-radius: 15px;
-    padding: 10px;
+    padding: 50px;
     margin: 10px auto;
     width: fit-content;
     max-width: 600px;
