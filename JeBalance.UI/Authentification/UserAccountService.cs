@@ -5,8 +5,8 @@ namespace JeBalance.UI.Authentification;
 
 public class UserAccountService
 {
-    private IHttpClientFactory _clientFactory;
     private readonly string _baseUrl;
+    private readonly IHttpClientFactory _clientFactory;
 
 
     public UserAccountService(IHttpClientFactory clientFactory, IConfiguration configuration)
@@ -18,7 +18,6 @@ public class UserAccountService
 
     public async Task<UserSession?> LoginAsync(string username, string password)
     {
-
         var request = MakeRequest(username, password);
         var client = _clientFactory.CreateClient();
         var response = await client.SendAsync(request);
@@ -33,7 +32,7 @@ public class UserAccountService
     private HttpRequestMessage MakeRequest(string username, string password)
     {
         // TODO : Change this function and use ServiceBase
-        
+
         var request = new HttpRequestMessage(
             HttpMethod.Post,
             $"{_baseUrl}");

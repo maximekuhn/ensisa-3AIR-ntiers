@@ -9,24 +9,25 @@ namespace JeBalance.UI.Data.Services;
 public class ServiceBase<TSourceType, TId>
 {
     private readonly IHttpClientFactory _clientFactory;
-    private CustomAuthenticationStateProvider? _casp;
+    private readonly CustomAuthenticationStateProvider? _casp;
 
     public ServiceBase(IHttpClientFactory clientFactory, CustomAuthenticationStateProvider? casp)
     {
         _clientFactory = clientFactory;
         _casp = casp;
     }
-    
+
     public async Task<HttpRequestMessage> MakePaginatedGetAllRequest(
         string url,
         int limit,
         int offset)
     {
-        var param = new Dictionary<string, string>() {
-            { "limit", limit.ToString() } ,
+        var param = new Dictionary<string, string>
+        {
+            { "limit", limit.ToString() },
             { "offset", offset.ToString() }
         };
-        
+
         var request = new HttpRequestMessage(
             HttpMethod.Get,
             new Uri(QueryHelpers.AddQueryString(url, param)));
@@ -47,7 +48,7 @@ public class ServiceBase<TSourceType, TId>
 
         request.Headers.Add("Accept", "application/json");
         request.Headers.Add("User-Agent", "JeBalance");
-        
+
         if (_casp == null) return request;
         var token = await _casp.GetJWT();
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -67,14 +68,14 @@ public class ServiceBase<TSourceType, TId>
 
         request.Headers.Add("Accept", "application/json");
         request.Headers.Add("User-Agent", "JeBalance");
-        
+
         if (_casp == null) return request;
         var token = await _casp.GetJWT();
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         return request;
     }
-    
+
     public async Task<HttpRequestMessage> MakeUpdateRequest(string url, TSourceType data)
     {
         var request = new HttpRequestMessage(
@@ -88,14 +89,14 @@ public class ServiceBase<TSourceType, TId>
 
         request.Headers.Add("Accept", "application/json");
         request.Headers.Add("User-Agent", "ParkNGo");
-        
+
         if (_casp == null) return request;
         var token = await _casp.GetJWT();
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         return request;
     }
-    
+
     public async Task<HttpRequestMessage> MakeDeleteRequest(string url)
     {
         var request = new HttpRequestMessage(
@@ -103,26 +104,26 @@ public class ServiceBase<TSourceType, TId>
 
         request.Headers.Add("Accept", "application/json");
         request.Headers.Add("User-Agent", "ParkNGo");
-        
+
         if (_casp == null) return request;
         var token = await _casp.GetJWT();
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         return request;
     }
-    
+
     public async Task<TSourceType[]> SendGetAllPaginatedRequest(HttpRequestMessage request)
     {
         var client = _clientFactory.CreateClient();
 
         var response = await client.SendAsync(request);
-        if (!response.IsSuccessStatusCode) return default(TSourceType[]);
+        if (!response.IsSuccessStatusCode) return default;
 
         using var responseStream = await response.Content.ReadAsStreamAsync();
         var data = await JsonSerializer.DeserializeAsync<TSourceType[]>(responseStream);
         return data;
     }
-    
+
     public async Task<TSourceType> SendGetOneRequest(HttpRequestMessage request)
     {
         var client = _clientFactory.CreateClient();
@@ -146,7 +147,7 @@ public class ServiceBase<TSourceType, TId>
         var id = await JsonSerializer.DeserializeAsync<TId>(responseStream);
         return id;
     }
-    
+
     public async Task<TId> SendUpdateRequest(HttpRequestMessage request)
     {
         var client = _clientFactory.CreateClient();
@@ -158,7 +159,7 @@ public class ServiceBase<TSourceType, TId>
         var id = await JsonSerializer.DeserializeAsync<TId>(responseStream);
         return id;
     }
-    
+
     public async Task<bool> SendDeleteRequest(HttpRequestMessage request)
     {
         var client = _clientFactory.CreateClient();

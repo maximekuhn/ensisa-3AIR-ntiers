@@ -8,8 +8,8 @@ public class CustomAuthenticationStateProvider : AuthenticationStateProvider
 {
     private const string SessionKey = "UserSession";
     private readonly ProtectedSessionStorage _sessionStorage;
-    private ClaimsPrincipal _anonymous = new ClaimsPrincipal(new ClaimsIdentity());
-    
+    private readonly ClaimsPrincipal _anonymous = new(new ClaimsIdentity());
+
     public CustomAuthenticationStateProvider(ProtectedSessionStorage sessionStorage)
     {
         _sessionStorage = sessionStorage;
@@ -24,10 +24,7 @@ public class CustomAuthenticationStateProvider : AuthenticationStateProvider
                 ? userSSR.Value
                 : null;
 
-            if (userSession == null)
-            {
-                return new AuthenticationState(_anonymous);
-            }
+            if (userSession == null) return new AuthenticationState(_anonymous);
 
             return new AuthenticationState(userSession.ToClaimsPrincipal());
         }
@@ -46,10 +43,7 @@ public class CustomAuthenticationStateProvider : AuthenticationStateProvider
                 ? userSSR.Value
                 : null;
 
-            if (userSession == null)
-            {
-                return null;
-            }
+            if (userSession == null) return null;
 
             return userSession.Token;
         }
@@ -63,7 +57,7 @@ public class CustomAuthenticationStateProvider : AuthenticationStateProvider
     {
         ClaimsPrincipal claimsPrincipal;
 
-        if(userSession != null)
+        if (userSession != null)
         {
             await _sessionStorage.SetAsync(SessionKey, userSession);
             claimsPrincipal = userSession.ToClaimsPrincipal();
@@ -76,6 +70,4 @@ public class CustomAuthenticationStateProvider : AuthenticationStateProvider
 
         NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(claimsPrincipal)));
     }
-    
-    
 }
