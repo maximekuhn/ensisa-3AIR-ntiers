@@ -1,0 +1,60 @@
+@page "/ajout-vip"
+@using JeBalance.UI.Data.Services.SecreteAPI
+@inject VIPServices Service
+@inject NavigationManager NavigationManager
+
+<h2>Ajoutez un nouveau membre VIP</h2>
+
+<EditForm Model="@vip" OnValidSubmit="FormSubmitted">
+    <div class="inter">
+        <h3>Renseignements sur le VIP</h3>
+        <div class="section">
+            <!-- Informations du VIP -->
+            <div class="form-group">
+                <label for="nomVIP">Nom du VIP</label>
+                <InputText class="form-control" id="nomVIP" @bind-Value="vip.Nom" placeholder="Exemple : Jackson"/>
+            </div>
+            <div class="form-group">
+                <label for="prenomVIP">Prénom du VIP</label>
+                <InputText class="form-control" id="prenomVIP" @bind-Value="vip.Prenom" placeholder="Exemple : Michael"/>
+            </div>
+        </div>
+        <div class="section">
+            <div class="form-group">
+                <label for="numVoieVIP">Numéro de Voie du VIP</label>
+                <InputNumber class="form-control" id="numVoieVIP" @bind-Value="vip.Adresse.NumeroVoie" min="0"/>
+            </div>
+            <div class="form-group">
+                <label for="nomVoieVIP">Nom de Voie du VIP</label>
+                <InputText class="form-control" id="nomVoieVIP" @bind-Value="vip.Adresse.NomVoie" placeholder="Exemple : Avenue de l'Europe"/>
+            </div>
+        </div>
+        <div class="section">
+            <div class="form-group">
+                <label for="cpVIP">Code Postal du VIP</label>
+                <InputNumber class="form-control" id="cpVIP" @bind-Value="vip.Adresse.CodePostal" placeholder="Exemple : 67000" min="0"/>
+            </div>
+            <div class="form-group">
+                <label for="communeVIP">Commune du VIP</label>
+                <InputText class="form-control" id="communeVIP" @bind-Value="vip.Adresse.NomCommune" placeholder="Exemple : Strasbourg"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <!-- Boutons -->
+        <button type="submit">Ajouter</button>
+    </div>
+</EditForm>
+
+@code {
+    readonly VIPAPI vip = new();
+
+    private async void FormSubmitted()
+    {
+        var id = await Service.AddVIPAsync(vip);
+
+        NavigationManager.NavigateTo("/");
+    }
+
+}

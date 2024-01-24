@@ -40,12 +40,16 @@ else
     [Parameter]
     public string Id { get; set; }
 
-    private DenonciationGetAPI denonciation = new();
+    private DenonciationGetAPI denonciation;
 
     protected override async Task OnInitializedAsync()
     {
+        await fdp();
+    }
+
+    private async Task fdp()
+    {
         denonciation = await DenonciationService.GetDenonciationAsync(Guid.Parse(Id));
-        Console.WriteLine(denonciation.Informateur.Nom);
     }
 
 }

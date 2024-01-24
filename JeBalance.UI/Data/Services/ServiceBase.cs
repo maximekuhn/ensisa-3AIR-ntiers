@@ -33,7 +33,7 @@ public class ServiceBase<TSourceType, TId>
             new Uri(QueryHelpers.AddQueryString(url, param)));
 
         request.Headers.Add("Accept", "application/json");
-        request.Headers.Add("User-Agent", "ParkNGo");
+        request.Headers.Add("User-Agent", "JeBalance");
 
         if (_casp == null) return request;
         var token = await _casp.GetJWT();
@@ -88,7 +88,7 @@ public class ServiceBase<TSourceType, TId>
         request.Content = httpContent;
 
         request.Headers.Add("Accept", "application/json");
-        request.Headers.Add("User-Agent", "ParkNGo");
+        request.Headers.Add("User-Agent", "JeBalance");
 
         if (_casp == null) return request;
         var token = await _casp.GetJWT();
@@ -103,7 +103,7 @@ public class ServiceBase<TSourceType, TId>
             HttpMethod.Delete, url);
 
         request.Headers.Add("Accept", "application/json");
-        request.Headers.Add("User-Agent", "ParkNGo");
+        request.Headers.Add("User-Agent", "JeBalance");
 
         if (_casp == null) return request;
         var token = await _casp.GetJWT();
