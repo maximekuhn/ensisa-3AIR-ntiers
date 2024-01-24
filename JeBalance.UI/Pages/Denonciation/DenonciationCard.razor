@@ -1,9 +1,10 @@
 @page "/recherche"
 @inject DenonciationGetService Service
+@inject NavigationManager NavigationManager
 
 <h2>Recherche d'une dénonciation par ID</h2>
 
-<EditForm Model="@denonciationId" OnValidSubmit="FetchData">
+<EditForm Model="@denonciationId" OnValidSubmit="Redirect">
     <div class="form-group">
         <label for="denonciationId">Id de la dénonciation : </label>
         <InputText class="form-control" id="denonciationId" @bind-Value="denonciationId"/>
@@ -13,22 +14,12 @@
     </div>
 </EditForm>
 
-@if (denonciation != null)
-{
-    <p>Type de Délit : @denonciation.TypeDelit</p>
-}
-
-
 @code {
-    private DenonciationGetAPI? denonciation;
     private string denonciationId = string.Empty;
 
-    private async void FetchData()
+    private async void Redirect()
     {
-        denonciation = null; // Réinitialiser la dénonciation précédente
-
-
-        denonciation = await Service.GetDenonciationAsync(Guid.Parse(denonciationId));
+        NavigationManager.NavigateTo($"/denonciation-result/{denonciationId}");
     }
 
 }

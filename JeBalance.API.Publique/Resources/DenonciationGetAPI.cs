@@ -12,6 +12,7 @@ public class DenonciationGetAPI
     {
         TypeDelit = denonciation.TypeDelit;
         PaysEvasion = denonciation.PaysEvasion;
+        Horodatage = denonciation.Horodatage;
         Informateur = new InformateurAPI(informateur);
         Suspect = new SuspectAPI(suspect);
         if (reponse != null)
@@ -21,6 +22,7 @@ public class DenonciationGetAPI
     // Informations de la dénonciation
     public TypeDelit TypeDelit { get; set; }
     public string? PaysEvasion { get; set; }
+    public DateTime Horodatage { get; set; }
 
     // Information à propos de l'informateur 
     public InformateurAPI Informateur { get; set; }

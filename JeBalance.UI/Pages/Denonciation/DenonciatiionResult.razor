@@ -1,11 +1,51 @@
 @page "/denonciation-result/{Id}"
+@inject DenonciationGetService DenonciationService
 
-<h3>Résultat de la Dénonciation</h3>
+<h2>Résultat de la dénonciation</h2>
 
-<p>ID de la dénonciation : @Id</p>
+@if (denonciation != null)
+{
+    <p>ID de la dénonciation : @Id</p>
+    <p>Heure de signalement : @denonciation.Horodatage</p>
+    <p>Type de délit : @denonciation.TypeDelit</p>
+    <p>Pays d'évasion : @denonciation.PaysEvasion</p>
+
+    @if (denonciation.Informateur != null)
+    {
+        <p>Informateur : @denonciation.Informateur.Nom @denonciation.Informateur.Prenom</p>
+        <p>Adresse : @denonciation.Informateur.Adresse</p>
+    }
+    else
+    {
+        <p>Informateur : Information non disponible</p>
+    }
+
+    @if (denonciation.Suspect != null)
+    {
+        <p>Suspect : @denonciation.Suspect.Nom @denonciation.Suspect.Prenom</p>
+        <p>Adresse : @denonciation.Suspect.Adresse</p>
+    }
+    else
+    {
+        <p>Suspect : Information non disponible</p>
+    }
+}
+else
+{
+    <p>Aucun ID correspondant à @Id n'a été trouvé.</p>
+}
 
 @code {
 
-    [Parameter] public string Id { get; set; }
+    [Parameter]
+    public string Id { get; set; }
+
+    private DenonciationGetAPI denonciation = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        denonciation = await DenonciationService.GetDenonciationAsync(Guid.Parse(Id));
+        Console.WriteLine(denonciation.Informateur.Nom);
+    }
 
 }
