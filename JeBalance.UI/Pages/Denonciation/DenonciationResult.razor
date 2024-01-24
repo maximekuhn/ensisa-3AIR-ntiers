@@ -44,12 +44,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        await fdp();
+        denonciation = await DenonciationService.GetDenonciationAsync(Guid.Parse(Id));
+
     }
 
-    private async Task fdp()
-    {
-        denonciation = await DenonciationService.GetDenonciationAsync(Guid.Parse(Id));
-    }
 
 }

@@ -106,7 +106,7 @@
 @code {
     readonly DenonciationAPI denonciation = new();
 
-    private async void FormSubmitted()
+    private async Task FormSubmitted()
     {
         var id = await Service.AddDenonciationAsync(denonciation);
         if (id == null || !id.HasValue)
