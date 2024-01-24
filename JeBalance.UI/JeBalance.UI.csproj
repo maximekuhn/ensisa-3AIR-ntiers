@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\JeBalance.API.Publique\JeBalance.API.Publique.csproj"/>
+        <ProjectReference Include="..\JeBalance.API.Secrete.Securisee\JeBalance.API.Secrete.Securisee.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

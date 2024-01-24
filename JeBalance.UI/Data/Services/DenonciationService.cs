@@ -7,7 +7,8 @@ public class DenonciationService : ServiceBase<DenonciationAPI, Guid>
     private const string Controller = "Denonciation";
     private readonly string _baseUrl;
 
-    public DenonciationService(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory)
+    public DenonciationService(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory,
+        null)
     {
         _baseUrl = configuration["ApiPublique:BaseUrl"] ??
                    throw new InvalidOperationException("API Base URL not configured");
