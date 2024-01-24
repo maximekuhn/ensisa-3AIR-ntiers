@@ -42,6 +42,6 @@ public class VIPController : ControllerBase
     {
         var getVIPs = new GetVIPsQuery((parameters.Limit, parameters.Offset));
         var (vips, total) = await _mediator.Send(getVIPs);
-        return Ok(vips.Select(vip => new VIPAPI(vip)));
+        return Ok(vips.Select(vip => new VIPGetAPI(vip)));
     }
 }

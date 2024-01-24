@@ -14,6 +14,7 @@ builder.Services.AddScoped<ProtectedSessionStorage>();
 builder.Services.AddScoped<DenonciationService>();
 builder.Services.AddScoped<DenonciationGetService>();
 builder.Services.AddScoped<VIPServices>();
+builder.Services.AddScoped<VIPGetServices>();
 
 var app = builder.Build();
 

@@ -1,5 +1,6 @@
 @page "/get-all-vip"
 @using JeBalance.UI.Data.Services.SecreteAPI
+@inject VIPGetServices ServiceGet
 @inject VIPServices Service
 
 <h2>Liste de tous les VIP</h2>
@@ -29,7 +30,7 @@ else
                 <td>@vip.Prenom</td>
                 <td>@vip.Adresse.NumeroVoie @vip.Adresse.NomVoie , @vip.Adresse.NomCommune @vip.Adresse.CodePostal</td>
                 <td>
-                    <button class="button-style-red">Supprimer</button>
+                    <button @onclick="@(async () => await Delete(vip.Id))" class="button-style-red">Supprimer</button>
                 </td>
             </tr>
         }
@@ -38,11 +39,22 @@ else
 }
 
 @code {
-    private VIPAPI[] vips;
+    private VIPGetAPI[] vips;
 
     protected override async Task OnInitializedAsync()
     {
-        vips = await Service.GetVIPsAsync(50, 0); // Récupère les 50 premiers VIP
+        await FetchData();
+    }
+    
+    private async Task FetchData()
+    {
+        vips = await ServiceGet.GetVIPsAsync(50, 0); // Récupère les 50 premiers VIP
+    }
+    
+    private async Task Delete(int id)
+    {
+        await Service.DeleteVIPAsync(id);
+        await FetchData();
     }
 
 }
