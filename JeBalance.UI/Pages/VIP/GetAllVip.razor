@@ -1,5 +1,6 @@
 @page "/get-all-vip"
 @using JeBalance.UI.Data.Services.SecreteAPI
+@using JeBalance.UI.Pages.VIP
 @inject VIPGetServices ServiceGet
 @inject VIPServices Service
 
@@ -44,7 +45,7 @@ else
 
 @code {
     private VIPGetAPI[] vips;
-    
+
     [CascadingParameter]
     public IModalService Modal { get; set; } = default!;
 
@@ -57,7 +58,7 @@ else
     {
         vips = await ServiceGet.GetVIPsAsync(50, 0); // Récupère les 50 premiers VIP
     }
-    
+
     async Task Delete(int id)
     {
         var parameters = new ModalParameters();
@@ -71,4 +72,5 @@ else
             await FetchData();
         }
     }
+
 }
