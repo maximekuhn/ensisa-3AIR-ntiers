@@ -2,12 +2,12 @@ using JeBalance.API.Publique.Resources;
 
 namespace JeBalance.UI.Data.Services.PubliqueAPI;
 
-public class DenonciationGetService : ServiceBase<DenonciationGetAPI, Guid>
+public class DenonciationGetServices : ServiceBase<DenonciationGetAPI, Guid>
 {
     private const string Controller = "Denonciation";
     private readonly string _baseUrl;
 
-    public DenonciationGetService(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory,
+    public DenonciationGetServices(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory,
         null)
     {
         _baseUrl = configuration["ApiPublique:BaseUrl"] ??

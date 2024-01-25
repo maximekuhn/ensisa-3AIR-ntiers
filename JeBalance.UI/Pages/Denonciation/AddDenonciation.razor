@@ -1,6 +1,6 @@
 @page "/denonciation"
 @using JeBalance.UI.Data.Services.PubliqueAPI
-@inject DenonciationService Service
+@inject DenonciationServices Services
 @inject NavigationManager NavigationManager
 
 <h2>Créez votre dénonciation</h2>
@@ -109,7 +109,7 @@
 
     private async Task FormSubmitted()
     {
-        var id = await Service.AddDenonciationAsync(denonciation);
+        var id = await Services.AddDenonciationAsync(denonciation);
         if (id == null || !id.HasValue)
         {
             throw new InvalidOperationException("Échec de l'ajout de la dénonciation ou ID null.");

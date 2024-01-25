@@ -1,6 +1,6 @@
 @page "/denonciation-result/{Id}"
 @using JeBalance.UI.Data.Services.PubliqueAPI
-@inject DenonciationGetService DenonciationService
+@inject DenonciationGetServices DenonciationServices
 
 <h2>Résultat de la dénonciation</h2>
 
@@ -58,7 +58,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        denonciation = await DenonciationService.GetDenonciationAsync(Guid.Parse(Id));
+        denonciation = await DenonciationServices.GetDenonciationAsync(Guid.Parse(Id));
     }
 
 

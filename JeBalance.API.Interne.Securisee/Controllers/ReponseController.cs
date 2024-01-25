@@ -1,7 +1,7 @@
+using JeBalance.API.Interne.Securisee.Resources;
 using JeBalance.Domain.Commands.Reponses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using JeBalance.API.Interne.Securisee.Resources;
 
 namespace JeBalance.API.Interne.Securisee.Controllers;
 
@@ -17,7 +17,8 @@ public class ReponseController : ControllerBase
     }
 
     [HttpPost("create")]
-    public async Task<IActionResult> CreateReponse([FromQuery] Guid denonciationId, [FromBody] ReponseCreateAPI resource)
+    public async Task<IActionResult> CreateReponse([FromQuery] Guid denonciationId,
+        [FromBody] ReponseCreateAPI resource)
     {
         var createReponseCommand = new CreateReponseCommand(
             resource.TypeReponse,
@@ -27,5 +28,4 @@ public class ReponseController : ControllerBase
         var reponseId = await _mediator.Send(createReponseCommand);
         return Ok(reponseId);
     }
-    
 }

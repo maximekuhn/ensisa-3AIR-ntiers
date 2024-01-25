@@ -18,7 +18,7 @@ public class DenonciationGetAPI
         Informateur = new InformateurAPI(informateur);
         Suspect = new SuspectAPI(suspect);
     }
-    
+
     // Informations de la dénonciation
     [JsonPropertyName("id")] public Guid Id { get; set; }
     [JsonPropertyName("typeDelit")] public TypeDelit TypeDelit { get; set; }
@@ -32,5 +32,4 @@ public class DenonciationGetAPI
 
     // Informations à propos du suspect
     [JsonPropertyName("suspect")] public SuspectAPI Suspect { get; set; }
-    
 }

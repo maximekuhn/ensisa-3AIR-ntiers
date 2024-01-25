@@ -38,12 +38,10 @@ public class DenonciationController : ControllerBase
         {
             var informateur = await _mediator.Send(new GetInformateurByIdQuery(denonciation.InformateurId));
             var suspect = await _mediator.Send(new GetSuspectByIdQuery(denonciation.SuspectId));
-        
+
             denonciationGetApiList.Add(new DenonciationGetAPI(denonciation, informateur, suspect));
         }
-        
+
         return Ok(denonciationGetApiList.ToArray());
     }
-    
-    
 }
