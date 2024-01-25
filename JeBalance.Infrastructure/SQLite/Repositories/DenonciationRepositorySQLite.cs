@@ -83,12 +83,9 @@ public class DenonciationRepositorySQLite : DenonciationRepository
     public Task<(IEnumerable<Denonciation> Results, int Total)> GetSortedDenonciationsNonTraitees(int limit, int offset,
         FindDenonciationsNonTraiteesSpecification specification)
     {
-        var query = _context.Denonciations
-            .Apply(specification.ToSQLiteExpression<Denonciation, DenonciationSQLite>());
-
-        var sortedQuery = query.OrderBy(d => d.Horodatage);
-
-        var results = sortedQuery
+        var results = _context.Denonciations
+            .Apply(specification.ToSQLiteExpression<Denonciation, DenonciationSQLite>())
+            .OrderBy(d => d.Horodatage)
             .Skip(offset)
             .Take(limit)
             .AsEnumerable()
