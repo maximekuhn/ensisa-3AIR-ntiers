@@ -1,5 +1,6 @@
 using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
+using JeBalance.Domain.Queries.Denonciations;
 using JeBalance.Domain.Repositories;
 using JeBalance.Infrastructure.SQLite.Model;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ public class DenonciationRepositorySQLite : DenonciationRepository
             .Take(limit)
             .AsEnumerable()
             .Select(denonciation => denonciation.ToDomain());
+        
 
         return Task.FromResult((results, _context.Denonciations.Count()));
     }
@@ -76,5 +78,21 @@ public class DenonciationRepositorySQLite : DenonciationRepository
         denonciationToUpdate.ReponseId = reponseId;
         await _context.SaveChangesAsync();
         return true;
+    }
+
+    public Task<(IEnumerable<Denonciation> Results, int Total)> GetSortDenonsiationsNonTraitee(int limit, int offset, FindDenonciationsNonTraiteesSpecification specification)
+    {
+        var query = _context.Denonciations
+            .Apply(specification.ToSQLiteExpression<Denonciation, DenonciationSQLite>());
+        
+        var sortedQuery = query.OrderByDescending(d => d.Horodatage);
+        
+        var results = sortedQuery
+            .Skip(offset)
+            .Take(limit)
+            .AsEnumerable()
+            .Select(denonciation => denonciation.ToDomain());
+
+        return Task.FromResult((results, _context.Denonciations.Count()));
     }
 }
