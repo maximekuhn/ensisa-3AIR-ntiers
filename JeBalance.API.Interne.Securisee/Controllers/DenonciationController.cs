@@ -25,8 +25,6 @@ public class DenonciationController : ControllerBase
     public async Task<IActionResult> GetDenonciationsNonTraitees(
         [FromQuery] FindDenonciationsNonTraiteesParameter parameter)
     {
-        // TODO: return total count
-
         var getDenonciationsNonTraiteesQuery =
             new GetDenonciationsNonTraiteesQuery((parameter.Limit, parameter.Offset));
         var (denonciations, total) = await _mediator.Send(getDenonciationsNonTraiteesQuery);
