@@ -16,6 +16,7 @@ builder.Services.AddScoped<ProtectedSessionStorage>();
 builder.Services.AddScoped<DenonciationServices>();
 builder.Services.AddScoped<DenonciationGetServices>();
 builder.Services.AddScoped<VIPServices>();
+builder.Services.AddScoped<VIPGetServices>();
 builder.Services.AddScoped<JeBalance.UI.Data.Services.InterneAPI.DenonciationServices>();
 builder.Services.AddScoped<ReponseServices>();
 
