@@ -90,6 +90,41 @@ public class AuthenticateController : ControllerBase
         return Ok(new Response { Status = "Success", Message = "Administrateur fiscal created successfully" });
     }
 
+    [HttpPost]
+    [Route("register-administrateur")]
+    public async Task<IActionResult> RegisterAdministrateur([FromBody] RegisterModel model)
+    {
+        var adminExists = await _userManager.FindByEmailAsync(model.Email);
+        if (adminExists != null)
+            return StatusCode(StatusCodes.Status409Conflict,
+                new Response
+                    { Status = "Error", Message = "An administrateur with the same email already exists !" });
+
+        var admin = new ApplicationUser
+        {
+            UserName = model.Username,
+            Email = model.Email,
+            SecurityStamp = Guid.NewGuid().ToString()
+        };
+        var result = await _userManager.CreateAsync(admin, model.Password);
+        if (!result.Succeeded)
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                new Response
+                {
+                    Status = "Error",
+                    Message = "Administrateur creation failed! Please check user details and try again."
+                });
+
+
+        if (!await _roleManager.RoleExistsAsync(UserRoles.Administrateur))
+            await _roleManager.CreateAsync(new IdentityRole(UserRoles.Administrateur));
+
+        if (await _roleManager.RoleExistsAsync(UserRoles.Administrateur))
+            await _userManager.AddToRoleAsync(admin, UserRoles.Administrateur);
+
+        return Ok(new Response { Status = "Success", Message = "Administrateur created successfully" });
+    }
+
     private JwtSecurityToken GetToken(List<Claim> authClaims)
     {
         var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
