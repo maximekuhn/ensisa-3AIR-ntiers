@@ -16,6 +16,7 @@ else
     <table class="table">
         <thead>
         <tr>
+            <th>ID</th>
             <th>Nom</th>
             <th>Prénom</th>
             <th>Adresse</th>
@@ -26,6 +27,7 @@ else
         @foreach (var vip in vips)
         {
             <tr>
+                <td>@vip.Id</td>
                 <td>@vip.Nom</td>
                 <td>@vip.Prenom</td>
                 <td>@vip.Adresse.NumeroVoie @vip.Adresse.NomVoie , @vip.Adresse.NomCommune @vip.Adresse.CodePostal</td>
@@ -45,12 +47,12 @@ else
     {
         await FetchData();
     }
-    
+
     private async Task FetchData()
     {
         vips = await ServiceGet.GetVIPsAsync(50, 0); // Récupère les 50 premiers VIP
     }
-    
+
     private async Task Delete(int id)
     {
         await Service.DeleteVIPAsync(id);

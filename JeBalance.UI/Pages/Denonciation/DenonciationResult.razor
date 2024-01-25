@@ -5,34 +5,48 @@
 
 @if (denonciation != null)
 {
-    <p>ID de la dénonciation : @Id</p>
-    <p>Heure de signalement : @denonciation.Horodatage</p>
-    <p>Type de délit : @denonciation.TypeDelit</p>
-    <p>Pays d'évasion : @denonciation.PaysEvasion</p>
-
+    <div class="denonciation_result">
+        <h4>Renseignements sur la dénonciation</h4>
+        <p>ID de la dénonciation :<span class="netstat"> @Id</span></p>
+        <p>Heure de signalement : <span class="netstat">@denonciation.Horodatage</span></p>
+        <p>Type de délit : <span class="netstat">@denonciation.TypeDelit</span></p>
+        <p>Pays d'évasion : <span class="netstat">@denonciation.PaysEvasion</span></p>
+    </div>
     @if (denonciation.Informateur != null)
     {
-        <p>Informateur : @denonciation.Informateur.Nom @denonciation.Informateur.Prenom</p>
-        <p>Adresse : @denonciation.Informateur.Adresse</p>
+        <div class="denonciation_result">
+            <h4>Renseignements sur l'infomateur</h4>
+            <p>Informateur : <span class="netstat">@denonciation.Informateur.Nom @denonciation.Informateur.Prenom</span></p>
+            <p>Adresse : <span class="netstat">@denonciation.Informateur.Adresse.NumeroVoie @denonciation.Informateur.Adresse.NomVoie , @denonciation.Informateur.Adresse.CodePostal @denonciation.Informateur.Adresse.NomCommune</span></p>
+        </div>
     }
     else
     {
-        <p>Informateur : Information non disponible</p>
+        <div class="denonciation_result">
+            <p>Informateur : Information non disponible</p>
+        </div>
     }
 
     @if (denonciation.Suspect != null)
     {
-        <p>Suspect : @denonciation.Suspect.Nom @denonciation.Suspect.Prenom</p>
-        <p>Adresse : @denonciation.Suspect.Adresse</p>
+        <div class="denonciation_result">
+            <h4>Renseignements sur le suspect</h4>
+            <p>Suspect : <span class="netstat">@denonciation.Suspect.Nom @denonciation.Suspect.Prenom</span></p>
+            <p>Adresse : <span class="netstat">@denonciation.Suspect.Adresse.NumeroVoie @denonciation.Suspect.Adresse.NomVoie , @denonciation.Suspect.Adresse.CodePostal @denonciation.Suspect.Adresse.NomCommune</span></p>
+        </div>
     }
     else
     {
-        <p>Suspect : Information non disponible</p>
+        <div class="denonciation_result">
+            <p>Suspect : Information non disponible</p>
+        </div>
     }
 }
 else
 {
-    <p>Aucun ID correspondant à @Id n'a été trouvé.</p>
+    <div class="denonciation_result">
+        <p>Aucun ID correspondant à @Id n'a été trouvé.</p>
+    </div>
 }
 
 @code {

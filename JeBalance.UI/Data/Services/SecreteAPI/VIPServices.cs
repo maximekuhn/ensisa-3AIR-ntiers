@@ -4,8 +4,8 @@ namespace JeBalance.UI.Data.Services.SecreteAPI;
 
 public class VIPServices : ServiceBase<VIPAPI, int>
 {
+    private const string Controller = "VIP";
     private readonly string _baseUrl;
-        private const string Controller = "VIP";
 
 
     public VIPServices(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory, null)

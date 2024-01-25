@@ -19,7 +19,7 @@ public class VIPGetAPI
     }
 
     [JsonPropertyName("id")] public int Id { get; set; }
-    
+
     [JsonPropertyName("nom")] public string Nom { get; set; }
 
     [JsonPropertyName("prenom")] public string Prenom { get; set; }
