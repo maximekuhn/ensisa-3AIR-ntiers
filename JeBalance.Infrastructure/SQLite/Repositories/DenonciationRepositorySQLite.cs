@@ -25,7 +25,7 @@ public class DenonciationRepositorySQLite : DenonciationRepository
             .Take(limit)
             .AsEnumerable()
             .Select(denonciation => denonciation.ToDomain());
-        
+
 
         return Task.FromResult((results, _context.Denonciations.Count()));
     }
@@ -80,13 +80,14 @@ public class DenonciationRepositorySQLite : DenonciationRepository
         return true;
     }
 
-    public Task<(IEnumerable<Denonciation> Results, int Total)> GetSortDenonsiationsNonTraitee(int limit, int offset, FindDenonciationsNonTraiteesSpecification specification)
+    public Task<(IEnumerable<Denonciation> Results, int Total)> GetSortDenonsiationsNonTraitee(int limit, int offset,
+        FindDenonciationsNonTraiteesSpecification specification)
     {
         var query = _context.Denonciations
             .Apply(specification.ToSQLiteExpression<Denonciation, DenonciationSQLite>());
-        
+
         var sortedQuery = query.OrderBy(d => d.Horodatage);
-        
+
         var results = sortedQuery
             .Skip(offset)
             .Take(limit)

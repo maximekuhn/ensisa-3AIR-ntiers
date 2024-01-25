@@ -66,12 +66,13 @@ public class DenonciationRepositoryDriver : DenonciationRepository
         return Task.FromResult(false);
     }
 
-    public async Task<(IEnumerable<Denonciation> Results, int Total)> GetSortDenonsiationsNonTraitee(int limit, int offset, FindDenonciationsNonTraiteesSpecification specification)
+    public async Task<(IEnumerable<Denonciation> Results, int Total)> GetSortDenonsiationsNonTraitee(int limit,
+        int offset, FindDenonciationsNonTraiteesSpecification specification)
     {
         var query = Denonciations.Where(specification.IsSatisfiedBy);
         var sortedQuery = query.OrderBy(d => d.Horodatage);
         var denonciations = sortedQuery.Skip(offset).Take(limit);
-        
+
         return (denonciations, Denonciations.Count);
     }
 }
