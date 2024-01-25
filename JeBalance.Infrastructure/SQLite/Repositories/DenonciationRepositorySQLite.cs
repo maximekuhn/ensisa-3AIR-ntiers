@@ -85,7 +85,7 @@ public class DenonciationRepositorySQLite : DenonciationRepository
         var query = _context.Denonciations
             .Apply(specification.ToSQLiteExpression<Denonciation, DenonciationSQLite>());
         
-        var sortedQuery = query.OrderByDescending(d => d.Horodatage);
+        var sortedQuery = query.OrderBy(d => d.Horodatage);
         
         var results = sortedQuery
             .Skip(offset)

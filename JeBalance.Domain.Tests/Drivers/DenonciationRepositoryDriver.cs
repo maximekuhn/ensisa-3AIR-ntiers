@@ -69,7 +69,7 @@ public class DenonciationRepositoryDriver : DenonciationRepository
     public async Task<(IEnumerable<Denonciation> Results, int Total)> GetSortDenonsiationsNonTraitee(int limit, int offset, FindDenonciationsNonTraiteesSpecification specification)
     {
         var query = Denonciations.Where(specification.IsSatisfiedBy);
-        var sortedQuery = query.OrderByDescending(d => d.Horodatage);
+        var sortedQuery = query.OrderBy(d => d.Horodatage);
         var denonciations = sortedQuery.Skip(offset).Take(limit);
         
         return (denonciations, Denonciations.Count);
