@@ -1,11 +1,15 @@
+using JeBalance.API.Interne.Securisee.Authentication;
 using JeBalance.API.Interne.Securisee.Parameters;
-using JeBalance.API.Interne.Securisee.Resources;
 using JeBalance.Domain.Queries.Denonciations;
+using JeBalance.Domain.Queries.Informateurs;
+using JeBalance.Domain.Queries.Suspects;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JeBalance.API.Interne.Securisee.Controllers;
 
+[Authorize(Roles = UserRoles.AdministrateurFiscale)]
 [Route("/api/[controller]")]
 [ApiController]
 public class DenonciationController : ControllerBase
@@ -24,6 +28,17 @@ public class DenonciationController : ControllerBase
         var getDenonciationsNonTraiteesQuery =
             new GetDenonciationsNonTraiteesQuery((parameter.Limit, parameter.Offset));
         var (denonciations, total) = await _mediator.Send(getDenonciationsNonTraiteesQuery);
-        return Ok(denonciations.Select(denonciation => new DenonciationAPI(denonciation)));
+
+        var denonciationGetApiList = new List<DenonciationGetAPI>();
+
+        foreach (var denonciation in denonciations)
+        {
+            var informateur = await _mediator.Send(new GetInformateurByIdQuery(denonciation.InformateurId));
+            var suspect = await _mediator.Send(new GetSuspectByIdQuery(denonciation.SuspectId));
+
+            denonciationGetApiList.Add(new DenonciationGetAPI(denonciation, informateur, suspect));
+        }
+
+        return Ok(denonciationGetApiList.ToArray());
     }
 }
