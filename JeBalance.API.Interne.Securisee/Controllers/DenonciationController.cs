@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JeBalance.API.Interne.Securisee.Controllers;
 
-[Authorize(Roles = UserRoles.AdministrationFiscale)]
+[Authorize(Roles = UserRoles.AdministrateurFiscale)]
 [Route("/api/[controller]")]
 [ApiController]
 public class DenonciationController : ControllerBase
