@@ -1,5 +1,6 @@
 using JeBalance.API.Interne.Securisee.Authentication;
 using JeBalance.API.Interne.Securisee.Parameters;
+using JeBalance.API.Interne.Securisee.Resources;
 using JeBalance.Domain.Queries.Denonciations;
 using JeBalance.Domain.Queries.Informateurs;
 using JeBalance.Domain.Queries.Suspects;

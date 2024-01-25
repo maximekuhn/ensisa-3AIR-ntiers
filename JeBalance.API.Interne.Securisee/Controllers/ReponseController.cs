@@ -1,8 +1,9 @@
 using JeBalance.Domain.Commands.Reponses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using JeBalance.API.Interne.Securisee.Resources;
 
-using JeBalance.API.Interne.Securisee;
+namespace JeBalance.API.Interne.Securisee.Controllers;
 
 [ApiController]
 [Route("/api/[controller]")]
