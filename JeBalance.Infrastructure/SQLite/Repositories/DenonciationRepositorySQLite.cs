@@ -80,7 +80,7 @@ public class DenonciationRepositorySQLite : DenonciationRepository
         return true;
     }
 
-    public Task<(IEnumerable<Denonciation> Results, int Total)> GetSortDenonsiationsNonTraitee(int limit, int offset,
+    public Task<(IEnumerable<Denonciation> Results, int Total)> GetSortedDenonciationsNonTraitees(int limit, int offset,
         FindDenonciationsNonTraiteesSpecification specification)
     {
         var query = _context.Denonciations

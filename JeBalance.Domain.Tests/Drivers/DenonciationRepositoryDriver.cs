@@ -66,7 +66,7 @@ public class DenonciationRepositoryDriver : DenonciationRepository
         return Task.FromResult(false);
     }
 
-    public async Task<(IEnumerable<Denonciation> Results, int Total)> GetSortDenonsiationsNonTraitee(int limit,
+    public async Task<(IEnumerable<Denonciation> Results, int Total)> GetSortedDenonciationsNonTraitees(int limit,
         int offset, FindDenonciationsNonTraiteesSpecification specification)
     {
         var query = Denonciations.Where(specification.IsSatisfiedBy);

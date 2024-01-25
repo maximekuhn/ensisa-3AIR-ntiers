@@ -8,6 +8,6 @@ public interface DenonciationRepository : Repository<Denonciation, Guid>
 {
     public Task<bool> SetReponseId(Guid denonciationId, int reponseId);
 
-    public Task<(IEnumerable<Denonciation> Results, int Total)> GetSortDenonsiationsNonTraitee(int limit, int offset,
+    public Task<(IEnumerable<Denonciation> Results, int Total)> GetSortedDenonciationsNonTraitees(int limit, int offset,
         FindDenonciationsNonTraiteesSpecification specification);
 }

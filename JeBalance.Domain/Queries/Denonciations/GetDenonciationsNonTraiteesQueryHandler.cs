@@ -19,7 +19,7 @@ public class GetDenonciationsNonTraiteesQueryHandler : IRequestHandler<GetDenonc
     {
         var pagination = request.Pagination;
         var findDenonciationsNonTraiteesSpecification = new FindDenonciationsNonTraiteesSpecification();
-        var (denonciations, total) = await _denonciationRepository.GetSortDenonsiationsNonTraitee(pagination.Limit,
+        var (denonciations, total) = await _denonciationRepository.GetSortedDenonciationsNonTraitees(pagination.Limit,
             pagination.Offset,
             findDenonciationsNonTraiteesSpecification);
         return (denonciations, total);
