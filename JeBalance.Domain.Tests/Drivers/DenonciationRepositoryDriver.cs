@@ -1,5 +1,6 @@
 using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
+using JeBalance.Domain.Queries.Denonciations;
 using JeBalance.Domain.Repositories;
 
 namespace JeBalance.Domain.Tests.Drivers;
@@ -63,5 +64,17 @@ public class DenonciationRepositoryDriver : DenonciationRepository
         }
 
         return Task.FromResult(false);
+    }
+
+    public async Task<(IEnumerable<Denonciation> Results, int Total)> GetSortedDenonciationsNonTraitees(int limit,
+        int offset, FindDenonciationsNonTraiteesSpecification specification)
+    {
+        var denonciations = Denonciations
+            .Where(specification.IsSatisfiedBy)
+            .OrderBy(d => d.Horodatage)
+            .Skip(offset)
+            .Take(limit);
+
+        return (denonciations, Denonciations.Count);
     }
 }
