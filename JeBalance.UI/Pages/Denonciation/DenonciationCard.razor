@@ -1,25 +1,65 @@
-@page "/recherche"
-@inject DenonciationGetService Service
-@inject NavigationManager NavigationManager
+@page "/denonciation-result/{Id}"
+@using JeBalance.UI.Data.Services.PubliqueAPI
+@inject DenonciationGetService DenonciationService
 
-<h2>Recherche d'une dénonciation par ID</h2>
+<h2>Résultat de la dénonciation</h2>
 
-<EditForm Model="@denonciationId" OnValidSubmit="Redirect">
-    <div class="form-group">
-        <label for="denonciationId">Id de la dénonciation : </label>
-        <InputText class="form-control" id="denonciationId" @bind-Value="denonciationId"/>
+@if (denonciation != null)
+{
+    <div class="denonciation_result">
+        <h4>Renseignements sur la dénonciation</h4>
+        <p>ID de la dénonciation :<span class="netstat"> @Id</span></p>
+        <p>Heure de signalement : <span class="netstat">@denonciation.Horodatage</span></p>
+        <p>Type de délit : <span class="netstat">@denonciation.TypeDelit</span></p>
+        <p>Pays d'évasion : <span class="netstat">@denonciation.PaysEvasion</span></p>
     </div>
-    <div class="content">
-        <button type="submit" class="btn btn-primary">Rechercher</button>
+    @if (denonciation.Informateur != null)
+    {
+        <div class="denonciation_result">
+            <h4>Renseignements sur l'infomateur</h4>
+            <p>Informateur : <span class="netstat">@denonciation.Informateur.Nom @denonciation.Informateur.Prenom</span></p>
+            <p>Adresse : <span class="netstat">@denonciation.Informateur.Adresse.NumeroVoie @denonciation.Informateur.Adresse.NomVoie , @denonciation.Informateur.Adresse.CodePostal @denonciation.Informateur.Adresse.NomCommune</span></p>
+        </div>
+    }
+    else
+    {
+        <div class="denonciation_result">
+            <p>Informateur : Information non disponible</p>
+        </div>
+    }
+
+    @if (denonciation.Suspect != null)
+    {
+        <div class="denonciation_result">
+            <h4>Renseignements sur le suspect</h4>
+            <p>Suspect : <span class="netstat">@denonciation.Suspect.Nom @denonciation.Suspect.Prenom</span></p>
+            <p>Adresse : <span class="netstat">@denonciation.Suspect.Adresse.NumeroVoie @denonciation.Suspect.Adresse.NomVoie , @denonciation.Suspect.Adresse.CodePostal @denonciation.Suspect.Adresse.NomCommune</span></p>
+        </div>
+    }
+    else
+    {
+        <div class="denonciation_result">
+            <p>Suspect : Information non disponible</p>
+        </div>
+    }
+}
+else
+{
+    <div class="denonciation_result">
+        <p>Aucun ID correspondant à @Id n'a été trouvé.</p>
     </div>
-</EditForm>
+}
 
 @code {
-    private string denonciationId = string.Empty;
 
-    private async void Redirect()
+    [Parameter] public string Id { get; set; }
+
+    private DenonciationGetAPI denonciation;
+
+    protected override async Task OnInitializedAsync()
     {
-        NavigationManager.NavigateTo($"/denonciation-result/{denonciationId}");
+        denonciation = await DenonciationService.GetDenonciationAsync(Guid.Parse(Id));
     }
+
 
 }

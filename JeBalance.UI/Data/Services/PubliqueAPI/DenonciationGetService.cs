@@ -1,6 +1,6 @@
 using JeBalance.API.Publique.Resources;
 
-namespace JeBalance.UI.Data.Services;
+namespace JeBalance.UI.Data.Services.PubliqueAPI;
 
 public class DenonciationGetService : ServiceBase<DenonciationGetAPI, Guid>
 {

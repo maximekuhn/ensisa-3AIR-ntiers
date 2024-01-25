@@ -1,5 +1,5 @@
 using Blazored.Modal;
-using JeBalance.UI.Data.Services;
+using JeBalance.UI.Data.Services.PubliqueAPI;
 using JeBalance.UI.Data.Services.SecreteAPI;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 

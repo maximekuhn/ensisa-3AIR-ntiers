@@ -1,0 +1,26 @@
+@page "/recherche"
+@using JeBalance.UI.Data.Services.PubliqueAPI
+@inject DenonciationGetService Service
+@inject NavigationManager NavigationManager
+
+<h2>Recherche d'une dénonciation par ID</h2>
+
+<EditForm Model="@denonciationId" OnValidSubmit="Redirect">
+    <div class="form-group">
+        <label for="denonciationId">Id de la dénonciation : </label>
+        <InputText class="form-control" id="denonciationId" @bind-Value="denonciationId"/>
+    </div>
+    <div class="content">
+        <button type="submit" class="btn btn-primary">Rechercher</button>
+    </div>
+</EditForm>
+
+@code {
+    private string denonciationId = string.Empty;
+
+    private async void Redirect()
+    {
+        NavigationManager.NavigateTo($"/denonciation-result/{denonciationId}");
+    }
+
+}
