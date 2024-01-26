@@ -11,7 +11,7 @@ public class DenonciationGetAPI
 
     public DenonciationGetAPI(Denonciation denonciation, Informateur informateur, Suspect suspect)
     {
-        Id = denonciation.Id;
+        DenonciationId = denonciation.Id;
         TypeDelit = denonciation.TypeDelit;
         PaysEvasion = denonciation.PaysEvasion;
         Horodatage = denonciation.Horodatage;
@@ -20,7 +20,7 @@ public class DenonciationGetAPI
     }
 
     // Informations de la dénonciation
-    [JsonPropertyName("id")] public Guid Id { get; set; }
+    [JsonPropertyName("id")] public Guid DenonciationId { get; set; }
     [JsonPropertyName("typeDelit")] public TypeDelit TypeDelit { get; set; }
 
     [JsonPropertyName("paysEvasion")] public string? PaysEvasion { get; set; }
