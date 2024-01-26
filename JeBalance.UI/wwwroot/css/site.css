@@ -49,6 +49,10 @@ html, body {
 /*========================================================================
                          Titles
 ========================================================================*/
+.modal-title {
+    color: #000;
+}
+
 h2 {
     text-align: center;
     font-weight: bold;
@@ -57,7 +61,7 @@ h2 {
     color: #D428BA;
 }
 
-h3 {
+.fom-title {
     color: white;
     font-weight: bold;
     margin-bottom: 20px;
@@ -222,8 +226,16 @@ button[type="submit"] {
 }
 
 button[type="button"] {
-    background-color: #f44336;
+    background-color: #4CAF50;
     color: white;
+}
+
+button[type="submit"].btn-primary, button[type="button"].btn-primary {
+    background-color: #0d6efd; /* Bleu */
+}
+
+button[type="submit"].btn-secondary, button[type="button"].btn-secondary {
+    background-color: #6c757d; /* Gris */
 }
 
 .button-container {

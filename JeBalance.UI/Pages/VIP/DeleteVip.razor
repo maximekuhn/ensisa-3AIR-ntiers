@@ -3,9 +3,9 @@
 @inject VIPServices Service
 
 <span>Êtes-vous certain de vouloir supprimer définitivement ce VIP ?</span>
-<br/>
-<button @onclick="SendDelete" class="btn btn-danger">Supprimer</button>
-<button @onclick="@(async () => await BlazoredModal.CancelAsync())" class="btn btn-secondary">Annuler</button>
+<br/><br/>
+<button type="button" @onclick="SendDelete" class="btn-primary">Supprimer</button>
+<button type="button" @onclick="@(async () => await BlazoredModal.CancelAsync())" class="btn-secondary">Annuler</button>
 
 
 @code {
