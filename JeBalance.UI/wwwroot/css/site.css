@@ -213,7 +213,6 @@ button {
     border: none;
     color: white;
     padding: 10px 13px;
-    margin-top: 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -260,6 +259,10 @@ button:active {
 .table {
     margin-right: 100px;
     margin-left: 100px;
+}
+
+.text-center {
+    text-align: center;
 }
 
 .tableau-style {

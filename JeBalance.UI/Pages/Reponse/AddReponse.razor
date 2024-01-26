@@ -36,15 +36,6 @@
 
     public ReponseCreateAPI reponse = new();
 
-    // private Reponse _reponse = new Reponse();
-    // private bool isLoaded = false;
-
-    // protected override async Task OnInitializedAsync()
-    // {
-    //     // _reponse.Horodatage = DateTime.Now;
-    //     isLoaded = true;
-    // }
-
     private async Task HandleValidSubmit()
     {
         var id = await ServiceReponse.AddReponseAsync(

@@ -11,16 +11,17 @@
         <InputText class="form-control" id="denonciationId" @bind-Value="denonciationId"/>
     </div>
     <div class="content">
-        <button type="submit" class="btn btn-primary">Rechercher</button>
+        <button type="submit">Rechercher</button>
     </div>
 </EditForm>
 
 @code {
     private string denonciationId = string.Empty;
 
-    private async void Redirect()
+    private async Task Redirect()
     {
         NavigationManager.NavigateTo($"/denonciation-result/{denonciationId}");
     }
+
 
 }
