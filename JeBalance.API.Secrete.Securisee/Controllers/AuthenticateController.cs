@@ -6,9 +6,8 @@ namespace JeBalance.API.Secrete.Securisee.Controllers;
 
 [Route("/api/[controller]")]
 [ApiController]
-public class AuthenticateController: ControllerBase
+public class AuthenticateController : ControllerBase
 {
- 
     private readonly IAuthenticationHelper _authenticationHelper;
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly UserManager<ApplicationUser> _userManager;
@@ -37,7 +36,7 @@ public class AuthenticateController: ControllerBase
             expiration = authenticationResult.Expiration
         });
     }
-    
+
     [HttpPost]
     [Route("register-administrateur")]
     public async Task<IActionResult> RegisterAdministrateur([FromBody] RegisterModel model)
