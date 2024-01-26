@@ -1,10 +1,11 @@
 using JeBalance.API.Interne.Securisee.Resources;
+using JeBalance.API.Securite.Shared.Model;
 using JeBalance.Domain.Commands.Reponses;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-//TODO
-// [Authorize(Roles = UserRoles.AdministrateurFiscale)]
+[Authorize(Roles = UserRoles.AdministrateurFiscale)]
 [ApiController]
 [Route("/api/[controller]")]
 public class ReponseController : ControllerBase
