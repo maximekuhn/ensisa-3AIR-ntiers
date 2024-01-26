@@ -1,6 +1,9 @@
 using Blazored.Modal;
-using JeBalance.UI.Data.Services;
+using JeBalance.UI.Data.Services.InterneAPI;
+using JeBalance.UI.Data.Services.PubliqueAPI;
+using JeBalance.UI.Data.Services.SecreteAPI;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+using DenonciationServices = JeBalance.UI.Data.Services.PubliqueAPI.DenonciationServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +13,12 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<ProtectedSessionStorage>();
-builder.Services.AddScoped<DenonciationService>();
-builder.Services.AddScoped<DenonciationGetService>();
+builder.Services.AddScoped<DenonciationServices>();
+builder.Services.AddScoped<DenonciationGetServices>();
+builder.Services.AddScoped<VIPServices>();
+builder.Services.AddScoped<VIPGetServices>();
+builder.Services.AddScoped<JeBalance.UI.Data.Services.InterneAPI.DenonciationServices>();
+builder.Services.AddScoped<ReponseServices>();
 
 var app = builder.Build();
 

@@ -16,19 +16,41 @@
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered"/>
 </head>
 <body>
-@RenderBody()
+<div class="main-container">
+    <div class="navbar">
+        <ul class="ul-navbar">
+            <li>
+                <a id="home-link" class="active-green" href="/">
+                    <i class="fas fa-home"></i>
+                </a>
+            </li>
+            <li>
+                <a id="create-link" href="denonciation">DENONCER</a>
+            </li>
+            <li>
+                <a id="edit-link" href="recherche">CONSULTER</a>
+            </li>
+            <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+            <img id="logo" src="/favicon.ico" alt="Home"/>
+        </ul>
+    </div>
+    @RenderBody()
 
-<div id="blazor-error-ui">
-    <environment include="Staging,Production">
-        An error has occurred. This application may no longer respond until reloaded.
-    </environment>
-    <environment include="Development">
-        An unhandled exception has occurred. See browser dev tools for details.
-    </environment>
-    <a href="" class="reload">Reload</a>
-    <a class="dismiss">🗙</a>
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
 </div>
-
-<script src="_framework/blazor.server.js"></script>
+<footer>
+    <p>© 2024 albi.grainca@uha.fr - batuhan.goker@uha.fr - maxime.kuhn@uha.fr</p>
+</footer>
 </body>
 </html>

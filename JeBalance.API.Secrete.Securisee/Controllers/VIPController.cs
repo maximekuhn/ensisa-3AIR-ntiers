@@ -33,8 +33,8 @@ public class VIPController : ControllerBase
     public async Task<IActionResult> Delete(int vipId)
     {
         var command = new DeleteVIPCommand(vipId);
-        await _mediator.Send(command);
-        return Ok();
+        var deleteResult = await _mediator.Send(command);
+        return Ok(deleteResult);
     }
 
     [HttpGet]
@@ -42,6 +42,6 @@ public class VIPController : ControllerBase
     {
         var getVIPs = new GetVIPsQuery((parameters.Limit, parameters.Offset));
         var (vips, total) = await _mediator.Send(getVIPs);
-        return Ok(vips.Select(vip => new VIPAPI(vip)));
+        return Ok(vips.Select(vip => new VIPGetAPI(vip)));
     }
 }

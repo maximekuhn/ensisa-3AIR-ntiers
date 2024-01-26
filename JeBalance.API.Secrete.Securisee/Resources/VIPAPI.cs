@@ -7,6 +7,7 @@ public class VIPAPI
 {
     public VIPAPI()
     {
+        Adresse = new AdresseAPI();
     }
 
     public VIPAPI(VIP vip)

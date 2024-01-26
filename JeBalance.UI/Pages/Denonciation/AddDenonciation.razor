@@ -1,30 +1,15 @@
 @page "/denonciation"
-@inject DenonciationService Service
+@using JeBalance.UI.Data.Services.PubliqueAPI
+@inject DenonciationServices Services
 @inject NavigationManager NavigationManager
+@inject IModalService Modal
 
-<div class="navbar">
-    <ul class="ul-navbar">
-        <li>
-            <a id="home-link" class="active-green" href="index">
-                <i class="fas fa-home"></i>
-            </a>
-        </li>
-        <li>
-            <a id="create-link" href="create">DENONCER</a>
-        </li>
-        <li>
-            <a id="edit-link" href="consult">CONSULTER</a>
-        </li>
-        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
-        <img id="logo" src="/favicon.ico" alt="Home"/>
-    </ul>
-</div>
 
 <h2>Créez votre dénonciation</h2>
 
 <EditForm Model="@denonciation" OnValidSubmit="FormSubmitted">
     <div class="inter">
-        <h3>Renseignements sur le délit</h3>
+        <h3 class="fom-title">Renseignements sur le délit</h3>
         <div class="section">
             <!-- Type de délit -->
             <div class="form-group">
@@ -46,7 +31,7 @@
     </div>
     <hr>
     <div class="inter">
-        <h3>Renseignements sur le suspect</h3>
+        <h3 class="fom-title">Renseignements sur le suspect</h3>
         <div class="section">
             <!-- Informations du suspect -->
             <div class="form-group">
@@ -61,7 +46,7 @@
         <div class="section">
             <div class="form-group">
                 <label for="numVoieSuspect">Numéro de Voie du Suspect</label>
-                <InputNumber class="form-control" id="numVoieSuspect" @bind-Value="denonciation.Suspect.Adresse.NumeroVoie"/>
+                <InputNumber class="form-control" id="numVoieSuspect" @bind-Value="denonciation.Suspect.Adresse.NumeroVoie" min="0"/>
             </div>
             <div class="form-group">
                 <label for="nomVoieSuspect">Nom de Voie du Suspect</label>
@@ -71,7 +56,7 @@
         <div class="section">
             <div class="form-group">
                 <label for="cpSuspect">Code Postal du Suspect</label>
-                <InputNumber class="form-control" id="cpSuspect" @bind-Value="denonciation.Suspect.Adresse.CodePostal" placeholder="Exemple : 67000"/>
+                <InputNumber class="form-control" id="cpSuspect" @bind-Value="denonciation.Suspect.Adresse.CodePostal" placeholder="Exemple : 67000" min="0"/>
             </div>
             <div class="form-group">
                 <label for="communeSuspect">Commune du Suspect</label>
@@ -81,7 +66,7 @@
     </div>
     <hr>
     <div class="inter">
-        <h3>Renseignements sur l'informateur</h3>
+        <h3 class="fom-title">Renseignements sur l'informateur</h3>
         <div class="section">
             <!-- Informations de l'informateur -->
             <div class="form-group">
@@ -96,7 +81,7 @@
         <div class="section">
             <div class="form-group">
                 <label for="numVoieInformateur">Numéro de Voie de l'Informateur</label>
-                <InputNumber class="form-control" id="numVoieInformateur" @bind-Value="denonciation.Informateur.Adresse.NumeroVoie"/>
+                <InputNumber class="form-control" id="numVoieInformateur" @bind-Value="denonciation.Informateur.Adresse.NumeroVoie" min="0"/>
             </div>
             <div class="form-group">
                 <label for="nomVoieInformateur">Nom de Voie de l'Informateur</label>
@@ -106,7 +91,7 @@
         <div class="section">
             <div class="form-group">
                 <label for="cpInformateur">Code Postal de l'Informateur</label>
-                <InputNumber class="form-control" id="cpInformateur" @bind-Value="denonciation.Informateur.Adresse.CodePostal" placeholder="Exemple : 68000"/>
+                <InputNumber class="form-control" id="cpInformateur" @bind-Value="denonciation.Informateur.Adresse.CodePostal" placeholder="Exemple : 68000" min="0"/>
             </div>
             <div class="form-group">
                 <label for="communeInformateur">Commune de l'Informateur</label>
@@ -117,26 +102,34 @@
 
     <div class="button-container">
         <!-- Boutons -->
-        <button type="submit">Ajouter</button>
+        <button type="button" @onclick="ShowConfirmationModal">Ajouter</button>
     </div>
 </EditForm>
-
-<footer>
-    <p>© 2024 Fondement Corporation</p>
-</footer>
 
 @code {
     readonly DenonciationAPI denonciation = new();
 
-    private async void FormSubmitted()
+    private async Task FormSubmitted()
     {
-        var id = await Service.AddDenonciationAsync(denonciation);
+        var id = await Services.AddDenonciationAsync(denonciation);
         if (id == null || !id.HasValue)
         {
             throw new InvalidOperationException("Échec de l'ajout de la dénonciation ou ID null.");
         }
 
         NavigationManager.NavigateTo($"/denonciation-result/{id.Value}");
+    }
+
+    private async Task ShowConfirmationModal()
+    {
+        var parameters = new ModalParameters();
+        var modal = Modal.Show<ConfirmationDenonciation>("Confirmer la dénonciation", parameters);
+        var result = await modal.Result;
+
+        if (!result.Cancelled)
+        {
+            await FormSubmitted();
+        }
     }
 
 }

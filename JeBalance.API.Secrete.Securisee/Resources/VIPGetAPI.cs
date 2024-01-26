@@ -1,21 +1,24 @@
 using System.Text.Json.Serialization;
 using JeBalance.Domain.Model;
 
-namespace JeBalance.API.Interne.Securisee.Resources;
+namespace JeBalance.API.Secrete.Securisee.Resources;
 
-public class SuspectAPI
+public class VIPGetAPI
 {
-    public SuspectAPI()
+    public VIPGetAPI()
     {
         Adresse = new AdresseAPI();
     }
 
-    public SuspectAPI(Suspect source)
+    public VIPGetAPI(VIP vip)
     {
-        Nom = source.Nom;
-        Prenom = source.Prenom;
-        Adresse = new AdresseAPI(source.Adresse);
+        Id = vip.Id;
+        Nom = vip.Nom;
+        Prenom = vip.Prenom;
+        Adresse = new AdresseAPI(vip.Adresse);
     }
+
+    [JsonPropertyName("id")] public int Id { get; set; }
 
     [JsonPropertyName("nom")] public string Nom { get; set; }
 

@@ -9,10 +9,20 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: #f0f0f0;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .content {
-    margin-top: 500px;
+    margin-top: 30px;
     text-align: center;
 }
 
@@ -28,9 +38,21 @@ html, body {
     color: red;
 }
 
+.denonciation_result {
+    flex: 1;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
 /*========================================================================
                          Titles
 ========================================================================*/
+.modal-title {
+    color: #000;
+}
+
 h2 {
     text-align: center;
     font-weight: bold;
@@ -39,7 +61,7 @@ h2 {
     color: #D428BA;
 }
 
-h3 {
+.fom-title {
     color: white;
     font-weight: bold;
     margin-bottom: 20px;
@@ -76,7 +98,7 @@ h3 {
     margin: 0;
     padding: 0;
     height: 50px;
-    overflow-y: auto;
+    overflow-y: hidden;
     background-color: #333;
     display: flex;
 }
@@ -96,7 +118,6 @@ li a {
     text-align: center;
     font-weight: bold;
     padding: 13px;
-    min-width: 140px;
     text-decoration: none;
 }
 
@@ -129,7 +150,7 @@ li a:hover {
 form {
     background-color: #4a4a4a;
     border-radius: 15px;
-    padding: 10px;
+    padding: 50px;
     margin: 10px auto;
     width: fit-content;
     max-width: 600px;
@@ -166,6 +187,10 @@ input::placeholder {
     color: #888888;
 }
 
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
 .form-group {
     display: flex;
     flex-direction: column;
@@ -183,14 +208,33 @@ button {
     margin-right: 10px;
 }
 
+.button-style-red {
+    background-color: #f44336; /* Red */
+    border: none;
+    color: white;
+    padding: 10px 13px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
 button[type="submit"] {
     background-color: #4CAF50;
     color: white;
 }
 
 button[type="button"] {
-    background-color: #f44336;
+    background-color: #4CAF50;
     color: white;
+}
+
+button[type="submit"].btn-primary, button[type="button"].btn-primary {
+    background-color: #0d6efd; /* Bleu */
+}
+
+button[type="submit"].btn-secondary, button[type="button"].btn-secondary {
+    background-color: #6c757d; /* Gris */
 }
 
 .button-container {
@@ -207,6 +251,73 @@ button:active {
     background-color: #1a4f8b;
     color: #ffffff;
     transform: translateY(2px);
+}
+
+/*========================================================================
+                         List tab styling
+========================================================================*/
+.table {
+    margin-right: 100px;
+    margin-left: 100px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.tableau-style {
+    border-collapse: collapse;
+    min-width: 400px;
+    width: auto;
+    /* box-shadow: 0, 5px, 50px, rgba(0, 0, 0, 0.15); */
+    cursor: pointer;
+    margin: 100px auto;
+    border: 2px solid #333;
+}
+
+thead tr {
+    background-color: #333;
+    color: white;
+    text-align: left;
+}
+
+th, td {
+    padding: 15px 20px;
+}
+
+tbody tr, td, th {
+    border: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+    background-color: white;
+}
+
+.form-inline {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.netstat {
+    font-weight: bold;
+}
+
+.tables-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.table-container {
+    width: 45%; /* ajustez cette valeur en fonction de vos besoins */
+}
+
+.table-container:first-child {
+    border-right: 2px solid #dadde1;
+    padding-right: 20px; /* ajouter un espace à droite du tableau */
+}
+
+.table-container:last-child {
+    padding-left: 20px; /* ajouter un espace à gauche du tableau */
 }
 
 /*========================================================================

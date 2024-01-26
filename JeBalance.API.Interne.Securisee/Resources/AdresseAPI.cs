@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using JeBalance.Domain.ValueObjects;
 
-namespace JeBalance.API.Interne.Securisee;
+namespace JeBalance.API.Interne.Securisee.Resources;
 
 public class AdresseAPI
 {

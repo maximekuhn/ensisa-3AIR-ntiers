@@ -1,0 +1,74 @@
+@page "/get-all-vip"
+@using JeBalance.UI.Data.Services.SecreteAPI
+@inject VIPGetServices ServiceGet
+
+<h2>Liste de tous les VIP</h2>
+
+@if (vips == null)
+{
+    <p>
+        <em>Chargement...</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Adresse</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var vip in vips)
+        {
+            <tr>
+                <td>@vip.Id</td>
+                <td>@vip.Nom</td>
+                <td>@vip.Prenom</td>
+                <td>@vip.Adresse.NumeroVoie @vip.Adresse.NomVoie , @vip.Adresse.NomCommune @vip.Adresse.CodePostal</td>
+                <td class="text-center">
+                    <button @onclick="@(() => Delete(vip.Id))" class="btn btn-sm btn-danger button-style-red">
+                        <span class="oi oi-trash"></span>
+                    </button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private VIPGetAPI[] vips;
+
+    [CascadingParameter]
+    public IModalService Modal { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await FetchData();
+    }
+
+    private async Task FetchData()
+    {
+        vips = await ServiceGet.GetVIPsAsync(50, 0); // Récupère les 50 premiers VIP
+    }
+
+    async Task Delete(int id)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(VIPGetAPI.Id), id);
+
+        var modal = Modal.Show<DeleteVip>("Suppression définitive d'un VIP", parameters);
+        var result = await modal.Result;
+
+        if (!result.Cancelled)
+        {
+            await FetchData();
+        }
+    }
+
+}
