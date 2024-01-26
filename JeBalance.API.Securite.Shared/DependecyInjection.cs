@@ -1,9 +1,7 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -12,11 +10,12 @@ namespace JeBalance.API.Securite.Shared;
 
 public static class DependecyInjection
 {
-    public static IServiceCollection AddSecurity(this IServiceCollection services, string dataSource, string validAudience, string validIssuer, string jwtSecret)
+    public static IServiceCollection AddSecurity(this IServiceCollection services, string dataSource,
+        string validAudience, string validIssuer, string jwtSecret)
     {
         // IConfiguration root = new ConfigurationBuilder();
-        
-        
+
+
         // For entity framework
         services.AddDbContext<AuthDbContext>(options =>
             options.UseSqlite(dataSource));
