@@ -1,6 +1,6 @@
 using System.Text;
 using JeBalance.API.Interne.Securisee;
-using JeBalance.API.Interne.Securisee.Authentication;
+using JeBalance.API.Securite.Shared.Authentication;
 using JeBalance.Domain;
 using JeBalance.Infrastructure;
 using JeBalance.Infrastructure.SQLite;
