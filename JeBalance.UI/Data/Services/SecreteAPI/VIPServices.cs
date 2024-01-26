@@ -11,7 +11,7 @@ public class VIPServices : ServiceBase<VIPAPI, int>
     public VIPServices(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory, null)
     {
         _baseUrl = configuration["ApiSecrete:BaseUrl"] ??
-                   throw new InvalidOperationException("API Base URL not configured");
+                   throw new InvalidOperationException("ApiSecrete:BaseUrl not configured");
     }
 
     public async Task<int> AddVIPAsync(VIPAPI vip)
