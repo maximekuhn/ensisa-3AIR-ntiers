@@ -1,4 +1,3 @@
-using JeBalance.API.Securite.Shared;
 using JeBalance.API.Securite.Shared.Helper;
 using JeBalance.API.Securite.Shared.Model;
 using Microsoft.AspNetCore.Identity;
@@ -45,7 +44,7 @@ public class AuthenticateController : ControllerBase
         if (adminExists != null)
             return StatusCode(StatusCodes.Status409Conflict,
                 new Response
-                    { Status = "Error", Message = "An administrateur with the same email already exists !" });
+                { Status = "Error", Message = "An administrateur with the same email already exists !" });
 
         var admin = new ApplicationUser
         {
