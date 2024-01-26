@@ -2,6 +2,8 @@
 @using JeBalance.UI.Data.Services.PubliqueAPI
 @inject DenonciationServices Services
 @inject NavigationManager NavigationManager
+@inject IModalService Modal
+
 
 <h2>Créez votre dénonciation</h2>
 
@@ -100,7 +102,7 @@
 
     <div class="button-container">
         <!-- Boutons -->
-        <button type="submit">Ajouter</button>
+        <button type="button" @onclick="ShowConfirmationModal">Ajouter</button>
     </div>
 </EditForm>
 
@@ -116,6 +118,18 @@
         }
 
         NavigationManager.NavigateTo($"/denonciation-result/{id.Value}");
+    }
+
+    private async Task ShowConfirmationModal()
+    {
+        var parameters = new ModalParameters();
+        var modal = Modal.Show<ConfirmationDenonciation>("Confirmer la dénonciation", parameters);
+        var result = await modal.Result;
+
+        if (!result.Cancelled)
+        {
+            await FormSubmitted();
+        }
     }
 
 }
