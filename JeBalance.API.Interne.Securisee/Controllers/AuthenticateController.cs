@@ -63,7 +63,7 @@ public class AuthenticateController : ControllerBase
         if (adminExists != null)
             return StatusCode(StatusCodes.Status409Conflict,
                 new Response
-                    { Status = "Error", Message = "An administrateur fiscal with the same email already exists !" });
+                { Status = "Error", Message = "An administrateur fiscal with the same email already exists !" });
 
         var admin = new ApplicationUser
         {
@@ -98,7 +98,7 @@ public class AuthenticateController : ControllerBase
         if (adminExists != null)
             return StatusCode(StatusCodes.Status409Conflict,
                 new Response
-                    { Status = "Error", Message = "An administrateur with the same email already exists !" });
+                { Status = "Error", Message = "An administrateur with the same email already exists !" });
 
         var admin = new ApplicationUser
         {
