@@ -17,6 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\JeBalance.API.Securite.Shared\JeBalance.API.Securite.Shared.csproj"/>
         <ProjectReference Include="..\JeBalance.Infrastructure\JeBalance.Infrastructure.csproj"/>
     </ItemGroup>
 

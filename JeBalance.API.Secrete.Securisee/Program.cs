@@ -1,4 +1,5 @@
 using JeBalance.API.Secrete.Securisee;
+using JeBalance.API.Securite.Shared;
 using JeBalance.Domain;
 using JeBalance.Infrastructure;
 using JeBalance.Infrastructure.SQLite;
@@ -12,14 +13,17 @@ services.AddDbContext<DatabaseContext>(
     options => options.UseSqlite(builder.Configuration.GetConnectionString("localdb")), ServiceLifetime.Scoped,
     ServiceLifetime.Transient);
 
+// Swagger
+services.AddEndpointsApiExplorer();
+
+// Configure security
+services.AddSecurity(builder.Configuration.GetConnectionString("localdb"), builder.Configuration["JWT:ValidAudience"],
+    builder.Configuration["JWT:ValidIssuer"], builder.Configuration["JWT:Secret"]);
+
 services.AddApplication();
 services.AddDomain();
 services.AddInfrastructure();
 services.AddControllers();
-
-// Swagger
-services.AddEndpointsApiExplorer();
-services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -31,6 +35,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

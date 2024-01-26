@@ -1,13 +1,16 @@
 using JeBalance.API.Secrete.Securisee.Parameters;
 using JeBalance.API.Secrete.Securisee.Resources;
+using JeBalance.API.Securite.Shared.Model;
 using JeBalance.Domain.Commands.VIPs;
 using JeBalance.Domain.Queries.VIPs;
 using JeBalance.Domain.ValueObjects;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JeBalance.API.Secrete.Securisee.Controllers;
 
+[Authorize(Roles = UserRoles.Administrateur)]
 [ApiController]
 [Route("/api/[controller]")]
 public class VIPController : ControllerBase

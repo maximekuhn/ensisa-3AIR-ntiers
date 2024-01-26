@@ -3,7 +3,7 @@ using JeBalance.API.Securite.Shared.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace JeBalance.API.Interne.Securisee.Controllers;
+namespace JeBalance.API.Secrete.Securisee.Controllers;
 
 [Route("/api/[controller]")]
 [ApiController]
@@ -13,12 +13,12 @@ public class AuthenticateController : ControllerBase
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public AuthenticateController(IAuthenticationHelper authenticationHelper, RoleManager<IdentityRole> roleManager,
-        UserManager<ApplicationUser> userManager)
+    public AuthenticateController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager,
+        IConfiguration configuration, IAuthenticationHelper authenticationHelper)
     {
-        _authenticationHelper = authenticationHelper;
-        _roleManager = roleManager;
         _userManager = userManager;
+        _roleManager = roleManager;
+        _authenticationHelper = authenticationHelper;
     }
 
     [HttpPost]
@@ -37,14 +37,14 @@ public class AuthenticateController : ControllerBase
     }
 
     [HttpPost]
-    [Route("register-administrateur-fiscal")]
-    public async Task<IActionResult> RegisterAdministrateurFiscal([FromBody] RegisterModel model)
+    [Route("register-administrateur")]
+    public async Task<IActionResult> RegisterAdministrateur([FromBody] RegisterModel model)
     {
         var adminExists = await _userManager.FindByEmailAsync(model.Email);
         if (adminExists != null)
             return StatusCode(StatusCodes.Status409Conflict,
                 new Response
-                { Status = "Error", Message = "An administrateur fiscal with the same email already exists !" });
+                { Status = "Error", Message = "An administrateur with the same email already exists !" });
 
         var admin = new ApplicationUser
         {
@@ -58,16 +58,16 @@ public class AuthenticateController : ControllerBase
                 new Response
                 {
                     Status = "Error",
-                    Message = "Administrateur fiscal creation failed! Please check user details and try again."
+                    Message = "Administrateur creation failed! Please check user details and try again."
                 });
 
 
-        if (!await _roleManager.RoleExistsAsync(UserRoles.AdministrateurFiscale))
-            await _roleManager.CreateAsync(new IdentityRole(UserRoles.AdministrateurFiscale));
+        if (!await _roleManager.RoleExistsAsync(UserRoles.Administrateur))
+            await _roleManager.CreateAsync(new IdentityRole(UserRoles.Administrateur));
 
-        if (await _roleManager.RoleExistsAsync(UserRoles.AdministrateurFiscale))
-            await _userManager.AddToRoleAsync(admin, UserRoles.AdministrateurFiscale);
+        if (await _roleManager.RoleExistsAsync(UserRoles.Administrateur))
+            await _userManager.AddToRoleAsync(admin, UserRoles.Administrateur);
 
-        return Ok(new Response { Status = "Success", Message = "Administrateur fiscal created successfully" });
+        return Ok(new Response { Status = "Success", Message = "Administrateur created successfully" });
     }
 }

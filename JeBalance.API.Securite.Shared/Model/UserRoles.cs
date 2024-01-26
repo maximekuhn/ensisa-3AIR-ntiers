@@ -1,4 +1,4 @@
-namespace JeBalance.API.Interne.Securisee.Authentication;
+namespace JeBalance.API.Securite.Shared.Model;
 
 public class UserRoles
 {
