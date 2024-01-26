@@ -37,7 +37,7 @@ public class UserAccountService
             HttpMethod.Post,
             $"{_baseUrl}");
         request.Headers.Add("Accept", "application/json");
-        request.Headers.Add("User-Agent", "ParkNGo");
+        request.Headers.Add("User-Agent", "JeBalance");
         var httpContent = new StringContent(
             JsonSerializer.Serialize(new { username, password }),
             Encoding.UTF8,
