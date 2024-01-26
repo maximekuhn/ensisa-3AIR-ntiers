@@ -1,1 +1,67 @@
 @page "/list-denonciation"
+@using DenonciationGetAPI = JeBalance.API.Interne.Securisee.Resources.DenonciationGetAPI
+@using JeBalance.UI.Data.Services.InterneAPI
+@inject DenonciationServices ServiceDenonciation
+@inject NavigationManager NavigationManager
+@inject IModalService Modal
+
+<h2>Liste des dénonciations non traitées</h2>
+
+@if (denonciations == null)
+{
+    <p>
+        <em>Chargement...</em>
+    </p>
+}
+else if (denonciations.Length == 0)
+{
+    <p>
+        <em>Aucune dénonciation non traitée.</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Type de Délit</th>
+            <th>Pays d'Évasion</th>
+            <th>Nom du Suspect</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var denonciation in denonciations)
+        {
+            <tr>
+                <td>@denonciation.TypeDelit</td>
+                <td>@denonciation.PaysEvasion</td>
+                <td>@denonciation.Suspect.Nom @denonciation.Suspect.Prenom</td>
+                <td class="text-center">
+                    <button @onclick="() => NavigateToReponse(denonciation.Id)" type="button">Répondre</button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private DenonciationGetAPI[] denonciations;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await FetchData();
+    }
+
+    private async Task FetchData()
+    {
+        denonciations = await ServiceDenonciation.GetDenonciationNonTraiteeAsync(10, 0);
+    }
+
+    private void NavigateToReponse(Guid id)
+    {
+        NavigationManager.NavigateTo($"/repondre/{id}");
+    }
+
+}
