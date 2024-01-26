@@ -10,7 +10,7 @@ public class ReponseServices : ServiceBase<ReponseCreateAPI, int>
     public ReponseServices(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory, null)
     {
         _baseUrl = configuration["ApiInterne:BaseUrl"] ??
-                   throw new InvalidOperationException("API Base URL not configured");
+                   throw new InvalidOperationException("ApiInterne:BaseUrl not configured");
     }
 
     public async Task<int> AddReponseAsync(Guid denonciationId, ReponseCreateAPI reponse)

@@ -11,7 +11,7 @@ public class DenonciationServices : ServiceBase<DenonciationGetAPI, Guid>
         null)
     {
         _baseUrl = configuration["ApiInterne:BaseUrl"] ??
-                   throw new InvalidOperationException("API Base URL not configured");
+                   throw new InvalidOperationException("ApiInterne:BaseUrl not configured");
     }
 
     public async Task<DenonciationGetAPI[]> GetDenonciationNonTraiteeAsync(int limit, int offset)

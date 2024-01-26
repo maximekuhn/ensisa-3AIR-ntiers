@@ -10,7 +10,7 @@ public class VIPGetServices : ServiceBase<VIPGetAPI, int>
     public VIPGetServices(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory, null)
     {
         _baseUrl = configuration["ApiSecrete:BaseUrl"] ??
-                   throw new InvalidOperationException("API Base URL not configured");
+                   throw new InvalidOperationException("ApiSecrete:BaseUrl not configured");
     }
 
     public async Task<VIPGetAPI[]> GetVIPsAsync(int limit, int offset)
