@@ -1,14 +1,9 @@
-using System.Text;
 using JeBalance.API.Secrete.Securisee;
 using JeBalance.API.Securite.Shared;
 using JeBalance.Domain;
 using JeBalance.Infrastructure;
 using JeBalance.Infrastructure.SQLite;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -22,7 +17,7 @@ services.AddDbContext<DatabaseContext>(
 services.AddEndpointsApiExplorer();
 
 // Configure security
-SecurityConfigurer.ConfigureSecurity(services, builder);
+services.AddSecurity(builder);
 
 services.AddApplication();
 services.AddDomain();

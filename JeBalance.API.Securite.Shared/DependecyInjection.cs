@@ -10,18 +10,21 @@ using Microsoft.OpenApi.Models;
 
 namespace JeBalance.API.Securite.Shared;
 
-public static class SecurityConfigurer
+public static class DependecyInjection
 {
-    public static void ConfigureSecurity(IServiceCollection services, WebApplicationBuilder builder)
+    public static IServiceCollection AddSecurity(this IServiceCollection services, WebApplicationBuilder builder)
     {
+        // IConfiguration root = new ConfigurationBuilder();
+        
+        
         // For entity framework
         services.AddDbContext<AuthDbContext>(options =>
-            options.UseSqlite(builder.Configuration.GetConnectionString("localdb")));
-        
+            options.UseSqlite(builder.Configuration.GetConnectionString("Data Source=../JeBalance.Infrastructure/LocalDatabase.db")));
+
         // For identity
         services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AuthDbContext>()
             .AddDefaultTokenProviders();
-        
+
         // Add authentication + JWT Bearer
         services.AddAuthentication(options =>
         {
@@ -41,7 +44,7 @@ public static class SecurityConfigurer
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
             };
         });
-        
+
         // Swagger
         builder.Services.AddSwaggerGen(c =>
         {
@@ -75,5 +78,6 @@ public static class SecurityConfigurer
                 }
             });
         });
+        return services;
     }
 }
