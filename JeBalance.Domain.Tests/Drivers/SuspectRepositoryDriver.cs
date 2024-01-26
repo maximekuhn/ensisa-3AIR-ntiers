@@ -13,11 +13,11 @@ public class SuspectRepositoryDriver : SuspectRepository
         Suspects = new List<Suspect>();
     }
 
-    public async Task<(IEnumerable<Suspect> Results, int Total)> Find(int limit, int offset,
+    public Task<(IEnumerable<Suspect> Results, int Total)> Find(int limit, int offset,
         Specification<Suspect>? specification)
     {
         var suspects = Suspects.Where(specification.IsSatisfiedBy).Skip(offset).Take(limit);
-        return (suspects, Suspects.Count);
+        return Task.FromResult((suspects, Suspects.Count));
     }
 
     public Task<Suspect> GetOne(int id)

@@ -44,7 +44,7 @@ public class DenonciationRepositorySQLite : DenonciationRepository
         return denonciationToSave.Id;
     }
 
-    public async Task<Guid> Update(Guid id, Denonciation denonciation)
+    public Task<Guid> Update(Guid id, Denonciation denonciation)
     {
         throw new NotImplementedException();
     }

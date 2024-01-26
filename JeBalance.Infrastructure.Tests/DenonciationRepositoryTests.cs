@@ -18,9 +18,9 @@ public class DenonciationRepositoryTests : RepositoryTest
     }
 
     [Fact]
-    public async Task ShouldFindAsync()
+    public Task ShouldFindAsync()
     {
-        // TODO
+        return Task.CompletedTask;
     }
 
     [Fact]

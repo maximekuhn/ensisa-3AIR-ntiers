@@ -26,9 +26,9 @@ public class ReponseRepositoryTests : RepositoryTest
     }
 
     [Fact]
-    public async Task ShouldFindAsync()
+    public Task ShouldFindAsync()
     {
-        // TODO
+        return Task.CompletedTask;
     }
 
     [Fact]

@@ -5,9 +5,9 @@ namespace JeBalance.Infrastructure.SQLite.Model;
 
 public class InformateurSQLite : Informateur
 {
-    [Column("id")] public int Id { get; set; }
-    [Column("nom")] public string Nom { get; set; }
-    [Column("prenom")] public string Prenom { get; set; }
-    [Column("calomniateur")] public bool EstCalomniateur { get; set; }
-    [Column("adresse")] public string Adresse { get; set; }
+    [Column("id")] public new int Id { get; set; }
+    [Column("nom")] public new string Nom { get; set; }
+    [Column("prenom")] public new string Prenom { get; set; }
+    [Column("calomniateur")] public new bool EstCalomniateur { get; set; }
+    [Column("adresse")] public new string Adresse { get; set; }
 }

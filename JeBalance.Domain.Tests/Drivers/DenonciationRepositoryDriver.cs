@@ -14,11 +14,11 @@ public class DenonciationRepositoryDriver : DenonciationRepository
 
     public List<Denonciation> Denonciations { get; }
 
-    public async Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset,
+    public Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset,
         Specification<Denonciation>? specification)
     {
         var denonciations = Denonciations.Where(specification.IsSatisfiedBy).Skip(offset).Take(limit);
-        return (denonciations, Denonciations.Count);
+        return Task.FromResult((denonciations, Denonciations.Count));
     }
 
     public Task<Denonciation> GetOne(Guid id)
@@ -66,7 +66,7 @@ public class DenonciationRepositoryDriver : DenonciationRepository
         return Task.FromResult(false);
     }
 
-    public async Task<(IEnumerable<Denonciation> Results, int Total)> GetSortedDenonciationsNonTraitees(int limit,
+    public Task<(IEnumerable<Denonciation> Results, int Total)> GetSortedDenonciationsNonTraitees(int limit,
         int offset, FindDenonciationsNonTraiteesSpecification specification)
     {
         var denonciations = Denonciations
@@ -75,6 +75,6 @@ public class DenonciationRepositoryDriver : DenonciationRepository
             .Skip(offset)
             .Take(limit);
 
-        return (denonciations, Denonciations.Count);
+        return Task.FromResult((denonciations, Denonciations.Count));
     }
 }

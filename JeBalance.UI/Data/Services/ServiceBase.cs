@@ -112,7 +112,7 @@ public class ServiceBase<TSourceType, TId>
         return request;
     }
 
-    public async Task<TSourceType[]> SendGetAllPaginatedRequest(HttpRequestMessage request)
+    public async Task<TSourceType[]?> SendGetAllPaginatedRequest(HttpRequestMessage request)
     {
         var client = _clientFactory.CreateClient();
 
@@ -124,7 +124,7 @@ public class ServiceBase<TSourceType, TId>
         return data;
     }
 
-    public async Task<TSourceType> SendGetOneRequest(HttpRequestMessage request)
+    public async Task<TSourceType?> SendGetOneRequest(HttpRequestMessage request)
     {
         var client = _clientFactory.CreateClient();
 
@@ -136,7 +136,7 @@ public class ServiceBase<TSourceType, TId>
         return data;
     }
 
-    public async Task<TId> SendAddRequest(HttpRequestMessage request)
+    public async Task<TId?> SendAddRequest(HttpRequestMessage request)
     {
         var client = _clientFactory.CreateClient();
 
@@ -148,7 +148,7 @@ public class ServiceBase<TSourceType, TId>
         return id;
     }
 
-    public async Task<TId> SendUpdateRequest(HttpRequestMessage request)
+    public async Task<TId?> SendUpdateRequest(HttpRequestMessage request)
     {
         var client = _clientFactory.CreateClient();
 

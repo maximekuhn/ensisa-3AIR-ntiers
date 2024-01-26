@@ -34,7 +34,7 @@ public class CustomAuthenticationStateProvider : AuthenticationStateProvider
         }
     }
 
-    public async Task<string> GetJWT()
+    public async Task<string?> GetJWT()
     {
         try
         {
