@@ -1,10 +1,7 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+using JeBalance.API.Securite.Shared;
 using JeBalance.API.Securite.Shared.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 namespace JeBalance.API.Interne.Securisee.Controllers;
 
@@ -12,6 +9,7 @@ namespace JeBalance.API.Interne.Securisee.Controllers;
 [ApiController]
 public class AuthenticateController : ControllerBase
 {
+    private readonly IAuthenticationHelper _authenticationHelper;
     private readonly IConfiguration _configuration;
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly UserManager<ApplicationUser> _userManager;
@@ -22,37 +20,24 @@ public class AuthenticateController : ControllerBase
         _userManager = userManager;
         _roleManager = roleManager;
         _configuration = configuration;
+
+        // TODO: use dependency injection
+        _authenticationHelper = new AuthenticationHelper(_configuration, _roleManager, _userManager);
     }
 
     [HttpPost]
     [Route("login")]
     public async Task<IActionResult> Login([FromBody] LoginModel model)
     {
-        var user = await _userManager.FindByEmailAsync(model.Email);
-        if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+        var authenticationResult = await _authenticationHelper.Login(model);
+        if (!authenticationResult.Success) return Unauthorized();
+        return Ok(new
         {
-            var userRoles = await _userManager.GetRolesAsync(user);
-
-            var authClaims = new List<Claim>
-            {
-                new(ClaimTypes.Name, user.UserName),
-                new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
-
-            foreach (var userRole in userRoles) authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-
-            var token = GetToken(authClaims);
-
-            return Ok(new
-            {
-                username = user.UserName,
-                role = userRoles.FirstOrDefault(),
-                token = new JwtSecurityTokenHandler().WriteToken(token),
-                expiration = token.ValidTo
-            });
-        }
-
-        return Unauthorized();
+            username = authenticationResult.Username,
+            role = authenticationResult.Role,
+            token = authenticationResult.Token,
+            expiration = authenticationResult.Expiration
+        });
     }
 
     [HttpPost]
@@ -63,7 +48,7 @@ public class AuthenticateController : ControllerBase
         if (adminExists != null)
             return StatusCode(StatusCodes.Status409Conflict,
                 new Response
-                { Status = "Error", Message = "An administrateur fiscal with the same email already exists !" });
+                    { Status = "Error", Message = "An administrateur fiscal with the same email already exists !" });
 
         var admin = new ApplicationUser
         {
@@ -98,7 +83,7 @@ public class AuthenticateController : ControllerBase
         if (adminExists != null)
             return StatusCode(StatusCodes.Status409Conflict,
                 new Response
-                { Status = "Error", Message = "An administrateur with the same email already exists !" });
+                    { Status = "Error", Message = "An administrateur with the same email already exists !" });
 
         var admin = new ApplicationUser
         {
@@ -123,20 +108,5 @@ public class AuthenticateController : ControllerBase
             await _userManager.AddToRoleAsync(admin, UserRoles.Administrateur);
 
         return Ok(new Response { Status = "Success", Message = "Administrateur created successfully" });
-    }
-
-    private JwtSecurityToken GetToken(List<Claim> authClaims)
-    {
-        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
-
-        var token = new JwtSecurityToken(
-            _configuration["JWT:ValidIssuer"],
-            _configuration["JWT:ValidAudience"],
-            expires: DateTime.Now.AddHours(3),
-            claims: authClaims,
-            signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-        );
-
-        return token;
     }
 }
