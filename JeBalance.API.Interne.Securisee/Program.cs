@@ -17,7 +17,7 @@ services.AddDbContext<DatabaseContext>(
 builder.Services.AddEndpointsApiExplorer();
 
 // Configure security
-services.AddSecurity(builder);
+services.AddSecurity(builder.Configuration.GetConnectionString("localdb"), builder.Configuration["JWT:ValidAudience"], builder.Configuration["JWT:ValidIssuer"], builder.Configuration["JWT:Secret"]);
 
 services.AddApplication();
 services.AddDomain();

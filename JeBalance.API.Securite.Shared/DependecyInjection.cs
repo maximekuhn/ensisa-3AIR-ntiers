@@ -12,14 +12,14 @@ namespace JeBalance.API.Securite.Shared;
 
 public static class DependecyInjection
 {
-    public static IServiceCollection AddSecurity(this IServiceCollection services, WebApplicationBuilder builder)
+    public static IServiceCollection AddSecurity(this IServiceCollection services, string dataSource, string validAudience, string validIssuer, string jwtSecret)
     {
         // IConfiguration root = new ConfigurationBuilder();
         
         
         // For entity framework
         services.AddDbContext<AuthDbContext>(options =>
-            options.UseSqlite(builder.Configuration.GetConnectionString("Data Source=../JeBalance.Infrastructure/LocalDatabase.db")));
+            options.UseSqlite(dataSource));
 
         // For identity
         services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AuthDbContext>()
@@ -39,14 +39,14 @@ public static class DependecyInjection
             {
                 ValidateIssuer = true,
                 ValidateAudience = true,
-                ValidAudience = builder.Configuration["JWT:ValidAudience"],
-                ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+                ValidAudience = validAudience,
+                ValidIssuer = validIssuer,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret))
             };
         });
 
         // Swagger
-        builder.Services.AddSwaggerGen(c =>
+        services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo
             {
