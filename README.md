@@ -25,8 +25,8 @@ dotnet ef database update --context DatabaseContext
 
 Un fichier `LocalDatabase.db` doit s'être créé dans `JeBalance.Infrastructure`.
 
-## Initialiser l'API interne sécurisée
-Se placer dans le répertoire `JeBalance.API.Interne.Securisee`.  
+## Initialiser l'authentification
+Se placer dans le répertoire `JeBalance.API.Securite.Shared`.  
 Initialiser la migration:
 ```shell
 dotnet ef migrations add initial --context AuthDbContext
