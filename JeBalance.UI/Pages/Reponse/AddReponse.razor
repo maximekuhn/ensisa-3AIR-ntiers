@@ -1,1 +1,56 @@
-@page "/repondre/{id}"
+@page "/repondre/{denonciationId:guid}"
+@using ReponseCreateAPI = JeBalance.API.Interne.Securisee.Resources.ReponseCreateAPI
+@using JeBalance.UI.Data.Services.InterneAPI
+@inject ReponseServices ServiceReponse
+@inject NavigationManager NavigationManager
+
+<h2>Répondre à la dénonciation</h2>
+
+
+<EditForm Model="@reponse" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator/>
+
+    <div class="form-group">
+        <label>Type de Réponse</label>
+        <InputSelect class="form-control" id="typeDelit" @bind-Value="reponse.TypeReponse">
+            @foreach (var repType in Enum.GetValues(typeof(TypeReponse)))
+            {
+                <option value="@repType">@repType</option>
+            }
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Rétribution (si applicable)</label>
+        <InputNumber @bind-Value="reponse.Retribution" class="form-control" min="0"/>
+    </div>
+
+    <button type="submit">Répondre</button>
+</EditForm>
+
+
+@code {
+
+    [Parameter]
+    public Guid denonciationId { get; set; }
+
+    public ReponseCreateAPI reponse = new();
+
+    // private Reponse _reponse = new Reponse();
+    // private bool isLoaded = false;
+
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     // _reponse.Horodatage = DateTime.Now;
+    //     isLoaded = true;
+    // }
+
+    private async Task HandleValidSubmit()
+    {
+        var id = await ServiceReponse.AddReponseAsync(
+            denonciationId, reponse);
+
+        NavigationManager.NavigateTo("/list-denonciation");
+    }
+
+}

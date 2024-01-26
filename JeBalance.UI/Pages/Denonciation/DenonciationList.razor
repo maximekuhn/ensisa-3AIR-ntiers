@@ -3,7 +3,6 @@
 @using JeBalance.UI.Data.Services.InterneAPI
 @inject DenonciationServices ServiceDenonciation
 @inject NavigationManager NavigationManager
-@inject IModalService Modal
 
 <h2>Liste des dénonciations non traitées</h2>
 
@@ -59,9 +58,9 @@ else
         denonciations = await ServiceDenonciation.GetDenonciationNonTraiteeAsync(10, 0);
     }
 
-    private void NavigateToReponse(Guid id)
+    private void NavigateToReponse(Guid denonciationId)
     {
-        NavigationManager.NavigateTo($"/repondre/{id}");
+        NavigationManager.NavigateTo($"/repondre/{denonciationId}");
     }
 
 }

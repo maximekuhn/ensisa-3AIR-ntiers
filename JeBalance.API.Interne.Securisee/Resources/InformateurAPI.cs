@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
-using JeBalance.API.Interne.Securisee.Resources;
 using JeBalance.Domain.Model;
+
+namespace JeBalance.API.Interne.Securisee.Resources;
 
 public class InformateurAPI
 {

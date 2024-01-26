@@ -13,9 +13,9 @@ public class ReponseServices : ServiceBase<ReponseCreateAPI, int>
                    throw new InvalidOperationException("API Base URL not configured");
     }
 
-    public async Task<int> AddReponseAsync(ReponseCreateAPI reponse)
+    public async Task<int> AddReponseAsync(Guid denonciationId, ReponseCreateAPI reponse)
     {
-        var request = await MakeAddRequest($"{_baseUrl}/{Controller}/create", reponse);
+        var request = await MakeAddRequest($"{_baseUrl}/{Controller}/create?denonciationId={denonciationId}", reponse);
         var id = await SendAddRequest(request);
         return id;
     }

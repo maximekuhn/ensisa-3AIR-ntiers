@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JeBalance.API.Interne.Securisee.Controllers;
 
+// [Authorize(Roles = UserRoles.AdministrateurFiscale)]
 [Route("/api/[controller]")]
 [ApiController]
 public class DenonciationController : ControllerBase
@@ -39,8 +40,6 @@ public class DenonciationController : ControllerBase
             denonciationGetApiList.Add(new DenonciationGetAPI(denonciation, informateur, suspect));
         }
 
-        var d = denonciationGetApiList.ToArray();
-
-        return Ok(d);
+        return Ok(denonciationGetApiList.ToArray());
     }
 }
