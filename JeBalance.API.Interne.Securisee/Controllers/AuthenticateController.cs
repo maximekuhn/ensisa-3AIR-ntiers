@@ -1,5 +1,4 @@
 using JeBalance.API.Securite.Shared;
-using JeBalance.API.Securite.Shared.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

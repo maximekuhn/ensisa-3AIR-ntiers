@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace JeBalance.API.Securite.Shared.Authentication;
+namespace JeBalance.API.Securite.Shared;
 
 public class AuthDbContext : IdentityDbContext<ApplicationUser>
 {

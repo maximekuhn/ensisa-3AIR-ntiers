@@ -1,4 +1,4 @@
-namespace JeBalance.API.Securite.Shared.Authentication;
+namespace JeBalance.API.Securite.Shared;
 
 public class Response
 {
