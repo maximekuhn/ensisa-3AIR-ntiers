@@ -13,8 +13,8 @@ public static class DependecyInjection
     public static IServiceCollection AddSecurity(this IServiceCollection services, string dataSource,
         string validAudience, string validIssuer, string jwtSecret)
     {
-        // IConfiguration root = new ConfigurationBuilder();
-
+        // For auth helper
+        services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
 
         // For entity framework
         services.AddDbContext<AuthDbContext>(options =>

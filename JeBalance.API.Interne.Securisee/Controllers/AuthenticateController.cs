@@ -12,14 +12,12 @@ public class AuthenticateController : ControllerBase
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public AuthenticateController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager,
-        IConfiguration configuration)
+    public AuthenticateController(IAuthenticationHelper authenticationHelper, RoleManager<IdentityRole> roleManager,
+        UserManager<ApplicationUser> userManager)
     {
-        _userManager = userManager;
+        _authenticationHelper = authenticationHelper;
         _roleManager = roleManager;
-
-        // TODO: use dependency injection
-        _authenticationHelper = new AuthenticationHelper(configuration, _roleManager, _userManager);
+        _userManager = userManager;
     }
 
     [HttpPost]
