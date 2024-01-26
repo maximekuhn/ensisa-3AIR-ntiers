@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace JeBalance.API.Securite.Shared;
+namespace JeBalance.API.Securite.Shared.Model;
 
 public class LoginModel
 {

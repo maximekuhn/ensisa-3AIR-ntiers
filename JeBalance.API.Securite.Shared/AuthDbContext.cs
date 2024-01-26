@@ -1,3 +1,4 @@
+using JeBalance.API.Securite.Shared.Model;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,23 +1,21 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using JeBalance.API.Securite.Shared.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace JeBalance.API.Securite.Shared;
+namespace JeBalance.API.Securite.Shared.Helper;
 
 public class AuthenticationHelper : IAuthenticationHelper
 {
     private readonly IConfiguration _configuration;
-    private readonly RoleManager<IdentityRole> _roleManager;
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public AuthenticationHelper(IConfiguration configuration, RoleManager<IdentityRole> roleManager,
-        UserManager<ApplicationUser> userManager)
+    public AuthenticationHelper(IConfiguration configuration, UserManager<ApplicationUser> userManager)
     {
         _configuration = configuration;
-        _roleManager = roleManager;
         _userManager = userManager;
     }
 

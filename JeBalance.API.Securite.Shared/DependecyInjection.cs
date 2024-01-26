@@ -1,4 +1,6 @@
 using System.Text;
+using JeBalance.API.Securite.Shared.Helper;
+using JeBalance.API.Securite.Shared.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
