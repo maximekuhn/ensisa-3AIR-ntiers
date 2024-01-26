@@ -9,7 +9,7 @@ public class UserSession
 
     [JsonPropertyName("role")] public string Role { get; set; }
 
-    [JsonPropertyName("driverid")] public int DriverId { get; set; }
+    [JsonPropertyName("driverId")] public int DriverId { get; set; }
 
     [JsonPropertyName("token")] public string Token { get; set; }
 

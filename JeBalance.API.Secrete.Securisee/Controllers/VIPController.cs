@@ -33,8 +33,8 @@ public class VIPController : ControllerBase
     public async Task<IActionResult> Delete(int vipId)
     {
         var command = new DeleteVIPCommand(vipId);
-        var res = await _mediator.Send(command);
-        return Ok(res);
+        var deleteResult = await _mediator.Send(command);
+        return Ok(deleteResult);
     }
 
     [HttpGet]
