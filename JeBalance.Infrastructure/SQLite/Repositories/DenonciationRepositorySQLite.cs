@@ -86,9 +86,9 @@ public class DenonciationRepositorySQLite : DenonciationRepository
         
         // Récupérer les IDs des suspects qui sont des VIPs
         var vipSuspectIds = await _context.Suspects
-            .Join(_context.VIPs, 
-                suspect => suspect.Nom, 
-                vip => vip.Nom,
+            .Join(_context.VIPs,
+                suspect => new { suspect.Nom, suspect.Prenom, suspect.Adresse },
+                vip => new { vip.Nom, vip.Prenom, vip.Adresse },
                 (suspect, vip) => suspect.Id)
             .ToListAsync();
 
