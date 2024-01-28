@@ -80,7 +80,8 @@ public class DenonciationRepositorySQLite : DenonciationRepository
         return true;
     }
 
-    public async Task<(IEnumerable<Denonciation> Results, int Total)> GetSortedDenonciationsNonTraitees(int limit, int offset,
+    public async Task<(IEnumerable<Denonciation> Results, int Total)> GetSortedDenonciationsNonTraitees(int limit,
+        int offset,
         FindDenonciationsNonTraiteesSpecification specification)
     {
         // Récupérer les IDs des suspects qui sont des VIPs
