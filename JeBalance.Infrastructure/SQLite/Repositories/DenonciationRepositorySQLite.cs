@@ -80,17 +80,33 @@ public class DenonciationRepositorySQLite : DenonciationRepository
         return true;
     }
 
-    public Task<(IEnumerable<Denonciation> Results, int Total)> GetSortedDenonciationsNonTraitees(int limit, int offset,
+    public async Task<(IEnumerable<Denonciation> Results, int Total)> GetSortedDenonciationsNonTraitees(int limit, int offset,
         FindDenonciationsNonTraiteesSpecification specification)
     {
-        var results = _context.Denonciations
+        // Récupérer les IDs des suspects qui sont des VIPs
+        var vipSuspectIds = await _context.Suspects
+            .Join(_context.VIPs,
+                suspect => new { suspect.Nom, suspect.Prenom, suspect.Adresse },
+                vip => new { vip.Nom, vip.Prenom, vip.Adresse },
+                (suspect, vip) => suspect.Id)
+            .ToListAsync();
+
+        // Filtrer les dénonciations pour exclure celles concernant des suspects VIPs
+        var filteredQuery = _context.Denonciations
             .Apply(specification.ToSQLiteExpression<Denonciation, DenonciationSQLite>())
+            .Where(d => !vipSuspectIds.Contains(d.IdSuspect));
+
+        // Compter le total des résultats après filtrage
+        var total = await filteredQuery.CountAsync();
+
+        // Appliquer le tri et la pagination
+        var results = await filteredQuery
             .OrderBy(d => d.Horodatage)
             .Skip(offset)
             .Take(limit)
-            .AsEnumerable()
-            .Select(denonciation => denonciation.ToDomain());
+            .Select(d => d.ToDomain())
+            .ToListAsync();
 
-        return Task.FromResult((results, _context.Denonciations.Count()));
+        return (results, total);
     }
 }
