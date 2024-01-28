@@ -10,9 +10,13 @@ public class DenonciationRepositoryDriver : DenonciationRepository
     public DenonciationRepositoryDriver()
     {
         Denonciations = new List<Denonciation>();
+        Suspects = new List<Suspect>();
+        VIPs = new List<VIP>();
     }
 
     public List<Denonciation> Denonciations { get; }
+    public List<Suspect> Suspects { get; }
+    public List<VIP> VIPs { get; }
 
     public Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset,
         Specification<Denonciation>? specification)
@@ -69,12 +73,27 @@ public class DenonciationRepositoryDriver : DenonciationRepository
     public Task<(IEnumerable<Denonciation> Results, int Total)> GetSortedDenonciationsNonTraitees(int limit,
         int offset, FindDenonciationsNonTraiteesSpecification specification)
     {
-        var denonciations = Denonciations
-            .Where(specification.IsSatisfiedBy)
+        // Récupérer les IDs des suspects qui sont des VIPs
+        var vipSuspectIds = Suspects
+            .Where(suspect => VIPs.Any(vip =>
+                vip.Nom == suspect.Nom && vip.Prenom == suspect.Prenom && vip.Adresse == suspect.Adresse))
+            .Select(suspect => suspect.Id)
+            .ToList();
+
+        // Filtrer les dénonciations pour exclure celles concernant des suspects VIPs
+        var filteredDenonciations = Denonciations
+            .Where(d => specification.IsSatisfiedBy(d) && !vipSuspectIds.Contains(d.SuspectId))
+            .ToList();
+
+        // Compter le total des résultats après filtrage
+        var total = filteredDenonciations.Count;
+
+        // Appliquer le tri et la pagination
+        var results = filteredDenonciations
             .OrderBy(d => d.Horodatage)
             .Skip(offset)
             .Take(limit);
 
-        return Task.FromResult((denonciations, Denonciations.Count));
+        return Task.FromResult((results, total));
     }
 }
