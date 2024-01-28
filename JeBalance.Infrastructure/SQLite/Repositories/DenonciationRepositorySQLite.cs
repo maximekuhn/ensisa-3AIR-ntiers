@@ -82,8 +82,6 @@ public class DenonciationRepositorySQLite : DenonciationRepository
 
     public async Task<(IEnumerable<Denonciation> Results, int Total)> GetSortedDenonciationsNonTraitees(int limit, int offset, FindDenonciationsNonTraiteesSpecification specification)
     {
-        // Todo : sa marche pt etre utiliser une autre manière
-        
         // Récupérer les IDs des suspects qui sont des VIPs
         var vipSuspectIds = await _context.Suspects
             .Join(_context.VIPs,
@@ -105,7 +103,7 @@ public class DenonciationRepositorySQLite : DenonciationRepository
             .OrderBy(d => d.Horodatage)
             .Skip(offset)
             .Take(limit)
-            .Select(d => d.ToDomain()) // Assurez-vous que la méthode ToDomain() convertit correctement les objets SQLite en objets de domaine
+            .Select(d => d.ToDomain())
             .ToListAsync();
 
         return (results, total);
