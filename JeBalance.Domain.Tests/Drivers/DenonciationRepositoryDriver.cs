@@ -72,10 +72,11 @@ public class DenonciationRepositoryDriver : DenonciationRepository
 
     public Task<(IEnumerable<Denonciation> Results, int Total)> GetSortedDenonciationsNonTraitees(int limit,
         int offset, FindDenonciationsNonTraiteesSpecification specification)
-    {   
+    {
         // Récupérer les IDs des suspects qui sont des VIPs
         var vipSuspectIds = Suspects
-            .Where(suspect => VIPs.Any(vip => vip.Nom == suspect.Nom && vip.Prenom == suspect.Prenom && vip.Adresse == suspect.Adresse))
+            .Where(suspect => VIPs.Any(vip =>
+                vip.Nom == suspect.Nom && vip.Prenom == suspect.Prenom && vip.Adresse == suspect.Adresse))
             .Select(suspect => suspect.Id)
             .ToList();
 

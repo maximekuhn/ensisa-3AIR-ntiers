@@ -44,8 +44,7 @@ else
 @code {
     private VIPGetAPI[] vips;
 
-    [CascadingParameter]
-    public IModalService Modal { get; set; } = default!;
+    [CascadingParameter] public IModalService Modal { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
