@@ -7,7 +7,7 @@ public class RepositoryTest
 {
     public RepositoryTest()
     {
-        var options = new DbContextOptionsBuilder<DbContext>()
+        var options = new DbContextOptionsBuilder<DatabaseContext>()
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
         Context = new DatabaseContext(options);
