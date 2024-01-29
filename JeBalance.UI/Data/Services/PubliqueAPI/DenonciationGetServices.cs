@@ -11,7 +11,7 @@ public class DenonciationGetServices : ServiceBase<DenonciationGetAPI, Guid>
         null)
     {
         _baseUrl = configuration["ApiPublique:BaseUrl"] ??
-                   throw new InvalidOperationException("API Base URL not configured");
+                   throw new InvalidOperationException("APIPublique:BaseUrl not configured");
     }
 
     public async Task<DenonciationGetAPI> GetDenonciationAsync(Guid id)
