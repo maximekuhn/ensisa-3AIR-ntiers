@@ -1,7 +1,10 @@
 @page "/get-all-vip"
 @attribute [Authorize(Roles = "Administrateur")]
+@inject AuthenticationStateProvider authStateProvider
 @using JeBalance.UI.Data.Services.SecreteAPI
 @inject VIPGetServices ServiceGet
+@inject NavigationManager NavigationManager
+
 
 <div class="navbar">
     <ul class="ul-navbar">
@@ -11,10 +14,15 @@
             </a>
         </li>
         <li>
+            <a id="edit-link" href="get-all-vip">LISTE VIP</a>
+        </li>
+        <li>
             <a id="create-link" href="ajout-vip">AJOUTER UN VIP</a>
         </li>
         <li>
-            <a id="edit-link" href="get-all-vip">LISTE VIP</a>
+            <a id="logout-secrete-button" @onclick="Logout" class="nav-link">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
         </li>
         <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
         <img id="logo" src="/favicon.ico" alt="Home"/>
@@ -87,6 +95,13 @@ else
         {
             await FetchData();
         }
+    }
+    
+    private async Task Logout()
+    {
+        var customASP = (CustomAuthenticationStateProvider)authStateProvider;
+        await customASP.UpdateAuthenticationState(null);
+        NavigationManager.NavigateTo("/login-secrete", true);
     }
 
 }

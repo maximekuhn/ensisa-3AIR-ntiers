@@ -2,7 +2,7 @@
 @inject UserAccountService userAccountService
 @inject IJSRuntime js
 @inject AuthenticationStateProvider authStateProvider
-@inject NavigationManager navManager
+@inject NavigationManager NavigationManager
 
 <div class="navbar" xmlns="http://www.w3.org/1999/html">
     <ul class="ul-navbar">
@@ -53,7 +53,18 @@
 
         var customASP = (CustomAuthenticationStateProvider)authStateProvider;
         await customASP.UpdateAuthenticationState(userSession);
-        navManager.NavigateTo("/get-all-vip", true);
+        NavigationManager.NavigateTo("/list-denonciation", true);
+    }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await authStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            NavigationManager.NavigateTo("/list-denonciation", true);
+        }
     }
 
 }
