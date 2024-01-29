@@ -39,18 +39,18 @@
 
 @code {
     private readonly RegisterModel _model = new();
-    private Response res = new();
+    private Response? _res = new();
 
     private async Task Register()
     {
-        res = await Service.SignupIntenreAsync(_model);
-        if (res.Status == "Success")
+        _res = await Service.SignupIntenreAsync(_model);
+        if (_res?.Status == "Success")
         {
             NavigationManager.NavigateTo("/login-interne", true);
         }
         else
         {
-            await js.InvokeVoidAsync("alert", res.Message);
+            await js.InvokeVoidAsync("alert", _res?.Message ?? "Unexpected error");
         }
     }
 
