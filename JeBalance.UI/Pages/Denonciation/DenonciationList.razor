@@ -1,4 +1,5 @@
 @page "/list-denonciation"
+@attribute [Authorize(Roles = "AdministrateurFiscale")]
 @using DenonciationGetAPI = JeBalance.API.Interne.Securisee.Resources.DenonciationGetAPI
 @using JeBalance.UI.Data.Services.InterneAPI
 @inject DenonciationServices ServiceDenonciation

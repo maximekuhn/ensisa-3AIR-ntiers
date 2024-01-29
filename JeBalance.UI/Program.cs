@@ -1,18 +1,23 @@
 using Blazored.Modal;
+using JeBalance.UI.Authentification;
 using JeBalance.UI.Data.Services.InterneAPI;
 using JeBalance.UI.Data.Services.PubliqueAPI;
 using JeBalance.UI.Data.Services.SecreteAPI;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using DenonciationServices = JeBalance.UI.Data.Services.PubliqueAPI.DenonciationServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddAuthenticationCore();
 builder.Services.AddBlazoredModal();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<ProtectedSessionStorage>();
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+builder.Services.AddSingleton<UserAccountService>();
 builder.Services.AddScoped<DenonciationServices>();
 builder.Services.AddScoped<DenonciationGetServices>();
 builder.Services.AddScoped<VIPServices>();

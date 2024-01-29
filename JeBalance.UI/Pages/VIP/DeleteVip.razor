@@ -1,4 +1,5 @@
 @page "/delete-vip"
+@attribute [Authorize(Roles = "Administrateur")]
 @using JeBalance.UI.Data.Services.SecreteAPI
 @inject VIPServices Service
 
