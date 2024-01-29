@@ -59,7 +59,7 @@
         var authState = await authStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
 
-        if (user.Identity.IsAuthenticated && user.IsInRole("AdministrateurFiscale"))
+        if (user.Identity.IsAuthenticated && user.IsInRole(UserRoles.AdministrateurFiscale))
         {
             NavigationManager.NavigateTo("/list-denonciation", true);
         }
