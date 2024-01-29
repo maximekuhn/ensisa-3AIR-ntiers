@@ -1,0 +1,68 @@
+@page "/signup-interne"
+@using JeBalance.API.Securite.Shared.Model
+@inject SignupServices Service
+@inject IJSRuntime js
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager NavigationManager
+
+<div class="navbar">
+    <ul class="ul-navbar">
+        <li>
+            <a id="home-link" class="active-green" href="/">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
+    </ul>
+</div>
+
+<h2>Inscrivez-vous à votre espace</h2>
+
+<div class="signup">
+    <label>Email</label>
+    <input @bind="_model.Email" class="form-control" placeholder="Email"/>
+    
+    <label>Username</label>
+    <input @bind="_model.Username" class="form-control" placeholder="Username"/>
+
+    <label>Mot de passe</label>
+    <input @bind="_model.Password" type="password" class="form-control" placeholder="Mot de passe"/>
+
+    <div class="text-center">
+        <button @onclick="Register" class="button">S'inscrire</button>
+    </div>
+    <div class="register-prompt">
+        <p>Déjà memebre? <a href="/login-interne">Connectez-vous</a></p>
+    </div>
+</div>
+
+@code {
+    private readonly RegisterModel _model = new();
+    private Response res = new();
+
+    private async Task Register()
+    {
+        res = await Service.SignupIntenreAsync(_model);
+        if (res.Status == "Success")
+        {
+            NavigationManager.NavigateTo("/login-interne", true);
+        }
+        else
+        {
+            await js.InvokeVoidAsync("alert", res.Message);
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await authStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated && user.IsInRole("AdministrateurFiscale"))
+        {
+            NavigationManager.NavigateTo("/list-denonciation", true);
+        }
+    }
+
+}
