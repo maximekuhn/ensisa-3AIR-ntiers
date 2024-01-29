@@ -9,8 +9,8 @@ public class ReponseServices : ServiceBase<ReponseCreateAPI, int>
     private const string Controller = "Reponse";
     private readonly string _baseUrl;
 
-    public ReponseServices(IHttpClientFactory clientFactory, 
-        IConfiguration configuration, 
+    public ReponseServices(IHttpClientFactory clientFactory,
+        IConfiguration configuration,
         AuthenticationStateProvider authStateProvider) : base(clientFactory, (CustomAuthenticationStateProvider)authStateProvider)
     {
         _baseUrl = configuration["ApiInterne:BaseUrl"] ??

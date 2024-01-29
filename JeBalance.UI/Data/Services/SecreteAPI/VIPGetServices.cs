@@ -10,8 +10,8 @@ public class VIPGetServices : ServiceBase<VIPGetAPI, int>
     private readonly string _baseUrl;
 
     public VIPGetServices(
-        IHttpClientFactory clientFactory, 
-        IConfiguration configuration, 
+        IHttpClientFactory clientFactory,
+        IConfiguration configuration,
         AuthenticationStateProvider authStateProvider) : base(clientFactory, (CustomAuthenticationStateProvider)authStateProvider)
     {
         _baseUrl = configuration["ApiSecrete:BaseUrl"] ??

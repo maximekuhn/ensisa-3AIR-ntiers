@@ -9,7 +9,7 @@ public class UserAccountService
     private readonly string _interneBaseUrl;
     private readonly string _secreteBaseUrl;
     private const string Controller = "Authenticate";
-    
+
     public UserAccountService(IHttpClientFactory clientFactory, IConfiguration configuration)
     {
         _clientFactory = clientFactory;
@@ -31,7 +31,7 @@ public class UserAccountService
         var session = await JsonSerializer.DeserializeAsync<UserSession>(responseStream);
         return session;
     }
-    
+
     public async Task<UserSession?> LoginSecreteAsync(string email, string password)
     {
         var request = MakeRequest($"{_secreteBaseUrl}/{Controller}/login", email, password);

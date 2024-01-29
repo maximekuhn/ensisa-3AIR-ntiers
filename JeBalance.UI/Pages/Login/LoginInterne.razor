@@ -4,7 +4,7 @@
 @inject AuthenticationStateProvider authStateProvider
 @inject NavigationManager navManager
 
-<div class="navbar">
+<div class="navbar" xmlns="http://www.w3.org/1999/html">
     <ul class="ul-navbar">
         <li>
             <a id="home-link" class="active-green" href="/">
@@ -16,22 +16,19 @@
     </ul>
 </div>
 
-<div class="row">
-    <div class="col-lg-4 offset-lg-4 pt-4 pb-4 border">
-        <div class="mb-3 text-center">
-            <h3>Connexion</h3>
-        </div>
-        <div class="mb-3">
-            <label>Email</label>
-            <input @bind="model.Email" class="form-control" placeholder="Email"/>
-        </div>
-        <div class="mb-3">
-            <label>Mot de passe</label>
-            <input @bind="model.Password" type="password" class="form-control" placeholder="Mot de passe"/>
-        </div>
-        <div class="mb-3 d-grid gap-2">
-            <button @onclick="Authenticate" class="btn btn-primary">Connexion</button>
-        </div>
+<h2>Connectez-vous à votre espace</h2>
+
+<div class="login">
+    <label>Email</label>
+    <input @bind="model.Email" class="form-control" placeholder="Email"/>
+
+    <label>Mot de passe</label>
+    <input @bind="model.Password" type="password" class="form-control" placeholder="Mot de passe"/>
+
+    <br>
+
+    <div class="text-center">
+        <button @onclick="Authenticate" class="button">Connexion</button>
     </div>
 </div>
 

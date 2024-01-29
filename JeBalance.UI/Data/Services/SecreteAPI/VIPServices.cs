@@ -11,8 +11,8 @@ public class VIPServices : ServiceBase<VIPAPI, int>
 
 
     public VIPServices(
-        IHttpClientFactory clientFactory, 
-        IConfiguration configuration, 
+        IHttpClientFactory clientFactory,
+        IConfiguration configuration,
         AuthenticationStateProvider authStateProvider) : base(clientFactory, (CustomAuthenticationStateProvider)authStateProvider)
     {
         _baseUrl = configuration["ApiSecrete:BaseUrl"] ??

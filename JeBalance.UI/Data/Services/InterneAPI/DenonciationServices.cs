@@ -9,8 +9,8 @@ public class DenonciationServices : ServiceBase<DenonciationGetAPI, Guid>
     private const string Controller = "Denonciation";
     private readonly string _baseUrl;
 
-    public DenonciationServices(IHttpClientFactory clientFactory, 
-        IConfiguration configuration, 
+    public DenonciationServices(IHttpClientFactory clientFactory,
+        IConfiguration configuration,
         AuthenticationStateProvider authStateProvider) : base(clientFactory, (CustomAuthenticationStateProvider)authStateProvider)
     {
         _baseUrl = configuration["ApiInterne:BaseUrl"] ??
