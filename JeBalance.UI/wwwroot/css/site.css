@@ -15,6 +15,29 @@ html, body {
     flex-direction: column;
 }
 
+.index-section-container {
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+}
+
+.index-section {
+    background-color: #4a4a4a;
+    color: white;
+    flex-grow: 1;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin: 10px;
+    border-radius: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.index-section:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 .main-container {
     flex: 1;
     display: flex;
@@ -201,6 +224,21 @@ input[type=number]::-webkit-inner-spin-button {
 /*======================================================================
                           Button styling
 =======================================================================*/
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
 button {
     padding: 10px 20px;
     border: none;

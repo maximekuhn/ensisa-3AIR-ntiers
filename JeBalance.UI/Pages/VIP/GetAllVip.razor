@@ -3,6 +3,24 @@
 @using JeBalance.UI.Data.Services.SecreteAPI
 @inject VIPGetServices ServiceGet
 
+<div class="navbar">
+    <ul class="ul-navbar">
+        <li>
+            <a id="home-link" class="active-green" href="/">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+        <li>
+            <a id="create-link" href="ajout-vip">AJOUTER UN VIP</a>
+        </li>
+        <li>
+            <a id="edit-link" href="get-all-vip">LISTE VIP</a>
+        </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
+    </ul>
+</div>
+
 <h2>Liste de tous les VIP</h2>
 
 @if (vips == null)

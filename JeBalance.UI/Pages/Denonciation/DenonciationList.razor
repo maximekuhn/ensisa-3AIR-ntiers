@@ -5,6 +5,21 @@
 @inject DenonciationServices ServiceDenonciation
 @inject NavigationManager NavigationManager
 
+<div class="navbar">
+    <ul class="ul-navbar">
+        <li>
+            <a id="home-link" class="active-green" href="/">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+        <li>
+            <a id="create-link" href="list-denonciation">LISTE DENONCIATION</a>
+        </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
+    </ul>
+</div>
+
 <h2>Liste des dénonciations non traitées</h2>
 
 @if (denonciations == null)

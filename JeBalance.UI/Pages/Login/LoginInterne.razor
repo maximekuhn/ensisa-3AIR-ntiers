@@ -4,6 +4,18 @@
 @inject AuthenticationStateProvider authStateProvider
 @inject NavigationManager navManager
 
+<div class="navbar">
+    <ul class="ul-navbar">
+        <li>
+            <a id="home-link" class="active-green" href="/">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
+    </ul>
+</div>
+
 <div class="row">
     <div class="col-lg-4 offset-lg-4 pt-4 pb-4 border">
         <div class="mb-3 text-center">
@@ -11,11 +23,11 @@
         </div>
         <div class="mb-3">
             <label>Email</label>
-            <input @bind="model.Email" class="form-control" placeholder="Email" />
+            <input @bind="model.Email" class="form-control" placeholder="Email"/>
         </div>
         <div class="mb-3">
             <label>Mot de passe</label>
-            <input @bind="model.Password" type="password" class="form-control" placeholder="Mot de passe" />
+            <input @bind="model.Password" type="password" class="form-control" placeholder="Mot de passe"/>
         </div>
         <div class="mb-3 d-grid gap-2">
             <button @onclick="Authenticate" class="btn btn-primary">Connexion</button>
@@ -24,6 +36,7 @@
 </div>
 
 @code {
+
     private class Model
     {
         public string Email { get; set; }
@@ -45,4 +58,5 @@
         await customASP.UpdateAuthenticationState(userSession);
         navManager.NavigateTo("/get-all-vip", true);
     }
+
 }
