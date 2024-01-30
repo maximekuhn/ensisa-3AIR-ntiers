@@ -1,7 +1,7 @@
 @page "/get-all-vip"
+@using JeBalance.UI.Data.Services.SecreteAPI
 @attribute [Authorize(Roles = "Administrateur")]
 @inject AuthenticationStateProvider authStateProvider
-@using JeBalance.UI.Data.Services.SecreteAPI
 @inject VIPGetServices ServiceGet
 @inject NavigationManager NavigationManager
 
@@ -43,7 +43,7 @@ else
     {
         <p>
             <em>Aucun VIP trouvé.</em>
-            </p>
+        </p>
     }
     else
     {
@@ -80,7 +80,8 @@ else
 @code {
     private VIPGetAPI[] vips;
 
-    [CascadingParameter] public IModalService Modal { get; set; } = default!;
+    [CascadingParameter]
+    public IModalService Modal { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
@@ -105,7 +106,7 @@ else
             await FetchData();
         }
     }
-    
+
     private async Task Logout()
     {
         var customASP = (CustomAuthenticationStateProvider)authStateProvider;

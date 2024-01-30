@@ -12,7 +12,8 @@ public class VIPGetServices : ServiceBase<VIPGetAPI, int>
     public VIPGetServices(
         IHttpClientFactory clientFactory,
         IConfiguration configuration,
-        AuthenticationStateProvider authStateProvider) : base(clientFactory, (CustomAuthenticationStateProvider)authStateProvider)
+        AuthenticationStateProvider authStateProvider) : base(clientFactory,
+        (CustomAuthenticationStateProvider)authStateProvider)
     {
         _baseUrl = configuration["ApiSecrete:BaseUrl"] ??
                    throw new InvalidOperationException("ApiSecrete:BaseUrl not configured");

@@ -62,8 +62,8 @@
             <p>Statut : <span class="netstat">@denonciation.Reponse.TypeReponse</span></p>
             @if (denonciation.Reponse.Retribution != null && denonciation.Reponse.TypeReponse.Equals(TypeReponse.Confirmation))
             {
-            <p>Retribution : <span class="netstat">@denonciation.Reponse.Retribution</span>€</p>
-            } 
+                <p>Retribution : <span class="netstat">@denonciation.Reponse.Retribution</span>€</p>
+            }
         </div>
     }
     else
@@ -82,7 +82,8 @@ else
 
 @code {
 
-    [Parameter] public string Id { get; set; }
+    [Parameter]
+    public string Id { get; set; }
 
     private DenonciationGetAPI denonciation;
 

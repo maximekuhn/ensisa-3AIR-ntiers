@@ -37,5 +37,4 @@ public class UserAccountService<TResponse, TSourceData>
         var res = await JsonSerializer.DeserializeAsync<TResponse>(responseStream);
         return res;
     }
-
 }

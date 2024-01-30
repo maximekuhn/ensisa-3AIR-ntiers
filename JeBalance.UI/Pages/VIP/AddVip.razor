@@ -1,7 +1,7 @@
 @page "/ajout-vip"
+@using JeBalance.UI.Data.Services.SecreteAPI
 @attribute [Authorize(Roles = "Administrateur")]
 @inject AuthenticationStateProvider authStateProvider
-@using JeBalance.UI.Data.Services.SecreteAPI
 @inject VIPServices Service
 @inject NavigationManager NavigationManager
 
@@ -82,7 +82,7 @@
 
         NavigationManager.NavigateTo("/get-all-vip", true);
     }
-    
+
     private async Task Logout()
     {
         var customASP = (CustomAuthenticationStateProvider)authStateProvider;

@@ -11,7 +11,8 @@ public class DenonciationServices : ServiceBase<DenonciationGetAPI, Guid>
 
     public DenonciationServices(IHttpClientFactory clientFactory,
         IConfiguration configuration,
-        AuthenticationStateProvider authStateProvider) : base(clientFactory, (CustomAuthenticationStateProvider)authStateProvider)
+        AuthenticationStateProvider authStateProvider) : base(clientFactory,
+        (CustomAuthenticationStateProvider)authStateProvider)
     {
         _baseUrl = configuration["ApiInterne:BaseUrl"] ??
                    throw new InvalidOperationException("ApiInterne:BaseUrl not configured");

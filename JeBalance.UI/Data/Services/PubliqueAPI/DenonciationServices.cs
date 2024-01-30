@@ -1,4 +1,5 @@
 using JeBalance.API.Publique.Resources;
+using JeBalance.UI.Data.Services.Error;
 
 namespace JeBalance.UI.Data.Services.PubliqueAPI;
 
@@ -14,7 +15,7 @@ public class DenonciationServices : ServiceBase<DenonciationAPI, Guid>
                    throw new InvalidOperationException("APIPublique:BaseUrl not configured");
     }
 
-    public async Task<Guid?> AddDenonciationAsync(DenonciationAPI denonciation)
+    public async Task<RequestResult<Guid>> AddDenonciationAsync(DenonciationAPI denonciation)
     {
         var request = await MakeAddRequest($"{_baseUrl}/{Controller}/create", denonciation);
         var id = await SendAddRequest(request);

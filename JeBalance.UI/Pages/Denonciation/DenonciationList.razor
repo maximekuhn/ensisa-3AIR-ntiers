@@ -1,8 +1,8 @@
 @page "/list-denonciation"
+@using DenonciationGetAPI = JeBalance.API.Interne.Securisee.Resources.DenonciationGetAPI
+@using JeBalance.UI.Data.Services.InterneAPI
 @attribute [Authorize(Roles = "AdministrateurFiscale")]
 @inject AuthenticationStateProvider authStateProvider
-@using JeBalance.UI.Data.Services.InterneAPI
-@using DenonciationGetAPI = JeBalance.API.Interne.Securisee.Resources.DenonciationGetAPI
 @inject DenonciationServices ServiceDenonciation
 @inject NavigationManager NavigationManager
 
@@ -84,7 +84,7 @@ else
     {
         NavigationManager.NavigateTo($"/repondre/{denonciationId}");
     }
-    
+
     private async Task Logout()
     {
         var customASP = (CustomAuthenticationStateProvider)authStateProvider;

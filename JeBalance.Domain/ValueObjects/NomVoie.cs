@@ -6,6 +6,7 @@ public class NomVoie : SimpleValueObject<string>
 {
     public const int MIN_LENGTH = 3;
     public const int MAX_LENGTH = 99;
+
     public NomVoie(string value) : base(value)
     {
     }

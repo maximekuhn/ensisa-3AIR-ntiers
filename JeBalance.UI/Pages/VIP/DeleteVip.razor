@@ -1,6 +1,6 @@
 @page "/delete-vip"
-@attribute [Authorize(Roles = "Administrateur")]
 @using JeBalance.UI.Data.Services.SecreteAPI
+@attribute [Authorize(Roles = "Administrateur")]
 @inject VIPServices Service
 
 <span>Êtes-vous certain de vouloir supprimer définitivement ce VIP ?</span>
@@ -11,9 +11,11 @@
 
 @code {
 
-    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+    [CascadingParameter]
+    BlazoredModalInstance BlazoredModal { get; set; }
 
-    [Parameter] public int Id { get; set; }
+    [Parameter]
+    public int Id { get; set; }
 
     private async void SendDelete()
     {

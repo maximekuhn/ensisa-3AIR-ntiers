@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 using JeBalance.Domain.ValueObjects;
 using JeBalance.Infrastructure.SQLite.Model;
 using Microsoft.EntityFrameworkCore;
