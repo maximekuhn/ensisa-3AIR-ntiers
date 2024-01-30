@@ -3,6 +3,7 @@
 @attribute [Authorize(Roles = "Administrateur")]
 @inject AuthenticationStateProvider authStateProvider
 @inject VIPServices Service
+@inject IJSRuntime js
 @inject NavigationManager NavigationManager
 
 <div class="navbar">
@@ -78,9 +79,17 @@
 
     private async void FormSubmitted()
     {
-        var id = await Service.AddVIPAsync(vip);
+        var requestResult = await Service.AddVIPAsync(vip);
 
+        if (requestResult.Errormessage != null)
+        {
+            await js.InvokeVoidAsync("alert", $"{requestResult.Errormessage}");
+        }
+        else
+        {
         NavigationManager.NavigateTo("/get-all-vip", true);
+        }
+
     }
 
     private async Task Logout()
