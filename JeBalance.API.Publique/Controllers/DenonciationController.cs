@@ -49,7 +49,7 @@ public class DenonciationController : ControllerBase
         var getSuspectByIdQuery = new GetSuspectByIdQuery(denonciation.SuspectId);
         var suspect = await _mediator.Send(getSuspectByIdQuery);
 
-        Reponse reponse = null;
+        Reponse? reponse = null;
         if (denonciation.ReponseId != null)
         {
             var getReponseByIdQuery = new GetReponseByIdQuery(denonciation.ReponseId.Value);

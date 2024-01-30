@@ -19,7 +19,7 @@ public class NomCommune : SimpleValueObject<string>
         if (trimmedValue.Length > MAX_LENGTH)
             throw new ApplicationException(
                 $"Le nom de commune ne peut pas excéder une longueur de plus de {MAX_LENGTH} caractères");
-        
+
         return value;
     }
 }

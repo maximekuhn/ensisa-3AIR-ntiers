@@ -19,7 +19,7 @@ public class NomVoie : SimpleValueObject<string>
         if (trimmedValue.Length > MAX_LENGTH)
             throw new ApplicationException(
                 $"Le nom de de la voie ne peut pas excéder une longueur de plus de {MAX_LENGTH} caractères");
-        
+
         return value;
     }
 }
