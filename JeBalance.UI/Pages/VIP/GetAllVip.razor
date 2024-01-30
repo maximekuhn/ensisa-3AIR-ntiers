@@ -39,33 +39,42 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Adresse</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var vip in vips)
-        {
+    @if (vips.Length == 0)
+    {
+        <p>
+            <em>Aucun VIP trouvé.</em>
+            </p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
             <tr>
-                <td>@vip.Id</td>
-                <td>@vip.Nom</td>
-                <td>@vip.Prenom</td>
-                <td>@vip.Adresse.NumeroVoie @vip.Adresse.NomVoie , @vip.Adresse.NomCommune @vip.Adresse.CodePostal</td>
-                <td class="text-center">
-                    <button @onclick="@(() => Delete(vip.Id))" class="btn btn-sm btn-danger button-style-red">
-                        <span class="oi oi-trash"></span>
-                    </button>
-                </td>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Adresse</th>
+                <th>Action</th>
             </tr>
-        }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            @foreach (var vip in vips)
+            {
+                <tr>
+                    <td>@vip.Id</td>
+                    <td>@vip.Nom</td>
+                    <td>@vip.Prenom</td>
+                    <td>@vip.Adresse.NumeroVoie @vip.Adresse.NomVoie , @vip.Adresse.NomCommune @vip.Adresse.CodePostal</td>
+                    <td class="text-center">
+                        <button @onclick="@(() => Delete(vip.Id))" class="btn btn-sm btn-danger button-style-red">
+                            <span class="oi oi-trash"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
 }
 
 @code {
