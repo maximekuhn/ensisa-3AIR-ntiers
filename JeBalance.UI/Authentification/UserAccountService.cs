@@ -26,7 +26,7 @@ public class UserAccountService<TResponse, TSourceData>
         return request;
     }
 
-    protected async Task<TResponse> SendRequest(HttpRequestMessage request)
+    protected async Task<TResponse?> SendRequest(HttpRequestMessage request)
     {
         var client = _clientFactory.CreateClient();
 
