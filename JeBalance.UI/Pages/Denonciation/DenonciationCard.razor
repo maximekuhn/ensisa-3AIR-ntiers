@@ -54,6 +54,18 @@
             <p>Adresse : <span class="netstat">@denonciation.Suspect.Adresse.NumeroVoie @denonciation.Suspect.Adresse.NomVoie , @denonciation.Suspect.Adresse.CodePostal @denonciation.Suspect.Adresse.NomCommune</span></p>
         </div>
     }
+    @if (denonciation.Reponse != null)
+    {
+        <div class="denonciation_result">
+            <h4>Réponse</h4>
+            <p>Date de réponse : <span class="netstat">@denonciation.Reponse.Horodatage</span></p>
+            <p>Statut : <span class="netstat">@denonciation.Reponse.TypeReponse</span></p>
+            @if (denonciation.Reponse.Retribution != null && denonciation.Reponse.TypeReponse.Equals(TypeReponse.Confirmation))
+            {
+            <p>Retribution : <span class="netstat">@denonciation.Reponse.Retribution</span>€</p>
+            } 
+        </div>
+    }
     else
     {
         <div class="denonciation_result">
