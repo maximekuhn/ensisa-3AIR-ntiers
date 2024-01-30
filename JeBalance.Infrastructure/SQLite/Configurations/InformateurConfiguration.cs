@@ -1,3 +1,5 @@
+using System.Security.Cryptography;
+using JeBalance.Domain.ValueObjects;
 using JeBalance.Infrastructure.SQLite.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -9,6 +11,10 @@ public class InformateurConfiguration : IEntityTypeConfiguration<InformateurSQLi
     public void Configure(EntityTypeBuilder<InformateurSQLite> builder)
     {
         builder.ToTable("INFORMATEURS").HasKey(informateur => informateur.Id);
-        // TODO
+
+        builder.Property(informateur => informateur.Adresse).IsRequired();
+        builder.Property(informateur => informateur.Nom).IsRequired().HasMaxLength(Nom.MAX_LENGTH);
+        builder.Property(informateur => informateur.Prenom).IsRequired().HasMaxLength(Nom.MAX_LENGTH);
+        builder.Property(informateur => informateur.EstCalomniateur).IsRequired();
     }
 }
