@@ -171,8 +171,8 @@ public class DenonciationStepDefinition
         for (var i = 0; i < nombre; i++)
         {
             var informateur = new Informateur("Informateur" + i, "Prénom",
-                createAdresse("Ville" + i, "Rue" + i, 75000 + i, i));
-            var suspect = new Suspect("Suspect" + i, "Prénom", createAdresse("Ville" + i, "Rue" + i, 75000 + i, i));
+                createAdresse("Ville" + i, "Rue" + i, 75000 + i, i + 1));
+            var suspect = new Suspect("Suspect" + i, "Prénom", createAdresse("Ville" + i, "Rue" + i, 75000 + i, i + 1));
             var typeDelit = TypeDelit.DissimulationDeRevenus;
 
             var createDenonciationCommand = new CreateDenonciationCommand(typeDelit, null, informateur, suspect);
