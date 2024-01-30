@@ -40,6 +40,7 @@ public class DenonciationController : ControllerBase
             denonciationGetApiList.Add(new DenonciationGetAPI(denonciation, informateur, suspect));
         }
 
+        // TODO: return total count for pagination
         return Ok(denonciationGetApiList.ToArray());
     }
 }
