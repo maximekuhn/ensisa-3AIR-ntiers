@@ -15,8 +15,8 @@ namespace JeBalance.Infrastructure.Migrations
                 {
                     id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    nom = table.Column<string>(type: "TEXT", nullable: false),
-                    prenom = table.Column<string>(type: "TEXT", nullable: false),
+                    nom = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false),
+                    prenom = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false),
                     calomniateur = table.Column<bool>(type: "INTEGER", nullable: false),
                     adresse = table.Column<string>(type: "TEXT", nullable: false)
                 },
@@ -46,8 +46,8 @@ namespace JeBalance.Infrastructure.Migrations
                 {
                     id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    nom = table.Column<string>(type: "TEXT", nullable: false),
-                    prenom = table.Column<string>(type: "TEXT", nullable: false),
+                    nom = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false),
+                    prenom = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false),
                     adresse = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -61,8 +61,8 @@ namespace JeBalance.Infrastructure.Migrations
                 {
                     id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    nom = table.Column<string>(type: "TEXT", nullable: false),
-                    prenom = table.Column<string>(type: "TEXT", nullable: false),
+                    nom = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false),
+                    prenom = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false),
                     adresse = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -77,7 +77,6 @@ namespace JeBalance.Infrastructure.Migrations
                     id = table.Column<Guid>(type: "TEXT", nullable: false),
                     type_delit = table.Column<int>(type: "int", nullable: false),
                     pays_evasion = table.Column<string>(type: "TEXT", nullable: true),
-                    statut = table.Column<int>(type: "int", nullable: false),
                     horodatage = table.Column<DateTime>(type: "TEXT", nullable: false),
                     fk_informateur = table.Column<int>(type: "INTEGER", nullable: false),
                     fk_suspect = table.Column<int>(type: "INTEGER", nullable: false),
