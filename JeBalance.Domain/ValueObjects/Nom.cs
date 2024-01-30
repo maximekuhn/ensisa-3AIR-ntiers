@@ -18,10 +18,10 @@ public class Nom : SimpleValueObject<string>
         if (string.IsNullOrEmpty(trimmedValue)) throw new ApplicationException("Name cannot be empty");
 
         if (trimmedValue.Length < MIN_LENGTH)
-            throw new ApplicationException($"Name cannot be less than {MIN_LENGTH} character(s)");
+            throw new ApplicationException($"Le nom doit faire au minimum {MIN_LENGTH} caractère(s)");
 
         if (trimmedValue.Length > MAX_LENGTH)
-            throw new ApplicationException($"Name cannot be more than {MAX_LENGTH} characters");
+            throw new ApplicationException($"Le nom ne peut pas faire plus de {MAX_LENGTH} caractère(s)");
 
         return trimmedValue;
     }
