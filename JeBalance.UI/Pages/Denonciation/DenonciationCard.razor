@@ -29,7 +29,10 @@
         <p>ID de la dénonciation :<span class="netstat"> @Id</span></p>
         <p>Heure de signalement : <span class="netstat">@denonciation.Horodatage</span></p>
         <p>Type de délit : <span class="netstat">@denonciation.TypeDelit</span></p>
+        @if (denonciation.PaysEvasion != null)
+        {
         <p>Pays d'évasion : <span class="netstat">@denonciation.PaysEvasion</span></p>
+        }
     </div>
     @if (denonciation.Informateur != null)
     {

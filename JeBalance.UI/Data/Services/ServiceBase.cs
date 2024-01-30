@@ -142,7 +142,7 @@ public class ServiceBase<TSourceType, TId>
         var client = _clientFactory.CreateClient();
 
         var response = await client.SendAsync(request);
-        
+
         if (response.IsSuccessStatusCode)
         {
             using var responseStream = await response.Content.ReadAsStreamAsync();

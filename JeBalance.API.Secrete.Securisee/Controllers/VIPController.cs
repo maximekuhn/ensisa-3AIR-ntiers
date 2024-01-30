@@ -41,7 +41,7 @@ public class VIPController : ControllerBase
         {
             return StatusCode(500);
         }
-        
+
     }
 
     [HttpDelete("{vipId}")]
