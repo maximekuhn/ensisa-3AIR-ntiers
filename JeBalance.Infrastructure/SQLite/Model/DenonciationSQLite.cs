@@ -10,7 +10,7 @@ public class DenonciationSQLite : Denonciation
     [Column("type_delit")] public new TypeDelit TypeDelit { get; set; }
 
     [Column("pays_evasion")] public new string? PaysEvasion { get; set; }
-    
+
     [Column("horodatage")] public new DateTime Horodatage { get; set; }
 
     [Column("fk_informateur")] public int IdInformateur { get; set; }

@@ -18,8 +18,8 @@ public class DenonciationConfiguration : IEntityTypeConfiguration<DenonciationSQ
         builder.Property(denonciation => denonciation.Horodatage).IsRequired();
         builder.Property(denonciation => denonciation.IdInformateur).IsRequired();
         builder.Property(denonciation => denonciation.IdSuspect).IsRequired();
-        
-        
+
+
         // store enum as int
         builder.Property(denonciation => denonciation.TypeDelit).HasColumnType("int").IsRequired();
 
