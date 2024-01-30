@@ -2,8 +2,6 @@ using JeBalance.Domain.Contracts;
 
 namespace JeBalance.Domain.Model;
 
-// TODO
-
 public class Reponse : Entity<int>
 {
     public Reponse(int id) : base(id)
@@ -16,6 +14,12 @@ public class Reponse : Entity<int>
 
     public Reponse(TypeReponse typeReponse, double? retribution) : base(0)
     {
+        if(typeReponse.Equals(TypeReponse.Confirmation) && retribution == null)
+        {
+            throw new ApplicationException(
+                "Une réponse de type confirmation doit obligatoirement avoir une retribution");
+        }
+        
         TypeReponse = typeReponse;
         Retribution = retribution;
     }

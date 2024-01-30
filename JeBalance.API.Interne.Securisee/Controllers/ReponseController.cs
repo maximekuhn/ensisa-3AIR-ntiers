@@ -21,12 +21,23 @@ public class ReponseController : ControllerBase
     public async Task<IActionResult> CreateReponse([FromQuery] Guid denonciationId,
         [FromBody] ReponseCreateAPI resource)
     {
-        var createReponseCommand = new CreateReponseCommand(
-            resource.TypeReponse,
-            resource.Retribution,
-            denonciationId
-        );
-        var reponseId = await _mediator.Send(createReponseCommand);
-        return Ok(reponseId);
+        try
+        {
+            var createReponseCommand = new CreateReponseCommand(
+                resource.TypeReponse,
+                resource.Retribution,
+                denonciationId
+            );
+            var reponseId = await _mediator.Send(createReponseCommand);
+            return Ok(reponseId);
+        }
+        catch (ApplicationException e)
+        {
+            return BadRequest(new { message = e.Message });
+        }
+        catch (Exception)
+        {
+            return StatusCode(500);
+        }
     }
 }
