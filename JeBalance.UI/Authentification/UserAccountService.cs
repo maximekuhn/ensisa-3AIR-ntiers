@@ -3,47 +3,38 @@ using System.Text.Json;
 
 namespace JeBalance.UI.Authentification;
 
-public class UserAccountService
+public class UserAccountService<TResponse, TSourceData>
 {
-    private readonly string _baseUrl;
     private readonly IHttpClientFactory _clientFactory;
 
-
-    public UserAccountService(IHttpClientFactory clientFactory, IConfiguration configuration)
+    public UserAccountService(IHttpClientFactory clientFactory)
     {
         _clientFactory = clientFactory;
-        // Todo : Add base url in app setting and change here
-        _baseUrl = "";
     }
 
-    public async Task<UserSession?> LoginAsync(string username, string password)
+    protected HttpRequestMessage MakeRequest(string url, TSourceData data)
     {
-        var request = MakeRequest(username, password);
-        var client = _clientFactory.CreateClient();
-        var response = await client.SendAsync(request);
-
-        if (!response.IsSuccessStatusCode) return null;
-
-        using var responseStream = await response.Content.ReadAsStreamAsync();
-        var session = await JsonSerializer.DeserializeAsync<UserSession>(responseStream);
-        return session;
-    }
-
-    private HttpRequestMessage MakeRequest(string username, string password)
-    {
-        // TODO : Change this function and use ServiceBase
-
-        var request = new HttpRequestMessage(
-            HttpMethod.Post,
-            $"{_baseUrl}");
+        var request = new HttpRequestMessage(HttpMethod.Post, url);
         request.Headers.Add("Accept", "application/json");
         request.Headers.Add("User-Agent", "JeBalance");
         var httpContent = new StringContent(
-            JsonSerializer.Serialize(new { username, password }),
+            JsonSerializer.Serialize(data),
             Encoding.UTF8,
             "application/json");
         request.Content = httpContent;
 
         return request;
+    }
+
+    protected async Task<TResponse?> SendRequest(HttpRequestMessage request)
+    {
+        var client = _clientFactory.CreateClient();
+
+        var response = await client.SendAsync(request);
+        if (!response.IsSuccessStatusCode) return default;
+
+        using var responseStream = await response.Content.ReadAsStreamAsync();
+        var res = await JsonSerializer.DeserializeAsync<TResponse>(responseStream);
+        return res;
     }
 }

@@ -1,7 +1,33 @@
 @page "/ajout-vip"
 @using JeBalance.UI.Data.Services.SecreteAPI
+@attribute [Authorize(Roles = "Administrateur")]
+@inject AuthenticationStateProvider authStateProvider
 @inject VIPServices Service
+@inject IJSRuntime js
 @inject NavigationManager NavigationManager
+
+<div class="navbar">
+    <ul class="ul-navbar">
+        <li>
+            <a id="home-link" class="active-green" href="/">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+        <li>
+            <a id="edit-link" href="get-all-vip">LISTE VIP</a>
+        </li>
+        <li>
+            <a id="create-link" href="ajout-vip">AJOUTER UN VIP</a>
+        </li>
+        <li>
+            <a id="logout-secrete-button" @onclick="Logout" class="nav-link">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
+    </ul>
+</div>
 
 <h2>Ajoutez un nouveau membre VIP</h2>
 
@@ -53,9 +79,24 @@
 
     private async void FormSubmitted()
     {
-        var id = await Service.AddVIPAsync(vip);
+        var requestResult = await Service.AddVIPAsync(vip);
 
-        NavigationManager.NavigateTo("/get-all-vip");
+        if (requestResult.Errormessage != null)
+        {
+            await js.InvokeVoidAsync("alert", $"{requestResult.Errormessage}");
+        }
+        else
+        {
+        NavigationManager.NavigateTo("/get-all-vip", true);
+        }
+
+    }
+
+    private async Task Logout()
+    {
+        var customASP = (CustomAuthenticationStateProvider)authStateProvider;
+        await customASP.UpdateAuthenticationState(null);
+        NavigationManager.NavigateTo("/login-secrete", true);
     }
 
 }

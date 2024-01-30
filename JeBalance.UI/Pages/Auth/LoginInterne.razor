@@ -1,0 +1,68 @@
+@page "/login-interne"
+@using JeBalance.API.Securite.Shared.Model
+@inject LoginServices Services
+@inject IJSRuntime js
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager NavigationManager
+
+<div class="navbar" xmlns="http://www.w3.org/1999/html">
+    <ul class="ul-navbar">
+        <li>
+            <a id="home-link" class="active-green" href="/">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
+    </ul>
+</div>
+
+<h2>Connectez-vous à votre espace</h2>
+
+<div class="login">
+    <label>Email</label>
+    <input @bind="_model.Email" class="form-control" placeholder="Email"/>
+
+    <label>Mot de passe</label>
+    <input @bind="_model.Password" type="password" class="form-control" placeholder="Mot de passe"/>
+
+    <br>
+
+    <div class="text-center">
+        <button @onclick="Authenticate" class="button">Connexion</button>
+        <br><br><hr><br>
+    </div>
+    <div class="text-center">
+        <a class="button-blue" href="/signup-interne">Inscrivez-vous</a>
+    </div>
+</div>
+
+@code {
+    private readonly LoginModel _model = new();
+
+    private async Task Authenticate()
+    {
+        var userSession = await Services.LoginIntenreAsync(_model);
+        if (userSession == null)
+        {
+            await js.InvokeVoidAsync("alert", "Connexion échouée, vérifier le pseudo et le mot de passe");
+            return;
+        }
+
+        var customASP = (CustomAuthenticationStateProvider)authStateProvider;
+        await customASP.UpdateAuthenticationState(userSession);
+        NavigationManager.NavigateTo("/list-denonciation", true);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await authStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity is { IsAuthenticated: true } && user.IsInRole("AdministrateurFiscale"))
+        {
+            NavigationManager.NavigateTo("/list-denonciation", true);
+        }
+    }
+
+}

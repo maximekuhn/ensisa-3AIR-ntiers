@@ -2,6 +2,24 @@
 @using JeBalance.UI.Data.Services.PubliqueAPI
 @inject DenonciationGetServices DenonciationServices
 
+<div class="navbar">
+    <ul class="ul-navbar">
+        <li>
+            <a id="home-link" class="active-green" href="/">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+        <li>
+            <a id="create-link" href="denonciation">DENONCER</a>
+        </li>
+        <li>
+            <a id="edit-link" href="recherche">CONSULTER</a>
+        </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
+    </ul>
+</div>
+
 <h2>Résultat de la dénonciation</h2>
 
 @if (denonciation != null)
@@ -11,7 +29,10 @@
         <p>ID de la dénonciation :<span class="netstat"> @Id</span></p>
         <p>Heure de signalement : <span class="netstat">@denonciation.Horodatage</span></p>
         <p>Type de délit : <span class="netstat">@denonciation.TypeDelit</span></p>
+        @if (denonciation.PaysEvasion != null)
+        {
         <p>Pays d'évasion : <span class="netstat">@denonciation.PaysEvasion</span></p>
+        }
     </div>
     @if (denonciation.Informateur != null)
     {
@@ -36,6 +57,18 @@
             <p>Adresse : <span class="netstat">@denonciation.Suspect.Adresse.NumeroVoie @denonciation.Suspect.Adresse.NomVoie , @denonciation.Suspect.Adresse.CodePostal @denonciation.Suspect.Adresse.NomCommune</span></p>
         </div>
     }
+    @if (denonciation.Reponse != null)
+    {
+        <div class="denonciation_result">
+            <h4>Réponse</h4>
+            <p>Date de réponse : <span class="netstat">@denonciation.Reponse.Horodatage</span></p>
+            <p>Statut : <span class="netstat">@denonciation.Reponse.TypeReponse</span></p>
+            @if (denonciation.Reponse.Retribution != null && denonciation.Reponse.TypeReponse.Equals(TypeReponse.Confirmation))
+            {
+                <p>Retribution : <span class="netstat">@denonciation.Reponse.Retribution</span>€</p>
+            }
+        </div>
+    }
     else
     {
         <div class="denonciation_result">
@@ -52,7 +85,8 @@ else
 
 @code {
 
-    [Parameter] public string Id { get; set; }
+    [Parameter]
+    public string Id { get; set; }
 
     private DenonciationGetAPI denonciation;
 

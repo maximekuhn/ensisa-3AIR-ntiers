@@ -1,7 +1,9 @@
 @page "/repondre/{denonciationId:guid}"
 @using ReponseCreateAPI = JeBalance.API.Interne.Securisee.Resources.ReponseCreateAPI
 @using JeBalance.UI.Data.Services.InterneAPI
+@attribute [Authorize(Roles = "AdministrateurFiscale")]
 @inject ReponseServices ServiceReponse
+@inject IJSRuntime js
 @inject NavigationManager NavigationManager
 
 <h2>Répondre à la dénonciation</h2>
@@ -31,16 +33,25 @@
 
 @code {
 
-    [Parameter] public Guid denonciationId { get; set; }
+    [Parameter]
+    public Guid denonciationId { get; set; }
 
     public ReponseCreateAPI reponse = new();
 
     private async Task HandleValidSubmit()
     {
-        var id = await ServiceReponse.AddReponseAsync(
+        var requestResult = await ServiceReponse.AddReponseAsync(
             denonciationId, reponse);
 
+        if (requestResult.Errormessage != null)
+        {
+            await js.InvokeVoidAsync("alert", $"{requestResult.Errormessage}");
+        }
+        else
+        {
         NavigationManager.NavigateTo("/list-denonciation");
+            
+        }
     }
 
 }

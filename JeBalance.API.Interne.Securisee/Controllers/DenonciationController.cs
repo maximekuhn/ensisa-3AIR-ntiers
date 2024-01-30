@@ -26,8 +26,6 @@ public class DenonciationController : ControllerBase
     public async Task<IActionResult> GetDenonciationsNonTraitees(
         [FromQuery] FindDenonciationsNonTraiteesParameter parameter)
     {
-        // TODO: return total count
-
         var getDenonciationsNonTraiteesQuery =
             new GetDenonciationsNonTraiteesQuery((parameter.Limit, parameter.Offset));
         var (denonciations, total) = await _mediator.Send(getDenonciationsNonTraiteesQuery);
@@ -42,6 +40,7 @@ public class DenonciationController : ControllerBase
             denonciationGetApiList.Add(new DenonciationGetAPI(denonciation, informateur, suspect));
         }
 
+        // TODO: return total count for pagination
         return Ok(denonciationGetApiList.ToArray());
     }
 }

@@ -1,9 +1,27 @@
 @page "/denonciation"
 @using JeBalance.UI.Data.Services.PubliqueAPI
 @inject DenonciationServices Services
+@inject IJSRuntime js
 @inject NavigationManager NavigationManager
 @inject IModalService Modal
 
+<div class="navbar">
+    <ul class="ul-navbar">
+        <li>
+            <a id="home-link" class="active-green" href="/">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+        <li>
+            <a id="create-link" href="denonciation">DENONCER</a>
+        </li>
+        <li>
+            <a id="edit-link" href="recherche">CONSULTER</a>
+        </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
+    </ul>
+</div>
 
 <h2>Créez votre dénonciation</h2>
 
@@ -111,13 +129,16 @@
 
     private async Task FormSubmitted()
     {
-        var id = await Services.AddDenonciationAsync(denonciation);
-        if (id == null || !id.HasValue)
-        {
-            throw new InvalidOperationException("Échec de l'ajout de la dénonciation ou ID null.");
-        }
+        var result = await Services.AddDenonciationAsync(denonciation);
 
-        NavigationManager.NavigateTo($"/denonciation-result/{id.Value}");
+        if (result.Errormessage != null)
+        {
+            await js.InvokeVoidAsync("alert", $"{result.Errormessage}");
+        }
+        else
+        {
+            NavigationManager.NavigateTo($"/denonciation-result/{result.Result}");
+        }
     }
 
     private async Task ShowConfirmationModal()

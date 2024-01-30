@@ -2,6 +2,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using JeBalance.UI.Authentification;
+using JeBalance.UI.Data.Services.Error;
 using Microsoft.AspNetCore.WebUtilities;
 
 namespace JeBalance.UI.Data.Services;
@@ -66,7 +67,7 @@ public class ServiceBase<TSourceType, TId>
         );
         request.Content = httpContent;
 
-        request.Headers.Add("Accept", "application/json");
+        request.Headers.Add("Accept", "application/problem+json");
         request.Headers.Add("User-Agent", "JeBalance");
 
         if (_casp == null) return request;
@@ -136,16 +137,22 @@ public class ServiceBase<TSourceType, TId>
         return data;
     }
 
-    public async Task<TId?> SendAddRequest(HttpRequestMessage request)
+    public async Task<RequestResult<TId>> SendAddRequest(HttpRequestMessage request)
     {
         var client = _clientFactory.CreateClient();
 
         var response = await client.SendAsync(request);
-        if (!response.IsSuccessStatusCode) return default;
 
-        using var responseStream = await response.Content.ReadAsStreamAsync();
-        var id = await JsonSerializer.DeserializeAsync<TId>(responseStream);
-        return id;
+        if (response.IsSuccessStatusCode)
+        {
+            using var responseStream = await response.Content.ReadAsStreamAsync();
+            var id = await JsonSerializer.DeserializeAsync<TId>(responseStream);
+            return new RequestResult<TId>(id);
+        }
+
+        var message = await response.Content.ReadAsStringAsync();
+        var errorMessage = JsonSerializer.Deserialize<RequestError>(message);
+        return new RequestResult<TId>(errorMessage?.Message ?? "Une erreur est survenue, vérifiez vos saisies");
     }
 
     public async Task<TId?> SendUpdateRequest(HttpRequestMessage request)

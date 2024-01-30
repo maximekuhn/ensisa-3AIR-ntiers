@@ -1,0 +1,65 @@
+@page "/signup-interne"
+@using JeBalance.API.Securite.Shared.Model
+@inject SignupServices Service
+@inject IJSRuntime js
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager NavigationManager
+
+<div class="navbar">
+    <ul class="ul-navbar">
+        <li>
+            <a id="home-link" class="active-green" href="/">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
+    </ul>
+</div>
+
+<h2>Inscrivez-vous à votre espace</h2>
+
+<div class="signup">
+    <label>Email</label>
+    <input @bind="_model.Email" class="form-control" placeholder="Email"/>
+
+    <label>Nom d'utilisateur</label>
+    <input @bind="_model.Username" class="form-control" placeholder="Nom d'utilisateur"/>
+
+    <label>Mot de passe</label>
+    <input @bind="_model.Password" type="password" class="form-control" placeholder="Mot de passe"/>
+
+    <div class="text-center">
+        <button @onclick="Register" class="button">S'inscrire</button>
+    </div>
+</div>
+
+@code {
+    private readonly RegisterModel _model = new();
+    private Response? _res = new();
+
+    private async Task Register()
+    {
+        _res = await Service.SignupIntenreAsync(_model);
+        if (_res?.Status == "Success")
+        {
+            NavigationManager.NavigateTo("/login-interne", true);
+        }
+        else
+        {
+            await js.InvokeVoidAsync("alert", _res?.Message ?? "Unexpected error");
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await authStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity is { IsAuthenticated: true } && user.IsInRole(UserRoles.AdministrateurFiscale))
+        {
+            NavigationManager.NavigateTo("/list-denonciation", true);
+        }
+    }
+
+}

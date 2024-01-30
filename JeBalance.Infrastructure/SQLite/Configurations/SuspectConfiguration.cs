@@ -1,3 +1,4 @@
+using JeBalance.Domain.ValueObjects;
 using JeBalance.Infrastructure.SQLite.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -11,6 +12,8 @@ public class SuspectConfiguration : IEntityTypeConfiguration<SuspectSQLite>
         builder.ToTable("SUSPECTS")
             .HasKey(suspect => suspect.Id);
 
-        // TODO
+        builder.Property(suspect => suspect.Adresse).IsRequired();
+        builder.Property(suspect => suspect.Nom).IsRequired().HasMaxLength(Nom.MAX_LENGTH);
+        builder.Property(suspect => suspect.Prenom).IsRequired().HasMaxLength(Nom.MAX_LENGTH);
     }
 }

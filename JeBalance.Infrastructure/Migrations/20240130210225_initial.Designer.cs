@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JeBalance.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240121151029_initial")]
+    [Migration("20240130210225_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,10 +51,6 @@ namespace JeBalance.Infrastructure.Migrations
                     b.Property<int?>("ReponseId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Statut")
-                        .HasColumnType("int")
-                        .HasColumnName("statut");
-
                     b.Property<int>("SuspectId")
                         .HasColumnType("INTEGER");
 
@@ -92,11 +88,13 @@ namespace JeBalance.Infrastructure.Migrations
 
                     b.Property<string>("Nom")
                         .IsRequired()
+                        .HasMaxLength(150)
                         .HasColumnType("TEXT")
                         .HasColumnName("nom");
 
                     b.Property<string>("Prenom")
                         .IsRequired()
+                        .HasMaxLength(150)
                         .HasColumnType("TEXT")
                         .HasColumnName("prenom");
 
@@ -143,11 +141,13 @@ namespace JeBalance.Infrastructure.Migrations
 
                     b.Property<string>("Nom")
                         .IsRequired()
+                        .HasMaxLength(150)
                         .HasColumnType("TEXT")
                         .HasColumnName("nom");
 
                     b.Property<string>("Prenom")
                         .IsRequired()
+                        .HasMaxLength(150)
                         .HasColumnType("TEXT")
                         .HasColumnName("prenom");
 
@@ -170,11 +170,13 @@ namespace JeBalance.Infrastructure.Migrations
 
                     b.Property<string>("Nom")
                         .IsRequired()
+                        .HasMaxLength(150)
                         .HasColumnType("TEXT")
                         .HasColumnName("nom");
 
                     b.Property<string>("Prenom")
                         .IsRequired()
+                        .HasMaxLength(150)
                         .HasColumnType("TEXT")
                         .HasColumnName("prenom");
 

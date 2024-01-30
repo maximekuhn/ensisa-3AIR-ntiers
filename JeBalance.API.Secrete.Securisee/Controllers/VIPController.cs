@@ -25,11 +25,23 @@ public class VIPController : ControllerBase
     [HttpPost("create")]
     public async Task<IActionResult> CreateVIP([FromBody] VIPAPI resource)
     {
-        var createVIPCommand = new CreateVIPCommand(resource.Nom, resource.Prenom,
-            new Adresse(new NumeroVoie(resource.Adresse.NumeroVoie), new NomVoie(resource.Adresse.NomVoie),
-                new CodePostal(resource.Adresse.CodePostal), new NomCommune(resource.Adresse.NomCommune)));
-        var vipId = await _mediator.Send(createVIPCommand);
-        return Ok(vipId);
+        try
+        {
+            var createVIPCommand = new CreateVIPCommand(resource.Nom, resource.Prenom,
+                new Adresse(new NumeroVoie(resource.Adresse.NumeroVoie), new NomVoie(resource.Adresse.NomVoie),
+                    new CodePostal(resource.Adresse.CodePostal), new NomCommune(resource.Adresse.NomCommune)));
+            var vipId = await _mediator.Send(createVIPCommand);
+            return Ok(vipId);
+        }
+        catch (ApplicationException e)
+        {
+            return BadRequest(new { message = e.Message });
+        }
+        catch (Exception)
+        {
+            return StatusCode(500);
+        }
+
     }
 
     [HttpDelete("{vipId}")]
@@ -45,6 +57,8 @@ public class VIPController : ControllerBase
     {
         var getVIPs = new GetVIPsQuery((parameters.Limit, parameters.Offset));
         var (vips, total) = await _mediator.Send(getVIPs);
+
+        // TODO: return total count for pagination
         return Ok(vips.Select(vip => new VIPGetAPI(vip)));
     }
 }

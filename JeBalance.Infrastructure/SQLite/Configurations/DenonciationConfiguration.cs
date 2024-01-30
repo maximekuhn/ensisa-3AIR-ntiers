@@ -14,10 +14,14 @@ public class DenonciationConfiguration : IEntityTypeConfiguration<DenonciationSQ
         // Dot not generate a Guid as the `IdOpaqueProvider` already does it
         builder.Property(denonciation => denonciation.Id).ValueGeneratedNever();
 
+        // required properties
+        builder.Property(denonciation => denonciation.Horodatage).IsRequired();
+        builder.Property(denonciation => denonciation.IdInformateur).IsRequired();
+        builder.Property(denonciation => denonciation.IdSuspect).IsRequired();
+
 
         // store enum as int
         builder.Property(denonciation => denonciation.TypeDelit).HasColumnType("int").IsRequired();
-        builder.Property(denonciation => denonciation.Statut).HasColumnType("int").IsRequired();
 
         // Relations
         builder.HasOne(denonciation => denonciation.Informateur).WithMany().OnDelete(DeleteBehavior.NoAction);

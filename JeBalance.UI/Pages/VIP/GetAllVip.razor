@@ -1,6 +1,33 @@
 @page "/get-all-vip"
 @using JeBalance.UI.Data.Services.SecreteAPI
+@attribute [Authorize(Roles = "Administrateur")]
+@inject AuthenticationStateProvider authStateProvider
 @inject VIPGetServices ServiceGet
+@inject NavigationManager NavigationManager
+
+
+<div class="navbar">
+    <ul class="ul-navbar">
+        <li>
+            <a id="home-link" class="active-green" href="/">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+        <li>
+            <a id="edit-link" href="get-all-vip">LISTE VIP</a>
+        </li>
+        <li>
+            <a id="create-link" href="ajout-vip">AJOUTER UN VIP</a>
+        </li>
+        <li>
+            <a id="logout-secrete-button" @onclick="Logout" class="nav-link">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
+    </ul>
+</div>
 
 <h2>Liste de tous les VIP</h2>
 
@@ -12,39 +39,49 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Adresse</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var vip in vips)
-        {
+    @if (vips.Length == 0)
+    {
+        <p>
+            <em>Aucun VIP trouvé.</em>
+        </p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
             <tr>
-                <td>@vip.Id</td>
-                <td>@vip.Nom</td>
-                <td>@vip.Prenom</td>
-                <td>@vip.Adresse.NumeroVoie @vip.Adresse.NomVoie , @vip.Adresse.NomCommune @vip.Adresse.CodePostal</td>
-                <td class="text-center">
-                    <button @onclick="@(() => Delete(vip.Id))" class="btn btn-sm btn-danger button-style-red">
-                        <span class="oi oi-trash"></span>
-                    </button>
-                </td>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Adresse</th>
+                <th>Action</th>
             </tr>
-        }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            @foreach (var vip in vips)
+            {
+                <tr>
+                    <td>@vip.Id</td>
+                    <td>@vip.Nom</td>
+                    <td>@vip.Prenom</td>
+                    <td>@vip.Adresse.NumeroVoie @vip.Adresse.NomVoie , @vip.Adresse.NomCommune @vip.Adresse.CodePostal</td>
+                    <td class="text-center">
+                        <button @onclick="@(() => Delete(vip.Id))" class="btn btn-sm btn-danger button-style-red">
+                            <span class="oi oi-trash"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
 }
 
 @code {
     private VIPGetAPI[] vips;
 
-    [CascadingParameter] public IModalService Modal { get; set; } = default!;
+    [CascadingParameter]
+    public IModalService Modal { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
@@ -68,6 +105,13 @@ else
         {
             await FetchData();
         }
+    }
+
+    private async Task Logout()
+    {
+        var customASP = (CustomAuthenticationStateProvider)authStateProvider;
+        await customASP.UpdateAuthenticationState(null);
+        NavigationManager.NavigateTo("/login-secrete", true);
     }
 
 }

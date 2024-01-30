@@ -15,6 +15,29 @@ html, body {
     flex-direction: column;
 }
 
+.index-section-container {
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+}
+
+.index-section {
+    background-color: #4a4a4a;
+    color: white;
+    flex-grow: 1;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin: 10px;
+    border-radius: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.index-section:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 .main-container {
     flex: 1;
     display: flex;
@@ -44,6 +67,42 @@ html, body {
     padding: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
+}
+
+.login {
+    background-color: #4a4a4a;
+    border-radius: 15px;
+    padding: 50px;
+    margin: 10px auto;
+    width: fit-content;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signup {
+    background-color: #4a4a4a;
+    border-radius: 15px;
+    padding: 50px;
+    margin: 10px auto;
+    width: fit-content;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.signup:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-control {
+    margin-bottom: 10px;
 }
 
 /*========================================================================
@@ -147,7 +206,7 @@ li a:hover {
 /*========================================================================
                          Form styling
 ========================================================================*/
-form {
+form:not(#search-form) {
     background-color: #4a4a4a;
     border-radius: 15px;
     padding: 50px;
@@ -156,7 +215,6 @@ form {
     max-width: 600px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
 
 .section {
     margin-bottom: 10px;
@@ -201,11 +259,40 @@ input[type=number]::-webkit-inner-spin-button {
 /*======================================================================
                           Button styling
 =======================================================================*/
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.button-blue {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3e8eab;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: auto;
+    transition: background-color 0.3s ease;
+}
+
+.button-blue:hover {
+    background-color: #3e61ab;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
 button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    margin-right: 10px;
+    margin: auto;
 }
 
 .button-style-red {

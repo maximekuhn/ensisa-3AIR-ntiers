@@ -13,5 +13,7 @@ public class ReponseConfiguration : IEntityTypeConfiguration<ReponseSQLite>
 
         // store enum as int
         builder.Property(reponse => reponse.TypeReponse).HasColumnType("int").IsRequired();
+
+        builder.Property(reponse => reponse.Horodatage).IsRequired();
     }
 }
