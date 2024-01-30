@@ -262,12 +262,26 @@ input[type=number]::-webkit-inner-spin-button {
 .button {
     display: inline-block;
     padding: 10px 20px;
-    margin-top: 20px;
     background-color: #4CAF50;
     color: white;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+}
+
+.button-blue {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3e8eab;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: auto;
+    transition: background-color 0.3s ease;
+}
+
+.button-blue:hover {
+    background-color: #3e61ab;
 }
 
 .button:hover {
@@ -278,7 +292,7 @@ button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    margin-right: 10px;
+    margin: auto;
 }
 
 .button-style-red {

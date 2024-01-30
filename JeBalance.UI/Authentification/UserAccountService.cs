@@ -25,7 +25,7 @@ public class UserAccountService<TResponse, TSourceData>
 
         return request;
     }
-    
+
     protected async Task<TResponse> SendRequest(HttpRequestMessage request)
     {
         var client = _clientFactory.CreateClient();
@@ -37,5 +37,5 @@ public class UserAccountService<TResponse, TSourceData>
         var res = await JsonSerializer.DeserializeAsync<TResponse>(responseStream);
         return res;
     }
-    
+
 }

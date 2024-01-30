@@ -16,7 +16,7 @@ public class LoginServices : UserAccountService<UserSession?, LoginModel>
         _secreteBaseUrl = configuration["ApiSecrete:BaseUrl"] ??
                           throw new InvalidOperationException("ApiSecrete:BaseUrl not configured");
     }
-    
+
     public Task<UserSession?> LoginIntenreAsync(LoginModel data)
     {
         var request = MakeRequest($"{_interneBaseUrl}/{Controller}/login", data);

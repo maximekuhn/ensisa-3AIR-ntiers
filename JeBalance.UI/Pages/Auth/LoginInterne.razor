@@ -30,9 +30,10 @@
 
     <div class="text-center">
         <button @onclick="Authenticate" class="button">Connexion</button>
+        <br><br><hr><br>
     </div>
-    <div class="register-prompt">
-        <p>Pas encore membre? <a href="/signup-interne">Inscrivez-vous</a></p>
+    <div class="text-center">
+        <a class="button-blue" href="/signup-interne">Inscrivez-vous</a>
     </div>
 </div>
 
@@ -52,7 +53,7 @@
         await customASP.UpdateAuthenticationState(userSession);
         NavigationManager.NavigateTo("/list-denonciation", true);
     }
-    
+
     protected override async Task OnInitializedAsync()
     {
         var authState = await authStateProvider.GetAuthenticationStateAsync();
@@ -63,4 +64,5 @@
             NavigationManager.NavigateTo("/list-denonciation", true);
         }
     }
+
 }
