@@ -45,6 +45,7 @@ else
     <table class="table">
         <thead>
         <tr>
+            <th>Informateur</th>
             <th>Type de Délit</th>
             <th>Pays d'Évasion</th>
             <th>Nom du Suspect</th>
@@ -55,8 +56,16 @@ else
         @foreach (var denonciation in denonciations)
         {
             <tr>
+                <td>@denonciation.Informateur.Nom @denonciation.Informateur.Prenom</td>
                 <td>@denonciation.TypeDelit</td>
-                <td>@denonciation.PaysEvasion</td>
+                @if (denonciation.PaysEvasion == null)
+                {
+                    <td class="text-center">-</td>
+                }
+                else
+                {
+                    @denonciation.PaysEvasion
+                }
                 <td>@denonciation.Suspect.Nom @denonciation.Suspect.Prenom</td>
                 <td class="text-center">
                     <button @onclick="() => NavigateToReponse(denonciation.Id)" type="button">Répondre</button>
