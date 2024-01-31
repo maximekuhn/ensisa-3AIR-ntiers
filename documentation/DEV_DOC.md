@@ -13,7 +13,7 @@ Cette documentation décrit le fonctionnement du projet et les choix d'architect
   - [Méthodes de travail](#méthodes-de-travail)
 
 ## Architecture en couches
-Pour réaliser ce projet, nous avons respecté le modèle d'architectue en couche.
+Pour réaliser ce projet, nous avons respecté le modèle d'architecture en couche.
 Étant donné le cahier des charges, nous avons décidé d'organiser le projet de la manière suivante:
 - couche de présentation (`JeBalance.UI`)
 - couche interface web (`JeBalance.API.Publique`, `JeBalance.API.Interne.Securisee`, `JeBalance.API.Secrete.Securisee`)
@@ -75,14 +75,14 @@ Pour ne pas dupliquer le code gérant la sécurité, nous avons créé le projet
 Ce projet permet de factoriser la gestion de la sécurité utilisée dans les 2 APIs actuelles (et pourrait servir d'en d'autres APIs dans le futur).
 
 ## Pourquoi nous avons un seul projet UI ?
-Le cahier des charges demandait une interface pour l'API `Publique`.
+Le cahier des charges demandait une interface pour l'API `Publique`.  
 Animés par l'envie d'apprendre, nous avons décidé d'ajouter des interface pour les APIs `Interne` et `Secrete`.
 Nous les avons mises dans le même projet pour éviter d'avoir trop de code dupliqué.
 Nous avons fait attention à ce qu'un utilisateur classique ne puisse pas accéder aux pages d'administration.
 
 ## Tests
-Nous avons écrit le code de chaque couche dans le but de le rendre facilement extensible et testable.
-Nous avons effectué des tests de validation dans le domaine en utilisant Specflow et Gherkin.
+Nous avons écrit le code de chaque couche dans le but de le rendre facilement extensible et testable.  
+Nous avons effectué des tests de validation dans le domaine en utilisant Specflow et Gherkin.  
 Nous avons effectué des tests unitaires pour l'infrastructure (pour tester qu'on appelle bien l'ORM Entity Framework avec les bons paramètres).
 
 ## Méthodes de travail
