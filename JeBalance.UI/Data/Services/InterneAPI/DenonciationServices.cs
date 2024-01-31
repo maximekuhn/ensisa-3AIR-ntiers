@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 
 namespace JeBalance.UI.Data.Services.InterneAPI;
 
-public class DenonciationServices : ServiceBase<DenonciationGetAPI, Guid>
+public class DenonciationServices : ServiceBase<DenonciationsAPI, Guid>
 {
     private const string Controller = "Denonciation";
     private readonly string _baseUrl;
@@ -18,13 +18,13 @@ public class DenonciationServices : ServiceBase<DenonciationGetAPI, Guid>
                    throw new InvalidOperationException("ApiInterne:BaseUrl not configured");
     }
 
-    public async Task<DenonciationGetAPI[]> GetDenonciationNonTraiteeAsync(int limit, int offset)
+    public async Task<DenonciationsAPI> GetDenonciationNonTraiteeAsync(int limit, int offset)
     {
         var request = await MakePaginatedGetAllRequest(
             $"{_baseUrl}/{Controller}/denonciationsNonTraitees",
             limit,
             offset);
-        var denonciations = await SendGetAllPaginatedRequest(request);
+        var denonciations = await SendGetAllPaginatedAndCountedRequest(request);
         return denonciations;
     }
 }

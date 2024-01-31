@@ -70,10 +70,8 @@ public class VIPController : ControllerBase
         {
             var getVIPs = new GetVIPsQuery((parameters.Limit, parameters.Offset));
             var (vips, total) = await _mediator.Send(getVIPs);
-
-            // TODO: return total count for pagination
-            return Ok(vips.Select(vip => new VIPGetAPI(vip)));
-
+            var vipGetApiList = vips.Select(vip => new VIPGetAPI(vip));
+            return Ok(new VIPsAPI(vipGetApiList.ToArray(), total));
         }
         catch (ApplicationException e)
         {

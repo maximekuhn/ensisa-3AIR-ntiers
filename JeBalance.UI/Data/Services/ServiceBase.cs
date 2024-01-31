@@ -125,6 +125,18 @@ public class ServiceBase<TSourceType, TId>
         return data;
     }
 
+    public async Task<TSourceType?> SendGetAllPaginatedAndCountedRequest(HttpRequestMessage request)
+    {
+        var client = _clientFactory.CreateClient();
+
+        var response = await client.SendAsync(request);
+        if (!response.IsSuccessStatusCode) return default;
+
+        using var responseStream = await response.Content.ReadAsStreamAsync();
+        var data = await JsonSerializer.DeserializeAsync<TSourceType>(responseStream);
+        return data;
+    }
+
     public async Task<TSourceType?> SendGetOneRequest(HttpRequestMessage request)
     {
         var client = _clientFactory.CreateClient();

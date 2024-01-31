@@ -105,6 +105,20 @@ html, body {
     margin-bottom: 10px;
 }
 
+.zero {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
 /*========================================================================
                          Titles
 ========================================================================*/
@@ -152,6 +166,10 @@ h2 {
     background-color: #04AA6D;
 }
 
+.active-red {
+    background-color: red;
+}
+
 .ul-navbar {
     list-style-type: none;
     margin: 0;
@@ -184,17 +202,17 @@ li a:hover {
     background-color: #111;
 }
 
-#home-link, #create-link, #edit-link {
+#home-link, #create-link, #edit-link, #logout-secrete-button {
     min-width: 80px;
     height: 100%;
 }
 
-#home-link i {
+#home-link i, #logout-secrete-button i {
     font-size: 20px;
     transition: transform 0.5s;
 }
 
-#home-link:hover i {
+#home-link:hover i, #logout-secrete-button:hover i {
     transform: scale(1.2);
 }
 
@@ -296,7 +314,7 @@ button {
 }
 
 .button-style-red {
-    background-color: #f44336; /* Red */
+    background-color: #f44336; /* Rouge*/
     border: none;
     color: white;
     padding: 10px 13px;
@@ -344,8 +362,7 @@ button:active {
                          List tab styling
 ========================================================================*/
 .table {
-    margin-right: 100px;
-    margin-left: 100px;
+    margin: auto;
 }
 
 .text-center {
@@ -356,7 +373,6 @@ button:active {
     border-collapse: collapse;
     min-width: 400px;
     width: auto;
-    /* box-shadow: 0, 5px, 50px, rgba(0, 0, 0, 0.15); */
     cursor: pointer;
     margin: 100px auto;
     border: 2px solid #333;
@@ -395,16 +411,16 @@ tbody tr:nth-child(even) {
 }
 
 .table-container {
-    width: 45%; /* ajustez cette valeur en fonction de vos besoins */
+    width: 45%;
 }
 
 .table-container:first-child {
     border-right: 2px solid #dadde1;
-    padding-right: 20px; /* ajouter un espace à droite du tableau */
+    padding-right: 20px;
 }
 
 .table-container:last-child {
-    padding-left: 20px; /* ajouter un espace à gauche du tableau */
+    padding-left: 20px;
 }
 
 /*========================================================================
