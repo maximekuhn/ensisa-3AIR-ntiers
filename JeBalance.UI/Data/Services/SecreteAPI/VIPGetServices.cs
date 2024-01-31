@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 
 namespace JeBalance.UI.Data.Services.SecreteAPI;
 
-public class VIPGetServices : ServiceBase<VIPGetAPI, int>
+public class VIPGetServices : ServiceBase<VIPsAPI, int>
 {
     private const string Controller = "VIP";
     private readonly string _baseUrl;
@@ -19,13 +19,13 @@ public class VIPGetServices : ServiceBase<VIPGetAPI, int>
                    throw new InvalidOperationException("ApiSecrete:BaseUrl not configured");
     }
 
-    public async Task<VIPGetAPI[]> GetVIPsAsync(int limit, int offset)
+    public async Task<VIPsAPI> GetVIPsAsync(int limit, int offset)
     {
         var request = await MakePaginatedGetAllRequest(
             $"{_baseUrl}/{Controller}",
             limit,
             offset);
-        var vips = await SendGetAllPaginatedRequest(request);
+        var vips = await SendGetAllPaginatedAndCountedRequest(request);
         return vips;
     }
 }

@@ -19,13 +19,13 @@
         <li>
             <a id="create-link" href="ajout-vip">AJOUTER UN VIP</a>
         </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
         <li>
-            <a id="logout-secrete-button" @onclick="Logout" class="nav-link">
+            <a id="logout-secrete-button" @onclick="Logout" class="active-red">
                 <i class="fas fa-sign-out-alt"></i>
             </a>
         </li>
-        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
-        <img id="logo" src="/favicon.ico" alt="Home"/>
     </ul>
 </div>
 
@@ -87,9 +87,8 @@
         }
         else
         {
-        NavigationManager.NavigateTo("/get-all-vip", true);
+            NavigationManager.NavigateTo("/get-all-vip", true);
         }
-
     }
 
     private async Task Logout()
