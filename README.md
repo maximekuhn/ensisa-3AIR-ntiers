@@ -21,9 +21,9 @@ Membres du groupe:
 ├── JeBalance.API.Interne.Securisee     # API interne pour répondre aux dénonciations non traitées
 ├── JeBalance.API.Publique              # API publique pour dénoncer / consulter une dénonciation
 ├── JeBalance.API.Secrete.Securisee     # API secrète pour administrer les VIPs
-├── JeBalance.API.Securite.Shared       # code commun pour gérer la sécurité des APIs publique et secrète
+├── JeBalance.API.Securite.Shared       # code commun pour gérer la sécurité des APIs interne et secrète
 ├── JeBalance.Domain                    # domaine (logique métier)
-├── JeBalance.Domain.Tests              # tests d'acceptance du domaine
+├── JeBalance.Domain.Tests              # tests de validation du domaine
 ├── JeBalance.Infrastructure            # interaction avec la base de données
 ├── JeBalance.Infrastructure.Tests      # tests unitaires pour utilisation de l'ORM
 ├── JeBalance.UI                        # appication web blazor (frontend)

@@ -1,6 +1,80 @@
 # Documentation développeur
 Cette documentation décrit le fonctionnement du projet et les choix d'architecture.
 
-## Une architecture en couche
+# Table des matières
+- [Documentation développeur](#documentation-développeur)
+- [Table des matières](#table-des-matières)
+  - [Architecture en couches](#architecture-en-couches)
+  - [Domain Driven Design](#domain-driven-design)
+  - [Pourquoi nous avons 3 APIs différentes ?](#pourquoi-nous-avons-3-apis-différentes-?)
+  - [Pourquoi nous avons un seul projet UI ?](#pourquoi-nous-avons-un-seul-projet-ui-?)
+  - [Tests](#tests)
+  - [Méthodes de travail](#méthodes-de-travail)
+
+
+## Architecture en couches
+Pour réaliser ce projet, nous avons respecté le modèle d'architectue en couche.
+Étant donné le cahier des charges, nous avons décidé d'organiser le projet de la manière suivante:
+- couche de présentation (`JeBalance.UI`)
+- couche interface web (`JeBalance.API.Publique`, `JeBalance.API.Interne.Securisee`, `JeBalance.API.Secrete.Securisee`)
+- couche logique métier (`JeBalance.Domain`)
+- couche d'accès aux données (`JeBalance.Infrastructure`)
+
+Grâce à cette architecture, nous pouvons faire évoluer et maintenir chaque couche indépendemment.
+Nous pouvons adapter notre stratégie de déploiement à chaque couche:
+- l'UI sur un serveur web
+- l'infrastructure sur un serveur qui a une grande capacité de stockage
+- ...
+
 
 ## Domain Driven Design
+Nous avons placé le domaine au centre, en respectant le vocabulaire donné dans le cahier des charges (Ubiquitous Language).
+
+Dans la classe `Denonciation`, nous avons choisi de mettre les identifiants des informateurs, du suspect et de la réponse pour se faciliter le développement.
+Nous aurions pu mettre directement le `Suspect`, l'`Informateur` et la `Reponse`, mais l'implémentation de l'infrastructure aurait été plus compliquée.
+
+## Pourquoi nous avons 3 APIs différentes ?
+Pour respecter au mieux le cahier des charges, nous avons décider de créer 3 APIs différentes:
+- `JeBalance.API.Publique`
+  - création et consultation de dénonciation(s)
+- `JeBalance.API.Interne.Securisee`
+  - API dédiée à l'administration fiscale
+  - permet de répondre aux dénonciations non traitées
+- `JeBalance.API.Secrete.Securisee`
+  - ajout/suppresion de VIP(s)
+
+Avantages de cette approche (3 APIs distinctes):
+- travail en parallèle
+- séparation des responsabilités
+- l'API publique sera plus sollicitée, on peut donc déployer plus de noeuds dédiés à la faire tourner
+
+Inconvénient de cette approche:
+- un petit peu de code dupliqué
+
+Les APIs `Secrete` et `Interne` gèrent l'authentification des utilisateurs.
+Pour ne pas dupliquer le code gérant la sécurité, nous avons créé le projet `JeBalance.API.Securite.Shared`.
+Ce projet permet de factoriser la gestion de la sécurité utilisée dans les 2 APIs actuelles (et pourrait servir d'en d'autres APIs dans le futur).
+
+## Pourquoi nous avons un seul projet UI ?
+Le cahier des charges demandait une interface pour l'API `Publique`.
+Animés par l'envie d'apprendre, nous avons décidé d'ajouter des interface pour les APIs `Interne` et `Secrete`.
+Nous les avons mises dans le même projet pour éviter d'avoir trop de code dupliqué.
+Nous avons fait attention à ce qu'un utilisateur classique ne puisse pas accéder aux pages d'administration.
+
+## Tests
+Nous avons écrit le code de chaque couche dans le but de le rendre facilement extensible et testable.
+Nous avons effectué des tests de validation dans le domaine en utilisant specflow.
+Nous avons effectué des tests unitaires pour l'infrastructure (pour tester qu'on appelle bien l'ORM Entity Framework avec les bons paramètres).
+
+## Méthodes de travail
+Pour travailler en groupe de manière parallèle et efficace, nous avons utilisé:
+- git pour la gestion des versions du code
+  - création d'une branche par fonctionnalité
+- GitHub
+  - pour stocker le code
+  - pour faire des Pull Requests et du Code Review
+  - pour utiliser Github Actions (CI)
+    - à chaque push
+      - vérifie si le code est bien formaté
+      - compile le code
+      - joue l'ensemble des tests
