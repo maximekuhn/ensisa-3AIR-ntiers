@@ -1,6 +1,5 @@
-@page "/signup-secrete"
-@using JeBalance.API.Securite.Shared.Model
-@inject SignupServices Service
+@page "/signup-interne"
+@inject RegisterServices Service
 @inject IJSRuntime js
 @inject AuthenticationStateProvider authStateProvider
 @inject NavigationManager NavigationManager
@@ -39,8 +38,7 @@
 
     private async Task Register()
     {
-        var requestResult = await Service.SignupSecreteAsync(_model);
-
+        RequestResult<Response?> requestResult = await Service.RegisterInterneAsync(_model);
         if (requestResult.Errormessage != null)
         {
             await js.InvokeVoidAsync("alert", requestResult.Errormessage ?? "Unexpected error");
@@ -49,7 +47,7 @@
         {
             if (requestResult.Result?.Status == "Success")
             {
-                NavigationManager.NavigateTo("/login-secrete", true);
+                NavigationManager.NavigateTo("/login-interne", true);
             }
             else
             {
@@ -63,9 +61,9 @@
         var authState = await authStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
 
-        if (user.Identity is { IsAuthenticated: true } && user.IsInRole(UserRoles.Administrateur))
+        if (user.Identity is { IsAuthenticated: true } && user.IsInRole(UserRoles.AdministrateurFiscale))
         {
-            NavigationManager.NavigateTo("/get-all-vip", true);
+            NavigationManager.NavigateTo("/list-denonciation", true);
         }
     }
 

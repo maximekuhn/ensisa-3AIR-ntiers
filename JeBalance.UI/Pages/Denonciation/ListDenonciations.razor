@@ -1,6 +1,5 @@
 @page "/list-denonciation"
-@using JeBalance.API.Interne.Securisee.Resources
-@using JeBalance.UI.Data.Services.InterneAPI
+@using DenonciationServices = JeBalance.UI.Data.Services.InterneAPI.DenonciationServices
 @attribute [Authorize(Roles = "AdministrateurFiscale")]
 @inject AuthenticationStateProvider authStateProvider
 @inject DenonciationServices ServiceDenonciation
@@ -78,7 +77,7 @@ else
         <div class="text-center">
             <div class="pagination">
                 <button class="button-blue" @onclick="() => ChangePage(currentPage - 1)">Précédent</button>
-                <span>Page @currentPage sur @CalculateTotalPages() (affichage de @pageSize résultat(s))</span>
+                <span>Page @currentPage sur @CalculateTotalPages() (affichage de <span class="netstat">@pageSize</span> résultat(s))</span>
                 <button class="button-blue" @onclick="() => ChangePage(currentPage + 1)">Suivant</button>
             </div>
         </div>
@@ -88,7 +87,7 @@ else
 @code {
     private DenonciationsAPI listDenonciations;
     private int currentPage = 1;
-    private readonly int pageSize = 10;
+    private int pageSize = 10;
     private int totalItems;
 
     protected override async Task OnInitializedAsync()
@@ -98,7 +97,7 @@ else
 
     private async Task FetchData()
     {
-        var offset = (currentPage - 1) * pageSize;
+        int offset = (currentPage - 1) * pageSize;
         listDenonciations = await ServiceDenonciation.GetDenonciationNonTraiteeAsync(pageSize, offset);
         totalItems = listDenonciations.Count;
     }
