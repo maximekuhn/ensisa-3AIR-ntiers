@@ -25,11 +25,6 @@ public class ReponseRepositoryTests : RepositoryTest
         Assert.Equal(_retribution, lastReponse.Retribution);
     }
 
-    [Fact]
-    public Task ShouldFindAsync()
-    {
-        return Task.CompletedTask;
-    }
 
     [Fact]
     public async Task ShouldGetOneAsync()
