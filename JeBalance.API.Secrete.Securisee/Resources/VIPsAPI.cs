@@ -7,6 +7,7 @@ public class VIPsAPI
     public VIPsAPI()
     {
         VIPs = Array.Empty<VIPGetAPI>();
+        Count = 0;
     }
 
     public VIPsAPI(VIPGetAPI[] vips, int count)
