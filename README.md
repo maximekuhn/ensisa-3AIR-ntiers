@@ -5,11 +5,10 @@
   - [Table des matières](#table-des-matières)
   - [A propos](#a-propos)
   - [Structure du projet](#structure-du-projet)
-  - [Documentation utilisateur](#documentation-utilisateur)
   - [Documentation développeur](#documentation-développeur)
+  - [Documentation utilisateur](#documentation-utilisateur)
 
 ## A propos
-
 Projet N-Tiers, ENSISA 3A IR.
 Membres du groupe:
 - GRAINCA Albi (albi.graica@uha.fr)
@@ -34,8 +33,8 @@ Membres du groupe:
 10 directories, 3 files
 ```
 
-## Documentation utilisateur
-Pour déployer et utiliser le projet, consultez [cette documentation](./documentation/USER_DOC.md).
-
 ## Documentation développeur
 Pour comprendre comment fonctionne le projet, consultez [cette documentation](./documentation/DEV_DOC.md).
+
+## Documentation utilisateur
+Pour déployer et utiliser le projet, consultez [cette documentation](./documentation/USER_DOC.md).
