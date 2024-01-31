@@ -1,5 +1,6 @@
 @page "/signup-interne"
 @using JeBalance.API.Securite.Shared.Model
+@using JeBalance.UI.Data.Services.Error
 @inject SignupServices Service
 @inject IJSRuntime js
 @inject AuthenticationStateProvider authStateProvider
@@ -36,18 +37,24 @@
 
 @code {
     private readonly RegisterModel _model = new();
-    private Response? _res = new();
 
     private async Task Register()
     {
-        _res = await Service.SignupIntenreAsync(_model);
-        if (_res?.Status == "Success")
+        RequestResult<Response?> requestResult = await Service.SignupIntenreAsync(_model);
+        if (requestResult.Errormessage != null)
         {
-            NavigationManager.NavigateTo("/login-interne", true);
+            await js.InvokeVoidAsync("alert", requestResult.Errormessage ?? "Unexpected error");
         }
         else
         {
-            await js.InvokeVoidAsync("alert", _res?.Message ?? "Unexpected error");
+            if (requestResult.Result?.Status == "Success")
+            {
+                NavigationManager.NavigateTo("/login-interne", true);
+            }
+            else
+            {
+                await js.InvokeVoidAsync("alert", requestResult.Result?.Message ?? "Unexpected error");
+            }
         }
     }
 
