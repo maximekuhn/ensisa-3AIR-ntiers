@@ -1,6 +1,5 @@
 @page "/get-all-vip"
 @using JeBalance.UI.Data.Services.SecreteAPI
-@using JeBalance.API.Secrete.Securisee.Resources
 @attribute [Authorize(Roles = "Administrateur")]
 @inject AuthenticationStateProvider authStateProvider
 @inject VIPGetServices ServiceGet
@@ -113,7 +112,7 @@ else
         var parameters = new ModalParameters();
         parameters.Add(nameof(VIPGetAPI.Id), id);
 
-        var modal = Modal.Show<DeleteVip>("Suppression définitive d'un VIP", parameters);
+        var modal = Modal.Show<DeleteVIP>("Suppression définitive d'un VIP", parameters);
         var result = await modal.Result;
 
         if (!result.Cancelled)

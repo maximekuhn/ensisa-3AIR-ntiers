@@ -1,6 +1,6 @@
 @page "/denonciation-result/{Id}"
-@using JeBalance.UI.Data.Services.PubliqueAPI
-@inject DenonciationGetServices DenonciationServices
+@using DenonciationGetAPI = JeBalance.API.Publique.Resources.DenonciationGetAPI
+@inject GetOneDenonciationServices GetOneDenonciationServices
 
 <div class="navbar">
     <ul class="ul-navbar">
@@ -92,7 +92,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        denonciation = await DenonciationServices.GetDenonciationAsync(Guid.Parse(Id));
+        denonciation = await GetOneDenonciationServices.GetDenonciationAsync(Guid.Parse(Id));
     }
 
 
