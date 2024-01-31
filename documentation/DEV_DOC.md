@@ -5,12 +5,12 @@ Cette documentation décrit le fonctionnement du projet et les choix d'architect
 - [Documentation développeur](#documentation-développeur)
 - [Table des matières](#table-des-matières)
   - [Architecture en couches](#architecture-en-couches)
+  - [Détails sur chaque projet de la solution](#détails-sur-chaque-projet-de-la-solution)
   - [Domain Driven Design](#domain-driven-design)
   - [Pourquoi nous avons 3 APIs différentes ?](#pourquoi-nous-avons-3-apis-différentes-?)
   - [Pourquoi nous avons un seul projet UI ?](#pourquoi-nous-avons-un-seul-projet-ui-?)
   - [Tests](#tests)
   - [Méthodes de travail](#méthodes-de-travail)
-
 
 ## Architecture en couches
 Pour réaliser ce projet, nous avons respecté le modèle d'architectue en couche.
