@@ -26,6 +26,25 @@ Nous pouvons adapter notre stratégie de déploiement à chaque couche:
 - l'infrastructure sur un serveur qui a une grande capacité de stockage
 - ...
 
+## Détails sur chaque projet de la solution
+- `JeBalance.UI`
+  - type de projet: **Blazor Server App**
+- `JeBalance.Infrastructure`
+  - type de projet: **Librairie de classes**
+- `JeBalance.Infrastructure.Tests`
+  - type de projet: **Tests XUnit**
+- `JeBalance.Domain`
+  - type de projet: **Librairie de classes**
+- `JeBalance.Domain.Tests`
+  - type de projet: **Tests XUnit + Specflow**
+- `JeBalance.API.Securite.Shared`
+  - type de projet: **Librairie de classes**
+- `JeBalance.API.Secrete.Securisee`
+  - type de projet: **ASP.NET Web Service**
+- `JeBalance.API.Interne.Securisee`
+  - type de projet: **ASP.NET Web Service**
+- `JeBalance.API.Publique`
+  - type de projet: **ASP.NET Web Service**
 
 ## Domain Driven Design
 Nous avons placé le domaine au centre, en respectant le vocabulaire donné dans le cahier des charges (Ubiquitous Language).
@@ -63,7 +82,7 @@ Nous avons fait attention à ce qu'un utilisateur classique ne puisse pas accéd
 
 ## Tests
 Nous avons écrit le code de chaque couche dans le but de le rendre facilement extensible et testable.
-Nous avons effectué des tests de validation dans le domaine en utilisant specflow.
+Nous avons effectué des tests de validation dans le domaine en utilisant Specflow et Gherkin.
 Nous avons effectué des tests unitaires pour l'infrastructure (pour tester qu'on appelle bien l'ORM Entity Framework avec les bons paramètres).
 
 ## Méthodes de travail
