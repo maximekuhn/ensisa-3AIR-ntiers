@@ -9,8 +9,10 @@ Cette documentation décrit le fonctionnement du projet et les choix d'architect
   - [Domain Driven Design](#domain-driven-design)
   - [Pourquoi nous avons 3 APIs différentes ?](#pourquoi-nous-avons-3-apis-différentes-?)
   - [Pourquoi nous avons un seul projet UI ?](#pourquoi-nous-avons-un-seul-projet-ui-?)
+  - [Traitement des calomniateurs](#traitement-des-calomniateurs)
   - [Tests](#tests)
   - [Méthodes de travail](#méthodes-de-travail)
+  - [Axes d'amélioration](#axes-damélioration)
 
 ## Architecture en couches
 Pour réaliser ce projet, nous avons respecté le modèle d'architecture en couche.
