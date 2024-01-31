@@ -29,13 +29,13 @@
 
 <h2>Liste des dénonciations non traitées</h2>
 
-@if (res == null)
+@if (listDenonciations == null)
 {
     <p>
         <em>Chargement...</em>
     </p>
 }
-else if (res.Count == 0)
+else if (listDenonciations.Count == 0)
 {
     <p>
         <em>Aucune dénonciation à traiter.</em>
@@ -55,7 +55,7 @@ else
             </tr>
             </thead>
             <tbody>
-            @foreach (var denonciation in res.Denonciations)
+            @foreach (var denonciation in listDenonciations.Denonciations)
             {
                 <tr>
                     <td>@denonciation.Informateur.Nom @denonciation.Informateur.Prenom</td>
@@ -87,7 +87,7 @@ else
 }
 
 @code {
-    private DenonciationsAPI res;
+    private DenonciationsAPI listDenonciations;
     private int currentPage = 1;
     private int pageSize = 10;
     private int totalItems;
@@ -100,8 +100,8 @@ else
     private async Task FetchData()
     {
         int offset = (currentPage - 1) * pageSize;
-        res = await ServiceDenonciation.GetDenonciationNonTraiteeAsync(pageSize, offset);
-        totalItems = res.Count;
+        listDenonciations = await ServiceDenonciation.GetDenonciationNonTraiteeAsync(pageSize, offset);
+        totalItems = listDenonciations.Count;
     }
 
     private void NavigateToReponse(Guid denonciationId)
