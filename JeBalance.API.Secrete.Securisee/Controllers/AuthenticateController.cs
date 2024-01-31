@@ -44,7 +44,7 @@ public class AuthenticateController : ControllerBase
         if (adminExists != null)
             return StatusCode(StatusCodes.Status409Conflict,
                 new Response
-                { Status = "Error", Message = "An administrateur with the same email already exists !" });
+                    { Status = "Error", Message = "An administrateur with the same email already exists !" });
 
         var admin = new ApplicationUser
         {
@@ -58,11 +58,12 @@ public class AuthenticateController : ControllerBase
             List<IdentityError> errorList = result.Errors.ToList();
             var errorsMessage = string.Join(", ", errorList.Select(err => err.Description));
             return StatusCode(StatusCodes.Status500InternalServerError,
-                    new Response
-                    {
-                        Status = "Error",
-                        Message = $"Administrateur creation failed! Please check user details and try again. Error: {errorsMessage}"
-                    });
+                new Response
+                {
+                    Status = "Error",
+                    Message =
+                        $"Administrateur creation failed! Please check user details and try again. Error: {errorsMessage}"
+                });
         }
 
 

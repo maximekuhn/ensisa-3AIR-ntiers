@@ -1,5 +1,5 @@
 @page "/repondre/{denonciationId:guid}"
-@using ReponseCreateAPI = JeBalance.API.Interne.Securisee.Resources.ReponseCreateAPI
+@using JeBalance.API.Interne.Securisee.Resources
 @using JeBalance.UI.Data.Services.InterneAPI
 @attribute [Authorize(Roles = "AdministrateurFiscale")]
 @inject ReponseServices ServiceReponse
@@ -51,7 +51,8 @@
 
 @code {
 
-    [Parameter] public Guid denonciationId { get; set; }
+    [Parameter]
+    public Guid denonciationId { get; set; }
 
     public ReponseCreateAPI reponse = new();
 
