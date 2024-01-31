@@ -46,9 +46,9 @@ else
         <thead>
         <tr>
             <th>Informateur</th>
+            <th>Suspect</th>
             <th>Type de Délit</th>
             <th>Pays d'Évasion</th>
-            <th>Nom du Suspect</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -57,6 +57,7 @@ else
         {
             <tr>
                 <td>@denonciation.Informateur.Nom @denonciation.Informateur.Prenom</td>
+                <td>@denonciation.Suspect.Nom @denonciation.Suspect.Prenom</td>
                 <td>@denonciation.TypeDelit</td>
                 @if (denonciation.PaysEvasion == null)
                 {
@@ -66,7 +67,6 @@ else
                 {
                     @denonciation.PaysEvasion
                 }
-                <td>@denonciation.Suspect.Nom @denonciation.Suspect.Prenom</td>
                 <td class="text-center">
                     <button @onclick="() => NavigateToReponse(denonciation.Id)" type="button">Répondre</button>
                 </td>
