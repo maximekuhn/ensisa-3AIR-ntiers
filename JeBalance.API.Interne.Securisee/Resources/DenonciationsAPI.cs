@@ -6,6 +6,7 @@ public class DenonciationsAPI
 {
     public DenonciationsAPI()
     {
+        Count = 0;
         Denonciations = Array.Empty<DenonciationGetAPI>();
     }
 
