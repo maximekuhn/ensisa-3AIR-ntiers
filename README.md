@@ -15,6 +15,8 @@ Membres du groupe:
 - GÖKER Batuhan (batuhan.goker@uha.fr)
 - KUHN Maxime (maxime.kuhn1@uha.fr)
 
+Le cahier des charges se trouve [ici](./documentation/CAHIER_DES_CHARGES.md)
+
 ## Structure du projet
 ```
 .

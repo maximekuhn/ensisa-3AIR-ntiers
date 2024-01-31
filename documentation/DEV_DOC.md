@@ -80,6 +80,14 @@ Animés par l'envie d'apprendre, nous avons décidé d'ajouter des interface pou
 Nous les avons mises dans le même projet pour éviter d'avoir trop de code dupliqué.
 Nous avons fait attention à ce qu'un utilisateur classique ne puisse pas accéder aux pages d'administration.
 
+## Traitement des calomniateurs
+Un `Informateur` peut devenir calomniateur si:
+- il essaye de dénoncer un `VIP`
+- il reçoit trois `Reponses` de type `Rejet`
+
+Pour gérer l'état calomniateur, nous avons stocké un **booléen** dans la base de données.  
+Grâce à cette méthode, nous n'avons pas besoin de re-calculer l'information à chaque fois que l`Informateur` tente de faire une `Denonciation`.
+
 ## Tests
 Nous avons écrit le code de chaque couche dans le but de le rendre facilement extensible et testable.  
 Nous avons effectué des tests de validation dans le domaine en utilisant Specflow et Gherkin.  
@@ -97,3 +105,12 @@ Pour travailler en groupe de manière parallèle et efficace, nous avons utilis�
       - vérifie si le code est bien formaté
       - compile le code
       - joue l'ensemble des tests
+
+## Axes d'amélioration
+Dans l'infrastructure, nous avons créé une table pour:
+- `Informateur`
+- `Suspect`
+- `VIP`
+
+Nous aurions pu utiliser à notre avantage la séparation domaine/infrastructure et n'avoir qu'un seule repository `Personne` dans l'infrastructure.
+Nous ne l'avons pour l'instant pas fait car il y a des légères différences entre `Suspect`, `Informateur` et `VIP`.
