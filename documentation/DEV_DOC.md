@@ -10,6 +10,7 @@ Cette documentation décrit le fonctionnement du projet et les choix d'architect
   - [Pourquoi nous avons 3 APIs différentes ?](#pourquoi-nous-avons-3-apis-différentes-?)
   - [Pourquoi nous avons un seul projet UI ?](#pourquoi-nous-avons-un-seul-projet-ui-?)
   - [Traitement des calomniateurs](#traitement-des-calomniateurs)
+  - [TODO: denonciations non traitees filtres](#todo:-denonciations-non-traitees-filtres)
   - [Tests](#tests)
   - [Méthodes de travail](#méthodes-de-travail)
   - [Axes d'amélioration](#axes-damélioration)
@@ -86,6 +87,8 @@ Nous avons fait attention à ce qu'un utilisateur classique ne puisse pas accéd
 Un `Informateur` peut devenir calomniateur si:
 - il essaye de dénoncer un `VIP`
 - il reçoit trois `Reponses` de type `Rejet`
+
+## TODO: denonciations non traitees filtres
 
 Pour gérer l'état calomniateur, nous avons stocké un **booléen** dans la base de données.  
 Grâce à cette méthode, nous n'avons pas besoin de re-calculer l'information à chaque fois que l`Informateur` tente de faire une `Denonciation`.
