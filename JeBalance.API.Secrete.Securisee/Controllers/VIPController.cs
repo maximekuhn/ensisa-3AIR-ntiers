@@ -47,18 +47,41 @@ public class VIPController : ControllerBase
     [HttpDelete("{vipId}")]
     public async Task<IActionResult> Delete(int vipId)
     {
-        var command = new DeleteVIPCommand(vipId);
-        var deleteResult = await _mediator.Send(command);
-        return Ok(deleteResult);
+        try
+        {
+            var command = new DeleteVIPCommand(vipId);
+            var deleteResult = await _mediator.Send(command);
+            return Ok(deleteResult);
+        }
+        catch (ApplicationException e)
+        {
+            return BadRequest(new { message = e.Message });
+        }
+        catch (Exception)
+        {
+            return StatusCode(500);
+        }
     }
 
     [HttpGet]
     public async Task<IActionResult> GetVIPs([FromQuery] FindVIPs parameters)
     {
-        var getVIPs = new GetVIPsQuery((parameters.Limit, parameters.Offset));
-        var (vips, total) = await _mediator.Send(getVIPs);
+        try
+        {
+            var getVIPs = new GetVIPsQuery((parameters.Limit, parameters.Offset));
+            var (vips, total) = await _mediator.Send(getVIPs);
 
-        // TODO: return total count for pagination
-        return Ok(vips.Select(vip => new VIPGetAPI(vip)));
+            // TODO: return total count for pagination
+            return Ok(vips.Select(vip => new VIPGetAPI(vip)));
+
+        }
+        catch (ApplicationException e)
+        {
+            return BadRequest(new { message = e.Message });
+        }
+        catch (Exception)
+        {
+            return StatusCode(500);
+        }
     }
 }
