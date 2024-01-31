@@ -57,12 +57,12 @@ public class AuthenticateController : ControllerBase
         {
             List<IdentityError> errorList = result.Errors.ToList();
             var errorsMessage = string.Join(", ", errorList.Select(err => err.Description));
-        return StatusCode(StatusCodes.Status500InternalServerError,
-                new Response
-                {
-                    Status = "Error",
-                    Message = $"Administrateur creation failed! Please check user details and try again. Error: {errorsMessage}"
-                });
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                    new Response
+                    {
+                        Status = "Error",
+                        Message = $"Administrateur creation failed! Please check user details and try again. Error: {errorsMessage}"
+                    });
         }
 
 

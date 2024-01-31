@@ -32,7 +32,7 @@ public class UserAccountService<TResponse, TSourceData>
         var client = _clientFactory.CreateClient();
 
         var response = await client.SendAsync(request);
-        
+
         using var responseStream = await response.Content.ReadAsStreamAsync();
         if (!response.IsSuccessStatusCode)
         {
@@ -40,7 +40,7 @@ public class UserAccountService<TResponse, TSourceData>
             var errorMessage = JsonSerializer.Deserialize<RequestError>(message);
             return new RequestResult<TResponse?>(errorMessage?.Message ?? "Une erreur est survenue");
         }
-        
+
         var res = await JsonSerializer.DeserializeAsync<TResponse>(responseStream);
         return new RequestResult<TResponse?>(res);
     }
