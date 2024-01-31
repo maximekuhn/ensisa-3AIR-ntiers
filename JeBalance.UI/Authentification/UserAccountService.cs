@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json;
+using JeBalance.UI.Data.Services.Error;
 
 namespace JeBalance.UI.Authentification;
 
@@ -26,15 +27,21 @@ public class UserAccountService<TResponse, TSourceData>
         return request;
     }
 
-    protected async Task<TResponse?> SendRequest(HttpRequestMessage request)
+    protected async Task<RequestResult<TResponse?>> SendRequest(HttpRequestMessage request)
     {
         var client = _clientFactory.CreateClient();
 
         var response = await client.SendAsync(request);
-        if (!response.IsSuccessStatusCode) return default;
-
+        
         using var responseStream = await response.Content.ReadAsStreamAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            var message = await response.Content.ReadAsStringAsync();
+            var errorMessage = JsonSerializer.Deserialize<RequestError>(message);
+            return new RequestResult<TResponse?>(errorMessage?.Message ?? "Une erreur est survenue");
+        }
+        
         var res = await JsonSerializer.DeserializeAsync<TResponse>(responseStream);
-        return res;
+        return new RequestResult<TResponse?>(res);
     }
 }
