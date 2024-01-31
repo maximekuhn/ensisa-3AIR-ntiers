@@ -16,13 +16,13 @@
         <li>
             <a id="create-link" href="list-denonciation">LISTE DENONCIATION</a>
         </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
         <li>
-            <a id="logout-secrete-button" @onclick="Logout" class="nav-link">
+            <a id="logout-secrete-button" @onclick="Logout" class="active-red">
                 <i class="fas fa-sign-out-alt"></i>
             </a>
         </li>
-        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
-        <img id="logo" src="/favicon.ico" alt="Home"/>
     </ul>
 </div>
 
@@ -37,7 +37,7 @@
 else if (denonciations.Length == 0)
 {
     <p>
-        <em>Aucune dénonciation non traitée.</em>
+        <em>Aucune dénonciation à traiter.</em>
     </p>
 }
 else

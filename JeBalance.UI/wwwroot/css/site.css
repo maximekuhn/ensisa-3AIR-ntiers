@@ -152,6 +152,10 @@ h2 {
     background-color: #04AA6D;
 }
 
+.active-red{
+    background-color: red;
+}
+
 .ul-navbar {
     list-style-type: none;
     margin: 0;
@@ -184,17 +188,17 @@ li a:hover {
     background-color: #111;
 }
 
-#home-link, #create-link, #edit-link {
+#home-link, #create-link, #edit-link, #logout-secrete-button {
     min-width: 80px;
     height: 100%;
 }
 
-#home-link i {
+#home-link i, #logout-secrete-button i {
     font-size: 20px;
     transition: transform 0.5s;
 }
 
-#home-link:hover i {
+#home-link:hover i, #logout-secrete-button:hover i {
     transform: scale(1.2);
 }
 
@@ -202,7 +206,6 @@ li a:hover {
     width: 50px;
     height: 50px;
 }
-
 /*========================================================================
                          Form styling
 ========================================================================*/
