@@ -1,4 +1,6 @@
-## Version(s) utilisée(s)
+# Migration
+
+## Version de dotnet
 - dotnet: 6
 
 ## Initialiser l'infrastructure
