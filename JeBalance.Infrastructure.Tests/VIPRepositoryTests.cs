@@ -21,12 +21,6 @@ public class VIPRepositoryTests : RepositoryTest
     }
 
     [Fact]
-    public Task ShouldFindAsync()
-    {
-        return Task.CompletedTask;
-    }
-
-    [Fact]
     public async Task ShouldGetOneAsync()
     {
         var vipId = await AddVIP();

@@ -1,4 +1,5 @@
 using JeBalance.API.Securite.Shared.Model;
+using JeBalance.UI.Data.Services.Error;
 
 namespace JeBalance.UI.Authentification;
 
@@ -16,14 +17,14 @@ public class LoginServices : UserAccountService<UserSession?, LoginModel>
                           throw new InvalidOperationException("ApiSecrete:BaseUrl not configured");
     }
 
-    public Task<UserSession?> LoginIntenreAsync(LoginModel data)
+    public Task<RequestResult<UserSession?>> LoginIntenreAsync(LoginModel data)
     {
         var request = MakeRequest($"{_interneBaseUrl}/{Controller}/login", data);
         var session = SendRequest(request);
         return session;
     }
 
-    public Task<UserSession?> LoginSecreteAsync(LoginModel data)
+    public Task<RequestResult<UserSession?>> LoginSecreteAsync(LoginModel data)
     {
         var request = MakeRequest($"{_secreteBaseUrl}/{Controller}/login", data);
         var session = SendRequest(request);

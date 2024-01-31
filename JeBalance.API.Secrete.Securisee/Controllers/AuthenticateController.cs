@@ -54,12 +54,16 @@ public class AuthenticateController : ControllerBase
         };
         var result = await _userManager.CreateAsync(admin, model.Password);
         if (!result.Succeeded)
+        {
+            List<IdentityError> errorList = result.Errors.ToList();
+            var errorsMessage = string.Join(", ", errorList.Select(err => err.Description));
             return StatusCode(StatusCodes.Status500InternalServerError,
-                new Response
-                {
-                    Status = "Error",
-                    Message = "Administrateur creation failed! Please check user details and try again."
-                });
+                    new Response
+                    {
+                        Status = "Error",
+                        Message = $"Administrateur creation failed! Please check user details and try again. Error: {errorsMessage}"
+                    });
+        }
 
 
         if (!await _roleManager.RoleExistsAsync(UserRoles.Administrateur))

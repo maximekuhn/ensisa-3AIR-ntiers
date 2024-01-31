@@ -17,11 +17,6 @@ public class DenonciationRepositoryTests : RepositoryTest
         _repository = new DenonciationRepositorySQLite(Context);
     }
 
-    [Fact]
-    public Task ShouldFindAsync()
-    {
-        return Task.CompletedTask;
-    }
 
     [Fact]
     public async Task ShouldGetOneAsync()

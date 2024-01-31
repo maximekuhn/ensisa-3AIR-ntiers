@@ -80,7 +80,7 @@ else
             <div class="text-center">
                 <div class="pagination">
                     <button class="button-blue" @onclick="() => ChangePage(currentPage - 1)">Précédent</button>
-                    <span>Page @currentPage sur @CalculateTotalPages()</span>
+                    <span>Page @currentPage sur @CalculateTotalPages() (affichage de @pageSize résultat(s))</span>
                     <button class="button-blue" @onclick="() => ChangePage(currentPage + 1)">Suivant</button>
                 </div>
             </div>
