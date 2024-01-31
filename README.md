@@ -29,7 +29,6 @@ Membres du groupe:
 ├── JeBalance.Infrastructure.Tests      # tests unitaires pour utilisation de l'ORM
 ├── JeBalance.UI                        # appication web blazor (frontend)
 ├── JeBalance.sln                       
-├── JeBalance.sln.DotSettings.user
 └── README.md                           # ce fichier
 
 10 directories, 3 files
