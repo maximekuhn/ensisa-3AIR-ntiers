@@ -11,7 +11,7 @@
 ## A propos
 Projet N-Tiers, ENSISA 3A IR.
 Membres du groupe:
-- GRAINCA Albi (albi.graica@uha.fr)
+- GRAINCA Albi (albi.grainca@uha.fr)
 - GÖKER Batuhan (batuhan.goker@uha.fr)
 - KUHN Maxime (maxime.kuhn1@uha.fr)
 
