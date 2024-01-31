@@ -1,3 +1,7 @@
+# JeBlance.Infrastructure
+LocalDatabase.db
+LocalDatabase.db*
+
 bin/
 obj/
 /packages/

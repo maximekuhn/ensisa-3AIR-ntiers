@@ -1,0 +1,50 @@
+@page "/recherche"
+@inject NavigationManager NavigationManager
+
+<div class="navbar">
+    <ul class="ul-navbar">
+        <li>
+            <a id="home-link" class="active-green" href="/">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+        <li>
+            <a id="create-link" href="denonciation">DENONCER</a>
+        </li>
+        <li>
+            <a id="edit-link" href="recherche">CONSULTER</a>
+        </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
+    </ul>
+</div>
+
+<h2>Recherche d'une dénonciation par ID</h2>
+
+<div class="login">
+    <EditForm Model="@denonciationId" id="search-form">
+        <div class="form-group">
+            <label for="denonciationId">Id de la dénonciation : </label>
+            <InputText class="form-control" id="denonciationId" @bind-Value="denonciationId"/>
+        </div>
+    </EditForm>
+    <div class="text-center">
+        <button class="text-center" type="button" @onclick="SubmitForm">Rechercher</button>
+    </div>
+</div>
+
+@code {
+    private string denonciationId = string.Empty;
+
+    private void SubmitForm()
+    {
+        Redirect();
+    }
+
+    private void Redirect()
+    {
+        NavigationManager.NavigateTo($"/denonciation-result/{denonciationId}");
+    }
+
+
+}

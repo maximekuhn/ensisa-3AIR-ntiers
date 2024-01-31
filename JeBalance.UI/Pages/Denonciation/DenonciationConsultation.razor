@@ -1,0 +1,99 @@
+@page "/denonciation-result/{Id}"
+@using JeBalance.UI.Data.Services.PubliqueAPI
+@inject DenonciationGetServices DenonciationServices
+
+<div class="navbar">
+    <ul class="ul-navbar">
+        <li>
+            <a id="home-link" class="active-green" href="/">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+        <li>
+            <a id="create-link" href="denonciation">DENONCER</a>
+        </li>
+        <li>
+            <a id="edit-link" href="recherche">CONSULTER</a>
+        </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
+    </ul>
+</div>
+
+<h2>Résultat de la dénonciation</h2>
+
+@if (denonciation != null)
+{
+    <div class="denonciation_result">
+        <h4>Renseignements sur la dénonciation</h4>
+        <p>ID de la dénonciation :<span class="netstat"> @Id</span></p>
+        <p>Heure de signalement : <span class="netstat">@denonciation.Horodatage</span></p>
+        <p>Type de délit : <span class="netstat">@denonciation.TypeDelit</span></p>
+        @if (denonciation.PaysEvasion != null)
+        {
+        <p>Pays d'évasion : <span class="netstat">@denonciation.PaysEvasion</span></p>
+        }
+    </div>
+    @if (denonciation.Informateur != null)
+    {
+        <div class="denonciation_result">
+            <h4>Renseignements sur l'infomateur</h4>
+            <p>Informateur : <span class="netstat">@denonciation.Informateur.Nom @denonciation.Informateur.Prenom</span></p>
+            <p>Adresse : <span class="netstat">@denonciation.Informateur.Adresse.NumeroVoie @denonciation.Informateur.Adresse.NomVoie , @denonciation.Informateur.Adresse.CodePostal @denonciation.Informateur.Adresse.NomCommune</span></p>
+        </div>
+    }
+    else
+    {
+        <div class="denonciation_result">
+            <p>Informateur : Information non disponible</p>
+        </div>
+    }
+
+    @if (denonciation.Suspect != null)
+    {
+        <div class="denonciation_result">
+            <h4>Renseignements sur le suspect</h4>
+            <p>Suspect : <span class="netstat">@denonciation.Suspect.Nom @denonciation.Suspect.Prenom</span></p>
+            <p>Adresse : <span class="netstat">@denonciation.Suspect.Adresse.NumeroVoie @denonciation.Suspect.Adresse.NomVoie , @denonciation.Suspect.Adresse.CodePostal @denonciation.Suspect.Adresse.NomCommune</span></p>
+        </div>
+    }
+    @if (denonciation.Reponse != null)
+    {
+        <div class="denonciation_result">
+            <h4>Réponse</h4>
+            <p>Date de réponse : <span class="netstat">@denonciation.Reponse.Horodatage</span></p>
+            <p>Statut : <span class="netstat">@denonciation.Reponse.TypeReponse</span></p>
+            @if (denonciation.Reponse.Retribution != null && denonciation.Reponse.TypeReponse.Equals(TypeReponse.Confirmation))
+            {
+                <p>Retribution : <span class="netstat">@denonciation.Reponse.Retribution</span>€</p>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="denonciation_result">
+            <p>Réponse : En attente de traitement</p>
+        </div>
+    }
+}
+else
+{
+    <div class="denonciation_result">
+        <p>Aucun ID correspondant à @Id n'a été trouvé.</p>
+    </div>
+}
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; }
+
+    private DenonciationGetAPI denonciation;
+
+    protected override async Task OnInitializedAsync()
+    {
+        denonciation = await DenonciationServices.GetDenonciationAsync(Guid.Parse(Id));
+    }
+
+
+}

@@ -1,0 +1,147 @@
+@page "/get-all-vip"
+@using JeBalance.UI.Data.Services.SecreteAPI
+@using JeBalance.API.Secrete.Securisee.Resources
+@attribute [Authorize(Roles = "Administrateur")]
+@inject AuthenticationStateProvider authStateProvider
+@inject VIPGetServices ServiceGet
+@inject NavigationManager NavigationManager
+
+
+<div class="navbar">
+    <ul class="ul-navbar">
+        <li>
+            <a id="home-link" class="active-green" href="/">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+        <li>
+            <a id="edit-link" href="get-all-vip">LISTE VIP</a>
+        </li>
+        <li>
+            <a id="create-link" href="ajout-vip">AJOUTER UN VIP</a>
+        </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
+        <li>
+            <a id="logout-secrete-button" @onclick="Logout" class="active-red">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<h2>Liste de tous les VIP</h2>
+
+@if (listVips == null)
+{
+    <p>
+        <em>Chargement...</em>
+    </p>
+}
+else
+{
+    @if (listVips.Count == 0)
+    {
+        <p>
+            <em>Aucun VIP trouvé.</em>
+        </p>
+    }
+    else
+    {
+        <div class="zero">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID du VIP</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Adresse</th>
+                    <th>Actions possibles</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var vip in listVips.VIPs)
+                {
+                    <tr>
+                        <td>@vip.Id</td>
+                        <td>@vip.Nom</td>
+                        <td>@vip.Prenom</td>
+                        <td>@vip.Adresse.NumeroVoie @vip.Adresse.NomVoie , @vip.Adresse.NomCommune @vip.Adresse.CodePostal</td>
+                        <td class="text-center">
+                            <button @onclick="@(() => Delete(vip.Id))" class="btn btn-sm btn-danger button-style-red">
+                                <span class="oi oi-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+            <hr>
+            <div class="text-center">
+                <div class="pagination">
+                    <button class="button-blue" @onclick="() => ChangePage(currentPage - 1)">Précédent</button>
+                    <span>Page @currentPage sur @CalculateTotalPages() (affichage de @pageSize résultat(s))</span>
+                    <button class="button-blue" @onclick="() => ChangePage(currentPage + 1)">Suivant</button>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@code {
+    private VIPsAPI listVips;
+    private int currentPage = 1;
+    private int pageSize = 10;
+    private int totalItems;
+
+    [CascadingParameter] public IModalService Modal { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await FetchData();
+    }
+
+    private async Task FetchData()
+    {
+        int offset = (currentPage - 1) * pageSize;
+        listVips = await ServiceGet.GetVIPsAsync(pageSize, offset);
+        totalItems = listVips.Count;
+    }
+
+    async Task Delete(int id)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(VIPGetAPI.Id), id);
+
+        var modal = Modal.Show<DeleteVip>("Suppression définitive d'un VIP", parameters);
+        var result = await modal.Result;
+
+        if (!result.Cancelled)
+        {
+            await FetchData();
+        }
+    }
+
+    private async Task Logout()
+    {
+        var customASP = (CustomAuthenticationStateProvider)authStateProvider;
+        await customASP.UpdateAuthenticationState(null);
+        NavigationManager.NavigateTo("/login-secrete", true);
+    }
+
+    private int CalculateTotalPages()
+    {
+        return (int)Math.Ceiling((double)totalItems / pageSize);
+    }
+
+    private async void ChangePage(int newPage)
+    {
+        if (newPage >= 1 && newPage <= CalculateTotalPages())
+        {
+            currentPage = newPage;
+            await FetchData();
+            StateHasChanged();
+        }
+    }
+
+}

@@ -1,0 +1,134 @@
+@page "/list-denonciation"
+@using DenonciationGetAPI = JeBalance.API.Interne.Securisee.Resources.DenonciationGetAPI
+@using JeBalance.UI.Data.Services.InterneAPI
+@using JeBalance.API.Interne.Securisee.Resources
+@attribute [Authorize(Roles = "AdministrateurFiscale")]
+@inject AuthenticationStateProvider authStateProvider
+@inject DenonciationServices ServiceDenonciation
+@inject NavigationManager NavigationManager
+
+<div class="navbar">
+    <ul class="ul-navbar">
+        <li>
+            <a id="home-link" class="active-green" href="/">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+        <li>
+            <a id="create-link" href="list-denonciation">LISTE DENONCIATION</a>
+        </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
+        <li>
+            <a id="logout-secrete-button" @onclick="Logout" class="active-red">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<h2>Liste des dénonciations non traitées</h2>
+
+@if (listDenonciations == null)
+{
+    <p>
+        <em>Chargement...</em>
+    </p>
+}
+else if (listDenonciations.Count == 0)
+{
+    <p>
+        <em>Aucune dénonciation à traiter.</em>
+    </p>
+}
+else
+{
+    <div class="zero">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Informateur</th>
+                <th>Suspect</th>
+                <th>Type de Délit</th>
+                <th>Pays d'Évasion</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var denonciation in listDenonciations.Denonciations)
+            {
+                <tr>
+                    <td>@denonciation.Informateur.Nom @denonciation.Informateur.Prenom</td>
+                    <td>@denonciation.Suspect.Nom @denonciation.Suspect.Prenom</td>
+                    <td>@denonciation.TypeDelit</td>
+                    @if (denonciation.PaysEvasion == null)
+                    {
+                        <td class="text-center">-</td>
+                    }
+                    else
+                    {
+                        <td>@denonciation.PaysEvasion</td>
+                    }
+                    <td class="text-center">
+                        <button @onclick="() => NavigateToReponse(denonciation.Id)" type="button">Répondre</button>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <div class="text-center">
+            <div class="pagination">
+                <button class="button-blue" @onclick="() => ChangePage(currentPage - 1)">Précédent</button>
+                <span>Page @currentPage sur @CalculateTotalPages() (affichage de @pageSize résultat(s))</span>
+                <button class="button-blue" @onclick="() => ChangePage(currentPage + 1)">Suivant</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private DenonciationsAPI listDenonciations;
+    private int currentPage = 1;
+    private int pageSize = 10;
+    private int totalItems;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await FetchData();
+    }
+
+    private async Task FetchData()
+    {
+        int offset = (currentPage - 1) * pageSize;
+        listDenonciations = await ServiceDenonciation.GetDenonciationNonTraiteeAsync(pageSize, offset);
+        totalItems = listDenonciations.Count;
+    }
+
+    private void NavigateToReponse(Guid denonciationId)
+    {
+        NavigationManager.NavigateTo($"/repondre/{denonciationId}");
+    }
+
+    private async Task Logout()
+    {
+        var customASP = (CustomAuthenticationStateProvider)authStateProvider;
+        await customASP.UpdateAuthenticationState(null);
+        NavigationManager.NavigateTo("/login-interne", true);
+    }
+
+    private int CalculateTotalPages()
+    {
+        return (int)Math.Ceiling((double)totalItems / pageSize);
+    }
+
+    private async void ChangePage(int newPage)
+    {
+        if (newPage >= 1 && newPage <= CalculateTotalPages())
+        {
+            currentPage = newPage;
+            await FetchData();
+            StateHasChanged();
+        }
+    }
+
+}

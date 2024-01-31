@@ -1,8 +1,5 @@
-using System;
+namespace JeBalance.Domain.Tests.Drivers;
 
-namespace JeBalance.Domain.Tests.Drivers
+public class Driver
 {
-    public class Driver
-    {
-    }
 }

@@ -1,0 +1,80 @@
+@page "/repondre/{denonciationId:guid}"
+@using ReponseCreateAPI = JeBalance.API.Interne.Securisee.Resources.ReponseCreateAPI
+@using JeBalance.UI.Data.Services.InterneAPI
+@attribute [Authorize(Roles = "AdministrateurFiscale")]
+@inject ReponseServices ServiceReponse
+@inject IJSRuntime js
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider authStateProvider
+
+<div class="navbar">
+    <ul class="ul-navbar">
+        <li>
+            <a id="home-link" class="active-green" href="/">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
+        <li>
+            <a id="logout-secrete-button" @onclick="Logout" class="active-red">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<h2>Répondre à la dénonciation</h2>
+
+
+<EditForm Model="@reponse" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator/>
+
+    <div class="form-group">
+        <label>Type de Réponse</label>
+        <InputSelect class="form-control" id="typeDelit" @bind-Value="reponse.TypeReponse">
+            @foreach (var repType in Enum.GetValues(typeof(TypeReponse)))
+            {
+                <option value="@repType">@repType</option>
+            }
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Rétribution (si applicable)</label>
+        <InputNumber @bind-Value="reponse.Retribution" class="form-control" min="0"/>
+    </div>
+
+    <button type="submit">Répondre</button>
+</EditForm>
+
+
+@code {
+
+    [Parameter] public Guid denonciationId { get; set; }
+
+    public ReponseCreateAPI reponse = new();
+
+    private async Task HandleValidSubmit()
+    {
+        var requestResult = await ServiceReponse.AddReponseAsync(
+            denonciationId, reponse);
+
+        if (requestResult.Errormessage != null)
+        {
+            await js.InvokeVoidAsync("alert", $"{requestResult.Errormessage}");
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/list-denonciation");
+        }
+    }
+
+    private async Task Logout()
+    {
+        var customASP = (CustomAuthenticationStateProvider)authStateProvider;
+        await customASP.UpdateAuthenticationState(null);
+        NavigationManager.NavigateTo("/login-interne", true);
+    }
+
+}

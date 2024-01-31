@@ -1,0 +1,30 @@
+﻿@page "/"
+
+<div class="navbar">
+    <ul class="ul-navbar">
+        <li>
+            <a id="home-link" class="active-green" href="/">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+        <p id="titleLogo"><span id="bleu">JeBalance</span><span id="gris">.gouv</span>.fr</p>
+        <img id="logo" src="/favicon.ico" alt="Home"/>
+    </ul>
+</div>
+
+<h2>Bienvenue sur JeBalance.gouv !</h2>
+
+<div class="index-section-container">
+    <div class="index-section" id="denonciation-section">
+        <p>Vous souhaitez dénoncer une personne? Dirigez-vous dans cette section</p>
+        <a href="/denonciation" class="button">Dénoncer</a>
+    </div>
+    <div class="index-section" id="employe-section">
+        <p>Vous êtes un employé de JeBalance.gouv ? Dirigez-vous vers votre interface de connexion</p>
+        <a href="/login-interne" class="button">Connexion Employé</a>
+    </div>
+    <div class="index-section" id="admin-section">
+        <p>Vous êtes un administrateur du système? Dirigez-vous vers votre interface de connexion</p>
+        <a href="/login-secrete" class="button">Connexion Administrateur</a>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<Modal Title="Confirmation de dénonciation">
+    <ModalBody>
+        Êtes-vous sûr de vouloir faire cette dénonciation?
+    </ModalBody>
+    <br/><br/>
+    <ModalFooter>
+        <button type="button" class="btn-primary" @onclick="Confirm">Confirmer</button>
+        <button type="button" class="btn-secondary" @onclick="Cancel">Annuler</button>
+    </ModalFooter>
+</Modal>
+
+@code {
+
+    [CascadingParameter]
+    BlazoredModalInstance BlazoredModal { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnConfirm { get; set; }
+
+    private async Task Confirm()
+    {
+        await OnConfirm.InvokeAsync(true);
+        await BlazoredModal.CloseAsync(ModalResult.Ok(true));
+    }
+
+    private async Task Cancel()
+    {
+        await BlazoredModal.CloseAsync(ModalResult.Cancel());
+    }
+
+}
