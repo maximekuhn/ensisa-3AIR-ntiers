@@ -1,6 +1,5 @@
 @page "/get-all-vip"
 @using JeBalance.UI.Data.Services.SecreteAPI
-@using JeBalance.API.Secrete.Securisee.Resources
 @attribute [Authorize(Roles = "Administrateur")]
 @inject AuthenticationStateProvider authStateProvider
 @inject VIPGetServices ServiceGet
@@ -80,7 +79,7 @@ else
             <div class="text-center">
                 <div class="pagination">
                     <button class="button-blue" @onclick="() => ChangePage(currentPage - 1)">Précédent</button>
-                    <span>Page @currentPage sur @CalculateTotalPages() (affichage de @pageSize résultat(s))</span>
+                    <span>Page @currentPage sur @CalculateTotalPages() (affichage de <span class="netstat">@pageSize</span> résultat(s))</span>
                     <button class="button-blue" @onclick="() => ChangePage(currentPage + 1)">Suivant</button>
                 </div>
             </div>
@@ -113,7 +112,7 @@ else
         var parameters = new ModalParameters();
         parameters.Add(nameof(VIPGetAPI.Id), id);
 
-        var modal = Modal.Show<DeleteVip>("Suppression définitive d'un VIP", parameters);
+        var modal = Modal.Show<DeleteVIP>("Suppression définitive d'un VIP", parameters);
         var result = await modal.Result;
 
         if (!result.Cancelled)
