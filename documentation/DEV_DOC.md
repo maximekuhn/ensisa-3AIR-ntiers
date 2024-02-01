@@ -10,7 +10,7 @@ Cette documentation décrit le fonctionnement du projet et les choix d'architect
   - [Pourquoi nous avons 3 APIs différentes ?](#pourquoi-nous-avons-3-apis-différentes-?)
   - [Pourquoi nous avons un seul projet UI ?](#pourquoi-nous-avons-un-seul-projet-ui-?)
   - [Traitement des calomniateurs](#traitement-des-calomniateurs)
-  - [TODO: denonciations non traitees filtres](#todo:-denonciations-non-traitees-filtres)
+  - [Traitement des calomniateurs et des dénonciations non traitées](#traitement-des-calomniateurs-et-des-denonciations-non-traitees)
   - [Tests](#tests)
   - [Méthodes de travail](#méthodes-de-travail)
   - [Axes d'amélioration](#axes-damélioration)
@@ -88,10 +88,14 @@ Un `Informateur` peut devenir calomniateur si:
 - il essaye de dénoncer un `VIP`
 - il reçoit trois `Reponses` de type `Rejet`
 
-## TODO: denonciations non traitees filtres
+## Traitement des calomniateurs et des dénonciations non traitées
 
 Pour gérer l'état calomniateur, nous avons stocké un **booléen** dans la base de données.  
-Grâce à cette méthode, nous n'avons pas besoin de re-calculer l'information à chaque fois que l`Informateur` tente de faire une `Denonciation`.
+Grâce à cette méthode, nous n'avons pas besoin de re-calculer l'information à chaque fois que `Informateur` tente de faire une `Denonciation`.
+
+Pour gérer la liste des dénonciations à restituer aux administrateurs fiscaux, qui doit contenir uniquement les dénonciations non traitées tout en gérant le cas des suspects considérés comme VIPs, nous avons mis en place une méthode spécifique dans le Repository. Cette méthode prend en paramètre une spécification conçue pour retenir uniquement les dénonciations non traitées.
+Ensuite, nous avons employé cette méthode au niveau de l'infrastructure pour, dans un premier temps, filtrer la liste des dénonciations grâce à la spécification donnée en paramètre. Puis, directement dans l'infrastructure, nous avons filtré les suspects identifiés comme VIPs, avant de trier la liste en fonction de l’horodatage de création. Ceci assure que seules les dénonciations non traitées et non liées à des VIPs sont restituées, conformément aux exigences du cahier des charges.
+Le filtrage et le tri est effectué directement dans la base de données pour optimiser l'envoi de données. De plus, le filtrage des VIPs est fait ici  pour maintenir la cohérence de la pagination.
 
 ## Tests
 Nous avons écrit le code de chaque couche dans le but de le rendre facilement extensible et testable.  
