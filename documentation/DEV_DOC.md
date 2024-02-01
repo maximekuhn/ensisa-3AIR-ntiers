@@ -10,7 +10,7 @@ Cette documentation décrit le fonctionnement du projet et les choix d'architect
   - [Pourquoi nous avons 3 APIs différentes ?](#pourquoi-nous-avons-3-apis-différentes-?)
   - [Pourquoi nous avons un seul projet UI ?](#pourquoi-nous-avons-un-seul-projet-ui-?)
   - [Traitement des calomniateurs](#traitement-des-calomniateurs)
-  - [Traitement des calomniateurs et des dénonciations non traitées](#traitement-des-calomniateurs-et-des-denonciations-non-traitees)
+  - [Traitement des calomniateurs et des dénonciations non traitées](#traitement-des-calomniateurs-et-des-dénonciations-non-traitées)
   - [Tests](#tests)
   - [Méthodes de travail](#méthodes-de-travail)
   - [Axes d'amélioration](#axes-damélioration)
