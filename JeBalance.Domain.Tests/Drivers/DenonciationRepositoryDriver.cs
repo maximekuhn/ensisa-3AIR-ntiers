@@ -96,4 +96,9 @@ public class DenonciationRepositoryDriver : DenonciationRepository
 
         return Task.FromResult((results, total));
     }
+
+    public Task<bool> Has2ReponsesDeTypeRejet(int informateurId)
+    {
+        throw new NotImplementedException();
+    }
 }
