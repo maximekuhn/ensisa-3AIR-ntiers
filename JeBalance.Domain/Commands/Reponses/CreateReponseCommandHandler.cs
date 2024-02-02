@@ -9,10 +9,12 @@ public class CreateReponseCommandHandler : IRequestHandler<CreateReponseCommand,
 {
     private readonly DenonciationRepository _denonciationRepository;
     private readonly IHorodatageProvider _horodatageProvider;
-    private readonly ReponseRepository _reponseRepository;
     private readonly InformateurRepository _informateurRepository;
+    private readonly ReponseRepository _reponseRepository;
 
-    public CreateReponseCommandHandler(DenonciationRepository denonciationRepository, IHorodatageProvider horodatageProvider, ReponseRepository reponseRepository, InformateurRepository informateurRepository)
+    public CreateReponseCommandHandler(DenonciationRepository denonciationRepository,
+        IHorodatageProvider horodatageProvider, ReponseRepository reponseRepository,
+        InformateurRepository informateurRepository)
     {
         _denonciationRepository = denonciationRepository;
         _horodatageProvider = horodatageProvider;
@@ -33,11 +35,11 @@ public class CreateReponseCommandHandler : IRequestHandler<CreateReponseCommand,
 
         var denonciationId = request.DenonciationId;
         var denonciation = await _denonciationRepository.GetOne(denonciationId);
-        
+
         if (reponse.TypeReponse == TypeReponse.Rejet)
         {
             reponse.Retribution = null;
-            
+
             // Si l'informateur a déjà eu 2 réponses de type `Rejet`, on le marque en tant que calomniateur
             if (await _denonciationRepository.Has2ReponsesDeTypeRejet(denonciation.InformateurId))
             {

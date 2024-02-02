@@ -93,8 +93,7 @@ else
     private readonly int pageSize = 10;
     private int totalItems;
 
-    [CascadingParameter]
-    public IModalService Modal { get; set; } = default!;
+    [CascadingParameter] public IModalService Modal { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {

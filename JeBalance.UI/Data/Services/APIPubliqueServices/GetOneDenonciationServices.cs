@@ -7,7 +7,8 @@ public class GetOneDenonciationServices : ServiceBase<DenonciationGetAPI, Guid>
     private const string Controller = "Denonciation";
     private readonly string _baseUrl;
 
-    public GetOneDenonciationServices(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory,
+    public GetOneDenonciationServices(IHttpClientFactory clientFactory, IConfiguration configuration) : base(
+        clientFactory,
         null)
     {
         _baseUrl = configuration["ApiPublique:BaseUrl"] ??

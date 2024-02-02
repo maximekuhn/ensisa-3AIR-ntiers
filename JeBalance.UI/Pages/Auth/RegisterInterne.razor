@@ -38,7 +38,7 @@
 
     private async Task Register()
     {
-        RequestResult<Response?> requestResult = await Service.RegisterInterneAsync(_model);
+        var requestResult = await Service.RegisterInterneAsync(_model);
         if (requestResult.Errormessage != null)
         {
             await js.InvokeVoidAsync("alert", requestResult.Errormessage ?? "Unexpected error");
