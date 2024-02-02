@@ -116,6 +116,8 @@ Pour travailler en groupe de manière parallèle et efficace, nous avons utilis�
       - joue l'ensemble des tests
 
 ## Axes d'amélioration
+
+### Axe 1
 Dans l'infrastructure, nous avons créé une table pour:
 - `Informateur`
 - `Suspect`
@@ -123,3 +125,8 @@ Dans l'infrastructure, nous avons créé une table pour:
 
 Nous aurions pu utiliser à notre avantage la séparation domaine/infrastructure et n'avoir qu'un seule repository `Personne` dans l'infrastructure.
 Nous ne l'avons pour l'instant pas fait car il y a des légères différences entre `Suspect`, `Informateur` et `VIP`.
+
+### Axe 2
+Quand un `Administrateur fiscal` répond à une `Dénonciation` **non traitée** par un `Réponse` de type `Rejet`, nous devons regarder si l'`Informateur` n'a pas déjà 2 `Réponses` de type `Rejet`. Si c'est le cas, alors il faut marquer l'`Informateur` comme `calomniateur`.
+
+La méthode associée dans le repository n'est pas très optimisée car elle récupère des données de la baise pour les traiter, au lieu de faire directement le traitement en base.
