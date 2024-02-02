@@ -116,7 +116,7 @@ public class DenonciationRepositorySQLite : DenonciationRepository
         // TODO: optimiser la requête pour ne récupérer que les résultats intéressant depuis la base
         // Il y a peut être un problème de configuration de relations des entités EF qui nous
         // empêche de le faire correctement pour le moment
-        
+
         // Récupérer les Id des réponses dont la dénonciation avait pour informateur informateurId
         var denonciations = await _context.Denonciations
             .ToListAsync();
