@@ -12,11 +12,13 @@ public class DenonciationRepositoryDriver : DenonciationRepository
         Denonciations = new List<Denonciation>();
         Suspects = new List<Suspect>();
         VIPs = new List<VIP>();
+        Reponses = new List<Reponse>();
     }
 
     public List<Denonciation> Denonciations { get; }
     public List<Suspect> Suspects { get; }
     public List<VIP> VIPs { get; }
+    public List<Reponse> Reponses { get; }
 
     public Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset,
         Specification<Denonciation>? specification)
@@ -99,6 +101,20 @@ public class DenonciationRepositoryDriver : DenonciationRepository
 
     public Task<bool> Has2ReponsesDeTypeRejet(int informateurId)
     {
-        return Task.FromResult(true);
+        var reponsesIdForInformateurId = Denonciations
+            .Where(denonciation => denonciation.InformateurId == informateurId)
+            .Select(denonciation => denonciation.ReponseId)
+            .Where(reponseId => reponseId != null)
+            .Select(reponseId => (int) reponseId)
+            .ToList()
+            ;
+
+        var reponsesRejet = Reponses
+                .Where(reponse => reponsesIdForInformateurId.Contains(reponse.Id))
+                .Where(reponse => reponse.TypeReponse == TypeReponse.Rejet)
+                .Count()
+            ;
+        
+        return Task.FromResult(reponsesRejet >= 2);
     }
 }
