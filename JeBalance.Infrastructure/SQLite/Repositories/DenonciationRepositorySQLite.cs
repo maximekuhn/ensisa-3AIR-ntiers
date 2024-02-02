@@ -110,4 +110,26 @@ public class DenonciationRepositorySQLite : DenonciationRepository
 
         return (results, total);
     }
+
+    public async Task<bool> Has2ReponsesDeTypeRejet(int informateurId)
+    {
+        // Récupérer les Id des réponses dont la dénonciation avait pour informateur informateurId
+        var reponses = await _context.Denonciations
+            .Join(_context.Reponses,
+                denonciation => denonciation.ReponseId,
+                reponse => reponse.Id,
+                (denonciation, reponse) => new
+                {
+                    denonciation.InformateurId,
+                    reponse.TypeReponse
+                }
+            ).Where(result => result.InformateurId == informateurId && result.TypeReponse == TypeReponse.Rejet)
+            .GroupBy(result => result.InformateurId)
+            .Where(group => group.Count() >= 1)
+            .AnyAsync();
+
+        Console.WriteLine($"{informateurId} est calomniateur ? {reponses}");
+        
+        return reponses;
+    }
 }
