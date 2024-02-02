@@ -128,6 +128,7 @@ public class DenonciationRepositorySQLite : DenonciationRepository
             .Select(denonciation => denonciation.ReponseId);
 
         var reponses = await _context.Reponses
+            .Where(reponse => reponse.TypeReponse == TypeReponse.Rejet)
             .Where(reponse => reponsesIdForInformateurId.Contains(reponse.Id))
             .ToListAsync();
 
