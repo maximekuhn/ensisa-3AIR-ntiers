@@ -105,7 +105,7 @@ public class DenonciationRepositoryDriver : DenonciationRepository
             .Where(denonciation => denonciation.InformateurId == informateurId)
             .Select(denonciation => denonciation.ReponseId)
             .Where(reponseId => reponseId != null)
-            .Select(reponseId => (int) reponseId)
+            .Select(reponseId => (int)reponseId)
             .ToList()
             ;
 
@@ -114,7 +114,7 @@ public class DenonciationRepositoryDriver : DenonciationRepository
                 .Where(reponse => reponse.TypeReponse == TypeReponse.Rejet)
                 .Count()
             ;
-        
+
         return Task.FromResult(reponsesRejet >= 2);
     }
 }
