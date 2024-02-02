@@ -113,23 +113,24 @@ public class DenonciationRepositorySQLite : DenonciationRepository
 
     public async Task<bool> Has2ReponsesDeTypeRejet(int informateurId)
     {
-        // Récupérer les Id des réponses dont la dénonciation avait pour informateur informateurId
-        var reponses = await _context.Denonciations
-            .Join(_context.Reponses,
-                denonciation => denonciation.ReponseId,
-                reponse => reponse.Id,
-                (denonciation, reponse) => new
-                {
-                    denonciation.InformateurId,
-                    reponse.TypeReponse
-                }
-            ).Where(result => result.InformateurId == informateurId && result.TypeReponse == TypeReponse.Rejet)
-            .GroupBy(result => result.InformateurId)
-            .Where(group => group.Count() >= 1)
-            .AnyAsync();
-
-        Console.WriteLine($"{informateurId} est calomniateur ? {reponses}");
+        // TODO: optimiser la requête pour ne récupérer que les résultats intéressant depuis la base
+        // Il y a peut être un problème de configuration de relations des entités EF qui nous
+        // empêche de le faire correctement pour le moment
         
-        return reponses;
+        // Récupérer les Id des réponses dont la dénonciation avait pour informateur informateurId
+        var denonciations = await _context.Denonciations
+            .ToListAsync();
+
+        var reponsesIdForInformateurId = denonciations
+            .AsEnumerable()
+            .Where(denonciation => denonciation.IdInformateur == informateurId)
+            .Where(denonciation => denonciation.ReponseId != null)
+            .Select(denonciation => denonciation.ReponseId);
+
+        var reponses = await _context.Reponses
+            .Where(reponse => reponsesIdForInformateurId.Contains(reponse.Id))
+            .ToListAsync();
+
+        return reponses.Count() >= 2;
     }
 }
