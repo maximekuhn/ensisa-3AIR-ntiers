@@ -19,5 +19,3 @@ public class DenonciationsAPI
     [JsonPropertyName("count")] public int Count { get; set; }
     [JsonPropertyName("denonciations")] public DenonciationGetAPI[] Denonciations { get; set; }
 }
-
-

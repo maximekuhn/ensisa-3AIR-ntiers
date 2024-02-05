@@ -1,39 +1,42 @@
 # ensisa-3AIR-ntiers
 
-## Version(s) utilisée(s)
-- dotnet: 6
+## Table des matières
+- [ensisa-3AIR-ntiers](#ensisa-3air-ntiers)
+  - [Table des matières](#table-des-matières)
+  - [A propos](#a-propos)
+  - [Structure du projet](#structure-du-projet)
+  - [Documentation développeur](#documentation-développeur)
+  - [Documentation utilisateur](#documentation-utilisateur)
 
-## Initialiser l'infrastructure
-Installer l'outil dotnet/Entity Framework:
-```shell
-dotnet tool install --global dotnet-ef
+## A propos
+Projet N-Tiers, ENSISA 3A IR.
+Membres du groupe:
+- GRAINCA Albi (albi.grainca@uha.fr)
+- GÖKER Batuhan (batuhan.goker@uha.fr)
+- KUHN Maxime (maxime.kuhn1@uha.fr)
+
+Le cahier des charges se trouve [ici](./documentation/CAHIER_DES_CHARGES.md)
+
+## Structure du projet
 ```
-> attention à bien installer la version 6 (--version 6)
+.
+├── JeBalance.API.Interne.Securisee     # API interne pour répondre aux dénonciations non traitées
+├── JeBalance.API.Publique              # API publique pour dénoncer / consulter une dénonciation
+├── JeBalance.API.Secrete.Securisee     # API secrète pour administrer les VIPs
+├── JeBalance.API.Securite.Shared       # code commun pour gérer la sécurité des APIs interne et secrète
+├── JeBalance.Domain                    # domaine (logique métier)
+├── JeBalance.Domain.Tests              # tests de validation du domaine
+├── JeBalance.Infrastructure            # interaction avec la base de données
+├── JeBalance.Infrastructure.Tests      # tests unitaires pour utilisation de l'ORM
+├── JeBalance.UI                        # appication web blazor (frontend)
+├── JeBalance.sln                       
+└── README.md                           # ce fichier
 
-Ensuite, se placer dans le répertoire `JeBalance.Infrastructure`.
-
-Initialiser la migration:
-```shell
-dotnet ef migrations add initial --context DatabaseContext
+10 directories, 3 files
 ```
-> inutile si le fichier de migration existe déjà
 
-Appliquer la migration:
-```shell
-dotnet ef database update --context DatabaseContext
-```
+## Documentation développeur
+Pour comprendre comment fonctionne le projet, consultez [cette documentation](./documentation/DEV_DOC.md).
 
-Un fichier `LocalDatabase.db` doit s'être créé dans `JeBalance.Infrastructure`.
-
-## Initialiser l'authentification
-Se placer dans le répertoire `JeBalance.API.Securite.Shared`.  
-Initialiser la migration:
-```shell
-dotnet ef migrations add initial --context AuthDbContext
-```
-> inutile si le fichier de migration existe déjà
-
-Appliquer la migration:
-```shell
-dotnet ef database update --context AuthDbContext
-```
+## Documentation utilisateur
+Pour déployer et utiliser le projet, consultez [cette documentation](./documentation/USER_DOC.md).

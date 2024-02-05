@@ -1,6 +1,6 @@
 @page "/denonciation-result/{Id}"
-@using JeBalance.UI.Data.Services.PubliqueAPI
-@inject DenonciationGetServices DenonciationServices
+@using DenonciationGetAPI = JeBalance.API.Publique.Resources.DenonciationGetAPI
+@inject GetOneDenonciationServices GetOneDenonciationServices
 
 <div class="navbar">
     <ul class="ul-navbar">
@@ -31,7 +31,7 @@
         <p>Type de délit : <span class="netstat">@denonciation.TypeDelit</span></p>
         @if (denonciation.PaysEvasion != null)
         {
-        <p>Pays d'évasion : <span class="netstat">@denonciation.PaysEvasion</span></p>
+            <p>Pays d'évasion : <span class="netstat">@denonciation.PaysEvasion</span></p>
         }
     </div>
     @if (denonciation.Informateur != null)
@@ -57,6 +57,7 @@
             <p>Adresse : <span class="netstat">@denonciation.Suspect.Adresse.NumeroVoie @denonciation.Suspect.Adresse.NomVoie , @denonciation.Suspect.Adresse.CodePostal @denonciation.Suspect.Adresse.NomCommune</span></p>
         </div>
     }
+
     @if (denonciation.Reponse != null)
     {
         <div class="denonciation_result">
@@ -85,14 +86,13 @@ else
 
 @code {
 
-    [Parameter]
-    public string Id { get; set; }
+    [Parameter] public string Id { get; set; }
 
     private DenonciationGetAPI denonciation;
 
     protected override async Task OnInitializedAsync()
     {
-        denonciation = await DenonciationServices.GetDenonciationAsync(Guid.Parse(Id));
+        denonciation = await GetOneDenonciationServices.GetDenonciationAsync(Guid.Parse(Id));
     }
 
 

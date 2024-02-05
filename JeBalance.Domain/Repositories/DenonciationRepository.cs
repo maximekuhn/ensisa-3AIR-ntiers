@@ -10,4 +10,6 @@ public interface DenonciationRepository : Repository<Denonciation, Guid>
 
     public Task<(IEnumerable<Denonciation> Results, int Total)> GetSortedDenonciationsNonTraitees(int limit, int offset,
         FindDenonciationsNonTraiteesSpecification specification);
+
+    public Task<bool> Has2ReponsesDeTypeRejet(int informateurId);
 }

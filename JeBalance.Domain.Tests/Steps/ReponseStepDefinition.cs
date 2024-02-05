@@ -60,7 +60,8 @@ public class ReponseStepDefinition
         {
             var createReponseCommand = new CreateReponseCommand(typeReponse, retribution, _denonciationId);
             var createReponseCommandHandler =
-                new CreateReponseCommandHandler(_reponseRepository, _denonciationRepository, _horodatageProvider);
+                new CreateReponseCommandHandler(_denonciationRepository, _horodatageProvider, _reponseRepository,
+                    _informateurRepository);
 
             _reponseId = await createReponseCommandHandler.Handle(createReponseCommand, CancellationToken.None);
             _denonciation = _denonciationRepository.Denonciations.Last();
@@ -110,7 +111,8 @@ public class ReponseStepDefinition
         {
             var createReponseCommand = new CreateReponseCommand(typeReponse, null, _denonciationId);
             var createReponseCommandHandler =
-                new CreateReponseCommandHandler(_reponseRepository, _denonciationRepository, _horodatageProvider);
+                new CreateReponseCommandHandler(_denonciationRepository, _horodatageProvider, _reponseRepository,
+                    _informateurRepository);
 
             _reponseId = await createReponseCommandHandler.Handle(createReponseCommand, CancellationToken.None);
             _denonciation = _denonciationRepository.Denonciations.Last();

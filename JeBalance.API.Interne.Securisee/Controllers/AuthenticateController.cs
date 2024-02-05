@@ -55,7 +55,6 @@ public class AuthenticateController : ControllerBase
         var result = await _userManager.CreateAsync(admin, model.Password);
         if (!result.Succeeded)
         {
-
             List<IdentityError> errorList = result.Errors.ToList();
             var errorsMessage = string.Join(", ", errorList.Select(err => err.Description));
 
@@ -63,7 +62,8 @@ public class AuthenticateController : ControllerBase
                 new Response
                 {
                     Status = "Error",
-                    Message = $"Administrateur fiscal creation failed! Please check user details and try again. Error: {errorsMessage}"
+                    Message =
+                        $"Administrateur fiscal creation failed! Please check user details and try again. Error: {errorsMessage}"
                 });
         }
 
